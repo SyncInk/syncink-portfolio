@@ -233,7 +233,7 @@ nav{
   display:flex;align-items:center;gap:0.5rem;margin-top:0.3rem;
   font-size:0.78rem;color:var(--muted);
 }
-.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;}
 .card-divider{height:1px;background:var(--border);margin:1.2rem 0;}
 .card-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:1.2rem;}
 .cstat{
@@ -728,7 +728,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
         <div class="card-info">
           <div class="card-name">Sync Ink</div>
           <div class="card-tag">sync_ink_001</div>
-          <div class="card-status"><span id="status-dot" class="status-dot"></span><span id="status-text">Loading...</span></div>
+          <div class="card-status"><span id="status-dot" class="status-dot"></span><span id="status-text">Loading...</span></div>`
         </div>
       </div>
       <div class="card-divider"></div>
@@ -1242,34 +1242,33 @@ document.getElementById('fSubmit').addEventListener('click', async () => {
   }, 3000);
 });
 </script>
-<script>
+
+</body><script>
 async function updateDiscordStatus() {
-  const YOUR_DISCORD_ID = "930306512864280607"; // Put your ID here
+  const YOUR_DISCORD_ID = "930306512864280607"; 
   const dot = document.getElementById('status-dot');
   const text = document.getElementById('status-text');
+
+  if (!dot || !text) return; // Safety check
 
   try {
     const response = await fetch(`https://api.lanyard.rest/v1/users/${YOUR_DISCORD_ID}`);
     const data = await response.json();
     
     if (data.success) {
-      const status = data.data.discord_status; // online, idle, dnd, offline
+      const status = data.data.discord_status; 
       
-      // Update the dot color
-      if (status === 'online') dot.style.backgroundColor = '#57f287'; // Green
-      else if (status === 'dnd') dot.style.backgroundColor = '#ed4245'; // Red
-      else if (status === 'idle') dot.style.backgroundColor = '#faa61a'; // Yellow
-      else dot.style.backgroundColor = '#747f8d'; // Grey (offline/invisible)
+      if (status === 'online') dot.style.backgroundColor = '#57f287';
+      else if (status === 'dnd') dot.style.backgroundColor = '#ed4245';
+      else if (status === 'idle') dot.style.backgroundColor = '#faa61a';
+      else dot.style.backgroundColor = '#747f8d';
 
-      // Update the text
       text.textContent = status.charAt(0).toUpperCase() + status.slice(1);
     }
   } catch (error) {
     console.error("Could not fetch Discord status:", error);
   }
 }
-
-// Update status every 5 seconds
 setInterval(updateDiscordStatus, 5000);
 updateDiscordStatus();
 </script>
