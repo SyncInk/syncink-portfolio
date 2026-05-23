@@ -175,6 +175,11 @@ nav{
   box-shadow:0 0 18px rgba(88,101,242,0.4);
 }
 .btn-primary:hover{background:#4752c4;box-shadow:0 0 28px rgba(88,101,242,0.65);transform:translateY(-2px);}
+.btn-pink {
+  background:var(--accent);color:#fff;
+  box-shadow:0 0 18px rgba(235,69,158,0.4);
+}
+.btn-pink:hover {background:#c83685;box-shadow:0 0 28px rgba(235,69,158,0.65);transform:translateY(-2px);}
 .btn-outline{
   background:transparent;color:var(--text);
   border:1px solid var(--border);
@@ -373,6 +378,64 @@ section{position:relative;z-index:10;}
 .proj:hover .proj-arrow{color:var(--cyan);transform:rotate(0deg);}
 @media(max-width:600px){.proj{grid-template-columns:44px 1fr auto;gap:1rem;padding:1.4rem 0;}}
 
+/* ============ BOTS SECTION ============ */
+.bots-wrap{display:flex;flex-direction:column;gap:3rem;margin-top:2.5rem;}
+.bot-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;
+  backdrop-filter:blur(10px);box-shadow:0 10px 40px rgba(0,0,0,0.2);
+}
+.bot-card::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(88,101,242,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.bot-card.radio-card::before{background:radial-gradient(circle,rgba(235,69,158,0.15) 0%,transparent 70%);}
+.bot-header{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem;position:relative;z-index:2;}
+.bot-logo{
+  width:80px;height:80px;border-radius:20px;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;font-weight:900;color:#fff;
+  box-shadow:0 0 24px rgba(88,101,242,0.4);flex-shrink:0;
+  animation:floatLogo 4s ease-in-out infinite;
+}
+.bot-logo.radio{
+  background:linear-gradient(135deg,#eb459e,var(--blue));
+  box-shadow:0 0 24px rgba(235,69,158,0.4);
+}
+@keyframes floatLogo{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.bot-info{flex:1;min-width:250px;}
+.bot-name{font-size:1.8rem;font-weight:900;margin-bottom:0.3rem;letter-spacing:-0.02em;color:var(--text);}
+.bot-desc{font-size:0.95rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;}
+.bot-platforms{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;}
+.cmd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;position:relative;z-index:2;}
+.cmd-category{
+  background:rgba(255,255,255,0.02);border:1px solid var(--border);
+  border-radius:14px;padding:1.2rem;
+  transition:background 0.3s;
+}
+.cmd-category:hover{background:rgba(88,101,242,0.05);}
+.cmd-cat-title{font-weight:800;font-size:0.95rem;margin-bottom:1rem;color:var(--text);display:flex;align-items:center;gap:0.5rem;}
+.cmd-list{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+.cmd-item{font-size:0.8rem;color:var(--muted);display:flex;align-items:flex-start;gap:0.5rem;}
+.cmd-name{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-weight:700;white-space:nowrap;background:rgba(0,212,255,0.1);padding:0.1rem 0.4rem;border-radius:4px;}
+.cmd-desc{line-height:1.5;}
+.radio-cmds{display:flex;flex-wrap:wrap;gap:0.6rem;position:relative;z-index:2;}
+.radio-cmd-tag{
+  background:rgba(235,69,158,0.08);border:1px solid rgba(235,69,158,0.2);
+  padding:0.6rem 0.9rem;border-radius:10px;display:inline-flex;flex-direction:column;gap:0.2rem;
+  transition:all 0.3s;
+}
+.radio-cmd-tag:hover{background:rgba(235,69,158,0.15);border-color:rgba(235,69,158,0.4);transform:translateY(-2px);}
+.radio-cmd-tag span{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--accent);font-weight:700;}
+.radio-cmd-desc{font-family:'Outfit',sans-serif;color:var(--text);font-size:0.75rem;}
+@media(max-width:768px){
+  .bot-card{padding:1.8rem;}
+  .bot-header{flex-direction:column;align-items:flex-start;}
+}
+
 /* ============ PROCESS ============ */
 .proc-bg{background:var(--bg2);}
 .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden;margin-top:2.5rem;}
@@ -559,18 +622,14 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
 </head>
 <body>
 
-<!-- Canvas animated background -->
 <canvas id="bgCanvas"></canvas>
 <div class="noise"></div>
 
-<!-- Cursor (desktop) -->
 <div class="cur-dot" id="curDot"></div>
 <div class="cur-ring" id="curRing"></div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- Contact Modal -->
 <div class="modal-overlay" id="cModal">
   <div class="modal">
     <button class="modal-close" id="mClose" aria-label="Close">✕</button>
@@ -586,11 +645,11 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </div>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" class="nav-link" data-mm>About</a>
   <a href="#skills" class="nav-link" data-mm>Skills</a>
   <a href="#work" class="nav-link" data-mm>Work</a>
+  <a href="#bots" class="nav-link" data-mm>Bots</a>
   <a href="#contact" class="nav-link" data-mm>Contact</a>
   <a href="https://discord.com/users/sync_ink_001" target="_blank" rel="noopener" class="nav-dc btn btn-dc">
     <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
@@ -598,7 +657,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </a>
 </div>
 
-<!-- NAV -->
 <nav id="mainNav">
   <a href="#home" class="nav-logo">
     <div class="nav-logo-icon">SI</div>
@@ -608,6 +666,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     <li><a href="#about" class="nav-link">About</a></li>
     <li><a href="#skills" class="nav-link">Skills</a></li>
     <li><a href="#work" class="nav-link">Work</a></li>
+    <li><a href="#bots" class="nav-link">Bots</a></li>
     <li><a href="#contact" class="nav-link">Contact</a></li>
     <li>
       <a href="https://discord.com/users/sync_ink_001" target="_blank" rel="noopener" class="nav-dc">
@@ -621,7 +680,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </button>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner container">
     <div class="hero-left">
@@ -674,7 +732,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
     <span class="marquee-item">JavaScript</span>
@@ -696,7 +753,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </div>
 
-<!-- ABOUT -->
 <section class="section-pad" id="about">
   <div class="container">
     <div class="about-grid">
@@ -725,7 +781,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
-<!-- SKILLS -->
 <section class="section-pad skills-bg" id="skills">
   <div class="container skills-wrap">
     <div class="s-label reveal">Skills & Tools</div>
@@ -749,7 +804,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section class="section-pad" id="work">
   <div class="container">
     <div class="s-label reveal">Projects</div>
@@ -779,7 +833,119 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
-<!-- PROCESS -->
+<section class="section-pad skills-bg" id="bots">
+  <div class="container bots-wrap">
+    
+    <div>
+      <div class="s-label reveal">My Creations</div>
+      <h2 class="s-heading reveal">Official <em>Bots</em></h2>
+    </div>
+
+    <div class="bot-card reveal">
+      <div class="bot-header">
+        <div class="bot-logo">SI</div>
+        <div class="bot-info">
+          <div class="bot-name">SyncInk©</div>
+          <div class="bot-desc">The ultimate multi-purpose bot loaded with economy, mini-games, fun commands, and solid server moderation features.</div>
+          <a href="https://discord.com/oauth2/authorize?client_id=1500289929731768472" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            Invite SyncInk
+          </a>
+        </div>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-category">
+          <div class="cmd-cat-title">💰 Economy</div>
+          <ul class="cmd-list">
+            <li class="cmd-item"><span class="cmd-name">?bal</span><span class="cmd-desc">View cookie balance</span></li>
+            <li class="cmd-item"><span class="cmd-name">?dep</span><span class="cmd-desc">Deposit cookies into vault</span></li>
+            <li class="cmd-item"><span class="cmd-name">?with</span><span class="cmd-desc">Withdraw from vault</span></li>
+            <li class="cmd-item"><span class="cmd-name">?daily</span><span class="cmd-desc">Claim daily reward</span></li>
+            <li class="cmd-item"><span class="cmd-name">?weekly</span><span class="cmd-desc">Claim weekly reward</span></li>
+            <li class="cmd-item"><span class="cmd-name">?work</span><span class="cmd-desc">Work for cookies</span></li>
+            <li class="cmd-item"><span class="cmd-name">?give</span><span class="cmd-desc">Give cookies to someone</span></li>
+          </ul>
+        </div>
+        <div class="cmd-category">
+          <div class="cmd-cat-title">🎰 Casino</div>
+          <ul class="cmd-list">
+            <li class="cmd-item"><span class="cmd-name">?bet</span><span class="cmd-desc">High/Low bet game</span></li>
+            <li class="cmd-item"><span class="cmd-name">?cr</span><span class="cmd-desc">Crash game</span></li>
+            <li class="cmd-item"><span class="cmd-name">?slots</span><span class="cmd-desc">Play Slot machine</span></li>
+            <li class="cmd-item"><span class="cmd-name">?cf</span><span class="cmd-desc">Coin flip (heads/tails)</span></li>
+            <li class="cmd-item"><span class="cmd-name">?dice</span><span class="cmd-desc">Dice guess (x5 payout)</span></li>
+            <li class="cmd-item"><span class="cmd-name">?bj</span><span class="cmd-desc">Play Blackjack</span></li>
+            <li class="cmd-item"><span class="cmd-name">?rl</span><span class="cmd-desc">Play Roulette</span></li>
+          </ul>
+        </div>
+        <div class="cmd-category">
+          <div class="cmd-cat-title">🛡️ Moderation & Settings</div>
+          <ul class="cmd-list">
+            <li class="cmd-item"><span class="cmd-name">?ban/kick</span><span class="cmd-desc">Ban or kick members</span></li>
+            <li class="cmd-item"><span class="cmd-name">?mute/warn</span><span class="cmd-desc">Timeout or warn users</span></li>
+            <li class="cmd-item"><span class="cmd-name">?clear</span><span class="cmd-desc">Purge messages (max 100)</span></li>
+            <li class="cmd-item"><span class="cmd-name">?lock</span><span class="cmd-desc">Lock/Unlock channel</span></li>
+            <li class="cmd-item"><span class="cmd-name">?setwelcome</span><span class="cmd-desc">Set welcome channel</span></li>
+            <li class="cmd-item"><span class="cmd-name">?setlog</span><span class="cmd-desc">Set server log channel</span></li>
+            <li class="cmd-item"><span class="cmd-name">?setauthorole</span><span class="cmd-desc">Set auto-role on join</span></li>
+          </ul>
+        </div>
+        <div class="cmd-category">
+          <div class="cmd-cat-title">📊 Fun, Stats & Crime</div>
+          <ul class="cmd-list">
+            <li class="cmd-item"><span class="cmd-name">?rob/heist</span><span class="cmd-desc">Rob users / start group heist</span></li>
+            <li class="cmd-item"><span class="cmd-name">?cd</span><span class="cmd-desc">Check your active cooldowns</span></li>
+            <li class="cmd-item"><span class="cmd-name">?lvl</span><span class="cmd-desc">View your level & XP</span></li>
+            <li class="cmd-item"><span class="cmd-name">?msgs/vctime</span><span class="cmd-desc">View activity stats</span></li>
+            <li class="cmd-item"><span class="cmd-name">?lb</span><span class="cmd-desc">Global cookie leaderboard</span></li>
+            <li class="cmd-item"><span class="cmd-name">?truth/dare</span><span class="cmd-desc">Random truth or dare</span></li>
+            <li class="cmd-item"><span class="cmd-name">?help</span><span class="cmd-desc">Show full command list</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="bot-card radio-card reveal">
+      <div class="bot-header">
+        <div class="bot-logo radio">📻</div>
+        <div class="bot-info">
+          <div class="bot-name">SyncInk© Radio</div>
+          <div class="bot-desc">High-quality audio streaming. Search by name or drop a link — it handles everything seamlessly.</div>
+          <div class="bot-platforms">
+            <span class="ctag pink">Spotify</span>
+            <span class="ctag pink">YouTube Music</span>
+            <span class="ctag pink">Apple Music</span>
+          </div>
+          <a href="https://discord.com/oauth2/authorize?client_id=1500567606648897819" target="_blank" rel="noopener" class="btn btn-pink">
+            <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            Invite Radio
+          </a>
+        </div>
+      </div>
+      <div class="radio-cmds">
+        <div class="radio-cmd-tag"><span>/play</span><div class="radio-cmd-desc">Play from URL or search term</div></div>
+        <div class="radio-cmd-tag"><span>/search</span><div class="radio-cmd-desc">Search supported platforms</div></div>
+        <div class="radio-cmd-tag"><span>/shuffle</span><div class="radio-cmd-desc">Shuffle the queue</div></div>
+        <div class="radio-cmd-tag"><span>/skip</span><div class="radio-cmd-desc">Skip to next track(s)</div></div>
+        <div class="radio-cmd-tag"><span>/queue list</span><div class="radio-cmd-desc">Show current queue</div></div>
+        <div class="radio-cmd-tag"><span>/np</span><div class="radio-cmd-desc">Show current track info</div></div>
+        <div class="radio-cmd-tag"><span>/lyrics</span><div class="radio-cmd-desc">Search track lyrics</div></div>
+        <div class="radio-cmd-tag"><span>/loop all</span><div class="radio-cmd-desc">Loop whole queue</div></div>
+        <div class="radio-cmd-tag"><span>/loop current</span><div class="radio-cmd-desc">Loop current track</div></div>
+        <div class="radio-cmd-tag"><span>/volume</span><div class="radio-cmd-desc">Adjust player volume</div></div>
+        <div class="radio-cmd-tag"><span>/bassboost</span><div class="radio-cmd-desc">Tweak bass settings</div></div>
+        <div class="radio-cmd-tag"><span>/8d</span><div class="radio-cmd-desc">Toggle 8D audio filter</div></div>
+        <div class="radio-cmd-tag"><span>/autoplay</span><div class="radio-cmd-desc">Toggle autoplay</div></div>
+        <div class="radio-cmd-tag"><span>/seek</span><div class="radio-cmd-desc">Seek to specific time</div></div>
+        <div class="radio-cmd-tag"><span>/remove</span><div class="radio-cmd-desc">Remove track from queue</div></div>
+        <div class="radio-cmd-tag"><span>/pause /resume</span><div class="radio-cmd-desc">Pause/Resume playback</div></div>
+        <div class="radio-cmd-tag"><span>/previous</span><div class="radio-cmd-desc">Go to previous track</div></div>
+        <div class="radio-cmd-tag"><span>/help</span><div class="radio-cmd-desc">Lists all commands</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section-pad proc-bg">
   <div class="container">
     <div class="s-label reveal">How I Work</div>
@@ -793,7 +959,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
-<!-- DISCORD BANNER -->
 <section class="section-pad" style="padding-top:0;padding-bottom:3rem;">
   <div class="dc-banner reveal">
     <div class="dc-icon">
@@ -809,7 +974,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
-<!-- SOCIALS -->
 <section class="section-pad socials-bg" id="contact">
   <div class="container">
     <div class="s-label reveal">Connect</div>
@@ -847,7 +1011,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
-<!-- CONTACT CTA -->
 <section class="section-pad">
   <div class="container">
     <div class="contact-wrap">
@@ -856,7 +1019,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       <p class="contact-sub reveal">Whether it's a game, a website, a collab, or just vibing — hit me up. I'm always down to build something cool.</p>
       <div class="contact-btns reveal">
         <button class="btn btn-primary" id="openContact3">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
           Send a Message
         </button>
         <a href="https://discord.com/users/sync_ink_001" target="_blank" rel="noopener" class="btn btn-dc">
@@ -987,7 +1150,7 @@ if (window.innerWidth > 768) {
     curRing.style.left = rx + 'px'; curRing.style.top = ry + 'px';
     requestAnimationFrame(loop);
   })();
-  document.querySelectorAll('a,button,.interest-card,.sk-card,.proj,.proc-card,.testi-card,.soc-card').forEach(el => {
+  document.querySelectorAll('a,button,.interest-card,.sk-card,.proj,.proc-card,.testi-card,.soc-card,.cmd-category,.radio-cmd-tag').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
   });
