@@ -2918,307 +2918,196 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   setInterval(updateActivityTimers, 1000);
 
-  /* ====== 3D GLOBE (Three.js) ====== */
+  /* ====== 3D GLOBE (Three.js + real NASA textures) ====== */
   let globeScene, globeCamera, globeRenderer, globeEarth, globeAtmo, globeMarker, globeArcMesh;
   let globeAnimId = null;
-  let globeGeo = null; /* visitor lat/lon */
   let globeInited = false;
-
-  function getThemeColors() {
-    const isLight = (root.getAttribute('data-theme') === 'light');
-    return isLight ? {
-      ocean: [0.28, 0.53, 0.78],    deepOcean: [0.14, 0.36, 0.60],
-      land:  [0.30, 0.58, 0.30],    landDark:  [0.20, 0.45, 0.22],
-      atmo:  [0.30, 0.62, 0.95],    atmoAlpha: 0.22,
-      amb:   0.72,                  sun:       1.20,
-      highlight: [0.20, 0.85, 0.48]
-    } : {
-      ocean: [0.08, 0.24, 0.48],    deepOcean: [0.03, 0.12, 0.28],
-      land:  [0.22, 0.48, 0.22],    landDark:  [0.14, 0.32, 0.15],
-      atmo:  [0.10, 0.52, 0.95],    atmoAlpha: 0.28,
-      amb:   0.38,                  sun:       1.0,
-      highlight: [0.34, 0.95, 0.53]
-    };
-  }
 
   async function initGlobe3D() {
     if (globeInited) return;
     const container = document.getElementById('globeContainer');
     if (!container) return;
-    /* Don't init on low-end / small mobile */
     if (document.body.classList.contains('low-motion') || window.innerWidth < 480) return;
 
-    /* Dynamically load Three.js from CDN */
+    /* Load Three.js */
     if (!window.THREE) {
-      await new Promise((resolve, reject) => {
+      await new Promise((res, rej) => {
         const s = document.createElement('script');
         s.src = 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js';
-        s.onload = resolve; s.onerror = reject;
+        s.onload = res; s.onerror = rej;
         document.head.appendChild(s);
       }).catch(() => null);
     }
-    if (!window.THREE) return; /* CDN failed */
+    if (!window.THREE) return;
     globeInited = true;
 
     const THREE = window.THREE;
-    const W = 180, H = 180;
-    const colors = getThemeColors();
+    const SIZE = 180;
+    const isLight = () => root.getAttribute('data-theme') === 'light';
 
     /* Scene */
     globeScene = new THREE.Scene();
-    globeCamera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-    globeCamera.position.set(0, 0, 2.6);
+    globeCamera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    globeCamera.position.z = 2.65;
 
     globeRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    globeRenderer.setSize(W, H);
+    globeRenderer.setSize(SIZE, SIZE);
     globeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     globeRenderer.setClearColor(0x000000, 0);
     container.appendChild(globeRenderer.domElement);
 
-    /* Lighting */
-    const ambLight = new THREE.AmbientLight(0xffffff, colors.amb);
+    /* Lights */
+    const ambLight = new THREE.AmbientLight(0x334466, 0.5);
     globeScene.add(ambLight);
-    const sunLight = new THREE.DirectionalLight(0xffd8a0, colors.sun);
-    sunLight.position.set(3, 1.5, 2);
+    const sunLight = new THREE.DirectionalLight(0xfff5e0, 1.25);
+    sunLight.position.set(5, 2, 3);
     globeScene.add(sunLight);
-    const fillLight = new THREE.DirectionalLight(0x4488ff, 0.18);
-    fillLight.position.set(-2, -1, -1);
-    globeScene.add(fillLight);
+    const backFill = new THREE.DirectionalLight(0x112244, 0.18);
+    backFill.position.set(-3, -1, -2);
+    globeScene.add(backFill);
 
-    /* ---- Procedural Earth texture via Canvas ---- */
-    const texSize = 512;
-    const texCanvas = document.createElement('canvas');
-    texCanvas.width = texSize; texCanvas.height = texSize;
-    const tx = texCanvas.getContext('2d');
+    /* Load real Earth textures */
+    const loader = new THREE.TextureLoader();
+    loader.crossOrigin = 'anonymous';
+    const loadTex = (url) => new Promise(res => loader.load(url, res, undefined, () => res(null)));
 
-    /* Ocean gradient */
-    const oceanGrad = tx.createLinearGradient(0, 0, 0, texSize);
-    oceanGrad.addColorStop(0,   `rgb(${Math.round(colors.deepOcean[0]*255)},${Math.round(colors.deepOcean[1]*255)},${Math.round(colors.deepOcean[2]*255)})`);
-    oceanGrad.addColorStop(0.5, `rgb(${Math.round(colors.ocean[0]*255)},${Math.round(colors.ocean[1]*255)},${Math.round(colors.ocean[2]*255)})`);
-    oceanGrad.addColorStop(1,   `rgb(${Math.round(colors.deepOcean[0]*255)},${Math.round(colors.deepOcean[1]*255)},${Math.round(colors.deepOcean[2]*255)})`);
-    tx.fillStyle = oceanGrad;
-    tx.fillRect(0, 0, texSize, texSize);
+    const BASE = 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/';
+    const [earthTex, cloudTex, specTex, normTex] = await Promise.all([
+      loadTex(BASE + 'earth_atmos_2048.jpg'),
+      loadTex(BASE + 'earth_clouds_1024.png'),
+      loadTex(BASE + 'earth_specular_2048.jpg'),
+      loadTex(BASE + 'earth_normal_2048.jpg'),
+    ]);
 
-    /* Continent shapes — simplified accurate outlines via canvas paths */
-    const landColor  = `rgb(${Math.round(colors.land[0]*255)},${Math.round(colors.land[1]*255)},${Math.round(colors.land[2]*255)})  `;
-    const landDarkColor = `rgb(${Math.round(colors.landDark[0]*255)},${Math.round(colors.landDark[1]*255)},${Math.round(colors.landDark[2]*255)})`;
-
-    /* Helper: lat/lon → texture pixel (equirectangular) */
-    const ll2px = (lon, lat) => [(lon + 180) / 360 * texSize, (90 - lat) / 180 * texSize];
-
-    const drawContinent = (points, col1, col2) => {
-      tx.beginPath();
-      points.forEach(([lon, lat], i) => {
-        const [x, y] = ll2px(lon, lat);
-        i === 0 ? tx.moveTo(x, y) : tx.lineTo(x, y);
-      });
-      tx.closePath();
-      const grad = tx.createLinearGradient(0, 0, texSize*0.5, texSize*0.5);
-      grad.addColorStop(0, col1); grad.addColorStop(1, col2);
-      tx.fillStyle = grad;
-      tx.fill();
-    };
-
-    /* North America */
-    drawContinent([[-165,72],[-140,72],[-100,74],[-80,72],[-56,50],[-52,46],[-67,44],[-70,41],[-80,25],[-88,15],[-84,10],[-78,8],[-77,7],[-75,8],[-77,10],[-85,11],[-90,15],[-92,18],[-88,21],[-90,30],[-97,26],[-105,20],[-109,23],[-117,32],[-120,36],[-125,38],[-130,55],[-145,60],[-154,58],[-165,60]],landColor, landDarkColor);
-    /* South America */
-    drawContinent([[-81,8],[-77,7],[-60,-4],[-50,-1],[-35,-8],[-35,-12],[-40,-20],[-44,-23],[-48,-28],[-52,-33],[-58,-38],[-63,-42],[-65,-55],[-66,-55],[-68,-54],[-70,-52],[-75,-45],[-72,-40],[-70,-30],[-70,-18],[-76,-2],[-80,0]],landColor, landDarkColor);
-    /* Europe */
-    drawContinent([[-10,36],[0,36],[15,37],[28,38],[32,36],[36,37],[28,42],[32,46],[24,48],[20,54],[10,55],[5,54],[-5,48],[-8,44],[-9,39],[-8,37],[-10,36]],landColor, landDarkColor);
-    /* Africa */
-    drawContinent([[-18,15],[-15,11],[-12,8],[-8,5],[-3,5],[2,5],[5,4],[10,2],[15,2],[25,0],[32,-2],[40,10],[44,12],[42,16],[38,22],[32,32],[28,30],[22,38],[16,36],[10,36],[2,38],[-8,38],[-14,26],[-18,20]],landColor, landDarkColor);
-    /* Asia (simplified) */
-    drawContinent([[26,42],[30,42],[36,46],[40,44],[48,40],[54,38],[58,36],[60,32],[66,24],[72,20],[80,12],[84,14],[90,20],[100,22],[105,20],[110,20],[120,22],[126,18],[120,10],[115,4],[110,-2],[115,-8],[118,-8],[126,28],[130,32],[130,40],[136,36],[140,40],[140,46],[134,50],[128,52],[120,54],[110,54],[100,55],[90,52],[80,52],[70,52],[60,50],[55,50],[48,46],[42,44],[36,46],[30,42],[26,42]],landColor, landDarkColor);
-    /* Australia */
-    drawContinent([[114,-22],[118,-20],[126,-14],[136,-12],[140,-16],[148,-20],[154,-28],[152,-38],[144,-38],[138,-36],[130,-32],[120,-34],[114,-28],[112,-22]],landColor, landDarkColor);
-    /* Greenland */
-    drawContinent([[-44,60],[-24,60],[-20,66],[-18,74],[-26,84],[-44,84],[-58,76],[-54,68],[-44,60]],landColor, landDarkColor);
-    /* Antarctica */
-    drawContinent([[-180,-72],[180,-72],[180,-90],[-180,-90]],landDarkColor, landColor);
-    /* Iceland */
-    drawContinent([[-24,63],[-14,63],[-13,65],[-16,66],[-24,65]],landColor, landDarkColor);
-    /* Japan */
-    drawContinent([[130,31],[132,33],[135,34],[136,36],[140,40],[141,42],[140,44],[134,44],[132,38],[130,33]],landColor, landDarkColor);
-    /* UK */
-    drawContinent([[-5,50],[2,51],[2,53],[-4,57],[-5,58],[-4,54],[-3,52],[-5,50]],landColor, landDarkColor);
-    /* Iberian */
-    drawContinent([[-9,36],[-9,44],[-8,44],[-2,46],[4,44],[4,40],[0,38],[-5,36],[-9,36]],landColor, landDarkColor);
-    /* Scandinavia */
-    drawContinent([[5,58],[8,58],[10,56],[12,56],[16,58],[20,60],[22,64],[28,70],[30,70],[28,68],[24,64],[22,60],[20,60],[28,58],[30,58],[30,54],[28,54],[26,56],[20,56],[15,58],[12,58],[8,58],[5,58]],landColor, landDarkColor);
-    /* SE Asia islands (rough) */
-    drawContinent([[96,6],[102,6],[104,2],[108,-2],[114,-2],[116,-4],[118,-8],[116,-8],[110,-6],[105,-4],[100,0],[96,4]],landColor, landDarkColor);
-    /* New Zealand */
-    drawContinent([[172,-34],[174,-36],[174,-40],[172,-44],[170,-44],[168,-44],[170,-38],[172,-34]],landColor, landDarkColor);
-
-    /* Subtle ocean noise texture overlay */
-    const imgData = tx.getImageData(0, 0, texSize, texSize);
-    for (let i = 0; i < imgData.data.length; i += 4) {
-      const n = (Math.random() - 0.5) * 8;
-      imgData.data[i]   = Math.max(0, Math.min(255, imgData.data[i]   + n));
-      imgData.data[i+1] = Math.max(0, Math.min(255, imgData.data[i+1] + n));
-      imgData.data[i+2] = Math.max(0, Math.min(255, imgData.data[i+2] + n));
+    if (!earthTex) {
+      globeRenderer.domElement.remove();
+      globeInited = false;
+      return;
     }
-    tx.putImageData(imgData, 0, 0);
-
-    /* Cloud layer texture */
-    const cloudCanvas = document.createElement('canvas');
-    cloudCanvas.width = texSize; cloudCanvas.height = texSize;
-    const cx = cloudCanvas.getContext('2d');
-    cx.fillStyle = 'rgba(0,0,0,0)';
-    cx.fillRect(0,0,texSize,texSize);
-    for (let c = 0; c < 40; c++) {
-      const x = Math.random() * texSize;
-      const y = Math.random() * texSize;
-      const rx = 20 + Math.random() * 60;
-      const ry = 8 + Math.random() * 18;
-      const alpha = 0.04 + Math.random() * 0.10;
-      const g = cx.createRadialGradient(x, y, 0, x, y, rx);
-      g.addColorStop(0, `rgba(255,255,255,${alpha})`);
-      g.addColorStop(1, 'rgba(255,255,255,0)');
-      cx.fillStyle = g;
-      cx.beginPath(); cx.ellipse(x, y, rx, ry, Math.random()*Math.PI, 0, Math.PI*2); cx.fill();
-    }
-
-    /* Build Three.js textures */
-    const earthTex  = new THREE.CanvasTexture(texCanvas);
-    const cloudTex  = new THREE.CanvasTexture(cloudCanvas);
 
     /* Earth sphere */
-    const sphereGeo = new THREE.SphereGeometry(1, 64, 64);
-    const earthMat  = new THREE.MeshPhongMaterial({
-      map: earthTex,
-      specular: new THREE.Color(0x1a3a6e),
-      shininess: 28,
+    const earthGeo = new THREE.SphereGeometry(1, 64, 64);
+    const earthMat = new THREE.MeshPhongMaterial({
+      map:         earthTex,
+      specularMap: specTex || null,
+      normalMap:   normTex || null,
+      normalScale: new THREE.Vector2(0.85, 0.85),
+      specular:    new THREE.Color(0x2244aa),
+      shininess:   38,
     });
-    globeEarth = new THREE.Mesh(sphereGeo, earthMat);
+    globeEarth = new THREE.Mesh(earthGeo, earthMat);
     globeScene.add(globeEarth);
 
     /* Cloud layer */
-    const cloudGeo = new THREE.SphereGeometry(1.008, 48, 48);
-    const cloudMat = new THREE.MeshPhongMaterial({
-      map: cloudTex, transparent: true, opacity: 0.55,
-      depthWrite: false,
-    });
-    const cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
-    globeScene.add(cloudMesh);
+    let cloudMesh = null;
+    if (cloudTex) {
+      const cloudGeo = new THREE.SphereGeometry(1.007, 48, 48);
+      const cloudMat = new THREE.MeshPhongMaterial({
+        map: cloudTex, transparent: true, opacity: 0.48, depthWrite: false,
+      });
+      cloudMesh = new THREE.Mesh(cloudGeo, cloudMat);
+      globeScene.add(cloudMesh);
+    }
 
-    /* Atmosphere glow (Fresnel-style overlay sphere) */
-    const atmoGeo = new THREE.SphereGeometry(1.12, 48, 48);
-    const atmoCol = new THREE.Color(...colors.atmo);
+    /* Atmosphere glow */
+    const atmoGeo = new THREE.SphereGeometry(1.14, 48, 48);
     const atmoMat = new THREE.MeshBasicMaterial({
-      color: atmoCol, transparent: true, opacity: colors.atmoAlpha,
+      color: isLight() ? 0x5599ff : 0x1166dd,
+      transparent: true, opacity: isLight() ? 0.18 : 0.26,
       side: THREE.BackSide, depthWrite: false,
     });
     globeAtmo = new THREE.Mesh(atmoGeo, atmoMat);
     globeScene.add(globeAtmo);
 
-    /* Visitor marker (glowing dot) */
-    const markerGeo = new THREE.SphereGeometry(0.028, 12, 12);
+    /* Visitor marker */
+    const markerGeo = new THREE.SphereGeometry(0.026, 14, 14);
     const markerMat = new THREE.MeshBasicMaterial({ color: 0x57f287 });
     globeMarker = new THREE.Mesh(markerGeo, markerMat);
     globeMarker.visible = false;
     globeScene.add(globeMarker);
 
-    /* Marker halo ring */
-    const haloGeo = new THREE.RingGeometry(0.038, 0.055, 32);
-    const haloMat = new THREE.MeshBasicMaterial({ color: 0x57f287, transparent: true, opacity: 0.5, side: THREE.DoubleSide });
+    const haloGeo = new THREE.RingGeometry(0.036, 0.052, 32);
+    const haloMat = new THREE.MeshBasicMaterial({
+      color: 0x57f287, transparent: true, opacity: 0.55, side: THREE.DoubleSide,
+    });
     const haloMesh = new THREE.Mesh(haloGeo, haloMat);
     globeMarker.add(haloMesh);
 
-    /* Connection arc (TubeGeometry built lazily) */
-    globeArcMesh = null;
-
-    /* Position marker from lat/lon */
-    const setMarkerLatLon = (lat, lon) => {
+    /* lat/lon to 3D */
+    const latLonToVec3 = (lat, lon, r = 1.04) => {
       const phi   = (90 - lat)  * Math.PI / 180;
       const theta = (lon + 180) * Math.PI / 180;
-      globeMarker.position.setFromSphericalCoords(1.04, phi, theta);
-      /* orient halo ring outward */
+      return new THREE.Vector3(
+        -r * Math.sin(phi) * Math.cos(theta),
+         r * Math.cos(phi),
+         r * Math.sin(phi) * Math.sin(theta)
+      );
+    };
+
+    /* Place marker + arc */
+    const setMarkerLatLon = (lat, lon) => {
+      const pos = latLonToVec3(lat, lon);
+      globeMarker.position.copy(pos);
       globeMarker.lookAt(0, 0, 0);
       globeMarker.rotateX(Math.PI / 2);
       globeMarker.visible = true;
 
-      /* Build arc from marker to equator front for premium effect */
-      if (globeArcMesh) { globeScene.remove(globeArcMesh); globeArcMesh.geometry.dispose(); globeArcMesh.material.dispose(); }
-      const arcPoints = [];
-      const steps = 40;
-      const startVec = globeMarker.position.clone().normalize();
-      const endVec   = new THREE.Vector3(0, 0, 1);
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        const v = new THREE.Vector3().lerpVectors(startVec, endVec, t).normalize();
-        v.multiplyScalar(1.06 + Math.sin(t * Math.PI) * 0.18); /* arc curve height */
-        arcPoints.push(v);
+      if (globeArcMesh) {
+        globeScene.remove(globeArcMesh);
+        globeArcMesh.geometry.dispose();
+        globeArcMesh.material.dispose();
       }
-      const arcCurve  = new THREE.CatmullRomCurve3(arcPoints);
-      const arcTube   = new THREE.TubeGeometry(arcCurve, 40, 0.004, 6, false);
-      const arcMat    = new THREE.MeshBasicMaterial({ color: 0x57f287, transparent: true, opacity: 0.55 });
-      globeArcMesh    = new THREE.Mesh(arcTube, arcMat);
+      const start = pos.clone().normalize();
+      const end   = new THREE.Vector3(0.2, 0.3, 1).normalize();
+      const pts   = [];
+      for (let i = 0; i <= 48; i++) {
+        const t = i / 48;
+        const v = new THREE.Vector3().lerpVectors(start, end, t).normalize();
+        v.multiplyScalar(1.05 + Math.sin(t * Math.PI) * 0.22);
+        pts.push(v);
+      }
+      const arcCurve = new THREE.CatmullRomCurve3(pts);
+      const arcGeo   = new THREE.TubeGeometry(arcCurve, 48, 0.0035, 6, false);
+      const arcMat   = new THREE.MeshBasicMaterial({ color: 0x57f287, transparent: true, opacity: 0.6 });
+      globeArcMesh   = new THREE.Mesh(arcGeo, arcMat);
       globeScene.add(globeArcMesh);
     };
     window._globeSetMarker = setMarkerLatLon;
 
-    /* Update materials on theme change */
+    /* Theme update */
     window._globeUpdateTheme = () => {
-      const c = getThemeColors();
-      sunLight.intensity = c.sun; ambLight.intensity = c.amb;
-      atmoMat.color.setRGB(...c.atmo); atmoMat.opacity = c.atmoAlpha;
-      /* Rebuild texture with new colors */
-      const oc = c.ocean, dc = c.deepOcean, lc = c.land, ld = c.landDark;
-      const og = tx.createLinearGradient(0,0,0,texSize);
-      og.addColorStop(0,   `rgb(${Math.round(dc[0]*255)},${Math.round(dc[1]*255)},${Math.round(dc[2]*255)})`);
-      og.addColorStop(0.5, `rgb(${Math.round(oc[0]*255)},${Math.round(oc[1]*255)},${Math.round(oc[2]*255)})`);
-      og.addColorStop(1,   `rgb(${Math.round(dc[0]*255)},${Math.round(dc[1]*255)},${Math.round(dc[2]*255)})`);
-      tx.fillStyle = og; tx.fillRect(0,0,texSize,texSize);
-      /* re-draw continents */
-      const lCol  = `rgb(${Math.round(lc[0]*255)},${Math.round(lc[1]*255)},${Math.round(lc[2]*255)})`;
-      const ldCol = `rgb(${Math.round(ld[0]*255)},${Math.round(ld[1]*255)},${Math.round(ld[2]*255)})`;
-      [[[-165,72],[-140,72],[-100,74],[-80,72],[-56,50],[-52,46],[-67,44],[-70,41],[-80,25],[-88,15],[-84,10],[-78,8],[-77,7],[-75,8],[-77,10],[-85,11],[-90,15],[-92,18],[-88,21],[-90,30],[-97,26],[-105,20],[-109,23],[-117,32],[-120,36],[-125,38],[-130,55],[-145,60],[-154,58],[-165,60]],
-        [[-81,8],[-77,7],[-60,-4],[-50,-1],[-35,-8],[-35,-12],[-40,-20],[-44,-23],[-48,-28],[-52,-33],[-58,-38],[-63,-42],[-65,-55],[-66,-55],[-68,-54],[-70,-52],[-75,-45],[-72,-40],[-70,-30],[-70,-18],[-76,-2],[-80,0]],
-        [[-10,36],[0,36],[15,37],[28,38],[32,36],[36,37],[28,42],[32,46],[24,48],[20,54],[10,55],[5,54],[-5,48],[-8,44],[-9,39],[-8,37],[-10,36]],
-        [[-18,15],[-15,11],[-12,8],[-8,5],[-3,5],[2,5],[5,4],[10,2],[15,2],[25,0],[32,-2],[40,10],[44,12],[42,16],[38,22],[32,32],[28,30],[22,38],[16,36],[10,36],[2,38],[-8,38],[-14,26],[-18,20]],
-        [[26,42],[30,42],[36,46],[40,44],[48,40],[54,38],[58,36],[60,32],[66,24],[72,20],[80,12],[84,14],[90,20],[100,22],[105,20],[110,20],[120,22],[126,18],[120,10],[115,4],[110,-2],[115,-8],[118,-8],[126,28],[130,32],[130,40],[136,36],[140,40],[140,46],[134,50],[128,52],[120,54],[110,54],[100,55],[90,52],[80,52],[70,52],[60,50],[55,50],[48,46],[42,44],[36,46],[30,42],[26,42]],
-        [[114,-22],[118,-20],[126,-14],[136,-12],[140,-16],[148,-20],[154,-28],[152,-38],[144,-38],[138,-36],[130,-32],[120,-34],[114,-28],[112,-22]]
-      ].forEach(pts => drawContinent(pts, lCol, ldCol));
-      earthTex.needsUpdate = true;
+      const light = isLight();
+      atmoMat.color.set(light ? 0x5599ff : 0x1166dd);
+      atmoMat.opacity = light ? 0.18 : 0.26;
+      ambLight.intensity = light ? 0.7 : 0.5;
+      sunLight.intensity = light ? 1.5 : 1.25;
     };
-    window.addEventListener('_globeThemeChange', window._globeUpdateTheme);
+    const themeObs = new MutationObserver(window._globeUpdateTheme);
+    themeObs.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
-    /* Animate */
+    /* Animation loop */
     let haloScale = 1, haloDir = 1;
-    const animate = () => {
-      globeAnimId = requestAnimationFrame(animate);
-      globeEarth.rotation.y  += 0.0012;
-      cloudMesh.rotation.y   += 0.0016;
+    const tick = () => {
+      globeAnimId = requestAnimationFrame(tick);
+      globeEarth.rotation.y += 0.0012;
+      if (cloudMesh) cloudMesh.rotation.y += 0.00015;
       if (globeMarker.visible) {
-        /* pulse halo */
-        haloScale += haloDir * 0.018;
-        if (haloScale > 1.6) haloDir = -1;
-        if (haloScale < 1.0) haloDir =  1;
+        haloScale += haloDir * 0.016;
+        if (haloScale > 1.65) haloDir = -1;
+        if (haloScale < 1.00) haloDir =  1;
         haloMesh.scale.setScalar(haloScale);
-        haloMat.opacity = 0.5 * (1.6 - haloScale) / 0.6;
-        if (globeArcMesh) {
-          globeArcMesh.material.opacity = 0.35 + Math.sin(Date.now() * 0.002) * 0.18;
-        }
+        haloMat.opacity = 0.55 * (1 - (haloScale - 1) / 0.65);
+        if (globeArcMesh) globeArcMesh.material.opacity = 0.35 + Math.sin(Date.now() * 0.0022) * 0.22;
       }
       globeRenderer.render(globeScene, globeCamera);
     };
-    animate();
-
-    /* Mark as ready (removes CSS fallback hiding) */
-    document.getElementById('visitorWidget')?.classList.remove('globe-3d-loading');
-
-    /* Theme change watcher */
-    const themeObs = new MutationObserver(() => {
-      if (window._globeUpdateTheme) window._globeUpdateTheme();
-    });
-    themeObs.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    tick();
 
     /* Resize */
     window.addEventListener('resize', () => {
       if (!globeRenderer) return;
-      const size = Math.min(180, window.innerWidth < 480 ? 140 : 180);
-      globeRenderer.setSize(size, size);
+      const s = window.innerWidth < 500 ? 140 : 180;
+      globeRenderer.setSize(s, s);
     });
   }
 
