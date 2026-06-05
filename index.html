@@ -557,6 +557,8 @@ nav{
 .activity-card.game{--activity-color:#eb459e;--activity-rgb:235,69,158;}
 .activity-card.youtube{--activity-color:#ff0000;--activity-rgb:255,0,0;}
 .activity-card.youtube .activity-icon { background: #ffffff !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+.activity-card.valorant{--activity-color:#FF4655;--activity-rgb:255,70,85;}
+.activity-card.valorant .activity-icon { background: #0f1923 !important; border: 3px solid #FF4655 !important; border-radius: 0 !important; }
 .activity-art,.activity-icon{
   width:54px;height:54px;border-radius:10px;object-fit:cover;display:grid;place-items:center;
   background:linear-gradient(135deg,rgba(var(--activity-rgb),0.2),rgba(var(--activity-rgb),0.08));
@@ -3177,7 +3179,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = (activity.name || '').toLowerCase();
       const isCode = /visual studio|code/i.test(name);
       const isYouTube = name.includes('watch together') || name.includes('youtube');
-      const kind = isCode ? 'code' : (isYouTube ? 'youtube' : 'game');
+      const isValorant = name.includes('valorant');
+      const kind = isCode ? 'code' : (isYouTube ? 'youtube' : (isValorant ? 'valorant' : 'game'));
       const kicker = isCode ? 'Playing' : (activity.type === 0 ? 'Playing' : 'Activity');
       cards.push(`
         <div class="activity-card ${kind}" data-kind="${kind}">
