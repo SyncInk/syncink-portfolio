@@ -215,6 +215,30 @@ nav{
 }
 .nav-links{display:flex;align-items:center;gap:0.3rem;list-style:none;}
 .nav-tools{display:flex;align-items:center;gap:0.6rem;}
+.music-player {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.6rem 0.35rem 0.35rem;
+  background: rgba(31, 45, 94, 0.4);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px; cursor: pointer; transition: all 0.2s ease;
+}
+.music-player:hover { background: rgba(31, 45, 94, 0.6); border-color: rgba(255, 255, 255, 0.15); transform: translateY(-1px); }
+.music-player:active { transform: scale(0.96); }
+.music-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  background: rgba(59, 130, 255, 0.2);
+  color: #3b82ff; display: grid; place-items: center;
+}
+.music-icon svg { width: 14px; height: 14px; }
+.music-info { display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+.music-title {
+  font-size: 0.75rem; font-weight: 600; color: #eaf0ff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;
+}
+:root[data-theme="light"] .music-player { background: rgba(255, 255, 255, 0.6); border-color: rgba(0, 0, 0, 0.1); }
+:root[data-theme="light"] .music-player:hover { background: rgba(255, 255, 255, 0.8); }
+:root[data-theme="light"] .music-title { color: var(--text); }
 .theme-toggle{
   width:40px;height:40px;border-radius:11px;
   border:1px solid var(--border);
@@ -1972,6 +1996,14 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     </li>
   </ul>
   <div class="nav-tools">
+    <div class="music-player" id="musicPlayerBtn" role="button" aria-label="Play/Pause Background Music" tabindex="0">
+      <div class="music-icon" id="musicIcon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </div>
+      <div class="music-info">
+        <div class="music-title">City Ruins - Rays of Light</div>
+      </div>
+    </div>
     <button class="theme-toggle" id="settingsBtn" aria-label="Open display settings" title="Display settings" aria-haspopup="dialog" aria-expanded="false">
       <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="3"></circle>
@@ -2471,6 +2503,26 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  /* ====== MUSIC PLAYER ====== */
+  const musicBtn = document.getElementById('musicPlayerBtn');
+  const musicAudio = document.getElementById('bgMusic');
+  const musicIcon = document.getElementById('musicIcon');
+  if (musicBtn && musicAudio) {
+    let isPlaying = false;
+    musicAudio.volume = 0.35;
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        musicAudio.pause();
+        musicIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+        musicBtn.style.background = '';
+      } else {
+        musicAudio.play().catch(e => console.log('Audio play failed:', e));
+        musicIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+        musicBtn.style.background = 'rgba(59, 130, 255, 0.15)';
+      }
+      isPlaying = !isPlaying;
+    });
+  }
   
   /* ====== REVEAL ANIMATIONS ====== */
   const revObs = new IntersectionObserver(entries => {
@@ -2630,7 +2682,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!uiAudioCtx) {
       uiAudioCtx = new AudioCtx();
       uiMasterGain = uiAudioCtx.createGain();
-      uiMasterGain.gain.value = 0.78;
+      uiMasterGain.gain.value = 1.6;
       uiMasterGain.connect(uiAudioCtx.destination);
     }
     if (uiAudioCtx.state === 'suspended') {
@@ -3722,5 +3774,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 })();
 </script>
+  <audio id="bgMusic" src="city-ruins.mp3" loop preload="auto"></audio>
 </body>
 </html>
