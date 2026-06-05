@@ -695,107 +695,28 @@ section{position:relative;z-index:10;}
 .widget-top b{
   color:var(--green);font-size:0.62rem;letter-spacing:0.08em;
   border:1px solid rgba(87,242,135,0.32);background:rgba(87,242,135,0.08);border-radius:999px;padding:0.18rem 0.5rem;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.live-dot{
+  width:6px;height:6px;border-radius:50%;background:#57f287;
+  box-shadow:0 0 6px rgba(87,242,135,0.7);
+  animation:livePulse 1.5s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes livePulse{
+  0%,100%{opacity:1;box-shadow:0 0 4px rgba(87,242,135,0.5);}
+  50%{opacity:0.4;box-shadow:0 0 10px rgba(87,242,135,0.9);}
 }
 /* ===== VISITOR GLOBE (Premium CSS) ===== */
 .visitor-main{position:relative;z-index:1;display:grid;grid-template-columns:84px 1fr;gap:0.9rem;align-items:center;}
 #globeCanvas{width:90px;height:90px;border-radius:50%;display:block;}
 .visitor-globe{
   position:relative;width:84px;aspect-ratio:1;border-radius:50%;overflow:hidden;flex-shrink:0;
-  /* Ocean depth gradient */
-  background:
-    /* Latitude grid lines */
-    repeating-linear-gradient(180deg,
-      transparent,
-      transparent calc(16.5% - 0.5px),
-      rgba(0,210,255,0.10) calc(16.5% - 0.5px),
-      rgba(0,210,255,0.10) 16.5%
-    ),
-    /* Longitude grid lines */
-    repeating-linear-gradient(90deg,
-      transparent,
-      transparent calc(20% - 0.5px),
-      rgba(0,210,255,0.10) calc(20% - 0.5px),
-      rgba(0,210,255,0.10) 20%
-    ),
-    /* Ocean */
-    radial-gradient(ellipse at 38% 30%, #1a5291 0%, #0b2f65 28%, #061a3e 58%, #020c1f 100%);
-  background-size:200% 100%, 200% 100%, 100% 100%;
-  border:1.5px solid rgba(0,200,255,0.30);
-  box-shadow:
-    inset -10px -8px 20px rgba(0,0,0,0.50),
-    inset  7px  5px 14px rgba(60,160,255,0.10),
-    0 0 24px rgba(0,180,255,0.20),
-    0 0  0 3px rgba(0,200,255,0.06);
-  animation:globeSpin 22s linear infinite;
+  background:transparent;
 }
-@keyframes globeSpin{
-  from{background-position:0 0, 0 0, 0 0;}
-  to  {background-position:-200% 0, -200% 0, 0 0;}
-}
-/* Continents layer (also rotates with globe) */
-.visitor-globe::before{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:
-    /* North America */
-    radial-gradient(ellipse 44% 24% at 19% 28%, rgba(72,152,72,0.82) 0%, rgba(50,120,55,0.50) 42%, transparent 70%),
-    /* Greenland */
-    radial-gradient(ellipse 13% 13% at 26% 7%, rgba(165,215,210,0.58) 0%, rgba(130,185,178,0.30) 55%, transparent 72%),
-    /* South America */
-    radial-gradient(ellipse 20% 30% at 27% 62%, rgba(76,162,76,0.78) 0%, rgba(52,128,58,0.48) 44%, transparent 68%),
-    /* Europe */
-    radial-gradient(ellipse 14% 14% at 52% 24%, rgba(72,152,72,0.78) 0%, rgba(52,124,56,0.48) 42%, transparent 68%),
-    /* Africa */
-    radial-gradient(ellipse 18% 28% at 54% 53%, rgba(125,158,55,0.74) 0%, rgba(98,132,42,0.48) 44%, transparent 68%),
-    /* Asia large */
-    radial-gradient(ellipse 48% 26% at 74% 28%, rgba(72,152,72,0.74) 0%, rgba(52,124,56,0.46) 44%, transparent 68%),
-    /* SE Asia */
-    radial-gradient(ellipse 16% 11% at 83% 50%, rgba(76,158,68,0.65) 0%, rgba(52,126,52,0.38) 50%, transparent 68%),
-    /* Australia */
-    radial-gradient(ellipse 19% 15% at 80% 68%, rgba(158,136,55,0.68) 0%, rgba(128,110,40,0.42) 48%, transparent 68%),
-    /* Antarctica */
-    radial-gradient(ellipse 90% 18% at 50% 99%, rgba(185,225,245,0.52) 0%, rgba(160,205,225,0.28) 55%, transparent 74%);
-  background-size:200% 100%;
-  animation:globeSpin 22s linear infinite;
-  z-index:1;
-}
-/* 3D lighting / depth */
-.visitor-globe::after{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:
-    radial-gradient(ellipse 60% 55% at 32% 22%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 45%, transparent 70%),
-    radial-gradient(ellipse 55% 50% at 76% 82%, rgba(0,0,0,0.38) 0%, transparent 55%),
-    /* equator glow */
-    radial-gradient(ellipse 100% 12% at 50% 50%, rgba(0,160,255,0.06) 0%, transparent 100%);
-  z-index:2;pointer-events:none;
-}
+.visitor-globe::before,.visitor-globe::after{display:none!important;}
 /* Visitor dot */
-.globe-dot{
-  position:absolute;left:50%;top:50%;
-  width:8px;height:8px;border-radius:50%;
-  transform:translate(-50%,-50%);
-  background:var(--green);
-  box-shadow:0 0 0 2px rgba(87,242,135,0.22),0 0 14px rgba(87,242,135,0.80);
-  transition:left .7s cubic-bezier(.4,0,.2,1),top .7s cubic-bezier(.4,0,.2,1);
-  z-index:5;
-}
-.globe-dot::before{
-  content:'';position:absolute;inset:-3px;border-radius:50%;
-  background:rgba(87,242,135,0.25);
-  animation:dotCore 1.6s ease-in-out infinite;
-}
-.globe-dot::after{
-  content:'';position:absolute;inset:-5px;border-radius:50%;
-  border:1.5px solid rgba(87,242,135,0.50);
-  animation:dotRing 2.2s ease-in-out infinite;
-}
-@keyframes dotCore{
-  0%,100%{transform:scale(1);opacity:0.8;}
-  50%{transform:scale(1.3);opacity:0.4;}
-}
-@keyframes dotRing{
-  0%,100%{transform:scale(1);opacity:0.6;}
-  50%{transform:scale(2.2);opacity:0;}
-}
+.globe-dot{display:none!important;}
 .visitor-copy{}
 .widget-value{font-weight:900;color:var(--text);font-size:0.98rem;line-height:1.24;}
 .widget-sub{font-size:0.78rem;color:var(--muted);line-height:1.45;margin-top:0.18rem;}
@@ -803,7 +724,19 @@ section{position:relative;z-index:10;}
   font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--blue2);
   margin-top:0.22rem;display:flex;align-items:center;gap:0.32rem;opacity:0.85;
 }
-.visitor-time::before{content:'🕐';font-size:0.60rem;}
+.visitor-time-icon{
+  width:14px;height:14px;flex-shrink:0;
+}
+.visitor-time-icon .clock-hand-m{
+  transform-origin:7px 7px;
+  animation:clockMinute 3600s linear infinite;
+}
+.visitor-time-icon .clock-hand-h{
+  transform-origin:7px 7px;
+  animation:clockHour 43200s linear infinite;
+}
+@keyframes clockMinute{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes clockHour{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 /* hide 3D artifacts */
 .globe-3d-wrap,.globe-3d-canvas-container,.globe-atmo-ring,.globe-visitor-label,.visitor-globe-css{display:none!important;}
 
@@ -1419,35 +1352,7 @@ nav,.hero-card,.bot-card,.interest-card,.sk-card,.cmd-category,.radio-cmd-tag,.p
   border-color:rgba(36,64,166,0.22);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,0.7),0 14px 28px rgba(31,45,94,0.13);
 }
-:root[data-theme="light"] .visitor-globe{
-  background:
-    repeating-linear-gradient(180deg,transparent,transparent calc(16.5% - 0.5px),rgba(30,100,220,0.10) calc(16.5% - 0.5px),rgba(30,100,220,0.10) 16.5%),
-    repeating-linear-gradient(90deg,transparent,transparent calc(20% - 0.5px),rgba(30,100,220,0.10) calc(20% - 0.5px),rgba(30,100,220,0.10) 20%),
-    radial-gradient(ellipse at 38% 30%,#4a90d9 0%,#2a68b8 28%,#1545a0 55%,#0e347e 100%);
-  border-color:rgba(30,90,210,0.40);
-  box-shadow:
-    inset -10px -8px 20px rgba(8,20,60,0.28),
-    inset  7px  5px 14px rgba(100,180,255,0.18),
-    0 0 22px rgba(30,100,220,0.25),
-    0 0  0 3px rgba(30,100,220,0.08);
-}
-:root[data-theme="light"] .visitor-globe::before{
-  background:
-    radial-gradient(ellipse 44% 24% at 19% 28%,rgba(56,140,56,0.90) 0%,rgba(38,108,44,0.55) 42%,transparent 70%),
-    radial-gradient(ellipse 13% 13% at 26% 7%,rgba(180,225,218,0.65) 0%,rgba(150,200,192,0.35) 55%,transparent 72%),
-    radial-gradient(ellipse 20% 30% at 27% 62%,rgba(60,152,60,0.85) 0%,rgba(40,116,46,0.55) 44%,transparent 68%),
-    radial-gradient(ellipse 14% 14% at 52% 24%,rgba(56,140,56,0.85) 0%,rgba(40,112,44,0.55) 42%,transparent 68%),
-    radial-gradient(ellipse 18% 28% at 54% 53%,rgba(112,148,40,0.82) 0%,rgba(86,120,30,0.55) 44%,transparent 68%),
-    radial-gradient(ellipse 48% 26% at 74% 28%,rgba(56,140,56,0.80) 0%,rgba(40,112,44,0.50) 44%,transparent 68%),
-    radial-gradient(ellipse 16% 11% at 83% 50%,rgba(60,148,52,0.72) 0%,rgba(40,116,40,0.42) 50%,transparent 68%),
-    radial-gradient(ellipse 19% 15% at 80% 68%,rgba(145,124,44,0.75) 0%,rgba(115,98,28,0.48) 48%,transparent 68%),
-    radial-gradient(ellipse 90% 18% at 50% 99%,rgba(200,235,250,0.58) 0%,rgba(175,215,235,0.30) 55%,transparent 74%);
-}
-:root[data-theme="light"] .visitor-globe::after{
-  background:
-    radial-gradient(ellipse 60% 55% at 32% 22%,rgba(255,255,255,0.38) 0%,rgba(255,255,255,0.10) 45%,transparent 70%),
-    radial-gradient(ellipse 55% 50% at 76% 82%,rgba(0,0,40,0.20) 0%,transparent 55%);
-}
+/* Light theme globe: canvas handles everything */
 :root[data-theme="light"] .gh-cell{background:rgba(31,45,94,0.12);border-color:rgba(31,45,94,0.1);}
 :root[data-theme="light"] .gh-cell[data-level="1"]{background:rgba(22,184,117,0.22);border-color:rgba(22,184,117,0.18);}
 :root[data-theme="light"] .gh-cell[data-level="2"]{background:rgba(22,184,117,0.4);border-color:rgba(22,184,117,0.28);}
@@ -2161,7 +2066,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
               <div class="visitor-copy">
                 <div class="widget-value" id="visitorPlace">Locating visitor...</div>
                 <div class="widget-sub" id="visitorMeta">Live geolocation signal</div>
-                <div class="visitor-time" id="visitorTime">--:--</div>
+                <div class="visitor-time" id="visitorTime"><svg class="visitor-time-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><line class="clock-hand-h" x1="7" y1="7" x2="7" y2="4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line class="clock-hand-m" x1="7" y1="7" x2="10" y2="7" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/></svg><span id="visitorTimeText">--:--</span></div>
               </div>
             </div>
           </div>
@@ -3303,25 +3208,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ── live clock (uses API tz or browser tz as fallback) ── */
     const tz = (geo && geo.tz) || Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if (timeEl && tz) {
+    const timeText = document.getElementById('visitorTimeText');
+    if (timeText && tz) {
       const tick = () => {
         try {
           const fmt = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-          timeEl.textContent = fmt.format(new Date()) + ' (' + tz.replace(/_/g, ' ') + ')';
-        } catch(_) { timeEl.textContent = ''; }
+          timeText.textContent = fmt.format(new Date()) + ' (' + tz.replace(/_/g, ' ') + ')';
+        } catch(_) { timeText.textContent = ''; }
       };
       tick();
       setInterval(tick, 1000);
     }
 
-    /* ── visit counter (countapi.xyz is dead, use localStorage) ── */
     if (!count) return;
-    try {
-      const key    = 'syncinkVisits';
-      const visits = (parseInt(localStorage.getItem(key) || '0', 10) || 0) + 1;
-      localStorage.setItem(key, String(visits));
-      count.textContent = visits === 1 ? 'NEW' : 'RETURN';
-    } catch (_) { count.textContent = 'LIVE'; }
+    count.innerHTML = '<span class="live-dot"></span>LIVE';
   }
 
   async function initGithubWidget() {
@@ -3536,167 +3436,199 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!C) return;
   var ctx = C.getContext('2d');
   var W = C.width, H = C.height;
-  var cx = W/2, cy = H/2, R = W/2 - 2;
-  var N = W * H;
+  var cx = W/2, cy = H/2, R = W/2 - 4;
 
-  /* ── continent regions (ellipses in lon/lat space) ── */
-  var EL = [
-    /* North America high */  [-100,55,34,22],
-    /* USA / Mexico */        [-96,36,28,14],
-    /* Mexico / C.Am. */      [-90,20,10,11],
-    /* Greenland */           [-42,73,15,9],
-    /* South America N */     [-54,3,15,10],
-    /* South America C */     [-58,-16,14,20],
-    /* Argentina */           [-66,-41,9,16],
-    /* Europe */              [-2,53,20,12],
-    /* Scandinavia */         [16,65,8,10],
-    /* UK / Ireland */        [-3,54,4,5],
-    /* Africa */              [20,5,26,37],
-    /* NW Africa */           [-5,27,18,14],
-    /* Arabia */              [45,23,12,12],
-    /* Russia / Siberia */    [80,60,52,14],
-    /* Central Asia */        [55,47,20,9],
-    /* India */               [79,22,12,19],
-    /* China / E Asia */      [108,36,22,14],
-    /* SE Asia mainland */    [103,14,7,10],
-    /* Indonesia / Borneo */  [112,0,13,7],
-    /* Japan */               [136,37,3,8],
-    /* Australia */           [133,-24,22,16],
-    /* New Zealand */         [170,-43,4,7],
-    /* Iceland */             [-19,65,5,4]
+  /* ── continent outlines (simplified but realistic lon/lat polygons) ── */
+  var continents = [
+    /* North America */
+    [[-130,50],[-125,60],[-120,67],[-100,72],[-85,75],[-65,70],[-55,52],[-65,45],[-75,35],[-82,30],[-90,28],[-98,26],[-105,30],[-118,33],[-125,48],[-130,50]],
+    /* Central America */
+    [[-105,22],[-98,20],[-92,18],[-86,15],[-82,10],[-78,8],[-80,10],[-85,14],[-90,16],[-95,18],[-100,20],[-105,22]],
+    /* South America */
+    [[-80,10],[-75,12],[-62,10],[-50,5],[-45,0],[-40,-5],[-35,-8],[-35,-18],[-42,-22],[-48,-28],[-53,-33],[-58,-38],[-65,-45],[-68,-53],[-73,-48],[-72,-40],[-70,-30],[-70,-18],[-75,-5],[-78,2],[-80,10]],
+    /* Europe */
+    [[-10,36],[-5,37],[0,38],[3,42],[0,46],[-5,44],[-10,44],[-9,50],[-5,50],[2,51],[5,53],[8,54],[12,55],[15,56],[22,55],[28,56],[30,60],[28,65],[20,70],[10,63],[5,58],[2,52],[0,48],[-5,47],[-10,44],[-10,36]],
+    /* Africa */
+    [[-15,30],[-17,15],[-10,5],[-5,5],[5,5],[10,2],[10,-5],[12,-10],[15,-15],[18,-20],[22,-28],[28,-33],[33,-30],[35,-25],[38,-18],[40,-10],[42,-2],[45,10],[42,15],[35,20],[33,30],[30,35],[20,37],[10,37],[0,36],[-5,35],[-10,33],[-15,30]],
+    /* Asia */
+    [[28,36],[35,37],[40,38],[45,35],[50,37],[55,38],[60,42],[65,40],[70,37],[75,30],[78,20],[80,15],[85,18],[90,22],[95,18],[100,15],[105,22],[110,22],[115,25],[120,30],[125,35],[130,38],[135,35],[140,38],[142,45],[140,50],[135,55],[128,50],[120,50],[110,45],[100,50],[90,50],[80,52],[70,55],[65,55],[60,58],[55,55],[50,55],[45,50],[40,42],[35,40],[28,36]],
+    /* India */
+    [[70,30],[72,25],[72,20],[74,15],[76,10],[78,8],[80,10],[82,15],[85,20],[88,22],[88,25],[85,28],[82,30],[78,32],[75,32],[70,30]],
+    /* Australia */
+    [[115,-12],[120,-14],[125,-14],[130,-13],[135,-12],[138,-16],[140,-18],[145,-18],[148,-20],[150,-24],[152,-28],[150,-32],[148,-36],[145,-38],[140,-38],[135,-35],[130,-32],[125,-30],[120,-28],[118,-25],[115,-22],[114,-18],[115,-12]],
+    /* UK */
+    [[-6,50],[-5,52],[-4,54],[-4,56],[-3,58],[-5,57],[-6,55],[-6,53],[-6,50]],
+    /* Japan */
+    [[130,31],[131,33],[132,34],[133,36],[136,37],[138,38],[140,40],[141,42],[140,44],[139,42],[137,36],[135,34],[132,32],[130,31]],
+    /* Indonesia */
+    [[96,5],[100,2],[104,0],[106,-2],[108,-6],[110,-7],[114,-8],[116,-6],[118,-5],[120,-8],[122,-6],[125,-8],[128,-4],[130,-2],[127,0],[124,2],[120,0],[116,0],[112,2],[108,4],[104,4],[100,4],[96,5]],
+    /* New Zealand */
+    [[166,-35],[168,-37],[170,-40],[172,-42],[174,-44],[174,-42],[172,-38],[170,-36],[168,-35],[166,-35]],
+    /* Greenland */
+    [[-55,60],[-50,62],[-45,65],[-40,70],[-35,74],[-30,78],[-40,80],[-50,78],[-55,75],[-58,70],[-55,60]],
+    /* Iceland */
+    [[-24,64],[-22,66],[-18,66],[-14,65],[-16,64],[-20,63],[-24,64]],
+    /* Madagascar */
+    [[44,-12],[46,-14],[48,-18],[49,-22],[48,-25],[46,-24],[44,-20],[43,-16],[44,-12]],
+    /* Antarctica (simplified arc) */
+    [[-180,-65],[-150,-70],[-120,-68],[-90,-72],[-60,-68],[-30,-70],[0,-68],[30,-70],[60,-68],[90,-70],[120,-68],[150,-70],[180,-65]]
   ];
 
-  function isLand(lon, lat) {
-    if (lat < -64) return true; /* Antarctica */
-    for (var e = 0; e < EL.length; e++) {
-      var el = EL[e];
-      var a = (lon - el[0]) / el[2];
-      var b = (lat - el[1]) / el[3];
-      if (a*a + b*b < 1) return true;
-    }
-    return false;
-  }
-
-  /* ── precompute per-pixel sphere data ── */
-  var pValid = new Uint8Array(N);
-  var pLat   = new Float32Array(N);
-  var pAng   = new Float32Array(N);
-  var pLi    = new Float32Array(N); /* diffuse light */
-  var pSp    = new Float32Array(N); /* specular */
-
-  var lx = -0.28, ly = 0.45;
-  var lz = Math.sqrt(Math.max(0, 1 - lx*lx - ly*ly));
-
-  for (var py = 0; py < H; py++) {
-    var wy = -(py - cy) / R;
-    var wy2 = wy * wy;
-    for (var px = 0; px < W; px++) {
-      var wx = (px - cx) / R;
-      var wz2 = 1 - wx*wx - wy2;
-      var i = py * W + px;
-      if (wz2 <= 0) continue;
-      var wz = Math.sqrt(wz2);
-      pValid[i] = 1;
-      pLat[i]   = Math.asin(wy) * 57.29577951;
-      pAng[i]   = Math.atan2(wx, wz) * 57.29577951;
-      var diff  = Math.max(0, wx*lx + wy*ly + wz*lz);
-      pLi[i]    = 0.20 + 0.80 * diff;
-      var d2    = diff * diff;
-      pSp[i]    = d2 * d2 * 0.55; /* diff^4 * 0.55 */
-    }
-  }
-
-  /* ── render state ── */
-  var rotation = 20;
+  /* ── 3D projection helpers ── */
+  var DEG = Math.PI / 180;
+  var targetRot = -20; /* default longitude to face */
+  var rotation = targetRot;
   var visLon = null, visLat = null;
-  var img = ctx.createImageData(W, H);
-  var px_ = img.data;
+
+  function project(lon, lat, rot) {
+    var lam = (lon + rot) * DEG;
+    var phi = lat * DEG;
+    var cp = Math.cos(phi);
+    var x = cp * Math.sin(lam);
+    var y = Math.sin(phi);
+    var z = cp * Math.cos(lam);
+    if (z < -0.05) return null; /* behind globe */
+    return { x: cx + R * x, y: cy - R * y, z: z };
+  }
+
+  function drawPath(pts, rot, fill, stroke, lw) {
+    var proj = [];
+    var anyVisible = false;
+    for (var i = 0; i < pts.length; i++) {
+      var p = project(pts[i][0], pts[i][1], rot);
+      if (!p) { proj.push(null); }
+      else { proj.push(p); anyVisible = true; }
+    }
+    if (!anyVisible) return;
+
+    ctx.beginPath();
+    var started = false;
+    for (var j = 0; j < proj.length; j++) {
+      if (!proj[j]) { started = false; continue; }
+      if (!started) { ctx.moveTo(proj[j].x, proj[j].y); started = true; }
+      else ctx.lineTo(proj[j].x, proj[j].y);
+    }
+    if (fill) { ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 0.8; ctx.stroke(); }
+  }
 
   function draw() {
-    var dark = document.documentElement.getAttribute('data-theme') !== 'light';
+    var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    ctx.clearRect(0, 0, W, H);
 
-    for (var i = 0; i < N; i++) {
-      var b4 = i << 2;
-      if (!pValid[i]) { px_[b4+3] = 0; continue; }
+    /* ── background sphere ── */
+    var bg = ctx.createRadialGradient(cx - R*0.25, cy - R*0.2, 0, cx, cy, R);
+    if (isDark) {
+      bg.addColorStop(0, 'rgba(12,18,40,0.95)');
+      bg.addColorStop(0.7, 'rgba(6,8,18,0.98)');
+      bg.addColorStop(1, 'rgba(4,5,12,1)');
+    } else {
+      bg.addColorStop(0, 'rgba(220,235,255,0.95)');
+      bg.addColorStop(0.7, 'rgba(180,210,250,0.98)');
+      bg.addColorStop(1, 'rgba(150,190,240,1)');
+    }
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.fillStyle = bg; ctx.fill();
 
-      /* longitude at this pixel for current rotation */
-      var raw = pAng[i] - rotation;
-      var lon = ((raw % 360) + 360) % 360;
-      if (lon > 180) lon -= 360;
-
-      var land = isLand(lon, pLat[i]);
-      var li = pLi[i], sp = pSp[i];
-      var r, g, b;
-
-      if (land) {
-        if (dark) {
-          r = (50  + sp * 205) * li | 0;
-          g = (120 + sp * 135) * li | 0;
-          b = (45  + sp * 210) * li | 0;
-        } else {
-          r = (36  + sp * 219) * li | 0;
-          g = (102 + sp * 153) * li | 0;
-          b = (32  + sp * 223) * li | 0;
-        }
-      } else {
-        if (dark) {
-          r = (7   + sp * 93)  * li | 0;
-          g = (33  + sp * 67)  * li | 0;
-          b = (102 + sp * 153) * li | 0;
-        } else {
-          r = (20  + sp * 110) * li | 0;
-          g = (82  + sp * 103) * li | 0;
-          b = (192 + sp * 63)  * li | 0;
-        }
+    /* ── grid lines (latitude) ── */
+    var gridColor = isDark ? 'rgba(88,101,242,0.18)' : 'rgba(30,80,180,0.15)';
+    for (var lat = -60; lat <= 60; lat += 30) {
+      ctx.beginPath();
+      var first = true;
+      for (var lon = -180; lon <= 180; lon += 3) {
+        var p = project(lon, lat, rotation);
+        if (!p) { first = true; continue; }
+        if (first) { ctx.moveTo(p.x, p.y); first = false; }
+        else ctx.lineTo(p.x, p.y);
       }
-
-      px_[b4]   = r > 255 ? 255 : r;
-      px_[b4+1] = g > 255 ? 255 : g;
-      px_[b4+2] = b > 255 ? 255 : b;
-      px_[b4+3] = 255;
+      ctx.strokeStyle = gridColor; ctx.lineWidth = 0.6; ctx.stroke();
     }
 
-    ctx.putImageData(img, 0, 0);
+    /* ── grid lines (longitude) ── */
+    for (var mlon = -180; mlon < 180; mlon += 30) {
+      ctx.beginPath();
+      var first2 = true;
+      for (var mlat = -90; mlat <= 90; mlat += 3) {
+        var p2 = project(mlon, mlat, rotation);
+        if (!p2) { first2 = true; continue; }
+        if (first2) { ctx.moveTo(p2.x, p2.y); first2 = false; }
+        else ctx.lineTo(p2.x, p2.y);
+      }
+      ctx.strokeStyle = gridColor; ctx.lineWidth = 0.6; ctx.stroke();
+    }
 
-    /* atmospheric rim glow */
-    var dark2 = document.documentElement.getAttribute('data-theme') !== 'light';
-    var rimG = ctx.createRadialGradient(cx, cy, R * 0.83, cx, cy, R + 0.5);
+    /* ── continents ── */
+    var landFill = isDark ? 'rgba(88,101,242,0.22)' : 'rgba(50,80,180,0.18)';
+    var landStroke = isDark ? 'rgba(0,212,255,0.55)' : 'rgba(30,100,200,0.6)';
+    for (var c = 0; c < continents.length; c++) {
+      drawPath(continents[c], rotation, landFill, landStroke, 1.0);
+    }
+
+    /* ── equator highlight ── */
+    ctx.beginPath();
+    var eFirst = true;
+    for (var elon = -180; elon <= 180; elon += 2) {
+      var ep = project(elon, 0, rotation);
+      if (!ep) { eFirst = true; continue; }
+      if (eFirst) { ctx.moveTo(ep.x, ep.y); eFirst = false; }
+      else ctx.lineTo(ep.x, ep.y);
+    }
+    ctx.strokeStyle = isDark ? 'rgba(0,212,255,0.25)' : 'rgba(30,100,200,0.22)';
+    ctx.lineWidth = 0.9; ctx.stroke();
+
+    /* ── atmospheric rim glow ── */
+    var rimG = ctx.createRadialGradient(cx, cy, R * 0.88, cx, cy, R + 2);
     rimG.addColorStop(0, 'transparent');
-    rimG.addColorStop(1, dark2 ? 'rgba(0,195,255,0.26)' : 'rgba(20,130,255,0.32)');
-    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    rimG.addColorStop(1, isDark ? 'rgba(88,101,242,0.35)' : 'rgba(30,100,220,0.3)');
+    ctx.beginPath(); ctx.arc(cx, cy, R + 1, 0, Math.PI * 2);
     ctx.fillStyle = rimG; ctx.fill();
-    ctx.strokeStyle = dark2 ? 'rgba(0,195,255,0.48)' : 'rgba(20,130,255,0.58)';
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.strokeStyle = isDark ? 'rgba(0,212,255,0.45)' : 'rgba(30,100,220,0.5)';
     ctx.lineWidth = 1.5; ctx.stroke();
 
-    /* visitor dot */
+    /* ── visitor dot ── */
     if (visLon !== null) {
-      var lonR = (visLon + rotation) * 0.01745329252;
-      var latR = visLat * 0.01745329252;
-      var cosLat = Math.cos(latR);
-      var vz = cosLat * Math.cos(lonR);
-      if (vz > 0) {
-        var vx = cx + R * cosLat * Math.sin(lonR);
-        var vy = cy - R * Math.sin(latR);
-        var pulse = 0.5 + 0.5 * Math.sin(Date.now() / 380);
+      var vp = project(visLon, visLat, rotation);
+      if (vp && vp.z > 0) {
+        var pulse = 0.5 + 0.5 * Math.sin(Date.now() / 400);
         ctx.beginPath();
-        ctx.arc(vx, vy, 7 + pulse * 4, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(87,242,135,' + (0.15 + pulse * 0.13).toFixed(2) + ')';
-        ctx.lineWidth = 1; ctx.stroke();
-        ctx.beginPath(); ctx.arc(vx, vy, 3, 0, Math.PI * 2);
+        ctx.arc(vp.x, vp.y, 8 + pulse * 5, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(87,242,135,' + (0.12 + pulse * 0.15).toFixed(2) + ')';
+        ctx.lineWidth = 1.2; ctx.stroke();
+        ctx.beginPath(); ctx.arc(vp.x, vp.y, 3.5, 0, Math.PI * 2);
         ctx.fillStyle = '#57f287';
-        ctx.shadowColor = '#57f287'; ctx.shadowBlur = 8;
+        ctx.shadowColor = '#57f287'; ctx.shadowBlur = 10;
         ctx.fill(); ctx.shadowBlur = 0;
       }
     }
   }
 
-  function tick() { rotation += 0.07; draw(); requestAnimationFrame(tick); }
+  /* ── slow rotation, stops when user's location is centered ── */
+  var autoSpin = true;
+  function tick() {
+    if (autoSpin) {
+      rotation += 0.08;
+    } else {
+      /* ease toward target rotation */
+      var diff = targetRot - rotation;
+      /* normalize to -180..180 */
+      while (diff > 180) diff -= 360;
+      while (diff < -180) diff += 360;
+      if (Math.abs(diff) > 0.1) {
+        rotation += diff * 0.02;
+      }
+    }
+    draw();
+    requestAnimationFrame(tick);
+  }
   requestAnimationFrame(tick);
 
-  new MutationObserver(function(){ /* theme change handled in draw() */ })
-    .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-  window.setGlobeVisitor = function(lon, lat) { visLon = lon; visLat = lat; };
+  window.setGlobeVisitor = function(lon, lat) {
+    visLon = lon; visLat = lat;
+    /* rotate globe to center on visitor */
+    targetRot = -lon;
+    autoSpin = false;
+  };
 })();
 </script>
 </body>
