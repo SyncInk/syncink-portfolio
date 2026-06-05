@@ -1370,6 +1370,21 @@ nav,.hero-card,.bot-card,.interest-card,.sk-card,.cmd-category,.radio-cmd-tag,.p
   border-color:rgba(36,64,166,0.22);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,0.7),0 14px 28px rgba(31,45,94,0.13);
 }
+:root[data-theme="light"] .widget-top b,
+:root[data-theme="light"] .activity-head b {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.38);
+  background: rgba(239, 68, 68, 0.08);
+}
+:root[data-theme="light"] .live-dot {
+  background: #ef4444;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
+  animation: livePulseLight 1.5s ease-in-out infinite;
+}
+@keyframes livePulseLight{
+  0%,100%{opacity:1;box-shadow:0 0 4px rgba(239,68,68,0.5);}
+  50%{opacity:0.4;box-shadow:0 0 10px rgba(239,68,68,0.9);}
+}
 /* Light theme globe: canvas handles everything */
 :root[data-theme="light"] .gh-cell{background:rgba(31,45,94,0.12);border-color:rgba(31,45,94,0.1);}
 :root[data-theme="light"] .gh-cell[data-level="1"]{background:rgba(22,184,117,0.22);border-color:rgba(22,184,117,0.18);}
