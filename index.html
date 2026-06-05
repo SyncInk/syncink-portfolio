@@ -657,26 +657,29 @@ section{position:relative;z-index:10;}
 .interest-card:nth-child(2n){border-right:none;}
 .interest-card:nth-last-child(-n+2){border-bottom:none;}
 .interest-card:hover{
-  background:rgba(var(--ac),0.07);
+  background:rgba(var(--ac),0.08);
   border-left-color:rgba(var(--ac),0.85);
 }
-.interest-card:hover .ic-wm{opacity:0.14;}
+.interest-card:hover .ic-wm{opacity:0.16;filter:drop-shadow(0 0 10px rgba(var(--ac),0.45));}
 .ic-icon{
   width:40px;height:40px;border-radius:50%;
   flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
 }
 .ic-wm{
   position:absolute;right:-10px;top:50%;
   transform:translateY(-50%);
-  opacity:0.07;
+  opacity:0.06;
   pointer-events:none;
-  transition:opacity 0.22s ease;
+  transition:opacity 0.3s ease, filter 0.3s ease;
 }
 .ic-name{font-weight:700;font-size:0.86rem;color:var(--text);}
 .ic-sub{font-size:0.74rem;color:var(--muted);margin-top:0.12rem;}
-:root[data-theme="light"] .interest-card{background:#fff;}
-:root[data-theme="light"] .interest-card:hover{background:rgba(var(--ac),0.05);}
+:root[data-theme="light"] .interest-card{background:#fff;border-right-color:rgba(0,0,0,0.08);border-bottom-color:rgba(0,0,0,0.08);}
+:root[data-theme="light"] .interest-card:hover{background:rgba(var(--ac),0.06);}
+:root[data-theme="light"] .ic-name{color:#111827;}
+:root[data-theme="light"] .ic-sub{color:#4b5563;}
+:root[data-theme="light"] .ic-wm{opacity:0.08;}
+:root[data-theme="light"] .interest-card:hover .ic-wm{opacity:0.18;}
 .about-widgets{display:grid;gap:0.85rem;margin-top:1rem;}
 .about-widgets{display:grid;gap:0.85rem;margin-top:1rem;}
 .signal-widget{
@@ -777,7 +780,7 @@ section{position:relative;z-index:10;}
   background:rgba(var(--ac),0.07);
   border-left-color:rgba(var(--ac),0.85);
 }
-.sk-card:hover .sk-wm{opacity:0.13;}
+.sk-card:hover .sk-wm{opacity:0.18;filter:drop-shadow(0 0 12px rgba(var(--ac),0.5));}
 .sk-icon-wrap{
   width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -787,13 +790,17 @@ section{position:relative;z-index:10;}
 }
 .sk-wm{
   position:absolute;right:-12px;bottom:-12px;
-  opacity:0.07;pointer-events:none;
-  transition:opacity 0.22s ease;
+  opacity:0.06;pointer-events:none;
+  transition:opacity 0.3s ease, filter 0.3s ease;
 }
 .sk-name{font-weight:800;font-size:0.95rem;margin-bottom:0.4rem;color:var(--text);}
 .sk-desc{font-size:0.82rem;color:var(--muted);line-height:1.65;}
-:root[data-theme="light"] .sk-card{background:#fff;}
-:root[data-theme="light"] .sk-card:hover{background:rgba(var(--ac),0.05);}
+:root[data-theme="light"] .sk-card{background:#fff;border-right-color:rgba(0,0,0,0.08);border-bottom-color:rgba(0,0,0,0.08);}
+:root[data-theme="light"] .sk-card:hover{background:rgba(var(--ac),0.06);}
+:root[data-theme="light"] .sk-wm{opacity:0.08;}
+:root[data-theme="light"] .sk-card:hover .sk-wm{opacity:0.15;}
+:root[data-theme="light"] .sk-name{color:#111827;}
+:root[data-theme="light"] .sk-desc{color:#4b5563;}
 @media(max-width:700px){.skills-grid{grid-template-columns:1fr 1fr;}.sk-card:nth-child(3n){border-right:1px solid var(--border);}.sk-card:nth-child(2n){border-right:none;}.sk-card:nth-last-child(-n+3){border-bottom:1px solid var(--border);}.sk-card:nth-last-child(-n+2){border-bottom:none;}}
 @media(max-width:480px){.skills-grid{grid-template-columns:1fr;}.sk-card{border-right:none!important;}.sk-card:nth-last-child(1){border-bottom:none;}}
 
@@ -823,7 +830,14 @@ section{position:relative;z-index:10;}
 .proj:hover::before{transform:scaleY(1);}
 .proj:hover{padding-left:1rem;}
 .proj-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);}
-.proj-name{font-size:clamp(1rem,2vw,1.4rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:0.35rem;transition:color 0.3s;}
+.proj-icon{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(88,101,242,0.12);border:1px solid rgba(88,101,242,0.2);
+  flex-shrink:0;transition:background 0.3s,box-shadow 0.3s;
+}
+.proj:hover .proj-icon{background:rgba(88,101,242,0.2);box-shadow:0 0 16px rgba(88,101,242,0.25);}
+.proj-name{font-size:clamp(1rem,2vw,1.4rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:0.35rem;transition:color 0.3s;display:flex;align-items:center;gap:0.6rem;}
 .proj:hover .proj-name{color:var(--blue2);}
 .proj-tags{display:flex;gap:0.5rem;flex-wrap:wrap;}
 .proj-tag{
@@ -834,6 +848,10 @@ section{position:relative;z-index:10;}
 }
 .proj-arrow{font-size:1.3rem;color:var(--muted);transition:all 0.3s;transform:rotate(-45deg);}
 .proj:hover .proj-arrow{color:var(--cyan);transform:rotate(0deg);}
+:root[data-theme="light"] .proj{border-bottom-color:rgba(0,0,0,0.1);color:#111827;}
+:root[data-theme="light"] .proj-tag{background:rgba(88,101,242,0.08);border-color:rgba(88,101,242,0.25);color:#4338ca;}
+:root[data-theme="light"] .proj-num{color:#6b7280;}
+:root[data-theme="light"] .proj-icon{background:rgba(88,101,242,0.1);border-color:rgba(88,101,242,0.22);}
 @media(max-width:600px){.proj{grid-template-columns:44px 1fr auto;gap:1rem;padding:1.4rem 0;}}
 
 /* ============ BOTS SECTION ============ */
@@ -2048,11 +2066,17 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       </div>
       <div class="reveal-r">
         <div class="interests">
-          <div class="interest-card" style="--ac:124,58,237"><span class="ic-icon" style="background:rgba(124,58,237,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h.01M10 10h.01"/><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(124,58,237,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h.01M10 10h.01"/><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/></svg><div><div class="ic-name">Gaming</div><div class="ic-sub">Hardcore gamer</div></div></div>
-          <div class="interest-card" style="--ac:245,158,11"><span class="ic-icon" style="background:rgba(245,158,11,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(253,211,77,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.5 2 6 4.5 6 8c0 2.5 1.5 4.5 3 6l1 6h4l1-6c1.5-1.5 3-3.5 3-6 0-3.5-2.5-6-6-6z"/><line x1="9" y1="14" x2="15" y2="14"/><path d="M9 17c1 1 5 1 6 0"/><circle cx="9.5" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="9" r="1" fill="currentColor" stroke="none"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.5 2 6 4.5 6 8c0 2.5 1.5 4.5 3 6l1 6h4l1-6c1.5-1.5 3-3.5 3-6 0-3.5-2.5-6-6-6z"/><line x1="9" y1="14" x2="15" y2="14"/><path d="M9 17c1 1 5 1 6 0"/><circle cx="9.5" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="9" r="1" fill="currentColor" stroke="none"/></svg><div><div class="ic-name">Cats</div><div class="ic-sub">Certified cat lover</div></div></div>
-          <div class="interest-card" style="--ac:14,165,233"><span class="ic-icon" style="background:rgba(14,165,233,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><div><div class="ic-name">Languages</div><div class="ic-sub">Always learning new ones</div></div></div>
-          <div class="interest-card" style="--ac:236,72,153"><span class="ic-icon" style="background:rgba(236,72,153,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(249,168,212,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><polyline points="8,9 12,13 16,9"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(236,72,153,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><polyline points="8,9 12,13 16,9"/></svg><div><div class="ic-name">Game Dev</div><div class="ic-sub">Building crazy games</div></div></div>
-          <div class="interest-card" style="--ac:249,115,22"><span class="ic-icon" style="background:rgba(249,115,22,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(253,186,116,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 3-1.8 5.5-4 6.8V18a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2.2C6.8 14.5 5 12 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="9" y1="19" x2="15" y2="19"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(249,115,22,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a7 7 0 0 1 7 7c0 3-1.8 5.5-4 6.8V18a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2.2C6.8 14.5 5 12 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="21" x2="15" y2="21"/><line x1="9" y1="19" x2="15" y2="19"/></svg><div><div class="ic-name">Creative Tech</div><div class="ic-sub">Art meets code</div></div></div>
+          <!-- Gaming: proper gamepad with DPAD + buttons -->
+          <div class="interest-card" style="--ac:124,58,237"><span class="ic-icon" style="background:rgba(124,58,237,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="4"/><path d="M6 11h4M8 9v4"/><circle cx="16" cy="11" r="1" fill="rgba(196,181,253,1)" stroke="none"/><circle cx="18" cy="13" r="1" fill="rgba(196,181,253,1)" stroke="none"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(124,58,237,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="12" rx="4"/><path d="M6 11h4M8 9v4"/><circle cx="16" cy="11" r="1" fill="rgba(124,58,237,1)" stroke="none"/><circle cx="18" cy="13" r="1" fill="rgba(124,58,237,1)" stroke="none"/></svg><div><div class="ic-name">Gaming</div><div class="ic-sub">Hardcore gamer</div></div></div>
+          <!-- Cats: cat paw icon -->
+          <div class="interest-card" style="--ac:245,158,11"><span class="ic-icon" style="background:rgba(245,158,11,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(253,211,77,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="5"/><circle cx="7" cy="9" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="17" cy="9" r="2"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="14" r="5"/><circle cx="7" cy="9" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="17" cy="9" r="2"/></svg><div><div class="ic-name">Cats</div><div class="ic-sub">Certified cat lover</div></div></div>
+          <!-- Languages: speech bubble with letters -->
+          <div class="interest-card" style="--ac:14,165,233"><span class="ic-icon" style="background:rgba(14,165,233,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><div><div class="ic-name">Languages</div><div class="ic-sub">Always learning new ones</div></div></div>
+          <!-- Game Dev: joystick/controller -->
+          <div class="interest-card" style="--ac:236,72,153"><span class="ic-icon" style="background:rgba(236,72,153,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(249,168,212,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="8"/><circle cx="12" cy="11" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M9 20h6"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(236,72,153,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="8"/><circle cx="12" cy="11" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M9 20h6"/></svg><div><div class="ic-name">Game Dev</div><div class="ic-sub">Building crazy games</div></div></div>
+          <!-- Creative Tech: sparkles/wand -->
+          <div class="interest-card" style="--ac:249,115,22"><span class="ic-icon" style="background:rgba(249,115,22,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(253,186,116,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1M6.343 6.343l-.707.707M3 12h1M6.343 17.657l-.707-.707M15.536 6.464l.707-.707M20 12h1M15.536 17.536l.707.707"/><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(249,115,22,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1M6.343 6.343l-.707.707M3 12h1M6.343 17.657l-.707-.707M15.536 6.464l.707-.707M20 12h1M15.536 17.536l.707.707"/><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg><div><div class="ic-name">Creative Tech</div><div class="ic-sub">Art meets code</div></div></div>
+          <!-- Student: graduation cap -->
           <div class="interest-card" style="--ac:16,185,129"><span class="ic-icon" style="background:rgba(16,185,129,0.18);"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="rgba(110,231,183,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span><svg class="ic-wm" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="rgba(16,185,129,1)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><div><div class="ic-name">Student</div><div class="ic-sub">Class 11 grind</div></div></div>
         </div>
         <div class="about-widgets">
@@ -2089,12 +2113,18 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     <div class="s-label reveal">Skills & Tools</div>
     <h2 class="s-heading reveal">What I <em>know</em></h2>
     <div class="skills-grid reveal">
-      <div class="sk-card" style="--ac:234,179,8"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(253,224,71,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(234,179,8,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg><div class="sk-name">JavaScript / TS</div><p class="sk-desc">5 years deep. From vanilla DOM to modern frameworks — JS is my first language.</p></div>
-      <div class="sk-card" style="--ac:124,58,237"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h.01M10 10h.01"/><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(124,58,237,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h.01M10 10h.01"/><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/></svg><div class="sk-name">Game Development</div><p class="sk-desc">Building original games with custom engines, physics and wild mechanics.</p></div>
-      <div class="sk-card" style="--ac:14,165,233"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><div class="sk-name">Web Development</div><p class="sk-desc">Full-stack web dev — clean frontends, solid backends, great UX.</p></div>
-      <div class="sk-card" style="--ac:34,197,94"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(134,239,172,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 2 7 3.5 7 6v2h5v1H6c-2 0-4 1.5-4 4v2c0 2.5 2 4 4 4h2v-2.5c0-1 .5-1.5 1.5-1.5h5c1 0 1.5-.5 1.5-1.5V9c0-1-.5-1.5-1.5-1.5H12V6c0-1 .5-1.5 1-1.5h3C17 4.5 17 2 15 2h-3z"/><circle cx="10" cy="7" r="1" fill="currentColor" stroke="none"/><path d="M12 22c3 0 5-1.5 5-4v-2h-5v-1h6c2 0 4-1.5 4-4V9c0-2.5-2-4-4-4h-2v2.5c0 1-.5 1.5-1.5 1.5H10c-1 0-1.5.5-1.5 1.5V15c0 1 .5 1.5 1.5 1.5H12v1.5c0 1-.5 1.5-1 1.5H8C7 20 7 22 9 22h3z"/><circle cx="14" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(34,197,94,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C9 2 7 3.5 7 6v2h5v1H6c-2 0-4 1.5-4 4v2c0 2.5 2 4 4 4h2v-2.5c0-1 .5-1.5 1.5-1.5h5c1 0 1.5-.5 1.5-1.5V9c0-1-.5-1.5-1.5-1.5H12V6c0-1 .5-1.5 1-1.5h3C17 4.5 17 2 15 2h-3z"/><circle cx="10" cy="7" r="1" fill="currentColor" stroke="none"/><path d="M12 22c3 0 5-1.5 5-4v-2h-5v-1h6c2 0 4-1.5 4-4V9c0-2.5-2-4-4-4h-2v2.5c0 1-.5 1.5-1.5 1.5H10c-1 0-1.5.5-1.5 1.5V15c0 1 .5 1.5 1.5 1.5H12v1.5c0 1-.5 1.5-1 1.5H8C7 20 7 22 9 22h3z"/><circle cx="14" cy="17" r="1" fill="currentColor" stroke="none"/></svg><div class="sk-name">Python</div><p class="sk-desc">Scripting, automation, data stuff and backend services.</p></div>
-      <div class="sk-card" style="--ac:236,72,153"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(249,168,212,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(236,72,153,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg><div class="sk-name">UI/UX & Design</div><p class="sk-desc">Designing interfaces that look great on every screen, pixel by pixel.</p></div>
-      <div class="sk-card" style="--ac:249,115,22"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(253,186,116,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="2" x2="12" y2="22"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(249,115,22,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="2" x2="12" y2="22"/></svg><div class="sk-name">Creative Coding</div><p class="sk-desc">Canvas, WebGL, generative art — making the browser do things it shouldn't.</p></div>
+      <!-- JavaScript / TS: real JS logo shape -->
+      <div class="sk-card" style="--ac:234,179,8"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(253,224,71,1)" aria-hidden="true"><rect width="24" height="24" rx="3" fill="rgba(234,179,8,0.2)"/><path d="M3 3h18v18H3z" fill="none"/><path d="M12 17.5c0 1.38-1.12 2-2.5 2S7 18.88 7 17.5h1.5c0 .55.45.5 1 .5s1-.17 1-.5V13H12v4.5zM17 15.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5 0 .2.13.37.32.45l1.56.65c.74.31 1.12.9 1.12 1.9 0 1.38-1.12 2-2.5 2S13 19.88 13 18.5h1.5c0 .55.45.5 1 .5s1-.17 1-.5c0-.2-.13-.37-.32-.45l-1.56-.65c-.74-.31-1.12-.9-1.12-1.9 0-1.38 1.12-2 2.5-2s2.5.62 2.5 2H17z" fill="rgba(253,224,71,1)"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="3" fill="none" stroke="rgba(234,179,8,1)" stroke-width="0.8"/><path d="M12 17.5c0 1.38-1.12 2-2.5 2S7 18.88 7 17.5h1.5c0 .55.45.5 1 .5s1-.17 1-.5V13H12v4.5zM17 15.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5 0 .2.13.37.32.45l1.56.65c.74.31 1.12.9 1.12 1.9 0 1.38-1.12 2-2.5 2S13 19.88 13 18.5h1.5c0 .55.45.5 1 .5s1-.17 1-.5c0-.2-.13-.37-.32-.45l-1.56-.65c-.74-.31-1.12-.9-1.12-1.9 0-1.38 1.12-2 2.5-2s2.5.62 2.5 2H17z" fill="rgba(234,179,8,1)"/></svg><div class="sk-name">JavaScript / TS</div><p class="sk-desc">5 years deep. From vanilla DOM to modern frameworks — JS is my first language.</p></div>
+      <!-- Game Dev: joystick icon -->
+      <div class="sk-card" style="--ac:124,58,237"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h4M8 8v4"/><circle cx="16" cy="10" r="1" fill="rgba(196,181,253,1)" stroke="none"/><circle cx="18" cy="12" r="1" fill="rgba(196,181,253,1)" stroke="none"/><circle cx="14" cy="12" r="1" fill="rgba(196,181,253,1)" stroke="none"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(124,58,237,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h4M8 8v4"/><circle cx="16" cy="10" r="1" fill="rgba(124,58,237,1)" stroke="none"/><circle cx="18" cy="12" r="1" fill="rgba(124,58,237,1)" stroke="none"/><circle cx="14" cy="12" r="1" fill="rgba(124,58,237,1)" stroke="none"/></svg><div class="sk-name">Game Development</div><p class="sk-desc">Building original games with custom engines, physics and wild mechanics.</p></div>
+      <!-- Web Dev: layers/stack icon -->
+      <div class="sk-card" style="--ac:14,165,233"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><div class="sk-name">Web Development</div><p class="sk-desc">Full-stack web dev — clean frontends, solid backends, great UX.</p></div>
+      <!-- Python: real snake/python logo shape -->
+      <div class="sk-card" style="--ac:34,197,94"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(134,239,172,1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C9.2 3 7 4.3 7 6v3h5v1H6C4.3 10 3 11.3 3 13v3c0 1.7 1.3 3 3 3h2v-2c0-1.1.9-2 2-2h4c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-2z"/><circle cx="10" cy="6.5" r="0.8" fill="rgba(134,239,172,1)" stroke="none"/><path d="M12 21c2.8 0 5-1.3 5-3v-3h-5v-1h6c1.7 0 3-1.3 3-3v-3"/><circle cx="14" cy="17.5" r="0.8" fill="rgba(134,239,172,1)" stroke="none"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(34,197,94,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3C9.2 3 7 4.3 7 6v3h5v1H6C4.3 10 3 11.3 3 13v3c0 1.7 1.3 3 3 3h2v-2c0-1.1.9-2 2-2h4c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-2z"/><circle cx="10" cy="6.5" r="0.8" fill="rgba(34,197,94,1)" stroke="none"/><path d="M12 21c2.8 0 5-1.3 5-3v-3h-5v-1h6c1.7 0 3-1.3 3-3v-3"/><circle cx="14" cy="17.5" r="0.8" fill="rgba(34,197,94,1)" stroke="none"/></svg><div class="sk-name">Python</div><p class="sk-desc">Scripting, automation, data stuff and backend services.</p></div>
+      <!-- UI/UX: pen-tool / figma-like icon -->
+      <div class="sk-card" style="--ac:236,72,153"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(249,168,212,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(236,72,153,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg><div class="sk-name">UI/UX &amp; Design</div><p class="sk-desc">Designing interfaces that look great on every screen, pixel by pixel.</p></div>
+      <!-- Creative Coding: canvas/brush icon -->
+      <div class="sk-card" style="--ac:249,115,22"><span class="sk-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(253,186,116,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 0 1 8 0c0 2-2 4-4 6-2-2-4-4-4-6z"/><circle cx="12" cy="10" r="1" fill="rgba(253,186,116,1)" stroke="none"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(249,115,22,1)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 0 1 8 0c0 2-2 4-4 6-2-2-4-4-4-6z"/><circle cx="12" cy="10" r="1" fill="rgba(249,115,22,1)" stroke="none"/></svg><div class="sk-name">Creative Coding</div><p class="sk-desc">Canvas, WebGL, generative art — making the browser do things it shouldn't.</p></div>
     </div>
     <div class="bars-wrap reveal">
       <div class="bar-item"><div class="bar-head"><span>JavaScript</span><span>90%</span></div><div class="bar-track"><div class="bar-fill" data-w="0.90"></div></div></div>
@@ -2112,24 +2142,28 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     <div class="s-label reveal">Projects</div>
     <h2 class="s-heading reveal">Things I've <em>built</em></h2>
     <div class="projects-list">
+      <!-- 01 Game Engine -->
       <a class="proj reveal" href="https://github.com/SyncInk" target="_blank" rel="noopener" style="transition-delay:.05s">
         <span class="proj-num">01</span>
-        <div><div class="proj-name">🎮 Project Nexus — Game Engine (coming soon)</div><div class="proj-tags"><span class="proj-tag">Game Dev</span><span class="proj-tag">JavaScript</span><span class="proj-tag">WebGL</span></div></div>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="4"/><path d="M6 11h4M8 9v4"/><circle cx="16" cy="11" r="1" fill="rgba(125,211,252,1)" stroke="none"/><circle cx="18" cy="13" r="1" fill="rgba(125,211,252,1)" stroke="none"/></svg></span>Project Nexus — Game Engine <span style="opacity:0.6;font-size:0.8em;font-weight:600">(coming soon)</span></div><div class="proj-tags"><span class="proj-tag">Game Dev</span><span class="proj-tag">JavaScript</span><span class="proj-tag">WebGL</span></div></div>
         <span class="proj-arrow">↗</span>
       </a>
+      <!-- 02 Portfolio -->
       <a class="proj reveal" href="https://github.com/SyncInk" target="_blank" rel="noopener" style="transition-delay:.1s">
         <span class="proj-num">02</span>
-        <div><div class="proj-name">🌐 Portfolio v1 — Web Project</div><div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JS</span><span class="proj-tag">Animations</span></div></div>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>Portfolio v1 — Web Project</div><div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JS</span><span class="proj-tag">Animations</span></div></div>
         <span class="proj-arrow">↗</span>
       </a>
+      <!-- 03 Discord Bot -->
       <a class="proj reveal" href="https://github.com/SyncInk" target="_blank" rel="noopener" style="transition-delay:.15s">
         <span class="proj-num">03</span>
-        <div><div class="proj-name">🤖 Discord Bot — Automation, Moderation, Fun Activities, and more!</div><div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Discord.py</span><span class="proj-tag">Bot</span></div></div>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h.01M10 10h.01"/><circle cx="16" cy="10" r="1" fill="rgba(125,211,252,1)" stroke="none"/><circle cx="18" cy="12" r="1" fill="rgba(125,211,252,1)" stroke="none"/><circle cx="14" cy="12" r="1" fill="rgba(125,211,252,1)" stroke="none"/></svg></span>Discord Bot — Automation, Moderation, Fun &amp; more!</div><div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Discord.py</span><span class="proj-tag">Bot</span></div></div>
         <span class="proj-arrow">↗</span>
       </a>
+      <!-- 04 Cat Clicker -->
       <a class="proj reveal" href="https://cat-clicke.onrender.com/" target="_blank" rel="noopener" style="transition-delay:.2s">
         <span class="proj-num">04</span>
-        <div><div class="proj-name">🐱 Cat Clicker — Mini Game (working on it)</div><div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">Game</span><span class="proj-tag">Fun</span></div></div>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="5"/><circle cx="7" cy="9" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="17" cy="9" r="2"/></svg></span>Cat Clicker — Mini Game <span style="opacity:0.6;font-size:0.8em;font-weight:600">(in progress)</span></div><div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">Game</span><span class="proj-tag">Fun</span></div></div>
         <span class="proj-arrow">↗</span>
       </a>
     </div>
@@ -3237,6 +3271,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return keyFor(d);
     });
     const counts = Object.fromEntries(days.map(day => [day, 0]));
+    /* store event details per day for rich tooltips */
+    const dayDetails = {};
+    days.forEach(d => { dayDetails[d] = []; });
     try {
       const res = await fetch('https://api.github.com/users/SyncInk/events/public?per_page=100');
       if (!res.ok) throw new Error('github unavailable');
@@ -3244,7 +3281,15 @@ document.addEventListener("DOMContentLoaded", () => {
       events.forEach(event => {
         if (event.type !== 'PushEvent') return;
         const key = String(event.created_at || '').slice(0, 10);
-        if (key in counts) counts[key] += Math.max(1, event.payload?.commits?.length || 1);
+        if (!(key in counts)) return;
+        const commits = event.payload?.commits || [];
+        const repoName = event.repo?.name?.replace('SyncInk/', '') || 'repo';
+        const isPublic = !event.repo?.private;
+        const n = Math.max(1, commits.length);
+        counts[key] += n;
+        /* store a short summary per push event */
+        const msgs = commits.slice(0, 2).map(c => (c.message || '').split('\n')[0].slice(0, 42));
+        dayDetails[key].push({ repo: repoName, n, msgs, isPublic });
       });
       let cursor = new Date(today);
       if (!counts[keyFor(cursor)]) cursor.setDate(cursor.getDate() - 1);
@@ -3257,14 +3302,30 @@ document.addEventListener("DOMContentLoaded", () => {
       heatmap.innerHTML = days.map(day => {
         const value = counts[day] || 0;
         const level = value >= 5 ? 4 : value >= 3 ? 3 : value >= 1 ? 2 : 0;
-        return `<span class="gh-cell" data-level="${level}" title="${day}: ${value} public commit${value === 1 ? '' : 's'}"></span>`;
+        /* build rich tooltip */
+        let tip = day;
+        if (value === 0) {
+          tip += ' · No commits';
+        } else {
+          const details = dayDetails[day] || [];
+          tip += ` · ${value} commit${value === 1 ? '' : 's'}`;
+          details.slice(0, 2).forEach(d => {
+            const vis = d.isPublic ? '🔓' : '🔒';
+            tip += `&#10;${vis} ${d.repo}: ${d.msgs[0] || `${d.n} commit${d.n > 1 ? 's' : ''}`}`;
+          });
+          if (details.length > 2) tip += `&#10;… +${details.length - 2} more push${details.length - 2 > 1 ? 'es' : ''}`;
+        }
+        return `<span class="gh-cell" data-level="${level}" title="${tip}"></span>`;
       }).join('');
       const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
-      meta.textContent = `${total} public commits in the last 35 days`;
+      /* format: e.g. "14 public commits · Updated just now" */
+      const lastActiveDay = days.slice().reverse().find(d => counts[d] > 0);
+      const lastStr = lastActiveDay ? ` · Last push: ${lastActiveDay}` : '';
+      meta.textContent = `${total} public commit${total !== 1 ? 's' : ''} in the last 35 days${lastStr}`;
     } catch (_) {
-      streakEl.textContent = 'LIVE';
-      heatmap.innerHTML = days.map(() => '<span class="gh-cell" data-level="1"></span>').join('');
-      meta.textContent = 'GitHub API rate limited, showing fallback pulse';
+      streakEl.textContent = '—';
+      heatmap.innerHTML = days.map(() => '<span class="gh-cell" data-level="0" title="Data unavailable"></span>').join('');
+      meta.textContent = 'GitHub API unavailable — check back later';
     }
   }
   initVisitorWidget();
