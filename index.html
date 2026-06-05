@@ -215,44 +215,66 @@ nav{
 }
 .nav-links{display:flex;align-items:center;gap:0.3rem;list-style:none;}
 .nav-tools{display:flex;align-items:center;gap:0.6rem;}
-.music-player {
-  display: flex; align-items: center; gap: 0.6rem;
-  padding: 0.35rem 0.6rem 0.35rem 0.35rem;
-  background: rgba(31, 45, 94, 0.4);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+/* Floating Music Player */
+.fmp-wrapper {
+  position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; align-items: center; gap: 10px; z-index: 9999;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.fmp-wrapper.closed { left: -280px; }
+.fmp-player {
+  width: 260px; padding: 16px; border-radius: 16px;
+  background: rgba(15, 20, 35, 0.5); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px; cursor: default;
-  min-width: 220px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  display: flex; flex-direction: column; gap: 12px;
 }
-.music-icon {
-  width: 28px; height: 28px; border-radius: 6px;
-  background: rgba(59, 130, 255, 0.2);
-  color: #3b82ff; display: grid; place-items: center; cursor: pointer;
-  transition: all 0.2s ease;
+.fmp-header { display: flex; align-items: center; gap: 12px; }
+.fmp-album-art {
+  width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
+  animation: fmpSpin 8s linear infinite; animation-play-state: paused;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
-.music-icon:hover { background: rgba(59, 130, 255, 0.3); transform: translateY(-1px); }
-.music-icon:active { transform: scale(0.92); }
-.music-icon svg { width: 14px; height: 14px; }
-.music-info { display: flex; flex-direction: column; justify-content: center; overflow: hidden; flex: 1; }
-.music-title {
-  font-size: 0.75rem; font-weight: 600; color: #eaf0ff;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;
+@keyframes fmpSpin { 100% { transform: rotate(360deg); } }
+.fmp-player.playing .fmp-album-art { animation-play-state: running; }
+.fmp-info { display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+.fmp-title { font-size: 0.85rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fmp-artist { font-size: 0.65rem; color: rgba(255, 255, 255, 0.6); }
+.fmp-progress-container { display: flex; align-items: center; gap: 8px; }
+.fmp-time { font-size: 0.6rem; color: rgba(255, 255, 255, 0.5); font-variant-numeric: tabular-nums; width: 28px; text-align: center; }
+.fmp-progress-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; cursor: pointer; position: relative; }
+.fmp-progress-fill { width: 0%; height: 100%; background: #3b82ff; border-radius: 2px; pointer-events: none; }
+.fmp-controls { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.fmp-btn {
+  background: none; border: none; padding: 0; color: rgba(255, 255, 255, 0.6);
+  cursor: pointer; display: grid; place-items: center; transition: all 0.2s;
 }
-.music-progress-bar {
-  width: 100%; height: 4px; background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px; overflow: hidden; cursor: pointer; position: relative;
+.fmp-btn:hover { color: #fff; transform: scale(1.1); }
+.fmp-btn svg { width: 20px; height: 20px; }
+.fmp-btn.fmp-play {
+  width: 36px; height: 36px; border-radius: 50%; background: #3b82ff; color: #fff;
 }
-.music-progress-fill {
-  width: 0%; height: 100%; background: #3b82ff; border-radius: 2px;
-  transition: width 0.1s linear;
+.fmp-btn.fmp-play svg { width: 16px; height: 16px; }
+.fmp-volume-container { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.fmp-vol-icon { width: 14px; height: 14px; color: rgba(255, 255, 255, 0.5); }
+.fmp-volume-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; cursor: pointer; }
+.fmp-volume-fill { width: 50%; height: 100%; background: rgba(255, 255, 255, 0.6); border-radius: 2px; pointer-events: none; }
+.fmp-toggle {
+  width: 40px; height: 40px; border-radius: 50%; background: rgba(15, 20, 35, 0.6);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;
+  display: grid; place-items: center; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: all 0.2s;
 }
-.music-time {
-  font-size: 0.65rem; color: rgba(255, 255, 255, 0.5); font-variant-numeric: tabular-nums;
-}
-:root[data-theme="light"] .music-player { background: rgba(255, 255, 255, 0.6); border-color: rgba(0, 0, 0, 0.1); }
-:root[data-theme="light"] .music-title { color: var(--text); }
-:root[data-theme="light"] .music-time { color: rgba(0, 0, 0, 0.5); }
-:root[data-theme="light"] .music-progress-bar { background: rgba(0, 0, 0, 0.1); }
+.fmp-toggle:hover { background: rgba(31, 45, 94, 0.8); transform: scale(1.05); }
+.fmp-toggle svg { width: 20px; height: 20px; }
+:root[data-theme="light"] .fmp-player { background: rgba(255, 255, 255, 0.7); border-color: rgba(0, 0, 0, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+:root[data-theme="light"] .fmp-title, :root[data-theme="light"] .fmp-btn { color: var(--text); }
+:root[data-theme="light"] .fmp-btn.fmp-play { color: #fff; }
+:root[data-theme="light"] .fmp-artist, :root[data-theme="light"] .fmp-time, :root[data-theme="light"] .fmp-vol-icon { color: var(--text-muted); }
+:root[data-theme="light"] .fmp-progress-bar, :root[data-theme="light"] .fmp-volume-bar { background: rgba(0, 0, 0, 0.1); }
+:root[data-theme="light"] .fmp-volume-fill { background: rgba(0, 0, 0, 0.4); }
+:root[data-theme="light"] .fmp-toggle { background: rgba(255, 255, 255, 0.8); color: var(--text); border-color: rgba(0, 0, 0, 0.1); }
 .theme-toggle{
   width:40px;height:40px;border-radius:11px;
   border:1px solid var(--border);
@@ -1996,18 +2018,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     <div class="nav-logo-icon">SI</div>
     Sync Ink
   </a>
-  <div class="music-player" id="musicPlayerBtn" role="button" aria-label="Play/Pause Background Music" tabindex="0" style="margin: 0 auto;">
-    <div class="music-icon" id="musicIcon">
-      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-    </div>
-    <div class="music-info">
-      <div class="music-title">City Ruins - Rays of Light</div>
-      <div class="music-progress-bar" id="musicProgressBar">
-        <div class="music-progress-fill" id="musicProgressFill"></div>
-      </div>
-    </div>
-    <div class="music-time" id="musicTime">0:00</div>
-  </div>
   <ul class="nav-links">
     <li><a href="#about" class="nav-link"><span class="nav-bullet" aria-hidden="true">&#9679;</span> about</a></li>
     <li><a href="#skills" class="nav-link"><span class="nav-bullet" aria-hidden="true">&#9679;</span> skills</a></li>
@@ -2522,16 +2532,28 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   /* ====== MUSIC PLAYER ====== */
-  const musicBtn = document.getElementById('musicPlayerBtn');
-  const musicAudio = document.getElementById('bgMusic');
-  const musicIcon = document.getElementById('musicIcon');
-  const musicProgressFill = document.getElementById('musicProgressFill');
-  const musicProgressBar = document.getElementById('musicProgressBar');
-  const musicTime = document.getElementById('musicTime');
+  const fmpWrapper = document.getElementById('fmpWrapper');
+  const fmpPlayer = document.getElementById('fmpPlayer');
+  const fmpToggleBtn = document.getElementById('fmpToggleBtn');
+  const bgMusic = document.getElementById('bgMusic');
+  const fmpPlayBtn = document.getElementById('fmpPlayBtn');
+  const fmpPrevBtn = document.getElementById('fmpPrevBtn');
+  const fmpNextBtn = document.getElementById('fmpNextBtn');
+  const fmpProgressBar = document.getElementById('fmpProgressBar');
+  const fmpProgressFill = document.getElementById('fmpProgressFill');
+  const fmpVolumeBar = document.getElementById('fmpVolumeBar');
+  const fmpVolumeFill = document.getElementById('fmpVolumeFill');
+  const fmpTime = document.getElementById('fmpTime');
+  const fmpDuration = document.getElementById('fmpDuration');
 
-  if (musicBtn && musicAudio && musicIcon) {
-    let isPlaying = false;
-    musicAudio.volume = 0.35;
+  if (fmpWrapper && bgMusic) {
+    let isPlaying = !bgMusic.paused;
+    bgMusic.volume = 0.5;
+
+    // Toggle player slide
+    fmpToggleBtn.addEventListener('click', () => {
+      fmpWrapper.classList.toggle('closed');
+    });
 
     const formatTime = (time) => {
       if (isNaN(time)) return '0:00';
@@ -2540,43 +2562,67 @@ document.addEventListener("DOMContentLoaded", () => {
       return `${m}:${s}`;
     };
 
-    const togglePlay = () => {
+    const updatePlayIcon = () => {
       if (isPlaying) {
-        musicAudio.pause();
-        musicIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
-        musicBtn.style.background = '';
+        fmpPlayBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+        fmpPlayer.classList.add('playing');
       } else {
-        musicAudio.play().catch(e => console.log('Audio play failed:', e));
-        musicIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
-        musicBtn.style.background = 'rgba(59, 130, 255, 0.15)';
+        fmpPlayBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+        fmpPlayer.classList.remove('playing');
       }
-      isPlaying = !isPlaying;
     };
 
-    musicIcon.addEventListener('click', (e) => {
-      e.stopPropagation();
-      togglePlay();
+    const togglePlay = () => {
+      if (isPlaying) {
+        bgMusic.pause();
+      } else {
+        bgMusic.play().catch(e => console.log('Autoplay prevented:', e));
+      }
+    };
+
+    bgMusic.addEventListener('play', () => { isPlaying = true; updatePlayIcon(); });
+    bgMusic.addEventListener('pause', () => { isPlaying = false; updatePlayIcon(); });
+
+    fmpPlayBtn.addEventListener('click', togglePlay);
+    
+    // Restart on prev/next for now
+    fmpPrevBtn.addEventListener('click', () => { bgMusic.currentTime = 0; if(!isPlaying) togglePlay(); });
+    fmpNextBtn.addEventListener('click', () => { bgMusic.currentTime = 0; if(!isPlaying) togglePlay(); });
+
+    bgMusic.addEventListener('timeupdate', () => {
+      const cur = bgMusic.currentTime;
+      const dur = bgMusic.duration || 1;
+      fmpProgressFill.style.width = `${(cur / dur) * 100}%`;
+      fmpTime.textContent = formatTime(cur);
+      fmpDuration.textContent = formatTime(dur);
     });
 
-    musicAudio.addEventListener('timeupdate', () => {
-      const currentTime = musicAudio.currentTime;
-      const duration = musicAudio.duration || 1;
-      const progressPercent = (currentTime / duration) * 100;
-      
-      if (musicProgressFill) musicProgressFill.style.width = `${progressPercent}%`;
-      if (musicTime) musicTime.textContent = formatTime(currentTime);
+    bgMusic.addEventListener('loadedmetadata', () => {
+      fmpDuration.textContent = formatTime(bgMusic.duration);
     });
 
-    if (musicProgressBar) {
-      musicProgressBar.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const rect = musicProgressBar.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const width = rect.width;
-        const seekTime = (clickX / width) * musicAudio.duration;
-        if (!isNaN(seekTime)) musicAudio.currentTime = seekTime;
-      });
-    }
+    fmpProgressBar.addEventListener('click', (e) => {
+      const rect = fmpProgressBar.getBoundingClientRect();
+      bgMusic.currentTime = ((e.clientX - rect.left) / rect.width) * bgMusic.duration;
+    });
+
+    fmpVolumeBar.addEventListener('click', (e) => {
+      const rect = fmpVolumeBar.getBoundingClientRect();
+      const vol = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      bgMusic.volume = vol;
+      fmpVolumeFill.style.width = `${vol * 100}%`;
+    });
+
+    // Handle initial autoplay state
+    updatePlayIcon();
+    bgMusic.play().catch(() => {
+      // If autoplay is blocked, wait for first click anywhere
+      const unlockAudio = () => {
+        bgMusic.play().catch(()=>{});
+        document.removeEventListener('click', unlockAudio);
+      };
+      document.addEventListener('click', unlockAudio);
+    });
   }
   
   /* ====== REVEAL ANIMATIONS ====== */
@@ -3829,6 +3875,39 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 })();
 </script>
-  <audio id="bgMusic" src="city-ruins.mp3" loop preload="auto"></audio>
+<div class="fmp-wrapper closed" id="fmpWrapper">
+  <div class="fmp-player" id="fmpPlayer">
+    <div class="fmp-header">
+      <img src="album-cover.jpg" alt="Album Art" class="fmp-album-art" id="fmpAlbumArt">
+      <div class="fmp-info">
+        <div class="fmp-title">City Ruins - Rays of Light</div>
+        <div class="fmp-artist">NieR:Automata</div>
+      </div>
+    </div>
+    <div class="fmp-progress-container">
+      <span class="fmp-time" id="fmpTime">0:00</span>
+      <div class="fmp-progress-bar" id="fmpProgressBar">
+        <div class="fmp-progress-fill" id="fmpProgressFill"></div>
+      </div>
+      <span class="fmp-time" id="fmpDuration">--:--</span>
+    </div>
+    <div class="fmp-controls">
+      <button class="fmp-btn" id="fmpPrevBtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"></line></svg></button>
+      <button class="fmp-btn fmp-play" id="fmpPlayBtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+      <button class="fmp-btn" id="fmpNextBtn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"></line></svg></button>
+    </div>
+    <div class="fmp-volume-container">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fmp-vol-icon"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      <div class="fmp-volume-bar" id="fmpVolumeBar">
+        <div class="fmp-volume-fill" id="fmpVolumeFill" style="width: 50%;"></div>
+      </div>
+    </div>
+  </div>
+  <button class="fmp-toggle" id="fmpToggleBtn" aria-label="Toggle Music Player">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+  </button>
+</div>
+
+  <audio id="bgMusic" src="city-ruins.mp3" loop preload="auto" autoplay></audio>
 </body>
 </html>
