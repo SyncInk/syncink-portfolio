@@ -1843,11 +1843,29 @@ footer{
 .footer-logo{font-weight:900;font-size:1rem;letter-spacing:-0.02em;}
 footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--muted);}
 .footer-top{
-  font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text);
   text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;
-  transition:color 0.2s;
+  transition:all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
 }
-.footer-top:hover{color:var(--blue2);}
+.footer-top:hover{
+  color: #fff;
+  background: rgba(59, 130, 255, 0.15);
+  border-color: var(--blue2);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(59, 130, 255, 0.2);
+}
+:root[data-theme="light"] .footer-top {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text);
+}
+:root[data-theme="light"] .footer-top:hover {
+  background: rgba(59, 130, 255, 0.1);
+}
 @media(max-width:600px){footer{flex-direction:column;text-align:center;}}
 
 /* ============ REVEAL ANIMATIONS ============ */
