@@ -130,58 +130,19 @@ body{
   color:var(--text);
   font-family:'Outfit',sans-serif;
   overflow-x:hidden;
-  cursor:none;
   line-height:1.6;
   transition:background-color .45s ease,color .35s ease;
 }
 img, video {max-width:100%;display:block;}
 a{text-decoration:none;color:inherit;}
-button{border:none;background:none;cursor:none;font-family:inherit;}
+button{border:none;background:none;cursor:pointer;font-family:inherit;}
 
 /* ============ SCROLLBAR ============ */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px;}
 
-/* ============ CURSOR (desktop only) ============ */
-.cur-dot,.cur-ring{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;}
-.cur-dot{
-  width:8px;height:8px;top:0;left:0;transform:translate(-50%,-50%);
-  background:radial-gradient(circle at 35% 35%,#fff 0%,var(--cyan) 55%,var(--blue) 100%);
-  box-shadow:0 0 12px rgba(0,212,255,0.55),0 0 20px rgba(88,101,242,0.35);
-  transition:transform 0.12s ease,box-shadow 0.28s ease,background 0.28s ease;
-}
-.cur-ring{
-  width:34px;height:34px;border:1.4px solid rgba(99,124,255,0.48);top:0;left:0;transform:translate(-50%,-50%);
-  background:radial-gradient(circle at 50% 50%,rgba(88,101,242,0.12) 0%,rgba(88,101,242,0.03) 58%,transparent 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05),0 0 20px rgba(88,101,242,0.22);
-  transition:width 0.28s,height 0.28s,border-color 0.28s,background 0.28s,box-shadow 0.28s,transform 0.16s ease;
-}
-body.hov .cur-dot{
-  transform:translate(-50%,-50%) scale(1.16);
-  box-shadow:0 0 15px rgba(0,212,255,0.72),0 0 26px rgba(88,101,242,0.46);
-}
-body.hov .cur-ring{
-  width:48px;height:48px;
-  background:radial-gradient(circle at 50% 50%,rgba(88,101,242,0.16) 0%,rgba(0,212,255,0.08) 58%,transparent 100%);
-  border-color:rgba(0,212,255,0.8);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08),0 0 30px rgba(0,212,255,0.32),0 0 42px rgba(88,101,242,0.24);
-}
-:root[data-theme="light"] .cur-dot{
-  background:radial-gradient(circle at 38% 34%,#ffffff 0%,#4f68e6 58%,#1f2d5e 100%);
-  box-shadow:0 0 10px rgba(47,79,199,0.5),0 0 18px rgba(31,45,94,0.34);
-}
-:root[data-theme="light"] .cur-ring{
-  border-color:rgba(47,79,199,0.46);
-  background:radial-gradient(circle at 50% 50%,rgba(47,79,199,0.12) 0%,rgba(31,45,94,0.04) 58%,transparent 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.56),0 0 18px rgba(36,60,151,0.2);
-}
-:root[data-theme="light"] body.hov .cur-ring{
-  border-color:rgba(31,45,94,0.72);
-  background:radial-gradient(circle at 50% 50%,rgba(47,79,199,0.16) 0%,rgba(31,45,94,0.08) 58%,transparent 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.7),0 0 26px rgba(36,60,151,0.3);
-}
-@media(max-width:768px){.cur-dot,.cur-ring{display:none;}body{cursor:auto;}button,a{cursor:pointer;}}
+/* ============ CURSOR REMOVED ============ */
 
 /* ============ CANVAS BG ============ */
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
@@ -430,7 +391,7 @@ nav{
   display:inline-flex;align-items:center;gap:0.5rem;
   padding:0.75rem 1.6rem;border-radius:10px;
   font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;
-  letter-spacing:0.02em;transition:all 0.25s;cursor:none;
+  letter-spacing:0.02em;transition:all 0.25s;cursor:pointer;
   white-space:nowrap;
 }
 @media(max-width:768px){.btn{cursor:pointer;}}
@@ -1665,7 +1626,7 @@ nav,.hero-card,.bot-card,.interest-card,.sk-card,.cmd-category,.radio-cmd-tag,.p
   height:26px;
   font-size:0.78rem;
   line-height:1;
-  cursor:none;
+  cursor:pointer;
   transition:all .2s ease;
 }
 .settings-pop-close:hover{
@@ -1912,8 +1873,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
 <canvas id="bgCanvas"></canvas>
 <div class="noise"></div>
 
-<div class="cur-dot" id="curDot"></div>
-<div class="cur-ring" id="curRing"></div>
 
 <div class="toast" id="toast"></div>
 <aside class="settings-pop" id="settingsPop" aria-label="Display Settings" aria-hidden="true">
@@ -3110,27 +3069,6 @@ document.addEventListener("DOMContentLoaded", () => {
       requestAnimationFrame(drawFrame);
     }
     drawFrame();
-  }
-
-  /* ====== CURSOR ====== */
-  const curDot = document.getElementById('curDot');
-  const curRing = document.getElementById('curRing');
-  let mx=0, my=0, rx=0, ry=0;
-  if (curDot && curRing && window.innerWidth > 768) {
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; curDot.style.left = mx + 'px'; curDot.style.top = my + 'px'; });
-    (function loop() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; curRing.style.left = rx + 'px'; curRing.style.top = ry + 'px'; requestAnimationFrame(loop); })();
-    document.querySelectorAll('a,button,.interest-card,.sk-card,.proj,.proc-card,.testi-card,.soc-card,.cmd-category,.radio-cmd-tag,.plat-tag,.activity-card,.signal-widget').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
-    });
-    document.addEventListener('pointerover', (event) => {
-      const target = event.target.closest('.activity-card,.signal-widget');
-      if (target) document.body.classList.add('hov');
-    }, { passive:true });
-    document.addEventListener('pointerout', (event) => {
-      const target = event.target.closest('.activity-card,.signal-widget');
-      if (target && (!event.relatedTarget || !target.contains(event.relatedTarget))) document.body.classList.remove('hov');
-    }, { passive:true });
   }
 
   /* ====== NAV & MENUS ====== */
