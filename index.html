@@ -893,6 +893,40 @@ section{position:relative;z-index:10;}
   pointer-events:none;
 }
 .bot-card.radio-card::before{background:radial-gradient(circle,rgba(235,69,158,0.15) 0%,transparent 70%);}
+
+/* ============ TICKET BOT SPECIFIC CSS ============ */
+.ticket-card { border-color: rgba(147, 51, 234, 0.3); }
+.ticket-card::before { background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 70%); }
+
+.ticket-banner-wrap { width: 100%; border-radius: 12px; margin-bottom: 2rem; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); }
+.ticket-banner-wrap img { width: 100%; display: block; object-fit: cover; }
+
+.ticket-features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem; margin-bottom: 2rem; }
+.ticket-feature { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 1.25rem; border-radius: 12px; transition: all 0.3s ease; position: relative; overflow: hidden; }
+.ticket-feature::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(147,51,234,0.1), transparent 50%); opacity: 0; transition: opacity 0.3s ease; }
+.ticket-feature:hover { transform: translateY(-5px); border-color: rgba(147, 51, 234, 0.3); box-shadow: 0 8px 24px rgba(147, 51, 234, 0.1); }
+.ticket-feature:hover::before { opacity: 1; }
+.ticket-feature-title { font-weight: 700; color: #fff; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; font-size: 1.05rem; }
+.ticket-feature-title svg { width: 18px; height: 18px; fill: #c084fc; }
+.ticket-feature-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+
+.ticket-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.ticket-media-card { background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; padding: 0.75rem; display: flex; align-items: center; justify-content: center; }
+.ticket-media-card img { width: 100%; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+.ticket-setup { background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+.ticket-setup-title { font-weight: 700; font-size: 1.2rem; color: #fff; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+.ticket-setup-steps { display: flex; flex-direction: column; gap: 0.85rem; counter-reset: setup-counter; }
+.ticket-step { display: flex; align-items: flex-start; gap: 0.85rem; }
+.ticket-step::before { counter-increment: setup-counter; content: counter(setup-counter); display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(147,51,234,0.2); color: #c084fc; border-radius: 50%; font-size: 0.75rem; font-weight: bold; flex-shrink: 0; }
+.ticket-step-text { color: var(--text); font-size: 0.9rem; padding-top: 1px; }
+
+.ticket-built-with { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; margin-bottom: 2rem; }
+.ticket-tag { padding: 4px 10px; background: rgba(147,51,234,0.1); color: #c084fc; border: 1px solid rgba(147,51,234,0.2); border-radius: 20px; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; }
+
+@media(max-width: 768px) {
+  .ticket-media-grid { grid-template-columns: 1fr; }
+}
 .bot-header{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem;position:relative;z-index:2;}
 
 /* BOT LOGO STYLING */
@@ -2410,6 +2444,109 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
         <div class="radio-cmd-tag"><div class="radio-cmd-head"><span>/pause /resume</span><button class="copy-btn" data-cmd="/pause /resume" title="Copy" aria-label="Copy /pause /resume"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="radio-cmd-desc">Pause/Resume playback</div></div>
         <div class="radio-cmd-tag"><div class="radio-cmd-head"><span>/previous</span><button class="copy-btn" data-cmd="/previous" title="Copy" aria-label="Copy /previous"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="radio-cmd-desc">Go to previous track</div></div>
         <div class="radio-cmd-tag"><div class="radio-cmd-head"><span>/help</span><button class="copy-btn" data-cmd="/help" title="Copy" aria-label="Copy /help"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="radio-cmd-desc">Lists all commands</div></div>
+      </div>
+    </div>
+
+    <div class="bot-card ticket-card reveal" style="margin-top: 3rem;">
+      <div class="ticket-banner-wrap">
+        <img src="ticket-banner.png" alt="SyncInk Ticket Banner">
+      </div>
+      <div class="bot-header">
+        <div class="bot-logo" style="border-radius: 50%; overflow: hidden;">
+            <img src="ticket-logo.png" alt="SyncInk Ticket Logo" style="border-radius: 50%;">
+        </div>
+        <div class="bot-info">
+          <div class="bot-name" style="display:flex;align-items:center;gap:12px;">
+            SyncInk Ticket
+          </div>
+          <div class="bot-desc" style="font-weight: 600; color: #e9d5ff; margin-bottom: 0.5rem;">Powerful. Automated. Professional.</div>
+          <div class="bot-desc">A next-generation Discord ticket bot built for modern communities. SyncInk Ticket combines private-thread infrastructure, intelligent claim systems, automated transcripts, advanced transfers, and premium workflows into one seamless support experience.</div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <a href="#" class="btn btn-primary" style="background: rgba(147, 51, 234, 0.2); border-color: rgba(147, 51, 234, 0.5); color: #fff;">Invite Bot</a>
+            <a href="#" class="btn" style="background: rgba(255, 255, 255, 0.05); color: #fff;">View Documentation</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-features-grid">
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Private Threads</div>
+          <div class="ticket-feature-desc">Instead of cluttering servers with hundreds of channels, tickets use lightweight private Discord threads for a cleaner experience.</div>
+        </div>
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg> Dynamic Modals</div>
+          <div class="ticket-feature-desc">Interactive popup forms collect detailed information automatically before the ticket is created.</div>
+        </div>
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> Auto-Claim System</div>
+          <div class="ticket-feature-desc">When staff reply inside a ticket, the bot automatically assigns them as the claimer instantly.</div>
+        </div>
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Mention-Claiming</div>
+          <div class="ticket-feature-desc">Intelligently verifies permissions and auto-adds staff members to the ticket when mentioned.</div>
+        </div>
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M16 1l-2.29 2.29 4.88 4.88-14.88.01v3h14.88l-4.88 4.88L16 19l9-9z"/></svg> Advanced Transfers</div>
+          <div class="ticket-feature-desc">Transfer tickets between support teams instantly using dropdown menus and automated role pings.</div>
+        </div>
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg> Auto-Transcripts</div>
+          <div class="ticket-feature-desc">When a ticket closes, the bot automatically generates full conversation transcripts and logs them securely.</div>
+        </div>
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg> Permission Controls</div>
+          <div class="ticket-feature-desc">Easily configure admin, staff, developer, and owner roles with powerful permission controls.</div>
+        </div>
+        <div class="ticket-feature">
+          <div class="ticket-feature-title"><svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg> Fast Configuration</div>
+          <div class="ticket-feature-desc">Minimal setup with slash commands and instant deployment to your server.</div>
+        </div>
+      </div>
+
+      <div class="ticket-media-grid">
+        <div class="ticket-media-card">
+          <img src="ticket-panel.png" alt="Ticket Panel UI">
+        </div>
+        <div class="ticket-media-card">
+          <img src="ticket-thread.png" alt="Ticket Thread UI">
+        </div>
+      </div>
+
+      <div class="cmd-grid" style="margin-top: 2rem;">
+        <div class="cmd-category" style="--ac:147, 51, 234; width: 100%;">
+          <div class="cmd-cat-title cmd-cat-title--mod">
+            Commands Overview
+          </div>
+          <ul class="cmd-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px;">
+            <li class="cmd-item"><span class="cmd-name">/ticket-panel</span><span class="cmd-desc">Creates main ticket panel</span><button class="copy-btn" data-cmd="/ticket-panel" title="Copy" aria-label="Copy /ticket-panel"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            <li class="cmd-item"><span class="cmd-name">/ticket-config</span><span class="cmd-desc">Configure roles and settings</span><button class="copy-btn" data-cmd="/ticket-config" title="Copy" aria-label="Copy /ticket-config"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            <li class="cmd-item"><span class="cmd-name">/ticket-logs</span><span class="cmd-desc">Set transcript log channel</span><button class="copy-btn" data-cmd="/ticket-logs" title="Copy" aria-label="Copy /ticket-logs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            <li class="cmd-item"><span class="cmd-name">/ticket-add &lt;user&gt;</span><span class="cmd-desc">Add user to ticket</span><button class="copy-btn" data-cmd="/ticket-add" title="Copy" aria-label="Copy /ticket-add"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            <li class="cmd-item"><span class="cmd-name">/ticket-remove &lt;user&gt;</span><span class="cmd-desc">Remove user from ticket</span><button class="copy-btn" data-cmd="/ticket-remove" title="Copy" aria-label="Copy /ticket-remove"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            <li class="cmd-item"><span class="cmd-name">/ticket-rename &lt;name&gt;</span><span class="cmd-desc">Rename current thread</span><button class="copy-btn" data-cmd="/ticket-rename" title="Copy" aria-label="Copy /ticket-rename"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ticket-setup">
+        <div class="ticket-setup-title"><svg viewBox="0 0 24 24" width="24" height="24" fill="#c084fc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Easy Setup</div>
+        <div class="ticket-setup-steps">
+          <div class="ticket-step"><div class="ticket-step-text">Invite SyncInk Ticket to your server</div></div>
+          <div class="ticket-step"><div class="ticket-step-text">Configure roles and ticket settings using <code>/ticket-config</code></div></div>
+          <div class="ticket-step"><div class="ticket-step-text">Go to your desired ticket channel</div></div>
+          <div class="ticket-step"><div class="ticket-step-text">Type: <code>/ticket-panel</code></div></div>
+          <div class="ticket-step"><div class="ticket-step-text">Your advanced ticket system is instantly ready!</div></div>
+        </div>
+      </div>
+
+      <div class="ticket-built-with">
+        <span class="ticket-tag">Node.js</span>
+        <span class="ticket-tag">Discord.js</span>
+        <span class="ticket-tag">Advanced Thread System</span>
+        <span class="ticket-tag">Slash Commands API</span>
+      </div>
+      <div class="ticket-feature-desc" style="font-style: italic; text-align: center; margin-top: 1rem; color: #a855f7;">
+        “SyncInk Ticket was engineered to provide enterprise-level support workflows inside Discord while keeping the experience lightweight, intuitive, and extremely fast.”
       </div>
     </div>
   </div>
