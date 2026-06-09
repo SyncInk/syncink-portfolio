@@ -3414,8 +3414,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (backTop) {
     backTop.addEventListener('click', (event) => {
       event.preventDefault();
-      smoothJumpTo('#home');
-      if (history.pushState) history.pushState(null, '', '#home');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
