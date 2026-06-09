@@ -788,12 +788,32 @@ section{position:relative;z-index:10;}
 /* hide 3D artifacts */
 .globe-3d-wrap,.globe-3d-canvas-container,.globe-atmo-ring,.globe-visitor-label,.visitor-globe-css{display:none!important;}
 
-.gh-heatmap{position:relative;z-index:1;display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:0.72rem;}
-.gh-cell{height:11px;border-radius:3px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.04);}
-.gh-cell[data-level="1"]{background:rgba(87,242,135,0.18);border-color:rgba(87,242,135,0.14);}
-.gh-cell[data-level="2"]{background:rgba(87,242,135,0.34);border-color:rgba(87,242,135,0.22);}
-.gh-cell[data-level="3"]{background:rgba(87,242,135,0.58);border-color:rgba(87,242,135,0.34);}
-.gh-cell[data-level="4"]{background:rgba(87,242,135,0.86);border-color:rgba(87,242,135,0.5);box-shadow:0 0 10px rgba(87,242,135,0.24);}
+.gh-heatmap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 0.9rem;
+}
+.gh-cell {
+  height: 12px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.03);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+}
+.gh-cell:hover {
+  transform: translateY(-2px) scale(1.05);
+  z-index: 2;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.gh-cell[data-level="1"] { background: rgba(87, 242, 135, 0.25); border: 1px solid rgba(87, 242, 135, 0.15); box-shadow: 0 0 4px rgba(87, 242, 135, 0.1); }
+.gh-cell[data-level="2"] { background: rgba(87, 242, 135, 0.50); border: 1px solid rgba(87, 242, 135, 0.30); box-shadow: 0 0 8px rgba(87, 242, 135, 0.2); }
+.gh-cell[data-level="3"] { background: rgba(87, 242, 135, 0.75); border: 1px solid rgba(87, 242, 135, 0.50); box-shadow: 0 0 12px rgba(87, 242, 135, 0.3); }
+.gh-cell[data-level="4"] { background: #57f287; border: 1px solid #8affb0; box-shadow: 0 0 16px rgba(87, 242, 135, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.5); }
 @media(max-width:768px){
   .about-grid{grid-template-columns:1fr;}
   .interests{grid-template-columns:1fr 1fr;}
@@ -3679,7 +3699,7 @@ document.addEventListener("DOMContentLoaded", () => {
         streak += 1;
         cursor.setDate(cursor.getDate() - 1);
       }
-      streakEl.textContent = `${streak} day`;
+      streakEl.innerHTML = `<span class="live-dot" style="background:${streak > 0 ? '#57f287' : '#8b95a8'}; box-shadow:0 0 6px ${streak > 0 ? 'rgba(87,242,135,0.7)' : 'rgba(139,149,168,0.5)'};"></span>${streak} DAY${streak !== 1 ? 'S' : ''}`;
       heatmap.innerHTML = days.map(day => {
         const value = counts[day] || 0;
         const level = value >= 5 ? 4 : value >= 3 ? 3 : value >= 1 ? 2 : 0;
