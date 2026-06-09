@@ -862,10 +862,11 @@ section{position:relative;z-index:10;}
 .sk-desc{font-size:0.82rem;color:var(--muted);line-height:1.65;}
 :root[data-theme="light"] .sk-card{background:rgba(255,255,255,0.85);border-color:rgba(0,0,0,0.08);box-shadow:0 8px 24px rgba(0,0,0,0.04);}
 :root[data-theme="light"] .sk-card:hover{background:rgba(var(--ac),0.08);border-color:rgba(var(--ac),0.3);box-shadow:0 16px 32px rgba(var(--ac),0.15);}
-:root[data-theme="light"] .sk-wm{opacity:0.08;}
-:root[data-theme="light"] .sk-card:hover .sk-wm{opacity:0.15;}
+:root[data-theme="light"] .sk-wm{opacity:0.12; mix-blend-mode:multiply; filter:contrast(1.2);}
+:root[data-theme="light"] .sk-card:hover .sk-wm{opacity:0.25; mix-blend-mode:multiply; filter:contrast(1.2);}
 :root[data-theme="light"] .sk-name{color:#111827;}
 :root[data-theme="light"] .sk-desc{color:#4b5563;}
+:root[data-theme="light"] .sk-icon-wrap path[fill="#fff"] { fill: #111827; }
 @media(max-width:700px){.skills-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:480px){.skills-grid{grid-template-columns:1fr;}}
 
