@@ -756,10 +756,11 @@ section{position:relative;z-index:10;}
 }
 /* ===== VISITOR GLOBE (Premium CSS) ===== */
 .visitor-main{position:relative;z-index:1;display:grid;grid-template-columns:84px 1fr;gap:0.9rem;align-items:center;}
-#globeCanvas{width:90px;height:90px;border-radius:50%;display:block;}
+#globeContainer{width:110px;height:110px;margin-left:-13px;margin-top:-13px;}
 .visitor-globe{
-  position:relative;width:84px;aspect-ratio:1;border-radius:50%;overflow:hidden;flex-shrink:0;
+  position:relative;width:84px;height:84px;border-radius:50%;flex-shrink:0;
   background:transparent;
+  display:flex;align-items:center;justify-content:center;
 }
 .visitor-globe::before,.visitor-globe::after{display:none!important;}
 /* Visitor dot */
@@ -2237,7 +2238,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
               <b id="visitorCount">--</b>
             </div>
             <div class="visitor-main">
-              <div class="visitor-globe" aria-hidden="true"><canvas id="globeCanvas" width="180" height="180"></canvas></div>
+              <div class="visitor-globe" aria-hidden="true"><div id="globeContainer"></div></div>
               <div class="visitor-copy">
                 <div class="widget-value" id="visitorPlace">Locating visitor...</div>
                 <div class="widget-sub" id="visitorMeta">Live geolocation signal</div>
@@ -3871,204 +3872,46 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+<script src="https://unpkg.com/globe.gl"></script>
 <script id="globeScript">
 (function(){
-  var C = document.getElementById('globeCanvas');
-  if (!C) return;
-  var ctx = C.getContext('2d');
-  var W = C.width, H = C.height;
-  var cx = W/2, cy = H/2, R = W/2 - 4;
+  const container = document.getElementById('globeContainer');
+  if (!container) return;
+  
+  const SIZE = 110; 
+  
+  const world = Globe()(container)
+    .width(SIZE)
+    .height(SIZE)
+    .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-dark.jpg')
+    .backgroundColor('rgba(0,0,0,0)')
+    .showAtmosphere(true)
+    .atmosphereColor('#00d4ff')
+    .atmosphereAltitude(0.25)
+    .showGraticules(true);
 
-  /* ── continent outlines (simplified but realistic lon/lat polygons) ── */
-  var continents = [
-    /* North America */
-    [[-130,50],[-125,60],[-120,67],[-100,72],[-85,75],[-65,70],[-55,52],[-65,45],[-75,35],[-82,30],[-90,28],[-98,26],[-105,30],[-118,33],[-125,48],[-130,50]],
-    /* Central America */
-    [[-105,22],[-98,20],[-92,18],[-86,15],[-82,10],[-78,8],[-80,10],[-85,14],[-90,16],[-95,18],[-100,20],[-105,22]],
-    /* South America */
-    [[-80,10],[-75,12],[-62,10],[-50,5],[-45,0],[-40,-5],[-35,-8],[-35,-18],[-42,-22],[-48,-28],[-53,-33],[-58,-38],[-65,-45],[-68,-53],[-73,-48],[-72,-40],[-70,-30],[-70,-18],[-75,-5],[-78,2],[-80,10]],
-    /* Europe */
-    [[-10,36],[-5,37],[0,38],[3,42],[0,46],[-5,44],[-10,44],[-9,50],[-5,50],[2,51],[5,53],[8,54],[12,55],[15,56],[22,55],[28,56],[30,60],[28,65],[20,70],[10,63],[5,58],[2,52],[0,48],[-5,47],[-10,44],[-10,36]],
-    /* Africa */
-    [[-15,30],[-17,15],[-10,5],[-5,5],[5,5],[10,2],[10,-5],[12,-10],[15,-15],[18,-20],[22,-28],[28,-33],[33,-30],[35,-25],[38,-18],[40,-10],[42,-2],[45,10],[42,15],[35,20],[33,30],[30,35],[20,37],[10,37],[0,36],[-5,35],[-10,33],[-15,30]],
-    /* Asia */
-    [[28,36],[35,37],[40,38],[45,35],[50,37],[55,38],[60,42],[65,40],[70,37],[75,30],[78,20],[80,15],[85,18],[90,22],[95,18],[100,15],[105,22],[110,22],[115,25],[120,30],[125,35],[130,38],[135,35],[140,38],[142,45],[140,50],[135,55],[128,50],[120,50],[110,45],[100,50],[90,50],[80,52],[70,55],[65,55],[60,58],[55,55],[50,55],[45,50],[40,42],[35,40],[28,36]],
-    /* India */
-    [[70,30],[72,25],[72,20],[74,15],[76,10],[78,8],[80,10],[82,15],[85,20],[88,22],[88,25],[85,28],[82,30],[78,32],[75,32],[70,30]],
-    /* Australia */
-    [[115,-12],[120,-14],[125,-14],[130,-13],[135,-12],[138,-16],[140,-18],[145,-18],[148,-20],[150,-24],[152,-28],[150,-32],[148,-36],[145,-38],[140,-38],[135,-35],[130,-32],[125,-30],[120,-28],[118,-25],[115,-22],[114,-18],[115,-12]],
-    /* UK */
-    [[-6,50],[-5,52],[-4,54],[-4,56],[-3,58],[-5,57],[-6,55],[-6,53],[-6,50]],
-    /* Japan */
-    [[130,31],[131,33],[132,34],[133,36],[136,37],[138,38],[140,40],[141,42],[140,44],[139,42],[137,36],[135,34],[132,32],[130,31]],
-    /* Indonesia */
-    [[96,5],[100,2],[104,0],[106,-2],[108,-6],[110,-7],[114,-8],[116,-6],[118,-5],[120,-8],[122,-6],[125,-8],[128,-4],[130,-2],[127,0],[124,2],[120,0],[116,0],[112,2],[108,4],[104,4],[100,4],[96,5]],
-    /* New Zealand */
-    [[166,-35],[168,-37],[170,-40],[172,-42],[174,-44],[174,-42],[172,-38],[170,-36],[168,-35],[166,-35]],
-    /* Greenland */
-    [[-55,60],[-50,62],[-45,65],[-40,70],[-35,74],[-30,78],[-40,80],[-50,78],[-55,75],[-58,70],[-55,60]],
-    /* Iceland */
-    [[-24,64],[-22,66],[-18,66],[-14,65],[-16,64],[-20,63],[-24,64]],
-    /* Madagascar */
-    [[44,-12],[46,-14],[48,-18],[49,-22],[48,-25],[46,-24],[44,-20],[43,-16],[44,-12]],
-    /* Antarctica (simplified arc) */
-    [[-180,-65],[-150,-70],[-120,-68],[-90,-72],[-60,-68],[-30,-70],[0,-68],[30,-70],[60,-68],[90,-70],[120,-68],[150,-70],[180,-65]]
-  ];
+  // Disable zoom and pan
+  world.controls().enableZoom = false;
+  world.controls().autoRotate = true;
+  world.controls().autoRotateSpeed = 1.2;
 
-  /* ── 3D projection helpers ── */
-  var DEG = Math.PI / 180;
-  var targetRot = -20; /* default longitude to face */
-  var rotation = targetRot;
-  var visLon = null, visLat = null;
+  // Add initial empty rings
+  world.ringsData([]);
 
-  function project(lon, lat, rot) {
-    var lam = (lon + rot) * DEG;
-    var phi = lat * DEG;
-    var cp = Math.cos(phi);
-    var x = cp * Math.sin(lam);
-    var y = Math.sin(phi);
-    var z = cp * Math.cos(lam);
-    if (z < -0.05) return null; /* behind globe */
-    return { x: cx + R * x, y: cy - R * y, z: z };
-  }
-
-  function drawPath(pts, rot, fill, stroke, lw) {
-    var proj = [];
-    var anyVisible = false;
-    for (var i = 0; i < pts.length; i++) {
-      var p = project(pts[i][0], pts[i][1], rot);
-      if (!p) { proj.push(null); }
-      else { proj.push(p); anyVisible = true; }
-    }
-    if (!anyVisible) return;
-
-    ctx.beginPath();
-    var started = false;
-    for (var j = 0; j < proj.length; j++) {
-      if (!proj[j]) { started = false; continue; }
-      if (!started) { ctx.moveTo(proj[j].x, proj[j].y); started = true; }
-      else ctx.lineTo(proj[j].x, proj[j].y);
-    }
-    if (fill) { ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); }
-    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 0.8; ctx.stroke(); }
-  }
-
-  function draw() {
-    var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-    ctx.clearRect(0, 0, W, H);
-
-    /* ── background sphere ── */
-    var bg = ctx.createRadialGradient(cx - R*0.25, cy - R*0.2, 0, cx, cy, R);
-    if (isDark) {
-      bg.addColorStop(0, 'rgba(12,18,40,0.95)');
-      bg.addColorStop(0.7, 'rgba(6,8,18,0.98)');
-      bg.addColorStop(1, 'rgba(4,5,12,1)');
-    } else {
-      bg.addColorStop(0, 'rgba(220,235,255,0.95)');
-      bg.addColorStop(0.7, 'rgba(180,210,250,0.98)');
-      bg.addColorStop(1, 'rgba(150,190,240,1)');
-    }
-    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
-    ctx.fillStyle = bg; ctx.fill();
-
-    /* ── grid lines (latitude) ── */
-    var gridColor = isDark ? 'rgba(88,101,242,0.18)' : 'rgba(30,80,180,0.15)';
-    for (var lat = -60; lat <= 60; lat += 30) {
-      ctx.beginPath();
-      var first = true;
-      for (var lon = -180; lon <= 180; lon += 3) {
-        var p = project(lon, lat, rotation);
-        if (!p) { first = true; continue; }
-        if (first) { ctx.moveTo(p.x, p.y); first = false; }
-        else ctx.lineTo(p.x, p.y);
-      }
-      ctx.strokeStyle = gridColor; ctx.lineWidth = 0.6; ctx.stroke();
-    }
-
-    /* ── grid lines (longitude) ── */
-    for (var mlon = -180; mlon < 180; mlon += 30) {
-      ctx.beginPath();
-      var first2 = true;
-      for (var mlat = -90; mlat <= 90; mlat += 3) {
-        var p2 = project(mlon, mlat, rotation);
-        if (!p2) { first2 = true; continue; }
-        if (first2) { ctx.moveTo(p2.x, p2.y); first2 = false; }
-        else ctx.lineTo(p2.x, p2.y);
-      }
-      ctx.strokeStyle = gridColor; ctx.lineWidth = 0.6; ctx.stroke();
-    }
-
-    /* ── continents ── */
-    var landFill = isDark ? 'rgba(88,101,242,0.22)' : 'rgba(50,80,180,0.18)';
-    var landStroke = isDark ? 'rgba(0,212,255,0.55)' : 'rgba(30,100,200,0.6)';
-    for (var c = 0; c < continents.length; c++) {
-      drawPath(continents[c], rotation, landFill, landStroke, 1.0);
-    }
-
-    /* ── equator highlight ── */
-    ctx.beginPath();
-    var eFirst = true;
-    for (var elon = -180; elon <= 180; elon += 2) {
-      var ep = project(elon, 0, rotation);
-      if (!ep) { eFirst = true; continue; }
-      if (eFirst) { ctx.moveTo(ep.x, ep.y); eFirst = false; }
-      else ctx.lineTo(ep.x, ep.y);
-    }
-    ctx.strokeStyle = isDark ? 'rgba(0,212,255,0.25)' : 'rgba(30,100,200,0.22)';
-    ctx.lineWidth = 0.9; ctx.stroke();
-
-    /* ── atmospheric rim glow ── */
-    var rimG = ctx.createRadialGradient(cx, cy, R * 0.88, cx, cy, R + 2);
-    rimG.addColorStop(0, 'transparent');
-    rimG.addColorStop(1, isDark ? 'rgba(88,101,242,0.35)' : 'rgba(30,100,220,0.3)');
-    ctx.beginPath(); ctx.arc(cx, cy, R + 1, 0, Math.PI * 2);
-    ctx.fillStyle = rimG; ctx.fill();
-    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
-    ctx.strokeStyle = isDark ? 'rgba(0,212,255,0.45)' : 'rgba(30,100,220,0.5)';
-    ctx.lineWidth = 1.5; ctx.stroke();
-
-    /* ── visitor dot ── */
-    if (visLon !== null) {
-      var vp = project(visLon, visLat, rotation);
-      if (vp && vp.z > 0) {
-        var pulse = 0.5 + 0.5 * Math.sin(Date.now() / 400);
-        ctx.beginPath();
-        ctx.arc(vp.x, vp.y, 8 + pulse * 5, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(87,242,135,' + (0.12 + pulse * 0.15).toFixed(2) + ')';
-        ctx.lineWidth = 1.2; ctx.stroke();
-        ctx.beginPath(); ctx.arc(vp.x, vp.y, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#57f287';
-        ctx.shadowColor = '#57f287'; ctx.shadowBlur = 10;
-        ctx.fill(); ctx.shadowBlur = 0;
-      }
-    }
-  }
-
-  /* ── slow rotation, stops when user's location is centered ── */
-  var autoSpin = true;
-  function tick() {
-    if (autoSpin) {
-      rotation += 0.08;
-    } else {
-      /* ease toward target rotation */
-      var diff = targetRot - rotation;
-      /* normalize to -180..180 */
-      while (diff > 180) diff -= 360;
-      while (diff < -180) diff += 360;
-      if (Math.abs(diff) > 0.1) {
-        rotation += diff * 0.02;
-      }
-    }
-    draw();
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-
+  // Setup the global function called by the IP fetcher
   window.setGlobeVisitor = function(lon, lat) {
-    visLon = lon; visLat = lat;
-    /* rotate globe to center on visitor */
-    targetRot = -lon;
-    autoSpin = false;
+    // Add the pulsing marker
+    world.ringsData([{ lat: lat, lng: lon, color: '#57f287' }])
+         .ringColor('color')
+         .ringMaxRadius(4)
+         .ringPropagationSpeed(1.5)
+         .ringRepeatPeriod(1000);
+         
+    // Smoothly transition the camera to the user's location
+    world.pointOfView({ lat: lat, lng: lon, altitude: 2.2 }, 2000);
+    setTimeout(() => {
+      world.controls().autoRotate = false; // Stop rotating so it stays on their location
+    }, 2000);
   };
 })();
 </script>
