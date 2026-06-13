@@ -628,76 +628,11 @@ nav{
   color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;
 }
 
-/* VS Code Discord Presence Card Custom Layout */
-.activity-card.code {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 0.75rem !important;
-  padding: 0.95rem 1.1rem !important;
-  border-radius: 14px !important;
-  position: relative !important;
-  overflow: hidden !important;
-}
-
-.discord-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding-bottom: 0.45rem;
-  margin-bottom: 0.15rem;
-  position: relative;
-  z-index: 1;
-}
-
-:root[data-theme="light"] .discord-card-header {
-  border-bottom: 1px solid rgba(31, 45, 94, 0.08);
-}
-
-.discord-playing-status {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.discord-playing-status::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--activity-color);
-  box-shadow: 0 0 6px rgba(var(--activity-rgb), 0.6);
-}
-
-.discord-menu-dots {
-  color: var(--muted);
-  font-size: 0.85rem;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  opacity: 0.7;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.discord-presence-body {
-  display: flex;
-  gap: 1.05rem;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-}
-
+/* VS Code Discord Presence Card Logo Styles */
 .vscode-logo-wrapper {
   position: relative;
-  width: 68px;
-  height: 68px;
+  width: 54px;
+  height: 54px;
   flex-shrink: 0;
 }
 
@@ -707,11 +642,11 @@ nav{
   justify-content: center;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
-  padding: 11px;
+  border-radius: 10px;
+  padding: 9px;
   box-sizing: border-box;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .vscode-large-logo svg {
@@ -723,84 +658,33 @@ nav{
 /* VS Code Small Badge overlapping bottom-right corner */
 .vscode-small-badge {
   position: absolute;
-  bottom: -4px;
-  right: -4px;
-  width: 24px;
-  height: 24px;
+  bottom: -3px;
+  right: -3px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--vscode-badge-bg);
-  border: 2px solid var(--vscode-badge-border);
+  border: 1.5px solid var(--vscode-badge-border);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   z-index: 2;
   transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 1px;
+  box-sizing: border-box;
 }
 
 .vscode-small-badge svg {
-  width: 14px;
-  height: 14px;
-  fill: #007acc;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .vscode-logo-wrapper:hover .vscode-small-badge svg {
   transform: rotate(15deg) scale(1.1);
-}
-
-.discord-presence-info {
-  min-width: 0;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.18rem;
-}
-
-.discord-presence-title {
-  font-weight: 800;
-  font-size: 0.94rem;
-  line-height: 1.2;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.discord-presence-details,
-.discord-presence-state {
-  font-size: 0.8rem;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.35;
-}
-
-.discord-presence-time {
-  display: flex;
-  align-items: center;
-  gap: 0.38rem;
-  font-size: 0.78rem;
-  color: var(--green);
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 600;
-  margin-top: 0.2rem;
-}
-
-.discord-gamepad-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 15px;
-  height: 15px;
-  color: var(--green);
-}
-
-.discord-gamepad-icon svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
 }
 
 /* Theme variables for VS Code badge background */
@@ -843,21 +727,15 @@ nav{
 /* Responsive adjustments for VS Code presence */
 @media(max-width:480px) {
   .vscode-logo-wrapper {
-    width: 58px;
-    height: 58px;
+    width: 46px;
+    height: 46px;
   }
   .vscode-small-badge {
-    width: 20px;
-    height: 20px;
-    bottom: -3px;
-    right: -3px;
-  }
-  .vscode-small-badge svg {
-    width: 11px;
-    height: 11px;
-  }
-  .discord-presence-body {
-    gap: 0.8rem;
+    width: 17px;
+    height: 17px;
+    bottom: -2px;
+    right: -2px;
+    border-width: 1.2px;
   }
 }
 @media(max-width:480px){
@@ -3735,7 +3613,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const spotifyLogo = `<span class="activity-icon" aria-hidden="true">${activitySvg.spotify}</span>`;
 
-  const vsCodeSvgRibbon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942 2.377A1.5 1.5 0 0 0 24 20.697V3.303a1.5 1.5 0 0 0-.85-1.348z"/></svg>`;
+  const vsCodeSvgRibbon = `<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421" viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="vscode-grad-a" gradientTransform="matrix(0 254.68 -254.68 0 127.844 .659988)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><g transform="matrix(1.05404 0 0 1.05404 145.165 65.0823)"><g fill-rule="nonzero"><path d="m246.94 27.638-52.747-25.397c-6.105-2.939-13.402-1.699-18.194 3.092l-172.675 157.44c-4.645 4.235-4.639 11.547.011 15.775l14.105 12.822c3.802 3.457 9.528 3.711 13.622.606l207.941-157.749c6.976-5.292 16.996-.317 16.996 8.44v-.613c0-6.146-3.521-11.749-9.059-14.416z" fill="#0065a9"/><path d="m246.94 228.362-52.747 25.397c-6.105 2.939-13.402 1.699-18.194-3.092l-172.675-157.44c-4.645-4.234-4.639-11.547.011-15.775l14.105-12.822c3.802-3.457 9.528-3.711 13.622-.605l207.941 157.748c6.976 5.292 16.996.317 16.996-8.44v.613c0 6.146-3.521 11.749-9.059 14.416z" fill="#007acc"/><path d="m194.196 253.763c-6.107 2.937-13.404 1.696-18.196-3.096 5.904 5.904 16 1.722 16-6.628v-232.078c0-8.35-10.096-12.532-16-6.628 4.792-4.792 12.089-6.034 18.196-3.097l52.738 25.363c5.542 2.665 9.066 8.27 9.066 14.419v171.965c0 6.149-3.524 11.754-9.066 14.419z" fill="#1f9cf0"/></g><path d="m181.378 254.252c4.032 1.57 8.63 1.47 12.699-.488l52.706-25.362c5.539-2.665 9.061-8.27 9.061-14.419v-171.965c0-6.149-3.522-11.754-9.06-14.419l-52.707-25.362c-5.34-2.57-11.591-1.941-16.279 1.467-.669.487-1.307 1.03-1.906 1.629l-100.899 92.053-43.95-33.361c-4.091-3.106-9.814-2.852-13.614.605l-14.096 12.822c-4.648 4.228-4.653 11.541-.011 15.775l38.114 34.773-38.114 34.773c-4.642 4.235-4.637 11.547.011 15.775l14.096 12.822c3.8 3.457 9.523 3.711 13.614.606l43.95-33.362 100.899 92.053c1.596 1.597 3.471 2.8 5.486 3.585zm10.505-184.367-76.56 58.115 76.56 58.115z" fill="url(#vscode-grad-a)"/></g></svg>`;
 
   const activitySvgLangs = {
     html: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>`,
@@ -3848,31 +3726,21 @@ document.addEventListener("DOMContentLoaded", () => {
         
         cards.push(`
           <div class="activity-card code" data-kind="code">
-            <div class="discord-card-header">
-              <span class="discord-playing-status">Playing</span>
-              <span class="discord-menu-dots">•••</span>
-            </div>
-            <div class="discord-presence-body">
-              <div class="vscode-logo-wrapper">
-                <div class="vscode-large-logo lang-${lang}">
-                  ${langSvg}
-                </div>
-                <div class="vscode-small-badge">
-                  ${vsCodeSvgRibbon}
-                </div>
+            <div class="vscode-logo-wrapper">
+              <div class="vscode-large-logo lang-${lang}">
+                ${langSvg}
               </div>
-              <div class="discord-presence-info">
-                <div class="discord-presence-title">Visual Studio Code</div>
-                ${details ? `<div class="discord-presence-details">${escapeText(details)}</div>` : ''}
-                ${state ? `<div class="discord-presence-state">${escapeText(state)}</div>` : ''}
-                <div class="discord-presence-time">
-                  <span class="discord-gamepad-icon">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 8.2h9.6c2.5 0 4.5 2 4.5 4.5v2.1c0 1.6-1.3 2.9-2.9 2.9-.9 0-1.7-.4-2.3-1.1l-1.2-1.5H9.1l-1.2 1.5c-.6.7-1.4 1.1-2.3 1.1-1.6 0-2.9-1.3-2.9-2.9v-2.1c0-2.5 2-4.5 4.5-4.5Zm.3 3.1H5.8v1.4h1.7v1.7h1.4v-1.7h1.7v-1.4H8.9V9.6H7.5v1.7Zm8.5.2a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm2.4 2.4a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>
-                  </span>
-                  <span data-elapsed="${started}">0:00</span>&nbsp;elapsed
-                </div>
+              <div class="vscode-small-badge">
+                ${vsCodeSvgRibbon}
               </div>
             </div>
+            <div class="activity-info">
+              <div class="activity-kicker">${escapeText(kicker)}</div>
+              <div class="activity-title">Visual Studio Code</div>
+              ${details ? `<div class="activity-sub">${escapeText(details)}</div>` : ''}
+              ${state ? `<div class="activity-detail">${escapeText(state)}</div>` : ''}
+            </div>
+            <div class="activity-time" data-elapsed="${started}">0:00</div>
           </div>
         `);
       } else {
