@@ -1731,6 +1731,39 @@ nav,.hero-card,.bot-card,.interest-card,.sk-card,.cmd-category,.radio-cmd-tag,.p
   border-color: rgba(239, 68, 68, 0.38);
   background: rgba(239, 68, 68, 0.08);
 }
+.form-success{
+  display: none; padding: 20px; border-radius: var(--radius-md);
+  background: rgba(30,215,96,0.1); border: 1px solid rgba(30,215,96,0.2);
+  color: #1ed760; font-weight: 600; text-align: center;
+}
+.attachment-group { margin-top: 15px; }
+.file-upload-box {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  gap: 10px; padding: 12px; border: 1px dashed var(--b-border); border-radius: var(--radius-sm);
+  background: var(--b-light); transition: all 0.2s ease; color: var(--muted);
+}
+.file-upload-box:hover {
+  border-color: var(--primary); color: var(--text); background: var(--b-medium);
+}
+.file-upload-box.has-file {
+  border-style: solid; border-color: var(--primary); background: rgba(88, 101, 242, 0.05);
+}
+.file-input {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; cursor: pointer; z-index: 1;
+}
+.file-icon { width: 18px; height: 18px; pointer-events: none; }
+.file-text {
+  font-size: 0.85rem; font-weight: 500; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; max-width: 80%; pointer-events: none;
+}
+.file-remove {
+  position: absolute; right: 10px; background: var(--b-dark); border: 1px solid var(--b-border);
+  color: var(--text); border-radius: 50%; width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center; font-size: 12px;
+  cursor: pointer; z-index: 2; transition: all 0.2s ease; padding: 0;
+}
+.file-remove:hover { background: #ff4757; border-color: #ff4757; color: #fff; }
 :root[data-theme="light"] .live-dot {
   background: #ef4444;
   box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
@@ -2298,6 +2331,19 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       <div class="fg"><label class="fl" for="fn">Your Name</label><input class="fi" id="fn" type="text" placeholder="Your name" autocomplete="off"/></div>
       <div class="fg"><label class="fl" for="fe">Email</label><input class="fi" id="fe" type="email" placeholder="you@example.com" autocomplete="off"/></div>
       <div class="fg"><label class="fl" for="fm">Message</label><textarea class="fta" id="fm" placeholder="Tell me about your idea or project…"></textarea></div>
+      <div class="fg attachment-group">
+        <label class="fl">Attachment (optional)</label>
+        <div class="file-upload-box" id="fileUploadBox">
+          <input type="file" id="fAttachment" accept=".png,.jpg,.jpeg,.pdf,.txt,.mp4" class="file-input" />
+          <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <span class="file-text" id="fileText">Click to attach file (Max 25MB)</span>
+          <button type="button" class="file-remove" id="fileRemove" aria-label="Remove attachment" style="display: none;">✕</button>
+        </div>
+      </div>
       <button class="btn btn-primary fsub" id="fSubmit"><span>Send Message</span></button>
     </div>
     <div class="form-success" id="fDone">✦ Message sent successfully! I'll read it soon. 🎉</div>
@@ -4196,6 +4242,43 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(syncDiscord, 5000); // Check for updates every 5 seconds
 
   /* ====== DISCORD WEBHOOK CONTACT FORM ====== */
+  const fAttachment = document.getElementById('fAttachment');
+  const fileText = document.getElementById('fileText');
+  const fileUploadBox = document.getElementById('fileUploadBox');
+  const fileRemove = document.getElementById('fileRemove');
+
+  function resetFile() {
+    if(fAttachment) fAttachment.value = '';
+    if(fileText) fileText.textContent = 'Click to attach file (Max 25MB)';
+    if(fileUploadBox) fileUploadBox.classList.remove('has-file');
+    if(fileRemove) fileRemove.style.display = 'none';
+  }
+
+  if(fAttachment) {
+    fAttachment.addEventListener('change', () => {
+      const file = fAttachment.files[0];
+      if(file) {
+        if(file.size > 25 * 1024 * 1024) {
+          showToast('⚠ File size exceeds 25MB limit.');
+          resetFile();
+          return;
+        }
+        fileText.textContent = file.name;
+        fileUploadBox.classList.add('has-file');
+        fileRemove.style.display = 'flex';
+      } else {
+        resetFile();
+      }
+    });
+  }
+
+  if(fileRemove) {
+    fileRemove.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetFile();
+    });
+  }
+
   const fSubmit = document.getElementById('fSubmit');
   if(fSubmit) {
     fSubmit.addEventListener('click', async () => {
@@ -4215,21 +4298,27 @@ document.addEventListener("DOMContentLoaded", () => {
       if(fDone) fDone.style.display = 'block';
 
       try {
+          const formData = new FormData();
+          formData.append('payload_json', JSON.stringify({
+            embeds: [{
+              title: "📩 New Portfolio Contact Message",
+              color: 5814783,
+              fields: [
+                { name: "Name", value: n, inline: true },
+                { name: "Email", value: em, inline: true },
+                { name: "Message", value: msg }
+              ],
+              timestamp: new Date().toISOString()
+            }]
+          }));
+
+          if (fAttachment && fAttachment.files.length > 0) {
+            formData.append('files[0]', fAttachment.files[0]);
+          }
+
           await fetch(WEBHOOK_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              embeds: [{
-                title: "📩 New Portfolio Contact Message",
-                color: 5814783,
-                fields: [
-                  { name: "Name", value: n, inline: true },
-                  { name: "Email", value: em, inline: true },
-                  { name: "Message", value: msg }
-                ],
-                timestamp: new Date().toISOString()
-              }]
-            })
+            body: formData
           });
       } catch (error) {
           console.log("Webhook error:", error);
@@ -4244,6 +4333,7 @@ document.addEventListener("DOMContentLoaded", () => {
              const input = document.getElementById(id);
              if(input) input.value = '';
           });
+          resetFile();
         }, 400);
       }, 3000);
     });
