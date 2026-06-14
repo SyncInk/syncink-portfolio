@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="si-favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet"/>
 <script id="theme-init">
 (() => {
   try {
@@ -483,7 +483,7 @@ nav{
   width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;
 }
 #avatar-decoration {
-  position: absolute; top: -18%; left: -18%; width: 136%; height: 136%; pointer-events: none; z-index: 3;
+  position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; pointer-events: none; z-index: 3;
 }
 .avatar-status-dot {
   position: absolute; bottom: 0px; right: 0px;
@@ -509,6 +509,12 @@ nav{
   background: var(--discord-name-grad, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: var(--discord-name-fill, #ffffff);
+}
+.card-name[data-font="8"] {
+  font-family: 'VT323', monospace;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  font-weight: 400;
 }
 .card-name.animated-name {
   background-size: 200% auto;
@@ -4032,6 +4038,9 @@ document.addEventListener("DOMContentLoaded", () => {
           document.documentElement.style.setProperty('--discord-name-grad', `linear-gradient(90deg, ${c1}, ${c2}, ${c1})`);
           document.documentElement.style.setProperty('--discord-name-fill', 'transparent');
           document.getElementById('discord-name').classList.add('animated-name');
+          if (data.user.display_name_styles.font_id) {
+            document.getElementById('discord-name').setAttribute('data-font', data.user.display_name_styles.font_id);
+          }
         }
         if (data.user.avatar_decoration_data && data.user.avatar_decoration_data.asset) {
           const decEl = document.getElementById('avatar-decoration');
