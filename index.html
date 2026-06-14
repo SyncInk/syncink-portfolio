@@ -10,22 +10,15 @@
 <link rel="apple-touch-icon" href="si-favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;700&family=Cherry+Bomb+One&family=Zilla+Slab:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Chicle&family=MuseoModerno:wght@400;500;700&family=UnifrakturMaguntia&family=Pixelify+Sans:wght@400;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-@font-face {
-  font-family: 'Sinistre';
-  src: url('https://raw.githubusercontent.com/collletttivo/sinistre/main/fonts/Sinistre-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Sinistre';
-  src: url('https://raw.githubusercontent.com/collletttivo/sinistre/main/fonts/Sinistre-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+@font-face{font-display:swap;font-family:Sakura;font-style:normal;font-weight:400;src:url(https://discord.com/assets/33d4f12a85e1f736.woff2) format("woff2")}
+@font-face{font-display:swap;font-family:Jellybean;font-style:normal;font-weight:400;src:url(https://discord.com/assets/e6f5f44abb520735.woff2) format("woff2")}
+@font-face{font-display:swap;font-family:Medieval;font-style:normal;font-weight:400;src:url(https://discord.com/assets/52b541f86401a5b6.woff2) format("woff2")}
+@font-face{font-display:swap;font-family:Modern;font-style:normal;font-weight:500;src:url(https://discord.com/assets/c560709c3470bb66.woff2) format("woff2")}
+@font-face{font-display:swap;font-family:"8Bit";font-style:normal;font-weight:400;src:url(https://discord.com/assets/69c735ca5c604de7.woff2) format("woff2")}
+@font-face{font-display:swap;font-family:Vampyre;font-style:normal;font-weight:400;src:url(https://discord.com/assets/8f20cb550d739cea.woff2) format("woff2")}
+@font-face{font-display:swap;font-family:Tempo;font-style:normal;font-weight:600;src:url(https://discord.com/assets/1e9bf5a9d7b2ba04.woff2) format("woff2")}
 </style>
 <script id="theme-init">
 (() => {
@@ -541,8 +534,8 @@ nav{
   /* Gradient — just the animated gradient, handled by .animated-name */
 }
 .card-name[data-effect="2"] {
-  /* Neon — very subtle glow matching Discord's real rendering */
-  filter: drop-shadow(0 0 3px var(--discord-name-color-1)) drop-shadow(0 0 8px var(--discord-name-color-2));
+  /* Neon — exact Discord subtle bloom */
+  filter: drop-shadow(0 0 4px var(--discord-name-color-1));
 }
 .card-name[data-effect="3"] {
   /* Toon — solid black outline with offset shadow */
@@ -554,16 +547,16 @@ nav{
   /* Pop — layered 3D block shadow */
   filter: drop-shadow(1px 1px 0 #000) drop-shadow(2px 2px 0 #000) drop-shadow(3px 3px 0 rgba(0,0,0,0.6));
 }
-/* Discord Nitro Nameplate Fonts — using actual Discord font families */
-/* font_id 0 = gg sans (default, no override needed) */
+/* Discord Nitro Nameplate Fonts — using actual Discord font CDN */
+/* font_id 0 = gg sans (default) */
 .card-name[data-font="1"] { font-family: 'Noto Sans', sans-serif; font-weight: 800; } /* gg sans bold variant */
-.card-name[data-font="2"] { font-family: 'Cherry Bomb One', cursive; font-weight: 400; font-size: 1.3rem; letter-spacing: 0; } /* sakura */
-.card-name[data-font="3"] { font-family: 'Zilla Slab', serif; font-weight: 700; font-size: 1.3rem; font-style: italic; letter-spacing: 0; } /* tempo */
-.card-name[data-font="4"] { font-family: 'Chicle', cursive; font-weight: 400; font-size: 1.35rem; letter-spacing: 0; } /* jellybean */
-.card-name[data-font="5"] { font-family: 'MuseoModerno', sans-serif; font-weight: 500; font-size: 1.3rem; letter-spacing: 0.02em; } /* modern */
-.card-name[data-font="6"] { font-family: 'UnifrakturMaguntia', cursive; font-weight: 400; font-size: 1.4rem; letter-spacing: 0; } /* medieval */
-.card-name[data-font="7"] { font-family: 'Pixelify Sans', monospace; font-size: 1.5rem; letter-spacing: 0.5px; font-weight: 700; } /* 8bit */
-.card-name[data-font="8"] { font-family: 'Sinistre', cursive; font-size: 1.3rem; letter-spacing: 0; font-weight: 400; } /* vampyre */
+.card-name[data-font="2"] { font-family: 'Sakura', cursive; font-weight: 400; } /* sakura */
+.card-name[data-font="3"] { font-family: 'Tempo', serif; font-weight: 600; } /* tempo */
+.card-name[data-font="4"] { font-family: 'Jellybean', cursive; font-weight: 400; } /* jellybean */
+.card-name[data-font="5"] { font-family: 'Modern', sans-serif; font-weight: 500; } /* modern */
+.card-name[data-font="6"] { font-family: 'Medieval', cursive; font-weight: 400; } /* medieval */
+.card-name[data-font="7"] { font-family: '"8Bit"', monospace; font-weight: 400; } /* 8bit */
+.card-name[data-font="8"] { font-family: 'Vampyre', cursive; font-weight: 400; } /* vampyre */
 .card-tag{
   font-family: 'gg sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 0.85rem; font-weight: 500; color: var(--muted); letter-spacing: 0;
