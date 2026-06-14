@@ -479,15 +479,18 @@ nav{
 :root[data-theme="light"] .card-avatar {
   box-shadow: 0 0 0 4px #ffffff,0 0 20px rgba(88,101,242,0.4);
 }
-.card-avatar img {
+.card-avatar img#profile-img {
   width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;
+}
+#avatar-decoration {
+  position: absolute; top: -18%; left: -18%; width: 136%; height: 136%; pointer-events: none; z-index: 3;
 }
 .avatar-status-dot {
   position: absolute; bottom: 0px; right: 0px;
   width: 20px; height: 20px; border-radius: 50%;
   background: var(--discord-status-color);
   border: 4px solid var(--card-bg, #0f1423);
-  z-index: 2; transition: background 0.3s ease,box-shadow 0.3s ease;
+  z-index: 4; transition: background 0.3s ease,box-shadow 0.3s ease;
   box-shadow:0 0 0 2px rgba(var(--discord-status-rgb),0.28);
 }
 :root[data-theme="light"] .avatar-status-dot {
@@ -495,12 +498,21 @@ nav{
 }
 
 .card-info{ margin-top: 12px; }
+@keyframes nameGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 .card-name{
-  font-family: 'Courier New', Courier, monospace; 
-  font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; margin-bottom: -2px;
+  font-family: 'Outfit', system-ui, sans-serif; 
+  font-weight: 900; font-size: 1.45rem; letter-spacing: -0.5px; margin-bottom: -2px;
   background: var(--discord-name-grad, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: var(--discord-name-fill, #ffffff);
+}
+.card-name.animated-name {
+  background-size: 200% auto;
+  animation: nameGradient 4s linear infinite;
 }
 :root[data-theme="light"] .card-name{
   background: var(--discord-name-grad, var(--text));
@@ -2325,6 +2337,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       <div class="card-header">
         <div class="card-avatar">
           <img id="profile-img" src="profile.jpg" alt="Profile avatar">
+          <img id="avatar-decoration" src="" style="display:none;" alt="Avatar Decoration">
           <span id="avatar-status-dot" class="avatar-status-dot"></span>
         </div>
         <div class="card-info">
@@ -4016,8 +4029,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.user.display_name_styles && data.user.display_name_styles.colors) {
           const c1 = '#' + data.user.display_name_styles.colors[0].toString(16).padStart(6, '0');
           const c2 = '#' + data.user.display_name_styles.colors[1].toString(16).padStart(6, '0');
-          document.documentElement.style.setProperty('--discord-name-grad', `linear-gradient(90deg, ${c1}, ${c2})`);
+          document.documentElement.style.setProperty('--discord-name-grad', `linear-gradient(90deg, ${c1}, ${c2}, ${c1})`);
           document.documentElement.style.setProperty('--discord-name-fill', 'transparent');
+          document.getElementById('discord-name').classList.add('animated-name');
+        }
+        if (data.user.avatar_decoration_data && data.user.avatar_decoration_data.asset) {
+          const decEl = document.getElementById('avatar-decoration');
+          if (decEl) {
+            decEl.src = `https://cdn.discordapp.com/avatar-decoration-presets/${data.user.avatar_decoration_data.asset}.png?size=96&passthrough=true`;
+            decEl.style.display = 'block';
+          }
         }
         if (data.user_profile && data.user_profile.pronouns) {
           const proEl = document.getElementById('discord-pronouns');
