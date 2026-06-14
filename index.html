@@ -511,8 +511,14 @@ nav{
   font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);
   display: flex; align-items: center; gap: 6px;
 }
-.discord-badge {
-  width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center;
+.discord-pronouns {
+  text-transform: uppercase;
+}
+.discord-badges {
+  display: flex; align-items: center; gap: 4px; margin-left: 4px;
+}
+.discord-badge-icon {
+  width: 22px; height: 22px; object-fit: contain;
 }
 .card-status{
   display:inline-flex;align-items:center;gap:0.2rem;margin-top:0.5rem;
@@ -2323,7 +2329,11 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
         </div>
         <div class="card-info">
           <div class="card-name" id="discord-name">Sync Ink</div>
-          <div class="card-tag">sync_ink_001</div>
+          <div class="card-tag">
+            <span id="discord-username">sync_ink_001</span>
+            <span id="discord-pronouns" class="discord-pronouns" style="display:none;"></span>
+            <div id="discord-badges" class="discord-badges"></div>
+          </div>
           <div class="card-status">
             <span id="status-text">Connecting...</span>
           </div>
@@ -4008,6 +4018,19 @@ document.addEventListener("DOMContentLoaded", () => {
           const c2 = '#' + data.user.display_name_styles.colors[1].toString(16).padStart(6, '0');
           document.documentElement.style.setProperty('--discord-name-grad', `linear-gradient(90deg, ${c1}, ${c2})`);
           document.documentElement.style.setProperty('--discord-name-fill', 'transparent');
+        }
+        if (data.user_profile && data.user_profile.pronouns) {
+          const proEl = document.getElementById('discord-pronouns');
+          if (proEl) {
+            proEl.textContent = `• ${data.user_profile.pronouns}`;
+            proEl.style.display = 'inline';
+          }
+        }
+      }
+      if (data.badges && data.badges.length > 0) {
+        const badgesEl = document.getElementById('discord-badges');
+        if (badgesEl) {
+          badgesEl.innerHTML = data.badges.map(b => `<img class="discord-badge-icon" src="https://cdn.discordapp.com/badge-icons/${b.icon}.png" alt="${b.description}" title="${b.description}">`).join('');
         }
       }
     } catch (e) {
