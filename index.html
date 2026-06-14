@@ -1736,6 +1736,10 @@ nav,.hero-card,.bot-card,.interest-card,.sk-card,.cmd-category,.radio-cmd-tag,.p
   background: rgba(30,215,96,0.1); border: 1px solid rgba(30,215,96,0.2);
   color: #1ed760; font-weight: 600; text-align: center;
 }
+.fl-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 6px; }
+.char-counter { font-size: 0.75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.char-counter.limit-reached { color: #ff4757; font-weight: 600; }
+.validation-msg { font-size: 0.75rem; color: #ff4757; margin-top: 4px; min-height: 14px; font-weight: 500; }
 .attachment-group { margin-top: 15px; }
 .file-upload-box {
   position: relative; display: flex; align-items: center; justify-content: center;
@@ -1757,13 +1761,20 @@ nav,.hero-card,.bot-card,.interest-card,.sk-card,.cmd-category,.radio-cmd-tag,.p
   font-size: 0.85rem; font-weight: 500; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis; max-width: 80%; pointer-events: none;
 }
-.file-remove {
-  position: absolute; right: 10px; background: var(--b-dark); border: 1px solid var(--b-border);
-  color: var(--text); border-radius: 50%; width: 24px; height: 24px;
-  display: flex; align-items: center; justify-content: center; font-size: 12px;
-  cursor: pointer; z-index: 2; transition: all 0.2s ease; padding: 0;
+.file-preview-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.file-preview-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 12px; background: var(--b-dark); border: 1px solid var(--b-border);
+  border-radius: var(--radius-sm); font-size: 0.85rem;
 }
-.file-remove:hover { background: #ff4757; border-color: #ff4757; color: #fff; }
+.file-preview-info { display: flex; align-items: center; gap: 10px; overflow: hidden; }
+.file-preview-name { color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+.file-preview-size { color: var(--muted); font-size: 0.75rem; }
+.file-preview-remove {
+  background: none; border: none; color: var(--muted); cursor: pointer; padding: 4px;
+  border-radius: 4px; transition: color 0.2s, background 0.2s;
+}
+.file-preview-remove:hover { color: #ff4757; background: rgba(255, 71, 87, 0.1); }
 :root[data-theme="light"] .live-dot {
   background: #ef4444;
   box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
@@ -2328,21 +2339,39 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       <p class="modal-sub">Share your idea, collab plan, or project details. I usually reply quickly on both email and Discord.</p>
     </div>
     <div id="fWrap">
-      <div class="fg"><label class="fl" for="fn">Your Name</label><input class="fi" id="fn" type="text" placeholder="Your name" autocomplete="off"/></div>
+      <div class="fg">
+        <div class="fl-header">
+          <label class="fl" for="fn">Your Name</label>
+          <span class="char-counter" id="fnCounter">0/20</span>
+        </div>
+        <input class="fi" id="fn" type="text" placeholder="Your name" autocomplete="off" maxlength="20"/>
+        <div class="validation-msg" id="fnWarn"></div>
+      </div>
       <div class="fg"><label class="fl" for="fe">Email</label><input class="fi" id="fe" type="email" placeholder="you@example.com" autocomplete="off"/></div>
-      <div class="fg"><label class="fl" for="fm">Message</label><textarea class="fta" id="fm" placeholder="Tell me about your idea or project…"></textarea></div>
+      <div class="fg">
+        <div class="fl-header">
+          <label class="fl" for="fm">Message</label>
+          <span class="char-counter" id="fmCounter">0/4000</span>
+        </div>
+        <textarea class="fta" id="fm" placeholder="Tell me about your idea or project…" maxlength="4000"></textarea>
+        <div class="validation-msg" id="fmWarn"></div>
+      </div>
       <div class="fg attachment-group">
-        <label class="fl">Attachment (optional)</label>
+        <div class="fl-header">
+          <label class="fl">Attachments (Max 4)</label>
+          <span class="char-counter" id="fileCounter">0/4 files (0MB/25MB)</span>
+        </div>
         <div class="file-upload-box" id="fileUploadBox">
-          <input type="file" id="fAttachment" accept=".png,.jpg,.jpeg,.pdf,.txt,.mp4" class="file-input" />
+          <input type="file" id="fAttachment" accept=".png,.jpg,.jpeg,.pdf,.txt,.mp4" class="file-input" multiple />
           <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="17 8 12 3 7 8"></polyline>
             <line x1="12" y1="3" x2="12" y2="15"></line>
           </svg>
-          <span class="file-text" id="fileText">Click to attach file (Max 25MB)</span>
-          <button type="button" class="file-remove" id="fileRemove" aria-label="Remove attachment" style="display: none;">✕</button>
+          <span class="file-text" id="fileText">Click to attach files</span>
         </div>
+        <div class="validation-msg" id="fAttachmentWarn"></div>
+        <div class="file-preview-list" id="filePreviewList"></div>
       </div>
       <button class="btn btn-primary fsub" id="fSubmit"><span>Send Message</span></button>
     </div>
@@ -4242,40 +4271,125 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(syncDiscord, 5000); // Check for updates every 5 seconds
 
   /* ====== DISCORD WEBHOOK CONTACT FORM ====== */
+  let selectedFiles = [];
+  const MAX_FILE_SIZE = 25 * 1024 * 1024;
+
   const fAttachment = document.getElementById('fAttachment');
   const fileText = document.getElementById('fileText');
   const fileUploadBox = document.getElementById('fileUploadBox');
-  const fileRemove = document.getElementById('fileRemove');
+  const filePreviewList = document.getElementById('filePreviewList');
+  const fileCounter = document.getElementById('fileCounter');
+  const fAttachmentWarn = document.getElementById('fAttachmentWarn');
+
+  function updateFileUI() {
+    if(!filePreviewList) return;
+    filePreviewList.innerHTML = '';
+    let totalSize = 0;
+    
+    selectedFiles.forEach((file, index) => {
+      totalSize += file.size;
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(2) + 'MB';
+      const item = document.createElement('div');
+      item.className = 'file-preview-item';
+      item.innerHTML = `
+        <div class="file-preview-info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+          <span class="file-preview-name">${file.name}</span>
+          <span class="file-preview-size">${sizeMB}</span>
+        </div>
+        <button type="button" class="file-preview-remove" data-index="${index}" aria-label="Remove">✕</button>
+      `;
+      filePreviewList.appendChild(item);
+    });
+
+    const totalSizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+    if(fileCounter) {
+      fileCounter.textContent = `${selectedFiles.length}/4 files (${totalSizeMB}MB/25MB)`;
+      if(selectedFiles.length >= 4 || totalSize > MAX_FILE_SIZE) fileCounter.classList.add('limit-reached');
+      else fileCounter.classList.remove('limit-reached');
+    }
+
+    document.querySelectorAll('.file-preview-remove').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = parseInt(e.currentTarget.getAttribute('data-index'));
+        selectedFiles.splice(idx, 1);
+        updateFileUI();
+        if(fAttachmentWarn) fAttachmentWarn.textContent = '';
+      });
+    });
+
+    if(fAttachment) fAttachment.value = '';
+  }
 
   function resetFile() {
-    if(fAttachment) fAttachment.value = '';
-    if(fileText) fileText.textContent = 'Click to attach file (Max 25MB)';
-    if(fileUploadBox) fileUploadBox.classList.remove('has-file');
-    if(fileRemove) fileRemove.style.display = 'none';
+    selectedFiles = [];
+    updateFileUI();
+    if(fAttachmentWarn) fAttachmentWarn.textContent = '';
   }
 
   if(fAttachment) {
     fAttachment.addEventListener('change', () => {
-      const file = fAttachment.files[0];
-      if(file) {
-        if(file.size > 25 * 1024 * 1024) {
-          showToast('⚠ File size exceeds 25MB limit.');
-          resetFile();
-          return;
-        }
-        fileText.textContent = file.name;
-        fileUploadBox.classList.add('has-file');
-        fileRemove.style.display = 'flex';
+      if(fAttachmentWarn) fAttachmentWarn.textContent = '';
+      const newFiles = Array.from(fAttachment.files);
+      
+      if(selectedFiles.length + newFiles.length > 4) {
+        if(fAttachmentWarn) fAttachmentWarn.textContent = '⚠ Maximum 4 files allowed.';
+        fAttachment.value = '';
+        return;
+      }
+
+      const allowedExts = ['.png', '.jpg', '.jpeg', '.pdf', '.txt', '.mp4'];
+      const hasUnsupported = newFiles.some(f => !allowedExts.some(ext => f.name.toLowerCase().endsWith(ext)));
+      if(hasUnsupported) {
+        if(fAttachmentWarn) fAttachmentWarn.textContent = '⚠ Unsupported file type selected.';
+        fAttachment.value = '';
+        return;
+      }
+
+      let currentTotalSize = selectedFiles.reduce((acc, f) => acc + f.size, 0);
+      let newTotalSize = newFiles.reduce((acc, f) => acc + f.size, 0);
+      if(currentTotalSize + newTotalSize > MAX_FILE_SIZE) {
+        if(fAttachmentWarn) fAttachmentWarn.textContent = '⚠ Total size exceeds 25MB limit.';
+        fAttachment.value = '';
+        return;
+      }
+
+      selectedFiles = selectedFiles.concat(newFiles);
+      updateFileUI();
+    });
+  }
+
+  const fnInput = document.getElementById('fn');
+  const fnCounter = document.getElementById('fnCounter');
+  const fnWarn = document.getElementById('fnWarn');
+  if(fnInput && fnCounter && fnWarn) {
+    fnInput.addEventListener('input', () => {
+      const len = fnInput.value.length;
+      fnCounter.textContent = `${len}/20`;
+      if(len >= 20) {
+        fnCounter.classList.add('limit-reached');
+        fnWarn.textContent = 'Maximum username length reached.';
       } else {
-        resetFile();
+        fnCounter.classList.remove('limit-reached');
+        fnWarn.textContent = '';
       }
     });
   }
 
-  if(fileRemove) {
-    fileRemove.addEventListener('click', (e) => {
-      e.preventDefault();
-      resetFile();
+  const fmInput = document.getElementById('fm');
+  const fmCounter = document.getElementById('fmCounter');
+  const fmWarn = document.getElementById('fmWarn');
+  if(fmInput && fmCounter && fmWarn) {
+    fmInput.addEventListener('input', () => {
+      const len = fmInput.value.length;
+      fmCounter.textContent = `${len}/4000`;
+      if(len >= 4000) {
+        fmCounter.classList.add('limit-reached');
+        fmWarn.textContent = 'Maximum message length reached.';
+      } else {
+        fmCounter.classList.remove('limit-reached');
+        fmWarn.textContent = '';
+      }
     });
   }
 
@@ -4298,23 +4412,33 @@ document.addEventListener("DOMContentLoaded", () => {
       if(fDone) fDone.style.display = 'block';
 
       try {
+          const embedFields = [
+            { name: "Name", value: n, inline: true },
+            { name: "Email", value: em, inline: true },
+            { name: "Message", value: msg }
+          ];
+
+          if(selectedFiles.length > 0) {
+            const fileList = selectedFiles.map(f => `• ${f.name}`).join('\\n');
+            embedFields.push({ name: `📎 Attachments (${selectedFiles.length})`, value: fileList });
+          }
+
           const formData = new FormData();
           formData.append('payload_json', JSON.stringify({
+            username: "Portfolio Contact",
+            avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png",
+            content: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\n🚨 **New Contact Submission!**",
             embeds: [{
-              title: "📩 New Portfolio Contact Message",
+              title: "📩 Message Details",
               color: 5814783,
-              fields: [
-                { name: "Name", value: n, inline: true },
-                { name: "Email", value: em, inline: true },
-                { name: "Message", value: msg }
-              ],
+              fields: embedFields,
               timestamp: new Date().toISOString()
             }]
           }));
 
-          if (fAttachment && fAttachment.files.length > 0) {
-            formData.append('files[0]', fAttachment.files[0]);
-          }
+          selectedFiles.forEach((file, index) => {
+            formData.append(`files[${index}]`, file);
+          });
 
           await fetch(WEBHOOK_URL, {
             method: 'POST',
@@ -4331,7 +4455,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if(fDone) fDone.style.display = 'none';
           ['fn','fe','fm'].forEach(id => {
              const input = document.getElementById(id);
-             if(input) input.value = '';
+             if(input) {
+               input.value = '';
+               input.dispatchEvent(new Event('input'));
+             }
           });
           resetFile();
         }, 400);
