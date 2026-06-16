@@ -678,6 +678,11 @@ nav{
   background:radial-gradient(circle,rgba(var(--activity-rgb),0.18),transparent 68%);
   pointer-events:none;
 }
+.ytmusic-corner-logo {
+  position: absolute; top: 12px; right: 14px; width: 26px; height: 26px; z-index: 2;
+  filter: drop-shadow(0 4px 8px rgba(255, 0, 0, 0.35)); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.activity-card.ytmusic:hover .ytmusic-corner-logo { transform: scale(1.15) rotate(8deg); }
 .activity-card.spotify{--activity-color:#1ed760;--activity-rgb:30,215,96;}
 .activity-card.ytmusic{--activity-color:#ff0000;--activity-rgb:255,0,0;}
 .activity-card.code{--activity-color:#3b82ff;--activity-rgb:59,130,255;}
@@ -3879,6 +3884,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       cards.push(`
         <div class="activity-card ytmusic" data-kind="ytmusic">
+          <div class="ytmusic-corner-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 176 176"><circle cx="88" cy="88" r="88" fill="red"/><path fill="#FFF" d="M88 46c23.1 0 42 18.8 42 42s-18.8 42-42 42-42-18.8-42-42 18.9-42 42-42m0-4c-25.4 0-46 20.6-46 46s20.6 46 46 46 46-20.6 46-46-20.6-46-46-46"/><path fill="#FFF" d="m72 111 39-24-39-22z"/></svg>
+          </div>
           ${albumArt}
           <div class="activity-info">
             <div class="activity-kicker">Listening on YT Music</div>
