@@ -679,6 +679,7 @@ nav{
   pointer-events:none;
 }
 .activity-card.spotify{--activity-color:#1ed760;--activity-rgb:30,215,96;}
+.activity-card.ytmusic{--activity-color:#ff0000;--activity-rgb:255,0,0;}
 .activity-card.code{--activity-color:#3b82ff;--activity-rgb:59,130,255;}
 .activity-card.game{--activity-color:#eb459e;--activity-rgb:235,69,158;}
 .activity-card.youtube{--activity-color:#ff0000;--activity-rgb:255,0,0;}
@@ -3736,6 +3737,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const activitySvg = {
     spotify: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.42.18.48.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-1.02-.12-1.14-.6-.12-.48.12-1.02.6-1.14C9.6 9.9 15 10.56 18.72 12.84c.36.18.54.78.24 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/></svg>',
+    ytmusic: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0000" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z"/><path fill="none" stroke="#FFFFFF" stroke-width="1.2" d="M12 4.114a7.886 7.886 0 1 0 0 15.772 7.886 7.886 0 0 0 0-15.772z"/><path fill="#FFFFFF" d="M10.15 15.3V8.7l5.717 3.3-5.717 3.3z"/></svg>',
     code: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8 9.5 8.4 5l1.2 1.5-3.1 3 3.1 3L8.4 14 3.8 9.5Zm16.4 0L15.6 14l-1.2-1.5 3.1-3-3.1-3L15.6 5l4.6 4.5ZM11 17.6l-1.8-.5L13 1.8l1.8.5L11 17.6Z"/></svg>',
     game: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 8.2h9.6c2.5 0 4.5 2 4.5 4.5v2.1c0 1.6-1.3 2.9-2.9 2.9-.9 0-1.7-.4-2.3-1.1l-1.2-1.5H9.1l-1.2 1.5c-.6.7-1.4 1.1-2.3 1.1-1.6 0-2.9-1.3-2.9-2.9v-2.1c0-2.5 2-4.5 4.5-4.5Zm.3 3.1H5.8v1.4h1.7v1.7h1.4v-1.7h1.7v-1.4H8.9V9.6H7.5v1.7Zm8.5.2a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm2.4 2.4a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>'
   };
@@ -3770,6 +3772,7 @@ document.addEventListener("DOMContentLoaded", () => {
     youtube: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#FFFFFF" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`
   };
   const spotifyLogo = `<span class="activity-icon" aria-hidden="true">${activitySvg.spotify}</span>`;
+  const ytmusicLogo = `<span class="activity-icon" aria-hidden="true">${activitySvg.ytmusic}</span>`;
 
   const vsCodeSvgRibbon = `<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.41421" viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="vscode-grad-a" gradientTransform="matrix(0 254.68 -254.68 0 127.844 .659988)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><g transform="matrix(1.05404 0 0 1.05404 145.165 65.0823)"><g fill-rule="nonzero"><path d="m246.94 27.638-52.747-25.397c-6.105-2.939-13.402-1.699-18.194 3.092l-172.675 157.44c-4.645 4.235-4.639 11.547.011 15.775l14.105 12.822c3.802 3.457 9.528 3.711 13.622.606l207.941-157.749c6.976-5.292 16.996-.317 16.996 8.44v-.613c0-6.146-3.521-11.749-9.059-14.416z" fill="#0065a9"/><path d="m246.94 228.362-52.747 25.397c-6.105 2.939-13.402 1.699-18.194-3.092l-172.675-157.44c-4.645-4.234-4.639-11.547.011-15.775l14.105-12.822c3.802-3.457 9.528-3.711 13.622-.605l207.941 157.748c6.976 5.292 16.996.317 16.996-8.44v.613c0 6.146-3.521 11.749-9.059 14.416z" fill="#007acc"/><path d="m194.196 253.763c-6.107 2.937-13.404 1.696-18.196-3.096 5.904 5.904 16 1.722 16-6.628v-232.078c0-8.35-10.096-12.532-16-6.628 4.792-4.792 12.089-6.034 18.196-3.097l52.738 25.363c5.542 2.665 9.066 8.27 9.066 14.419v171.965c0 6.149-3.524 11.754-9.066 14.419z" fill="#1f9cf0"/></g><path d="m181.378 254.252c4.032 1.57 8.63 1.47 12.699-.488l52.706-25.362c5.539-2.665 9.061-8.27 9.061-14.419v-171.965c0-6.149-3.522-11.754-9.06-14.419l-52.707-25.362c-5.34-2.57-11.591-1.941-16.279 1.467-.669.487-1.307 1.03-1.906 1.629l-100.899 92.053-43.95-33.361c-4.091-3.106-9.814-2.852-13.614.605l-14.096 12.822c-4.648 4.228-4.653 11.541-.011 15.775l38.114 34.773-38.114 34.773c-4.642 4.235-4.637 11.547.011 15.775l14.096 12.822c3.8 3.457 9.523 3.711 13.614.606l43.95-33.362 100.899 92.053c1.596 1.597 3.471 2.8 5.486 3.585zm10.505-184.367-76.56 58.115 76.56 58.115z" fill="url(#vscode-grad-a)"/></g></svg>`;
 
@@ -3863,8 +3866,35 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `);
     }
+
+    const ytm = (data.activities || []).find(a => a.name === 'YouTube Music' || a.name === 'Youtube Music');
+    if (ytm) {
+      let albumArt = ytmusicLogo;
+      if (ytm.assets && ytm.assets.large_image) {
+        let imgUrl = ytm.assets.large_image;
+        if (imgUrl.startsWith('mp:external/')) {
+          imgUrl = 'https://media.discordapp.net/external/' + imgUrl.slice('mp:external/'.length);
+        }
+        albumArt = `<img class="activity-art" src="${escapeText(imgUrl)}" alt="YouTube Music art" onerror="this.outerHTML='<span class=activity-icon aria-hidden=true>${activitySvg.ytmusic.replace(/"/g,"'")}</span>'">`;
+      }
+      cards.push(`
+        <div class="activity-card ytmusic" data-kind="ytmusic">
+          ${albumArt}
+          <div class="activity-info">
+            <div class="activity-kicker">Listening on YT Music</div>
+            <div class="activity-title">${escapeText(ytm.details || 'Unknown track')}</div>
+            <div class="activity-sub">by ${escapeText(ytm.state || 'Unknown artist')}</div>
+          </div>
+          <div class="activity-meter">
+            <div class="activity-progress"><span data-progress-start="${Number(ytm.timestamps?.start || Date.now())}" data-progress-end="${Number(ytm.timestamps?.end || Date.now())}"></span></div>
+            <div class="activity-times"><span data-elapsed="${Number(ytm.timestamps?.start || Date.now())}">0:00</span><span data-remaining="${Number(ytm.timestamps?.end || Date.now())}">0:00</span></div>
+          </div>
+        </div>
+      `);
+    }
+
     const visible = (data.activities || [])
-      .filter(a => a && a.type !== 4 && a.name !== 'Spotify')
+      .filter(a => a && a.type !== 4 && a.name !== 'Spotify' && a.name !== 'YouTube Music' && a.name !== 'Youtube Music')
       .sort((a, b) => ((b.name || '').includes('Visual Studio Code') ? 1 : 0) - ((a.name || '').includes('Visual Studio Code') ? 1 : 0))
       .slice(0, 2);
     visible.forEach((activity) => {
