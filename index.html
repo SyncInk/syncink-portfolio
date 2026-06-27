@@ -3843,10 +3843,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (name.includes('call of duty') || name.includes('warzone') || name.includes('modern warfare')) return `<span class="activity-icon" aria-hidden="true">${activitySvgGames.cod}</span>`;
     if (name.includes('steam'))            return `<span class="activity-icon" aria-hidden="true">${activitySvgGames.steam}</span>`;
     if (name.includes('watch together') || name.includes('youtube')) return `<span class="activity-icon" aria-hidden="true">${activitySvgGames.youtube}</span>`;
-    // Fallback to Discord-provided large image, or generic controller
+    // Fallback to Discord-provided large image, application icon proxy, or generic controller
+    let src = null;
     if (activity.assets?.large_image) {
       const img = activity.assets.large_image;
-      let src = null;
       if (img.startsWith('mp:external/')) {
         src = 'https://media.discordapp.net/external/' + img.slice('mp:external/'.length);
       } else if (img.startsWith('https://') || img.startsWith('http://')) {
@@ -3854,8 +3854,12 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (activity.application_id) {
         src = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${img}.png`;
       }
-      if (src) return `<img class="activity-art" src="${src}" alt="${escapeText(activity.name||'')}" onerror="this.outerHTML='<span class=activity-icon aria-hidden=true>${activitySvg.game.replace(/'/g, '&apos;').replace(/"/g, '&quot;')}</span>'">`;
+    } else if (activity.application_id) {
+      // If no assets were provided but an application_id exists, fetch the game's icon via Lanyard's CDN proxy
+      src = `https://dcdn.dstn.to/app-icons/${activity.application_id}`;
     }
+
+    if (src) return `<img class="activity-art" src="${src}" alt="${escapeText(activity.name||'')}" onerror="this.outerHTML='<span class=activity-icon aria-hidden=true>${activitySvg.game.replace(/'/g, '&apos;').replace(/"/g, '&quot;')}</span>'">`;
     return `<span class="activity-icon" aria-hidden="true">${activitySvg.game}</span>`;
   };
   const renderActivities = (data = {}) => {
