@@ -3846,8 +3846,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fallback to Discord-provided large image, or generic controller
     if (activity.assets?.large_image) {
       const img = activity.assets.large_image;
-      const src = img.startsWith('mp:external/') ? 'https://media.discordapp.net/external/' + img.slice('mp:external/'.length) : img.startsWith('https') ? img : null;
-      if (src) return `<img class="activity-art" src="${src}" alt="${(activity.name||'').replace(/"/g,'')}" onerror="this.outerHTML='<span class=activity-icon aria-hidden=true>${activitySvg.game.replace(/`/g,'')}</span>'">`;
+      let src = null;
+      if (img.startsWith('mp:external/')) {
+        src = 'https://media.discordapp.net/external/' + img.slice('mp:external/'.length);
+      } else if (img.startsWith('https://') || img.startsWith('http://')) {
+        src = img;
+      } else if (activity.application_id) {
+        src = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${img}.png`;
+      }
+      if (src) return `<img class="activity-art" src="${src}" alt="${escapeText(activity.name||'')}" onerror="this.outerHTML='<span class=activity-icon aria-hidden=true>${activitySvg.game.replace(/'/g, '&apos;').replace(/"/g, '&quot;')}</span>'">`;
     }
     return `<span class="activity-icon" aria-hidden="true">${activitySvg.game}</span>`;
   };
