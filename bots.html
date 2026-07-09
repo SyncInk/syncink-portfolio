@@ -3,1177 +3,659 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="color-scheme" content="dark light"/>
-<meta name="description" content="SyncInk Official Discord Bots — Multi-purpose, Radio, Ticket, and Voice bots for Discord."/>
-<title>SyncInk Bots — Official Discord Bots</title>
+<meta name="description" content="SyncInk Official Bots — Full details, commands, and features for SyncInk, Radio, Ticket and Voice bots."/>
+<title>SyncInk · Official Bots</title>
 <link rel="icon" type="image/svg+xml" href="si-favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script id="theme-init">
-(()=>{
-  try{
-    const s=localStorage.getItem('theme');
-    const sl=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches;
-    document.documentElement.setAttribute('data-theme',s||(sl?'light':'dark'));
-  }catch(_){document.documentElement.setAttribute('data-theme','dark');}
-})();
-</script>
+<script>(function(){try{var t=localStorage.getItem('theme');var s=window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches;document.documentElement.setAttribute('data-theme',t||(s?'light':'dark'));}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <style>
-/* ===== RESET & ROOT ===== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
   color-scheme:dark;
-  --bg:#060812;
-  --bg2:#0d1117;
-  --surface:#111827;
-  --surface2:#1a2233;
-  --border:rgba(88,101,242,0.18);
-  --blue:#5865F2;
-  --blue2:#7289da;
-  --blue3:#99aab5;
-  --cyan:#00d4ff;
-  --accent:#eb459e;
-  --green:#57f287;
-  --text:#e8eaf0;
-  --muted:#8b95a8;
-  --card:rgba(17,24,39,0.55);
-  --glow:rgba(88,101,242,0.4);
-  --glass-border:1px solid rgba(255,255,255,0.08);
-  --surface-shadow:0 18px 50px rgba(0,0,0,0.32);
-  --spring:cubic-bezier(0.175,0.885,0.32,1.275);
-  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
-  --nav-bg:rgba(6,8,18,0.70);
-  --nav-bg-solid:rgba(6,8,18,0.95);
-  --mobile-bg:rgba(6,8,18,0.97);
-  --canvas-particle-a:#5865F2;
-  --canvas-particle-b:#00d4ff;
-  --canvas-particle-c:#7289da;
-  --canvas-line:#5865F2;
-  --orb-1:rgba(88,101,242,0.08);
-  --orb-2:rgba(0,212,255,0.06);
-  --orb-3:rgba(88,101,242,0.05);
-  --particle-count:120;
-  --particle-size-min:0.3;
-  --particle-size-max:1.8;
-  --particle-opacity-min:0.1;
-  --particle-opacity-max:0.58;
-  --canvas-link-distance:100;
-  --canvas-line-alpha:0.08;
-  --canvas-line-width:0.5;
-  --orb-radius-scale:1;
+  --bg:#060812;--bg2:#0d1117;--surface:#111827;--border:rgba(88,101,242,0.18);
+  --blue:#5865F2;--blue2:#7289da;--blue3:#99aab5;--cyan:#00d4ff;--accent:#eb459e;
+  --green:#57f287;--text:#e8eaf0;--muted:#8b95a8;
+  --spring:cubic-bezier(0.175,0.885,0.32,1.275);--ease-out:cubic-bezier(0.16,1,0.3,1);
 }
 :root[data-theme="light"]{
-  color-scheme:light;
-  --bg:#eef4ff;
-  --bg2:#e2ebff;
-  --surface:#ffffff;
-  --surface2:#eef3ff;
-  --border:rgba(42,68,162,0.22);
-  --blue:#3F5CF4;
-  --blue2:#5973F5;
-  --blue3:#4f618d;
-  --cyan:#00b8cc;
-  --accent:#d93d8f;
-  --green:#16b875;
-  --text:#101b3d;
-  --muted:#4d618a;
-  --card:rgba(255,255,255,0.7);
-  --glow:rgba(63,92,244,0.28);
-  --glass-border:1px solid rgba(0,0,0,0.08);
-  --surface-shadow:0 18px 42px rgba(36,58,132,0.18);
-  --nav-bg:rgba(236,244,255,0.84);
-  --nav-bg-solid:rgba(236,244,255,0.97);
-  --mobile-bg:rgba(236,244,255,0.9);
-  --canvas-particle-a:#2f4fc7;
-  --canvas-particle-b:#008fbe;
-  --canvas-particle-c:#1f2d5e;
-  --canvas-line:#3650aa;
-  --orb-1:rgba(52,79,194,0.23);
-  --orb-2:rgba(0,150,196,0.2);
-  --orb-3:rgba(30,44,96,0.18);
-  --particle-count:185;
-  --particle-size-min:0.58;
-  --particle-size-max:2.8;
-  --particle-opacity-min:0.2;
-  --particle-opacity-max:0.85;
-  --canvas-link-distance:145;
-  --canvas-line-alpha:0.19;
-  --canvas-line-width:0.8;
-  --orb-radius-scale:1.14;
+  color-scheme:light;--bg:#eef4ff;--bg2:#e2ebff;--surface:#fff;--border:rgba(42,68,162,0.22);
+  --blue:#3F5CF4;--blue2:#5973F5;--blue3:#4f618d;--cyan:#00b8cc;--accent:#d93d8f;
+  --green:#16b875;--text:#101b3d;--muted:#4d618a;
 }
-html{scroll-behavior:smooth;font-size:16px;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Outfit',sans-serif;
-  overflow-x:hidden;
-  line-height:1.6;
-  transition:background-color .45s ease,color .35s ease;
-}
-img,video{max-width:100%;display:block;}
-a{text-decoration:none;color:inherit;}
-button{border:none;background:none;cursor:pointer;font-family:inherit;}
-
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px;}
-
-/* ===== CANVAS ===== */
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6;}
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.page{position:relative;z-index:1;}
 
 /* ===== NAV ===== */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:300;
-  display:flex;align-items:center;gap:0.8rem;
-  padding:0.9rem 2rem;
-  background:var(--nav-bg);
-  backdrop-filter:blur(18px);
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:60px;
+  background:rgba(6,8,18,0.82);backdrop-filter:blur(24px);
   border-bottom:1px solid var(--border);
-  transition:background 0.4s;
 }
-.nav-logo{
-  margin-right:auto;
-  display:flex;align-items:center;gap:0.6rem;
-  font-weight:900;font-size:1.15rem;letter-spacing:-0.02em;color:var(--text);
+:root[data-theme="light"] nav{background:rgba(238,244,255,0.9);}
+.nav-logo{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.1rem;color:var(--text);text-decoration:none;}
+.nav-logo-icon{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font-size:.7rem;font-weight:900;color:#fff;}
+.nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;}
+.nav-links a{font-size:.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--text);}
+.nav-links a.active{color:var(--cyan);}
+.nav-right{display:flex;align-items:center;gap:.8rem;}
+.btn-back{display:flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.82rem;font-weight:600;text-decoration:none;transition:all .2s;}
+.btn-back:hover{color:var(--text);border-color:var(--blue);background:rgba(88,101,242,.08);}
+.theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:all .2s;}
+.theme-toggle:hover{color:var(--text);border-color:var(--blue);background:rgba(88,101,242,.1);}
+.theme-toggle svg{width:16px;height:16px;fill:currentColor;}
+@media(max-width:768px){.nav-links{display:none;}.nav{padding:0 1rem;}}
+
+/* ===== HERO ===== */
+.hero{padding:110px 2rem 50px;text-align:center;}
+.kicker{display:inline-flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue3);padding:.35rem .9rem;border-radius:999px;border:1px solid rgba(88,101,242,.25);background:rgba(88,101,242,.08);margin-bottom:1.4rem;}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,var(--text) 0%,var(--blue2) 50%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero h1 em{font-style:normal;color:var(--cyan);-webkit-text-fill-color:var(--cyan);}
+.hero p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto;}
+
+/* ===== CONTAINER ===== */
+.container{max-width:1060px;margin:0 auto;padding:0 2rem;}
+
+/* ===== SECTION LABEL ===== */
+.s-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem;}
+.s-heading{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-.02em;color:var(--text);margin-bottom:.8rem;}
+.s-heading em{font-style:normal;color:var(--cyan);}
+
+/* ===== BOT SECTION WRAPPER ===== */
+.bots-section{padding:0 0 60px;}
+.bot-block{
+  position:relative;overflow:hidden;border-radius:22px;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,rgba(11,16,36,0.94),rgba(13,19,41,0.72));
+  box-shadow:0 20px 60px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.06);
+  margin-bottom:2.5rem;
+}
+:root[data-theme="light"] .bot-block{background:rgba(255,255,255,.86);box-shadow:0 8px 30px rgba(42,68,162,.1);}
+.bot-block.radio-block{border-color:rgba(235,69,158,.22);}
+.bot-block.ticket-block{border-color:rgba(147,51,234,.22);}
+.bot-block.voice-block{border-color:rgba(0,212,255,.18);}
+.block-glow{position:absolute;top:-30%;right:-10%;width:280px;height:280px;border-radius:50%;pointer-events:none;}
+.block-glow.blue{background:radial-gradient(circle,rgba(88,101,242,.15),transparent 65%);}
+.block-glow.pink{background:radial-gradient(circle,rgba(235,69,158,.16),transparent 65%);}
+.block-glow.purple{background:radial-gradient(circle,rgba(147,51,234,.16),transparent 65%);}
+.block-glow.cyan{background:radial-gradient(circle,rgba(0,212,255,.13),transparent 65%);}
+
+/* ===== BOT HEADER ===== */
+.bot-top{padding:2rem 2rem 1.5rem;display:flex;align-items:flex-start;gap:1.4rem;flex-wrap:wrap;}
+.bot-pfp{
+  width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:2.5px solid rgba(255,255,255,.14);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  animation:pfpFloat 4s ease-in-out infinite;
+}
+.bot-pfp img{width:100%;height:100%;object-fit:cover;display:block;}
+@keyframes pfpFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+.bot-pfp.radio-glow{box-shadow:0 8px 24px rgba(235,69,158,.35);}
+.bot-pfp.purple-glow{box-shadow:0 8px 24px rgba(147,51,234,.35);}
+.bot-pfp.cyan-glow{box-shadow:0 8px 24px rgba(0,212,255,.3);}
+.bot-meta{flex:1;min-width:0;}
+.bot-tag-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.5rem;}
+.btag{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;padding:.2rem .5rem;border-radius:999px;border:1px solid;font-weight:700;}
+.btag.blue{border-color:rgba(88,101,242,.55);color:var(--blue2);background:rgba(88,101,242,.1);}
+.btag.pink{border-color:rgba(235,69,158,.55);color:var(--accent);background:rgba(235,69,158,.1);}
+.btag.purple{border-color:rgba(147,51,234,.55);color:#c084fc;background:rgba(147,51,234,.1);}
+.btag.cyan{border-color:rgba(0,212,255,.5);color:var(--cyan);background:rgba(0,212,255,.08);}
+.btag.yellow{border-color:rgba(234,179,8,.5);color:#eab308;background:rgba(234,179,8,.08);}
+.bot-name-row{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.bot-bname{font-size:1.75rem;font-weight:900;letter-spacing:-.02em;color:var(--text);}
+.bot-icons{display:inline-flex;align-items:center;gap:5px;}
+.bot-icons img{width:24px;height:24px;object-fit:contain;display:block;}
+.bot-icons img.radio-logo{width:80px;height:80px;margin-left:-10px;}
+.bot-bdesc{font-size:.95rem;color:var(--muted);line-height:1.65;max-width:700px;}
+.bot-bdesc-bold{font-weight:700;color:#e9d5ff;margin-bottom:.3rem;}
+.bot-actions-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.1rem;}
+.bbot-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.52rem 1.15rem;border-radius:10px;font-size:.88rem;font-weight:700;text-decoration:none;border:1px solid;transition:all .22s var(--spring);cursor:pointer;background:transparent;}
+.bbot-btn:hover{transform:translateY(-2px);}
+.bbot-btn.blue{background:linear-gradient(135deg,rgba(88,101,242,.32),rgba(88,101,242,.14));border-color:rgba(88,101,242,.55);color:#fff;}
+.bbot-btn.blue:hover{box-shadow:0 0 22px rgba(88,101,242,.38);}
+.bbot-btn.pink{background:linear-gradient(135deg,rgba(235,69,158,.28),rgba(235,69,158,.1));border-color:rgba(235,69,158,.55);color:var(--accent);}
+.bbot-btn.pink:hover{box-shadow:0 0 22px rgba(235,69,158,.35);}
+.bbot-btn.purple{background:linear-gradient(135deg,rgba(147,51,234,.28),rgba(147,51,234,.1));border-color:rgba(147,51,234,.55);color:#c084fc;}
+.bbot-btn.purple:hover{box-shadow:0 0 22px rgba(147,51,234,.35);}
+.bbot-btn.cyan{background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(0,212,255,.06));border-color:rgba(0,212,255,.45);color:var(--cyan);}
+.bbot-btn.cyan:hover{box-shadow:0 0 22px rgba(0,212,255,.28);}
+.bbot-btn svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
+
+/* ===== PLATFORM TAGS ===== */
+.plat-strip{display:flex;flex-wrap:wrap;gap:.6rem;padding:0 2rem 1.5rem;}
+.pt{display:inline-flex;align-items:center;gap:.38rem;padding:.28rem .7rem;border-radius:8px;font-size:.8rem;font-weight:700;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);}
+.pt svg{width:15px;height:15px;fill:currentColor;}
+.pt.spotify{color:#1ED760;border-color:rgba(30,215,96,.2);}
+.pt.ytmusic{color:#ff0000;border-color:rgba(255,0,0,.2);}
+.pt.soundcloud{color:#FF5500;border-color:rgba(255,85,0,.2);}
+.pt.apple{color:#fc3c44;border-color:rgba(252,60,68,.2);}
+.pt.deezer{color:#FEAA2D;border-color:rgba(254,170,45,.2);}
+.pt.tidal{color:#5EB7D7;border-color:rgba(94,183,215,.2);}
+
+/* ===== COMMAND GRID ===== */
+.cmd-section{padding:0 2rem 2rem;}
+.cmd-section-title{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue3);margin-bottom:.9rem;}
+.cmd-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+@media(max-width:650px){.cmd-grid-2{grid-template-columns:1fr;}}
+.cmd-cat{border-radius:14px;background:rgba(255,255,255,.03);border:1px solid;padding:1rem;}
+.cmd-cat.gold{border-color:rgba(234,179,8,.2);}.cmd-cat.purple{border-color:rgba(139,92,246,.2);}.cmd-cat.blue{border-color:rgba(59,130,246,.2);}.cmd-cat.green{border-color:rgba(34,197,94,.2);}
+.cmd-cat-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem;font-weight:800;font-size:.92rem;}
+.cmd-cat-head.gold{color:#eab308;}.cmd-cat-head.purple{color:#a78bfa;}.cmd-cat-head.blue{color:#60a5fa;}.cmd-cat-head.green{color:#4ade80;}
+.cmd-cat-head img{width:22px;height:22px;object-fit:contain;}
+.cmd-cat-head svg{width:22px;height:22px;}
+.cmd-list{list-style:none;display:flex;flex-direction:column;gap:.32rem;}
+.cmd-item{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.28rem .38rem;border-radius:6px;transition:background .18s;}
+.cmd-item:hover{background:rgba(255,255,255,.04);}
+.cmd-name{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:var(--blue2);flex-shrink:0;}
+.cmd-desc{font-size:.78rem;color:var(--muted);text-align:right;flex:1;}
+.copy-btn{background:transparent;border:none;cursor:pointer;color:var(--muted);padding:2px 4px;border-radius:4px;transition:all .15s;flex-shrink:0;}
+.copy-btn:hover{color:var(--text);background:rgba(255,255,255,.06);}
+.copy-btn.copied{color:var(--green);}
+
+/* ===== RADIO CMD GRID ===== */
+.radio-cmds{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;padding:0 2rem 2rem;}
+@media(max-width:600px){.radio-cmds{grid-template-columns:repeat(2,1fr);}}
+.rcmd{border-radius:10px;background:rgba(235,69,158,.05);border:1px solid rgba(235,69,158,.15);padding:.7rem .85rem;}
+.rcmd-name{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--accent);display:flex;align-items:center;justify-content:space-between;margin-bottom:.18rem;}
+.rcmd-desc{font-size:.75rem;color:var(--muted);}
+
+/* ===== TICKET FEATURES ===== */
+.ticket-banner{width:100%;border-radius:16px 16px 0 0;overflow:hidden;max-height:200px;object-fit:cover;display:block;}
+.tkt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;padding:0 2rem 1.5rem;}
+@media(max-width:700px){.tkt-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:450px){.tkt-grid{grid-template-columns:1fr;}}
+.tkt-feat{border-radius:12px;background:rgba(147,51,234,.05);border:1px solid rgba(147,51,234,.15);padding:.9rem;transition:all .2s;}
+.tkt-feat:hover{background:rgba(147,51,234,.1);border-color:rgba(147,51,234,.3);}
+.tkt-feat-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:.3rem;}
+.tkt-feat-title svg{width:16px;height:16px;fill:#c084fc;flex-shrink:0;}
+.tkt-feat-desc{font-size:.78rem;color:var(--muted);line-height:1.5;}
+
+/* ===== TICKET SETUP ===== */
+.ticket-setup{padding:0 2rem 1.5rem;}
+.ticket-setup-card{border-radius:14px;background:rgba(147,51,234,.06);border:1px solid rgba(147,51,234,.18);padding:1.2rem 1.5rem;}
+.ticket-setup-title{display:flex;align-items:center;gap:.5rem;font-weight:800;color:#c084fc;margin-bottom:.9rem;}
+.ticket-steps{display:flex;flex-direction:column;gap:.45rem;}
+.ticket-step{display:flex;align-items:flex-start;gap:.6rem;font-size:.86rem;color:var(--muted);}
+.step-num{min-width:20px;height:20px;border-radius:50%;background:rgba(147,51,234,.3);border:1px solid rgba(147,51,234,.5);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#c084fc;flex-shrink:0;margin-top:1px;}
+.ticket-step code{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#c084fc;background:rgba(147,51,234,.15);padding:.1rem .35rem;border-radius:4px;}
+
+/* ===== TECH TAGS ===== */
+.tech-tags{display:flex;flex-wrap:wrap;gap:.5rem;padding:0 2rem 1.5rem;}
+.tech-tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.25rem .6rem;border-radius:6px;background:rgba(147,51,234,.08);border:1px solid rgba(147,51,234,.2);color:#c084fc;}
+
+/* ===== VOICE FEATURES ===== */
+.voice-feats{display:flex;flex-wrap:wrap;gap:.6rem;padding:0 2rem 2rem;}
+.vfeat{display:inline-flex;align-items:center;gap:.4rem;padding:.32rem .75rem;border-radius:8px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);font-size:.82rem;color:var(--cyan);font-weight:600;transition:all .2s;}
+.vfeat:hover{background:rgba(0,212,255,.12);}
+.vfeat svg{width:14px;height:14px;fill:var(--cyan);}
+
+/* ===== DIVIDER ===== */
+.block-divider{height:1px;background:rgba(255,255,255,.06);margin:0 1.5rem;}
+:root[data-theme="light"] .block-divider{background:rgba(0,0,0,.07);}
+
+/* ===== COMMUNITY ===== */
+.community-section{padding:0 0 80px;}
+.srv-card{
+  position:relative;overflow:hidden;border-radius:24px;
+  background:linear-gradient(145deg,rgba(11,16,36,.95),rgba(16,28,64,.8));
+  border:1px solid rgba(88,101,242,.3);
+  box-shadow:0 24px 70px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.07);
+  padding:2.8rem;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
+  transition:transform .35s var(--spring),box-shadow .35s ease;
+}
+:root[data-theme="light"] .srv-card{background:rgba(255,255,255,.9);}
+.srv-card:hover{transform:translateY(-4px);box-shadow:0 36px 90px rgba(0,0,0,.4),0 0 0 1px rgba(88,101,242,.4);}
+.srv-card::before{content:'';position:absolute;top:-40%;right:-10%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(88,101,242,.18),transparent 65%);pointer-events:none;}
+.srv-card::after{content:'';position:absolute;bottom:-30%;left:-10%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 65%);pointer-events:none;}
+.srv-icon-wrap{
+  position:relative;flex-shrink:0;
+  width:100px;height:100px;border-radius:50%;overflow:hidden;
+  border:3px solid rgba(88,101,242,.5);
+  box-shadow:0 0 30px rgba(88,101,242,.4),0 0 60px rgba(88,101,242,.15);
+}
+.srv-icon-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.srv-icon-wrap .live-ring{
+  position:absolute;inset:-4px;border-radius:50%;
+  border:2px solid rgba(87,242,135,.5);
+  animation:liveRing 2s ease-in-out infinite;
+}
+@keyframes liveRing{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.04);}}
+.srv-info{flex:1;min-width:220px;}
+.srv-name{font-size:1.6rem;font-weight:900;letter-spacing:-.02em;color:var(--text);margin-bottom:.3rem;}
+.srv-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue2);padding:.2rem .6rem;border-radius:999px;background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.3);margin-bottom:1.1rem;}
+.srv-stats{display:flex;gap:2rem;margin-bottom:1.2rem;}
+.srv-stat-val{font-size:1.5rem;font-weight:900;color:var(--text);display:flex;align-items:center;gap:.45rem;}
+.srv-stat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.srv-stat-dot.green{background:#57f287;box-shadow:0 0 8px rgba(87,242,135,.7);animation:dotPulse 1.6s ease-in-out infinite;}
+.srv-stat-dot.grey{background:var(--muted);}
+@keyframes dotPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.4);}}
+.srv-stat-lab{font-size:.75rem;color:var(--muted);margin-top:.05rem;}
+.live-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.22rem .6rem;border-radius:999px;background:rgba(87,242,135,.1);border:1px solid rgba(87,242,135,.25);font-size:.7rem;font-weight:700;color:var(--green);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;margin-bottom:1rem;}
+.live-pill .pdot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:dotPulse 1.6s ease-in-out infinite;}
+.srv-desc{font-size:.92rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem;max-width:480px;}
+.srv-join-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.75rem 1.8rem;border-radius:12px;font-size:.95rem;font-weight:800;
   text-decoration:none;
+  background:linear-gradient(135deg,#5865F2,#7289da);
+  border:none;color:#fff;
+  box-shadow:0 6px 24px rgba(88,101,242,.4);
+  transition:all .25s var(--spring);
 }
-.nav-logo-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:linear-gradient(135deg,var(--blue),var(--cyan));
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.75rem;font-weight:900;color:#fff;letter-spacing:0;
-  box-shadow:0 0 14px rgba(88,101,242,0.5);
-  flex-shrink:0;
-}
-.nav-links{display:flex;align-items:center;gap:0.3rem;list-style:none;}
-.nav-tools{display:flex;align-items:center;gap:0.6rem;}
-.nav-link{
-  display:inline-flex;align-items:center;gap:0.38rem;
-  padding:0.45rem 0.9rem;border-radius:8px;
-  font-size:0.82rem;font-weight:600;color:var(--muted);
-  letter-spacing:0;transition:color 0.2s,background 0.2s;
-  text-transform:capitalize;
-}
-.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface);}
-.nav-link.active{color:var(--blue2);}
-.nav-portfolio-btn{
-  display:flex;align-items:center;gap:0.45rem;
-  padding:0.45rem 1rem;border-radius:8px;
-  background:var(--surface);color:var(--text);
-  font-size:0.8rem;font-weight:700;
-  border:1px solid var(--border);
-  transition:all 0.2s;
-}
-.nav-portfolio-btn:hover{border-color:var(--blue);color:var(--blue2);background:rgba(88,101,242,0.08);transform:translateY(-1px);}
-.nav-portfolio-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.theme-toggle{
-  width:40px;height:40px;border-radius:11px;
-  border:1px solid var(--border);
-  background:linear-gradient(140deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015));
-  color:var(--blue2);
-  display:inline-flex;align-items:center;justify-content:center;
-  position:relative;isolation:isolate;
-  transition:transform .28s,border-color .32s,box-shadow .32s,background .32s,color .32s;
-}
-.theme-toggle:hover{transform:translateY(-1px);border-color:rgba(92,120,255,0.48);background:linear-gradient(140deg,rgba(255,255,255,0.14),rgba(97,124,255,0.09));box-shadow:0 8px 22px rgba(60,84,168,0.22);color:var(--blue);}
-.theme-toggle svg{width:18px;height:18px;position:absolute;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;fill:none;transition:opacity .35s,transform .45s;}
-.theme-toggle .sun-icon{opacity:0;transform:scale(0.6) rotate(-38deg);}
-.theme-toggle .moon-icon{opacity:1;transform:scale(1) rotate(0deg);}
-:root[data-theme="light"] .theme-toggle .sun-icon{opacity:1;transform:scale(1) rotate(0deg);}
-:root[data-theme="light"] .theme-toggle .moon-icon{opacity:0;transform:scale(0.6) rotate(34deg);}
-.hamburger{display:none;flex-direction:column;gap:5px;padding:4px;z-index:201;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s;}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mobile-menu{
-  display:none;position:fixed;inset:0;z-index:260;
-  background:var(--mobile-bg);backdrop-filter:blur(20px);
-  flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-}
-.mobile-menu.open{display:flex;}
-.mobile-menu .nav-link{font-size:1.4rem;font-weight:700;color:var(--text);padding:0.6rem 2rem;}
-.mobile-menu .nav-portfolio-btn{font-size:1rem;padding:0.8rem 2rem;}
-@media(max-width:768px){
-  .nav-links{display:none;}
-  .nav-tools{margin-left:auto;}
-  .hamburger{display:flex;}
-  nav{padding:0.8rem 1.2rem;}
-  .theme-toggle{width:38px;height:38px;}
-}
+.srv-join-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(88,101,242,.55);}
+.srv-join-btn svg{width:20px;height:20px;fill:currentColor;}
 
-/* ===== PAGE WRAPPER ===== */
-.page-wrap{position:relative;z-index:10;padding-top:80px;}
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);}
+.reveal.v{opacity:1;transform:none;}
 
-/* ===== HERO SECTION ===== */
-.bots-hero{
-  padding:5rem 2rem 4rem;
-  text-align:center;
-  position:relative;
-}
-.bots-hero-inner{max-width:700px;margin:0 auto;}
-.hero-label{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  background:rgba(88,101,242,0.12);border:1px solid rgba(88,101,242,0.3);
-  padding:0.38rem 1rem;border-radius:100px;
-  font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--blue2);
-  margin-bottom:1.4rem;letter-spacing:0.05em;
-  opacity:0;animation:fadeUp 0.7s ease 0.1s forwards;
-}
-.hero-label-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;flex-shrink:0;}
-.bots-hero h1{
-  font-size:clamp(2.8rem,7vw,5rem);font-weight:900;
-  letter-spacing:-0.04em;line-height:0.95;
-  background:linear-gradient(135deg,#ffffff 10%,#8ea2ff 50%,#36e0ff 90%);
-  background-size:200% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:1rem;
-  opacity:0;animation:fadeUp 0.9s var(--ease-out-expo) 0.25s forwards, liquidGrad 6s linear infinite;
-}
-:root[data-theme="light"] .bots-hero h1{
-  background:linear-gradient(135deg,#142550 10%,#2f4fb8 50%,#009ccf 90%);
-  background-size:200% auto;
-  -webkit-background-clip:text;background-clip:text;
-}
-.bots-hero-sub{
-  font-size:1.05rem;color:var(--muted);
-  opacity:0;animation:fadeUp 0.8s ease 0.45s forwards;
-}
-.bots-hero-sub span{color:var(--blue2);font-weight:600;}
-
-/* ===== SECTION WRAPPER ===== */
-.section{padding:3rem 2rem 4rem;max-width:900px;margin:0 auto;}
-.section-title{
-  font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;
-  color:var(--text);margin-bottom:2rem;display:flex;align-items:center;gap:0.75rem;
-}
-.section-title::before{content:'';display:inline-block;width:4px;height:1.3em;border-radius:2px;background:linear-gradient(180deg,var(--blue),var(--cyan));}
-
-/* ===== BOT CARDS ===== */
-.bots-list{display:flex;flex-direction:column;gap:2rem;}
-.bot-card{
-  background:var(--card);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border-radius:20px;
-  border:1.5px solid var(--border);
-  padding:2rem;
-  position:relative;
-  overflow:hidden;
-  transition:transform 0.3s var(--spring),box-shadow 0.3s;
-  opacity:0;transform:translateY(28px);
-}
-.bot-card.visible{opacity:1;transform:translateY(0);}
-.bot-card:hover{transform:translateY(-4px);}
-.bot-card-glow{
-  position:absolute;top:-40px;right:-40px;
-  width:180px;height:180px;
-  border-radius:50%;
-  pointer-events:none;
-  opacity:0.55;
-}
-/* Bot accent border colors */
-.bot-card.blue{border-color:rgba(88,101,242,0.35);}
-.bot-card.blue .bot-card-glow{background:radial-gradient(circle,rgba(88,101,242,0.35),transparent 70%);}
-.bot-card.pink{border-color:rgba(235,69,158,0.35);}
-.bot-card.pink .bot-card-glow{background:radial-gradient(circle,rgba(235,69,158,0.35),transparent 70%);}
-.bot-card.purple{border-color:rgba(192,132,252,0.35);}
-.bot-card.purple .bot-card-glow{background:radial-gradient(circle,rgba(192,132,252,0.35),transparent 70%);}
-.bot-card.cyan{border-color:rgba(0,212,255,0.35);}
-.bot-card.cyan .bot-card-glow{background:radial-gradient(circle,rgba(0,212,255,0.35),transparent 70%);}
-
-/* Card header */
-.bot-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.4rem;flex-wrap:wrap;}
-.bot-avatar{
-  width:72px;height:72px;border-radius:16px;object-fit:cover;
-  box-shadow:0 0 20px rgba(88,101,242,0.3);
-  flex-shrink:0;
-}
-.bot-avatar.circle{border-radius:50%;}
-.bot-avatar.blue{box-shadow:0 0 20px rgba(88,101,242,0.4);}
-.bot-avatar.pink{box-shadow:0 0 20px rgba(235,69,158,0.4);}
-.bot-avatar.purple{box-shadow:0 0 20px rgba(192,132,252,0.4);}
-.bot-avatar.cyan{box-shadow:0 0 20px rgba(0,212,255,0.4);}
-.bot-meta{}
-.bot-name{font-size:1.4rem;font-weight:800;letter-spacing:-0.02em;color:var(--text);margin-bottom:0.3rem;}
-.bot-tags{display:flex;gap:0.4rem;flex-wrap:wrap;}
-.bot-tag{
-  font-family:'JetBrains Mono',monospace;font-size:0.67rem;
-  padding:0.22rem 0.6rem;border-radius:100px;
-  border:1px solid var(--border);color:var(--muted);
-  background:rgba(255,255,255,0.03);
-  letter-spacing:0.03em;
-}
-.bot-tag.blue{border-color:rgba(88,101,242,0.45);color:var(--blue2);background:rgba(88,101,242,0.08);}
-.bot-tag.pink{border-color:rgba(235,69,158,0.45);color:#eb459e;background:rgba(235,69,158,0.08);}
-.bot-tag.purple{border-color:rgba(192,132,252,0.45);color:#c084fc;background:rgba(192,132,252,0.08);}
-.bot-tag.cyan{border-color:rgba(0,212,255,0.45);color:var(--cyan);background:rgba(0,212,255,0.08);}
-.bot-tag.green{border-color:rgba(87,242,135,0.45);color:var(--green);background:rgba(87,242,135,0.08);}
-.bot-tag.soon{border-color:rgba(250,166,26,0.45);color:#faa61a;background:rgba(250,166,26,0.08);}
-.bot-description{color:var(--muted);font-size:0.95rem;line-height:1.65;margin-bottom:1.3rem;}
-
-/* Commands */
-.cmd-label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue3);margin-bottom:0.6rem;}
-.cmd-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.4rem;}
-.cmd-chip{
-  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
-  padding:0.25rem 0.65rem;border-radius:6px;
-  background:rgba(88,101,242,0.1);border:1px solid rgba(88,101,242,0.22);
-  color:var(--blue2);cursor:default;
-  transition:background 0.2s,border-color 0.2s;
-}
-.cmd-chip:hover{background:rgba(88,101,242,0.18);border-color:rgba(88,101,242,0.4);}
-.cmd-chip.pink{background:rgba(235,69,158,0.1);border-color:rgba(235,69,158,0.22);color:#eb459e;}
-.cmd-chip.pink:hover{background:rgba(235,69,158,0.18);border-color:rgba(235,69,158,0.4);}
-.cmd-chip.purple{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.22);color:#c084fc;}
-.cmd-chip.purple:hover{background:rgba(192,132,252,0.18);border-color:rgba(192,132,252,0.4);}
-.cmd-chip.cyan{background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.22);color:var(--cyan);}
-.cmd-chip.cyan:hover{background:rgba(0,212,255,0.18);border-color:rgba(0,212,255,0.4);}
-
-/* Platforms */
-.plat-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.4rem;}
-.plat-chip{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  font-size:0.75rem;font-weight:600;
-  padding:0.28rem 0.72rem;border-radius:100px;
-  border:1px solid;
-}
-.plat-chip.spotify{color:#1ed760;border-color:rgba(30,215,96,0.35);background:rgba(30,215,96,0.08);}
-.plat-chip.ytm{color:#ff4444;border-color:rgba(255,68,68,0.35);background:rgba(255,68,68,0.08);}
-.plat-chip.sc{color:#ff7700;border-color:rgba(255,119,0,0.35);background:rgba(255,119,0,0.08);}
-.plat-chip.apple{color:#fc3c44;border-color:rgba(252,60,68,0.35);background:rgba(252,60,68,0.08);}
-.plat-chip.deezer{color:#f5d53e;border-color:rgba(245,213,62,0.35);background:rgba(245,213,62,0.08);}
-.plat-chip.tidal{color:#4fa3e0;border-color:rgba(79,163,224,0.35);background:rgba(79,163,224,0.08);}
-.plat-chip svg{width:12px;height:12px;fill:currentColor;}
-
-/* Stats row */
-.bot-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem;margin-bottom:1.4rem;}
-@media(max-width:600px){.bot-stats{grid-template-columns:repeat(2,1fr);}}
-.bot-stat{
-  background:rgba(88,101,242,0.07);border:1px solid var(--border);
-  border-radius:12px;padding:0.75rem 0.6rem;text-align:center;
-}
-.bot-stat-icon{font-size:1.3rem;margin-bottom:0.3rem;line-height:1;}
-.bot-stat-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);}
-
-/* Feature grid */
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.4rem;}
-@media(max-width:540px){.feature-grid{grid-template-columns:1fr;}}
-.feature-item{
-  display:flex;align-items:flex-start;gap:0.7rem;
-  background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.14);
-  border-radius:12px;padding:0.8rem;
-}
-.feature-icon{
-  width:32px;height:32px;border-radius:8px;flex-shrink:0;
-  background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.22);
-  display:flex;align-items:center;justify-content:center;
-  color:#c084fc;
-}
-.feature-icon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.feature-text{}
-.feature-name{font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:0.15rem;}
-.feature-desc{font-size:0.72rem;color:var(--muted);}
-
-/* Feature chips (voice bot) */
-.feature-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.4rem;}
-.feature-chip{
-  display:inline-flex;align-items:center;gap:0.35rem;
-  font-size:0.78rem;font-weight:600;
-  padding:0.3rem 0.8rem;border-radius:100px;
-  background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.22);
-  color:var(--cyan);
-}
-.feature-chip svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
-
-/* Divider */
-.bot-divider{height:1px;background:var(--border);margin:1.2rem 0;}
-
-/* Buttons */
-.bot-btns{display:flex;gap:0.75rem;flex-wrap:wrap;}
-.btn{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  padding:0.65rem 1.4rem;border-radius:10px;
-  font-family:'Outfit',sans-serif;font-weight:700;font-size:0.83rem;
-  letter-spacing:0.02em;transition:all 0.25s;cursor:pointer;
-  white-space:nowrap;text-decoration:none;
-}
-.btn svg{width:16px;height:16px;flex-shrink:0;}
-.btn-blue{
-  background:var(--blue);color:#fff;
-  box-shadow:0 0 16px rgba(88,101,242,0.4);
-}
-.btn-blue:hover{background:#4752c4;box-shadow:0 0 26px rgba(88,101,242,0.65);transform:translateY(-2px);}
-.btn-pink{
-  background:#eb459e;color:#fff;
-  box-shadow:0 0 16px rgba(235,69,158,0.4);
-}
-.btn-pink:hover{background:#c83685;box-shadow:0 0 26px rgba(235,69,158,0.65);transform:translateY(-2px);}
-.btn-purple{
-  background:#c084fc;color:#0e0620;
-  box-shadow:0 0 16px rgba(192,132,252,0.4);
-}
-.btn-purple:hover{background:#a855f7;color:#fff;box-shadow:0 0 26px rgba(192,132,252,0.65);transform:translateY(-2px);}
-.btn-outline-cyan{
-  background:transparent;color:var(--cyan);
-  border:1.5px solid rgba(0,212,255,0.45);
-}
-.btn-outline-cyan:hover{background:rgba(0,212,255,0.1);border-color:var(--cyan);transform:translateY(-2px);}
-.btn-outline-blue{
-  background:transparent;color:var(--blue2);
-  border:1.5px solid rgba(88,101,242,0.45);
-}
-.btn-outline-blue:hover{background:rgba(88,101,242,0.1);border-color:var(--blue);transform:translateY(-2px);}
-.btn svg[stroke]{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-
-/* ===== COMMUNITY SECTION ===== */
-.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-@media(max-width:700px){.community-grid{grid-template-columns:1fr;}}
-.comm-card{
-  background:var(--card);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-radius:20px;padding:1.8rem;
-  position:relative;overflow:hidden;
-  transition:transform 0.3s var(--spring),box-shadow 0.3s;
-  opacity:0;transform:translateY(28px);
-}
-.comm-card.visible{opacity:1;transform:translateY(0);}
-.comm-card:hover{transform:translateY(-4px);}
-.comm-card.blue-card{border:1.5px solid rgba(88,101,242,0.35);}
-.comm-card.purple-card{border:1.5px solid rgba(192,132,252,0.35);}
-.comm-card-glow-bl{position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(88,101,242,0.28),transparent 70%);pointer-events:none;}
-.comm-card-glow-pu{position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(192,132,252,0.28),transparent 70%);pointer-events:none;}
-
-/* Server card */
-.server-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
-.server-icon{width:56px;height:56px;border-radius:16px;object-fit:cover;box-shadow:0 0 16px rgba(88,101,242,0.35);flex-shrink:0;}
-.server-name{font-size:1.1rem;font-weight:800;color:var(--text);}
-.server-badge{
-  display:inline-flex;align-items:center;gap:0.35rem;
-  font-family:'JetBrains Mono',monospace;font-size:0.62rem;
-  color:var(--blue2);background:rgba(88,101,242,0.1);
-  border:1px solid rgba(88,101,242,0.25);
-  padding:0.18rem 0.55rem;border-radius:100px;letter-spacing:0.05em;
-  margin-top:0.25rem;
-}
-.server-live{
-  margin-left:auto;
-  display:inline-flex;align-items:center;gap:0.35rem;
-  font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;
-  color:var(--green);background:rgba(87,242,135,0.1);
-  border:1px solid rgba(87,242,135,0.28);
-  padding:0.22rem 0.65rem;border-radius:100px;
-  align-self:flex-start;
-}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;animation:livePulse 1.6s ease-in-out infinite;box-shadow:0 0 6px rgba(87,242,135,0.5);}
-@keyframes livePulse{0%,100%{transform:scale(1);opacity:1;box-shadow:0 0 4px rgba(87,242,135,0.4);}50%{transform:scale(1.35);opacity:0.7;box-shadow:0 0 12px rgba(87,242,135,0.7);}}
-.server-stats{display:flex;gap:1.2rem;margin-bottom:1rem;}
-.server-stat{display:flex;align-items:center;gap:0.45rem;font-size:0.85rem;font-weight:600;}
-.stat-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-.stat-dot.grey{background:#747f8d;}
-.stat-dot.green{background:var(--green);box-shadow:0 0 6px rgba(87,242,135,0.5);}
-.stat-dot.green.pulse{animation:livePulse 1.6s ease-in-out infinite;}
-.stat-count{color:var(--text);font-weight:700;}
-.stat-label{color:var(--muted);font-size:0.78rem;}
-.server-desc{color:var(--muted);font-size:0.9rem;line-height:1.6;margin-bottom:1.3rem;}
-
-/* Dashboard card */
-.dash-icon-box{
-  width:52px;height:52px;border-radius:14px;
-  background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.25);
-  display:flex;align-items:center;justify-content:center;
-  color:#c084fc;margin-bottom:1rem;
-}
-.dash-icon-box svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.dash-title{font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:0.5rem;}
-.dash-desc{color:var(--muted);font-size:0.88rem;line-height:1.6;margin-bottom:1.1rem;}
-.dash-features{list-style:none;display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1.3rem;}
-.dash-features li{display:flex;align-items:center;gap:0.55rem;font-size:0.85rem;color:var(--muted);}
-.dash-features li svg{width:14px;height:14px;stroke:#c084fc;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
-.dash-features li span{color:var(--text);}
+/* ===== HR ===== */
+.hr{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 0 60px;}
 
 /* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:2.5rem 2rem;
-  color:var(--muted);
-  font-size:0.87rem;
-  border-top:1px solid var(--border);
-  position:relative;z-index:10;
-}
-footer a{color:var(--blue2);transition:color 0.2s;}
-footer a:hover{color:var(--blue);}
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
-@keyframes liquidGrad{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(87,242,135,0.5);}50%{box-shadow:0 0 0 6px rgba(87,242,135,0);}}
-.transition-all{transition:all 0.3s var(--spring);}
+footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:.84rem;}
+footer a{color:var(--blue2);text-decoration:none;}
+footer a:hover{color:var(--cyan);}
 </style>
 </head>
 <body>
-
-<!-- Canvas Background -->
 <canvas id="bgCanvas"></canvas>
 
-<!-- Navigation -->
-<nav id="mainNav">
-  <a href="index.html" class="nav-logo" aria-label="SyncInk home">
-    <div class="nav-logo-icon">SI</div>
-    <span>Sync Ink</span>
-  </a>
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-icon">SI</div>Sync Ink</a>
   <ul class="nav-links">
-    <li><a href="index.html#about" class="nav-link">About</a></li>
-    <li><a href="index.html#skills" class="nav-link">Skills</a></li>
-    <li><a href="index.html#work" class="nav-link">Work</a></li>
-    <li><a href="bots.html" class="nav-link active">Bots</a></li>
-    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="bots.html" class="active">Bots</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <div class="nav-tools">
-    <a href="index.html" class="nav-portfolio-btn" aria-label="Back to portfolio">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  <div class="nav-right">
+    <a href="index.html" class="btn-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
       Portfolio
     </a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
-      <svg class="sun-icon" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      <svg class="moon-icon" viewBox="0 0 24 24" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
+    <button class="theme-toggle" id="tt" aria-label="Toggle theme">
+      <svg id="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="sun" viewBox="0 0 24 24" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/><line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/><line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/><line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/></svg>
     </button>
   </div>
 </nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#about" class="nav-link">About</a>
-  <a href="index.html#skills" class="nav-link">Skills</a>
-  <a href="index.html#work" class="nav-link">Work</a>
-  <a href="bots.html" class="nav-link active">Bots</a>
-  <a href="index.html#contact" class="nav-link">Contact</a>
-  <a href="index.html" class="nav-portfolio-btn">
-    <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    Portfolio
-  </a>
-</div>
-
-<div class="page-wrap">
-
-  <!-- Hero -->
-  <section class="bots-hero">
-    <div class="bots-hero-inner">
-      <div class="hero-label">
-        <span class="hero-label-dot"></span>
-        Official Discord Bots
-      </div>
-      <h1>My Bots</h1>
-      <p class="bots-hero-sub">
-        Powerful, feature-rich Discord bots crafted by <span>SyncInk</span> — 
-        from economy &amp; music to advanced ticket systems and voice management.
-      </p>
+<div class="page">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="kicker">
+      <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="12" height="12"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+      SyncInk Ecosystem
     </div>
-  </section>
-
-  <!-- Bots List -->
-  <div class="section">
-    <div class="section-title">Bot Lineup</div>
-    <div class="bots-list">
-
-      <!-- BOT 1: SyncInk Main -->
-      <div class="bot-card blue reveal-card">
-        <div class="bot-card-glow"></div>
-        <div class="bot-header">
-          <img src="main-bot.jpg" alt="SyncInk Bot" class="bot-avatar blue" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2272%22 height=%2272%22 viewBox=%220 0 72 72%22%3E%3Crect width=%2272%22 height=%2272%22 rx=%2216%22 fill=%22%235865F2%22/%3E%3Ctext x=%2236%22 y=%2244%22 text-anchor=%22middle%22 font-family=%22Outfit%22 font-weight=%22900%22 font-size=%2224%22 fill=%22white%22%3ESI%3C/text%3E%3C/svg%3E'"/>
-          <div class="bot-meta">
-            <div class="bot-name">SyncInk©</div>
-            <div class="bot-tags">
-              <span class="bot-tag blue">Multi-Purpose</span>
-              <span class="bot-tag blue">Economy</span>
-              <span class="bot-tag blue">Moderation</span>
-            </div>
-          </div>
-        </div>
-        <p class="bot-description">
-          The ultimate multi-purpose bot loaded with economy, mini-games, fun commands, and solid server moderation features. One bot to rule them all.
-        </p>
-
-        <!-- Stats -->
-        <div class="bot-stats">
-          <div class="bot-stat">
-            <div class="bot-stat-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5865F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-            <div class="bot-stat-label">Economy</div>
-          </div>
-          <div class="bot-stat">
-            <div class="bot-stat-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <div class="bot-stat-label">Casino</div>
-          </div>
-          <div class="bot-stat">
-            <div class="bot-stat-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#57f287" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="bot-stat-label">Moderation</div>
-          </div>
-          <div class="bot-stat">
-            <div class="bot-stat-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#eb459e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-            </div>
-            <div class="bot-stat-label">Fun</div>
-          </div>
-        </div>
-
-        <div class="cmd-label">Commands</div>
-        <div class="cmd-chips">
-          <span class="cmd-chip">?bal</span>
-          <span class="cmd-chip">?daily</span>
-          <span class="cmd-chip">?bet</span>
-          <span class="cmd-chip">?slots</span>
-          <span class="cmd-chip">?bj</span>
-          <span class="cmd-chip">?cf</span>
-          <span class="cmd-chip">?rob</span>
-          <span class="cmd-chip">?heist</span>
-          <span class="cmd-chip">?lvl</span>
-          <span class="cmd-chip">?lb</span>
-          <span class="cmd-chip">?ban</span>
-          <span class="cmd-chip">?clear</span>
-          <span class="cmd-chip">?help</span>
-        </div>
-
-        <div class="bot-divider"></div>
-        <div class="bot-btns">
-          <a href="https://discord.com/oauth2/authorize?client_id=1500289929731768472" target="_blank" rel="noopener" class="btn btn-blue">
-            <svg viewBox="0 0 24 24" style="fill:#fff;width:16px;height:16px;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.08.114 18.1.132 18.112a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-            Invite Bot
-          </a>
-        </div>
-      </div>
-
-      <!-- BOT 2: SyncInk Radio -->
-      <div class="bot-card pink reveal-card">
-        <div class="bot-card-glow"></div>
-        <div class="bot-header">
-          <img src="radio-bot.jpg" alt="SyncInk Radio" class="bot-avatar pink" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2272%22 height=%2272%22 viewBox=%220 0 72 72%22%3E%3Crect width=%2272%22 height=%2272%22 rx=%2216%22 fill=%22%23eb459e%22/%3E%3Ctext x=%2236%22 y=%2244%22 text-anchor=%22middle%22 font-family=%22Outfit%22 font-weight=%22900%22 font-size=%2220%22 fill=%22white%22%3E%E2%99%AC%3C/text%3E%3C/svg%3E'"/>
-          <div class="bot-meta">
-            <div class="bot-name">SyncInk© Radio</div>
-            <div class="bot-tags">
-              <span class="bot-tag pink">Music</span>
-              <span class="bot-tag pink">Radio</span>
-              <span class="bot-tag pink">Audio</span>
-            </div>
-          </div>
-        </div>
-        <p class="bot-description">
-          High-quality audio streaming for Discord. Search by name or drop a link — Spotify, YouTube, SoundCloud, Apple Music and more. Crystal-clear audio with advanced effects.
-        </p>
-
-        <div class="cmd-label">Platforms</div>
-        <div class="plat-row">
-          <span class="plat-chip spotify">
-            <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-            Spotify
-          </span>
-          <span class="plat-chip ytm">
-            <svg viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>
-            YouTube Music
-          </span>
-          <span class="plat-chip sc">
-            <svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c1.5 0 2.68-1.22 2.68-2.72 0-1.37-1.01-2.5-2.33-2.68-.03-3.46-2.82-6.25-6.28-6.25-2.38 0-4.44 1.32-5.53 3.27.29.04.53.27.53.55v.95l2.17-.25zm-3.23-.25c-.45 0-.81.37-.81.81V17h3.5V9.43c0-.45-.37-.81-.81-.81h-1.88zm-3.5.69c-.45 0-.81.36-.81.81V17h2.5V10.12c0-.45-.37-.81-.81-.81h-.88zm-2.69 2c-.43 0-.77.33-.81.75L1 17h1.97V12.31c-.04-.41-.38-.7-.79-.7h-.04z"/></svg>
-            SoundCloud
-          </span>
-          <span class="plat-chip apple">
-            <svg viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 0 0-.24-2.19c-.317-1.31-1.048-2.31-2.008-3.04a5.022 5.022 0 0 0-1.8-.76c-.617-.rattrap145-1.29-.25-1.902-.17H2.536a3.772 3.772 0 0 0-1.127.17 4.928 4.928 0 0 0-1.395.76C.014 1.624 0 1.627 0 1.627v20.69c0 .94.76 1.683 1.7 1.683h20.6c.94 0 1.7-.743 1.7-1.683V6.124z" fill="none"/><path d="M17.05 7.178A2.84 2.84 0 0 0 14.3 6c-.44 0-.9.1-1.36.32l-1.47.68-.78-.36L9.3 6.02A2.72 2.72 0 0 0 7.7 6a2.84 2.84 0 0 0-2.75 1.18l-.38.54a6.95 6.95 0 0 0 0 7.56l.38.54a2.84 2.84 0 0 0 2.75 1.18 2.72 2.72 0 0 0 1.6-.02l1.39-.64.78-.36 1.47.68c.46.22.92.32 1.36.32a2.84 2.84 0 0 0 2.75-1.18l.38-.54a6.95 6.95 0 0 0 0-7.56l-.38-.54z"/></svg>
-            Apple Music
-          </span>
-          <span class="plat-chip deezer">
-            <svg viewBox="0 0 24 24"><path d="M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.027h5.189V8.38H6.27zm6.27 0v3.027h5.19V8.38h-5.19zm6.27 0v3.027H24V8.38h-5.19zM6.27 12.6v3.027h5.189V12.6H6.27zm6.27 0v3.027h5.19V12.6h-5.19zm6.27 0v3.027H24V12.6h-5.19zM0 16.81v3.027h5.19V16.81H0zm6.27 0v3.027h5.189V16.81H6.27zm6.27 0v3.027h5.19V16.81h-5.19zm6.27 0v3.027H24V16.81h-5.19z"/></svg>
-            Deezer
-          </span>
-          <span class="plat-chip tidal">
-            <svg viewBox="0 0 24 24"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996l4.004 4.004 4.004-4.004 4.004 4.004 4.004-4.004L12.012 3.992zM8.008 12l-4.004 4.004L0 12l4.004-4.004L8.008 12zm4.004 4.004L8.008 12l4.004-4.004L16.016 12l-4.004 4.004zm4.004-8.008L12.012 3.992 16.016 0 20.02 3.992l-4.004 4.004zm3.992 8.008l4.004-4.004L24 12l-4.004 4.004-4.004-4.004 4.004-4.004z"/></svg>
-            TIDAL
-          </span>
-        </div>
-
-        <div class="cmd-label">Commands</div>
-        <div class="cmd-chips">
-          <span class="cmd-chip pink">/play</span>
-          <span class="cmd-chip pink">/search</span>
-          <span class="cmd-chip pink">/skip</span>
-          <span class="cmd-chip pink">/shuffle</span>
-          <span class="cmd-chip pink">/queue list</span>
-          <span class="cmd-chip pink">/np</span>
-          <span class="cmd-chip pink">/lyrics</span>
-          <span class="cmd-chip pink">/loop all</span>
-          <span class="cmd-chip pink">/bassboost</span>
-          <span class="cmd-chip pink">/8d</span>
-          <span class="cmd-chip pink">/autoplay</span>
-          <span class="cmd-chip pink">/volume</span>
-        </div>
-
-        <div class="bot-divider"></div>
-        <div class="bot-btns">
-          <a href="https://discord.com/oauth2/authorize?client_id=1500567606648897819" target="_blank" rel="noopener" class="btn btn-pink">
-            <svg viewBox="0 0 24 24" style="fill:#fff;width:16px;height:16px;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.08.114 18.1.132 18.112a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-            Invite Bot
-          </a>
-        </div>
-      </div>
-
-      <!-- BOT 3: SyncInk Ticket -->
-      <div class="bot-card purple reveal-card">
-        <div class="bot-card-glow"></div>
-        <div class="bot-header">
-          <img src="ticket-logo.png" alt="SyncInk Ticket" class="bot-avatar circle purple" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2272%22 height=%2272%22 viewBox=%220 0 72 72%22%3E%3Ccircle cx=%2236%22 cy=%2236%22 r=%2236%22 fill=%22%23c084fc%22/%3E%3Ctext x=%2236%22 y=%2244%22 text-anchor=%22middle%22 font-family=%22Outfit%22 font-weight=%22900%22 font-size=%2220%22 fill=%22white%22%3E%F0%9F%8E%AB%3C/text%3E%3C/svg%3E'"/>
-          <div class="bot-meta">
-            <div class="bot-name">SyncInk© Ticket</div>
-            <div class="bot-tags">
-              <span class="bot-tag purple">Support Tickets</span>
-              <span class="bot-tag purple">Automation</span>
-              <span class="bot-tag purple">Transcripts</span>
-            </div>
-          </div>
-        </div>
-        <p class="bot-description">
-          A next-generation Discord ticket bot. Private-thread infrastructure, intelligent claim systems, automated transcripts, and advanced transfers — redefining how servers handle support.
-        </p>
-
-        <!-- Feature Grid -->
-        <div class="feature-grid">
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="feature-text">
-              <div class="feature-name">Private Threads</div>
-              <div class="feature-desc">Isolated thread-based support channels</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-            </div>
-            <div class="feature-text">
-              <div class="feature-name">Auto-Claim System</div>
-              <div class="feature-desc">Smart staff auto-assignment logic</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            </div>
-            <div class="feature-text">
-              <div class="feature-name">Auto-Transcripts</div>
-              <div class="feature-desc">Full HTML transcripts on close</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-            </div>
-            <div class="feature-text">
-              <div class="feature-name">Advanced Transfers</div>
-              <div class="feature-desc">Cross-category ticket transfers</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
-            </div>
-            <div class="feature-text">
-              <div class="feature-name">Dynamic Modals</div>
-              <div class="feature-desc">Custom intake forms per category</div>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </div>
-            <div class="feature-text">
-              <div class="feature-name">Permission Controls</div>
-              <div class="feature-desc">Granular role-based access</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cmd-label">Commands</div>
-        <div class="cmd-chips">
-          <span class="cmd-chip purple">/ticket-panel</span>
-          <span class="cmd-chip purple">/ticket-config</span>
-          <span class="cmd-chip purple">/ticket-logs</span>
-          <span class="cmd-chip purple">/ticket-add</span>
-          <span class="cmd-chip purple">/ticket-remove</span>
-          <span class="cmd-chip purple">/close</span>
-          <span class="cmd-chip purple">/claim</span>
-          <span class="cmd-chip purple">/transfer</span>
-        </div>
-
-        <div class="bot-divider"></div>
-        <div class="bot-btns">
-          <a href="https://discord.com/oauth2/authorize?client_id=1513075101992747158" target="_blank" rel="noopener" class="btn btn-purple">
-            <svg viewBox="0 0 24 24" style="fill:#0e0620;width:16px;height:16px;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.08.114 18.1.132 18.112a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-            Invite Bot
-          </a>
-          <a href="https://syncink-discord-ticketbot.up.railway.app/" target="_blank" rel="noopener" class="btn btn-outline-cyan">
-            <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Open Dashboard
-          </a>
-        </div>
-      </div>
-
-      <!-- BOT 4: SyncInk Voice -->
-      <div class="bot-card cyan reveal-card">
-        <div class="bot-card-glow"></div>
-        <div class="bot-header">
-          <img src="voice-logo.png" alt="SyncInk Voice" class="bot-avatar cyan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2272%22 height=%2272%22 viewBox=%220 0 72 72%22%3E%3Crect width=%2272%22 height=%2272%22 rx=%2216%22 fill=%22%2300d4ff22%22/%3E%3Crect width=%2272%22 height=%2272%22 rx=%2216%22 fill=%22none%22 stroke=%22%2300d4ff%22 stroke-width=%222%22/%3E%3Ctext x=%2236%22 y=%2244%22 text-anchor=%22middle%22 font-family=%22Outfit%22 font-weight=%22900%22 font-size=%2224%22 fill=%22%2300d4ff%22%3E%F0%9F%94%8A%3C/text%3E%3C/svg%3E'"/>
-          <div class="bot-meta">
-            <div class="bot-name">SyncInk© Voice</div>
-            <div class="bot-tags">
-              <span class="bot-tag cyan">Voice</span>
-              <span class="bot-tag cyan">Automation</span>
-              <span class="bot-tag soon">Coming Soon</span>
-            </div>
-          </div>
-        </div>
-        <p class="bot-description">
-          Advanced voice channel management — dynamic channel creation, custom naming patterns, user limits, and real-time voice analytics. The future of Discord voice organization.
-        </p>
-
-        <div class="feature-chips">
-          <span class="feature-chip">
-            <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-            Dynamic Channels
-          </span>
-          <span class="feature-chip">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            User Limits
-          </span>
-          <span class="feature-chip">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-            Auto Management
-          </span>
-          <span class="feature-chip">
-            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            Real-time Analytics
-          </span>
-        </div>
-
-        <div class="bot-divider"></div>
-        <div class="bot-btns">
-          <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener" class="btn btn-outline-cyan">
-            <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            Get Notified
-          </a>
-        </div>
-      </div>
-
-    </div><!-- /bots-list -->
+    <h1>Official <em>Bots</em></h1>
+    <p>Handcrafted Discord bots built for performance, simplicity, and community. Invite, explore, and level up your server.</p>
   </div>
 
-  <!-- Community Section -->
-  <div class="section" style="padding-top:1rem;">
-    <div class="section-title">Community</div>
-    <div class="community-grid">
+  <div class="container bots-section">
 
-      <!-- Support Server -->
-      <div class="comm-card blue-card reveal-card">
-        <div class="comm-card-glow-bl"></div>
-        <div class="server-header">
-          <img
-            src="https://cdn.discordapp.com/icons/1136319484459266100/ba66f3204080aec335d410249295408d.png?size=128"
-            alt="SyncInk Support Server"
-            class="server-icon"
-          />
-          <div>
-            <div class="server-name" id="serverName">SyncInk Support</div>
-            <div class="server-badge">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="#5865F2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.08.114 18.1.132 18.112a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 19.9 19.9 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-              Official Discord Server
+    <!-- ============ BOT 1: SYNCINK MAIN ============ -->
+    <div class="bot-block reveal">
+      <div class="block-glow blue"></div>
+      <div class="bot-top">
+        <div class="bot-pfp"><img src="main-bot.jpg" alt="SyncInk Bot"></div>
+        <div class="bot-meta">
+          <div class="bot-tag-row">
+            <span class="btag blue">Multi-Purpose</span>
+            <span class="btag blue">Economy</span>
+            <span class="btag blue">Moderation</span>
+          </div>
+          <div class="bot-name-row">
+            <span class="bot-bname">SyncInk&copy;</span>
+            <span class="bot-icons">
+              <img src="icons/sync-robot.png" alt="">
+              <img src="icons/sync-tools.png" alt="">
+              <img src="icons/sync-code.png" alt="">
+            </span>
+          </div>
+          <div class="bot-bdesc">The ultimate multi-purpose bot loaded with economy, mini-games, fun commands, and solid server moderation features. One bot to rule them all.</div>
+          <div class="bot-actions-row">
+            <a href="https://discord.com/oauth2/authorize?client_id=1500289929731768472" target="_blank" rel="noopener" class="bbot-btn blue">
+              <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+              Invite SyncInk
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="block-divider"></div>
+      <div class="cmd-section" style="padding-top:1.5rem;">
+        <div class="cmd-section-title">Commands</div>
+        <div class="cmd-grid-2">
+          <div class="cmd-cat gold">
+            <div class="cmd-cat-head gold">
+              <img src="icons/eco-chart.png" alt=""><img src="icons/eco-money.png" alt="">
+              Economy
+            </div>
+            <ul class="cmd-list">
+              <li class="cmd-item"><span class="cmd-name">?bal</span><span class="cmd-desc">View cookie balance</span><button class="copy-btn" data-cmd="?bal" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?dep</span><span class="cmd-desc">Deposit cookies into vault</span><button class="copy-btn" data-cmd="?dep" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?with</span><span class="cmd-desc">Withdraw from vault</span><button class="copy-btn" data-cmd="?with" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?daily</span><span class="cmd-desc">Claim daily reward</span><button class="copy-btn" data-cmd="?daily" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?weekly</span><span class="cmd-desc">Claim weekly reward</span><button class="copy-btn" data-cmd="?weekly" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?work</span><span class="cmd-desc">Work for cookies</span><button class="copy-btn" data-cmd="?work" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?give</span><span class="cmd-desc">Give cookies to someone</span><button class="copy-btn" data-cmd="?give" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            </ul>
+          </div>
+          <div class="cmd-cat purple">
+            <div class="cmd-cat-head purple">
+              <img src="icons/casino-gem.png" alt=""><img src="icons/casino-cards.png" alt="">
+              Casino
+            </div>
+            <ul class="cmd-list">
+              <li class="cmd-item"><span class="cmd-name">?bet</span><span class="cmd-desc">High/Low bet game</span><button class="copy-btn" data-cmd="?bet" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?cr</span><span class="cmd-desc">Crash game</span><button class="copy-btn" data-cmd="?cr" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?slots</span><span class="cmd-desc">Play Slot machine</span><button class="copy-btn" data-cmd="?slots" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?cf</span><span class="cmd-desc">Coin flip (heads/tails)</span><button class="copy-btn" data-cmd="?cf" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?dice</span><span class="cmd-desc">Dice guess (x5 payout)</span><button class="copy-btn" data-cmd="?dice" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?bj</span><span class="cmd-desc">Play Blackjack</span><button class="copy-btn" data-cmd="?bj" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?rl</span><span class="cmd-desc">Play Roulette</span><button class="copy-btn" data-cmd="?rl" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            </ul>
+          </div>
+          <div class="cmd-cat blue">
+            <div class="cmd-cat-head blue">
+              <img src="icons/mod-hammer.png" alt="">
+              <svg viewBox="0 0 24 24" fill="#5865F2"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>
+              Moderation &amp; Settings
+            </div>
+            <ul class="cmd-list">
+              <li class="cmd-item"><span class="cmd-name">?ban/kick</span><span class="cmd-desc">Ban or kick members</span><button class="copy-btn" data-cmd="?ban/kick" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?mute/warn</span><span class="cmd-desc">Timeout or warn users</span><button class="copy-btn" data-cmd="?mute/warn" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?clear</span><span class="cmd-desc">Purge messages (max 100)</span><button class="copy-btn" data-cmd="?clear" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?lock</span><span class="cmd-desc">Lock/Unlock channel</span><button class="copy-btn" data-cmd="?lock" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?setwelcome</span><span class="cmd-desc">Set welcome channel</span><button class="copy-btn" data-cmd="?setwelcome" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?setlog</span><span class="cmd-desc">Set server log channel</span><button class="copy-btn" data-cmd="?setlog" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?setauthorole</span><span class="cmd-desc">Set auto-role on join</span><button class="copy-btn" data-cmd="?setauthorole" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            </ul>
+          </div>
+          <div class="cmd-cat green">
+            <div class="cmd-cat-head green">
+              <img src="icons/fun-camera.png" alt=""><img src="icons/fun-stats.png" alt=""><img src="icons/fun-crime.png" alt="">
+              Fun, Stats &amp; Crime
+            </div>
+            <ul class="cmd-list">
+              <li class="cmd-item"><span class="cmd-name">?rob/heist</span><span class="cmd-desc">Rob users / start group heist</span><button class="copy-btn" data-cmd="?rob/heist" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?cd</span><span class="cmd-desc">Check your active cooldowns</span><button class="copy-btn" data-cmd="?cd" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?lvl</span><span class="cmd-desc">View your level &amp; XP</span><button class="copy-btn" data-cmd="?lvl" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?msgs/vctime</span><span class="cmd-desc">View activity stats</span><button class="copy-btn" data-cmd="?msgs/vctime" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?lb</span><span class="cmd-desc">Global cookie leaderboard</span><button class="copy-btn" data-cmd="?lb" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?truth/dare</span><span class="cmd-desc">Random truth or dare</span><button class="copy-btn" data-cmd="?truth/dare" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+              <li class="cmd-item"><span class="cmd-name">?help</span><span class="cmd-desc">Show full command list</span><button class="copy-btn" data-cmd="?help" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BOT 2: RADIO ============ -->
+    <div class="bot-block radio-block reveal">
+      <div class="block-glow pink"></div>
+      <div class="bot-top">
+        <div class="bot-pfp radio-glow"><img src="radio-bot.jpg" alt="SyncInk Radio"></div>
+        <div class="bot-meta">
+          <div class="bot-tag-row">
+            <span class="btag pink">Music</span><span class="btag pink">Radio</span><span class="btag pink">Audio</span>
+          </div>
+          <div class="bot-name-row">
+            <span class="bot-bname">SyncInk&copy; Radio</span>
+            <span class="bot-icons">
+              <img src="icons/sync-robot.png" alt="">
+              <img src="icons/sync-code.png" alt="">
+              <img src="icons/sync-radio-logo.png" alt="" class="radio-logo">
+            </span>
+          </div>
+          <div class="bot-bdesc">High-quality audio streaming. Search by name or drop a link — it handles everything seamlessly.</div>
+          <div class="bot-actions-row">
+            <a href="https://discord.com/oauth2/authorize?client_id=1500567606648897819" target="_blank" rel="noopener" class="bbot-btn pink">
+              <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+              Invite Radio
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Platforms -->
+      <div class="plat-strip">
+        <span class="pt spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</span>
+        <span class="pt ytmusic"><svg viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>YouTube Music</span>
+        <span class="pt soundcloud"><svg viewBox="0 0 24 24"><path d="M11.52 14.532v-6.326c0-.269-.17-.436-.395-.436-.226 0-.397.167-.397.436v6.23c0 .268.171.435.397.435.225 0 .395-.167.395-.435zm-1.732 0V9.362c0-.268-.169-.434-.396-.434-.225 0-.395.166-.395.434v5.074c0 .268.17.435.395.435.227 0 .396-.167.396-.435zm-1.73 0V9.985c0-.268-.17-.434-.397-.434-.226 0-.395.166-.395.434v4.453c0 .268.169.435.395.435.227 0 .397-.167.397-.435zm-1.732 0v-3.83c0-.268-.17-.434-.396-.434-.226 0-.396.166-.396.434v3.736c0 .268.17.435.396.435.226 0 .396-.167.396-.435zm-1.73 0v-3.21c0-.268-.17-.434-.397-.434-.226 0-.396.166-.396.434v3.115c0 .268.17.435.396.435.227 0 .397-.167.397-.435zM2.866 14.437v-2.588c0-.268-.169-.434-.395-.434-.227 0-.396.166-.396.434v2.494c0 .268.169.435.396.435.226 0 .395-.167.395-.435zm-1.73 0v-1.966c0-.269-.171-.435-.397-.435-.225 0-.395.166-.395.435v1.872c0 .268.17.435.395.435.226 0 .397-.167.397-.435zm12.119.094h6.273c1.755 0 3.176-1.425 3.176-3.184 0-1.758-1.421-3.183-3.176-3.183a3.132 3.132 0 0 0-.78.097c-.598-1.95-2.433-3.355-4.6-3.355-1.972 0-3.672 1.184-4.389 2.898-.088-.005-.179-.01-.269-.01-.226 0-.395.166-.395.434v5.856c0 .268.169.435.395.435z"/></svg>SoundCloud</span>
+        <span class="pt apple"><svg viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324.378-.082.758-.153 1.134-.24.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234-.16.01-.318.035-.475.066-.76.15-1.52.303-2.28.456l-2.325.47-1.374.278c-.016.003-.032.01-.048.013-.277.077-.377.203-.39.49-.002.042 0 .086 0 .13-.002 2.602 0 5.204-.003 7.805 0 .42-.047.836-.215 1.227-.278.64-.77 1.04-1.434 1.233-.35.1-.71.16-1.075.172-.96.036-1.755-.6-1.92-1.544-.14-.812.23-1.685 1.154-2.075.357-.15.73-.232 1.108-.31.287-.06.575-.116.86-.177.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882 0-.123.013-.25.042-.37.07-.285.273-.448.546-.518.255-.066.515-.112.774-.165.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403.22-.043.442-.088.663-.106.31-.025.523.17.554.482.008.073.012.148.012.223.002 1.91.002 3.822 0 5.732z"/></svg>Apple Music</span>
+        <span class="pt deezer"><svg viewBox="0 0 24 24"><path d="M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.027h5.189V8.38h-5.19zm12.54 0v3.027H24V8.38h-5.19zM6.27 12.594v3.027h5.189v-3.027h-5.19zm6.271 0v3.027h5.19v-3.027h-5.19zm6.27 0v3.027H24v-3.027h-5.19zM0 16.81v3.029h5.19v-3.03H0zm6.27 0v3.029h5.189v-3.03h-5.19zm6.271 0v3.029h5.19v-3.03h-5.19zm6.27 0v3.029H24v-3.03h-5.19Z"/></svg>Deezer</span>
+        <span class="pt tidal"><svg viewBox="0 0 24 24"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996 4.004 12l4.004-4.004L12.012 12l-4.004 4.004 4.004 4.004 4.004-4.004L12.012 12l4.004-4.004-4.004-4.004zM16.042 7.996l3.979-3.979L24 7.996l-3.979 3.979z"/></svg>TIDAL</span>
+      </div>
+      <div class="block-divider" style="margin-bottom:1.5rem;"></div>
+      <!-- Radio Commands -->
+      <div class="cmd-section">
+        <div class="cmd-section-title">Slash Commands</div>
+        <div class="radio-cmds">
+          <div class="rcmd"><div class="rcmd-name">/play <button class="copy-btn" data-cmd="/play" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Play from URL or search term</div></div>
+          <div class="rcmd"><div class="rcmd-name">/search <button class="copy-btn" data-cmd="/search" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Search supported platforms</div></div>
+          <div class="rcmd"><div class="rcmd-name">/shuffle <button class="copy-btn" data-cmd="/shuffle" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Shuffle the queue</div></div>
+          <div class="rcmd"><div class="rcmd-name">/skip <button class="copy-btn" data-cmd="/skip" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Skip to next track(s)</div></div>
+          <div class="rcmd"><div class="rcmd-name">/queue list <button class="copy-btn" data-cmd="/queue list" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Show current queue</div></div>
+          <div class="rcmd"><div class="rcmd-name">/np <button class="copy-btn" data-cmd="/np" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Show current track info</div></div>
+          <div class="rcmd"><div class="rcmd-name">/lyrics <button class="copy-btn" data-cmd="/lyrics" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Search track lyrics</div></div>
+          <div class="rcmd"><div class="rcmd-name">/loop all <button class="copy-btn" data-cmd="/loop all" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Loop whole queue</div></div>
+          <div class="rcmd"><div class="rcmd-name">/loop current <button class="copy-btn" data-cmd="/loop current" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Loop current track</div></div>
+          <div class="rcmd"><div class="rcmd-name">/volume <button class="copy-btn" data-cmd="/volume" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Adjust player volume</div></div>
+          <div class="rcmd"><div class="rcmd-name">/bassboost <button class="copy-btn" data-cmd="/bassboost" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Tweak bass settings</div></div>
+          <div class="rcmd"><div class="rcmd-name">/8d <button class="copy-btn" data-cmd="/8d" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Toggle 8D audio filter</div></div>
+          <div class="rcmd"><div class="rcmd-name">/autoplay <button class="copy-btn" data-cmd="/autoplay" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Toggle autoplay</div></div>
+          <div class="rcmd"><div class="rcmd-name">/seek <button class="copy-btn" data-cmd="/seek" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Seek to specific time</div></div>
+          <div class="rcmd"><div class="rcmd-name">/remove <button class="copy-btn" data-cmd="/remove" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Remove track from queue</div></div>
+          <div class="rcmd"><div class="rcmd-name">/pause /resume <button class="copy-btn" data-cmd="/pause /resume" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Pause/Resume playback</div></div>
+          <div class="rcmd"><div class="rcmd-name">/previous <button class="copy-btn" data-cmd="/previous" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Go to previous track</div></div>
+          <div class="rcmd"><div class="rcmd-name">/help <button class="copy-btn" data-cmd="/help" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Lists all commands</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BOT 3: TICKET ============ -->
+    <div class="bot-block ticket-block reveal">
+      <div class="block-glow purple"></div>
+      <img src="ticket-banner.png" alt="SyncInk Ticket Banner" class="ticket-banner">
+      <div class="bot-top">
+        <div class="bot-pfp purple-glow"><img src="ticket-logo.png" alt="SyncInk Ticket"></div>
+        <div class="bot-meta">
+          <div class="bot-tag-row">
+            <span class="btag purple">Support Tickets</span><span class="btag purple">Automation</span><span class="btag purple">Transcripts</span>
+          </div>
+          <div class="bot-name-row">
+            <span class="bot-bname">SyncInk&copy; Ticket</span>
+            <span class="bot-icons">
+              <img src="icons/sync-robot.png" alt="">
+              <img src="icons/sync-code.png" alt="">
+              <img src="icons/syncink-ticket.png" alt="">
+            </span>
+          </div>
+          <div class="bot-bdesc-bold">Powerful. Automated. Professional.</div>
+          <div class="bot-bdesc">A next-generation Discord ticket bot built for modern communities. SyncInk Ticket combines private-thread infrastructure, intelligent claim systems, automated transcripts, advanced transfers, and premium workflows into one seamless support experience.</div>
+          <div class="bot-actions-row">
+            <a href="https://discord.com/oauth2/authorize?client_id=1513075101992747158" target="_blank" rel="noopener" class="bbot-btn purple">
+              <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+              Invite Bot
+            </a>
+            <a href="https://syncink-discord-ticketbot.up.railway.app/" target="_blank" rel="noopener" class="bbot-btn cyan">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+              Open Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="block-divider" style="margin-bottom:1.5rem;"></div>
+      <!-- Ticket Features -->
+      <div class="tkt-grid">
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M2 3.9934C2 3.44476 2.45531 3 2.9918 3H5.0082C5.55595 3 6 3.44495 6 3.9934V15C6 16.1046 6.89543 17 8 17H11V15.0066C11 14.453 11.4447 14 11.9812 14H14.0188C14.5665 14 15 14.455 15 15.0066V17H20.0066C20.5552 17 21 17.4553 21 17.9918V20.0082C21 20.556 20.555 21 20.0066 21H8C4.68629 21 2 18.3137 2 15V3.9934Z"/><path d="M21 5C21 3.89543 20.1046 3 19 3H15C13.8954 3 13 3.89543 13 5V9C13 10.1046 13.8954 11 15 11H19C20.1046 11 21 10.1046 21 9V5Z"/></svg>Private Threads</div><div class="tkt-feat-desc">Lightweight private threads instead of cluttering channels.</div></div>
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>Dynamic Modals</div><div class="tkt-feat-desc">Interactive forms collect info before ticket creation.</div></div>
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Auto-Claim System</div><div class="tkt-feat-desc">Staff auto-assigned when they reply to a ticket.</div></div>
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Mention-Claiming</div><div class="tkt-feat-desc">Auto-adds staff when mentioned inside a ticket.</div></div>
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M16 1l-2.29 2.29 4.88 4.88-14.88.01v3h14.88l-4.88 4.88L16 19l9-9z"/></svg>Advanced Transfers</div><div class="tkt-feat-desc">Transfer between teams using dropdown menus.</div></div>
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>Auto-Transcripts</div><div class="tkt-feat-desc">Full logs generated automatically when ticket closes.</div></div>
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Permission Controls</div><div class="tkt-feat-desc">Fine-grained controls for admin, staff, and devs.</div></div>
+        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Fast Configuration</div><div class="tkt-feat-desc">Minimal setup with slash commands, instant deploy.</div></div>
+      </div>
+      <!-- Setup Steps -->
+      <div class="ticket-setup">
+        <div class="ticket-setup-card">
+          <div class="ticket-setup-title"><svg viewBox="0 0 24 24" width="20" height="20" fill="#c084fc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Easy Setup</div>
+          <div class="ticket-steps">
+            <div class="ticket-step"><div class="step-num">1</div>Invite SyncInk Ticket to your server</div>
+            <div class="ticket-step"><div class="step-num">2</div>Configure using <code>/ticket-config</code></div>
+            <div class="ticket-step"><div class="step-num">3</div>Go to your desired ticket channel</div>
+            <div class="ticket-step"><div class="step-num">4</div>Type <code>/ticket-panel</code></div>
+            <div class="ticket-step"><div class="step-num">5</div>Your advanced ticket system is instantly ready!</div>
+          </div>
+        </div>
+      </div>
+      <div class="tech-tags">
+        <span class="tech-tag">Node.js</span>
+        <span class="tech-tag">Discord.js</span>
+        <span class="tech-tag">Advanced Thread System</span>
+        <span class="tech-tag">Slash Commands API</span>
+      </div>
+    </div>
+
+    <!-- ============ BOT 4: VOICE ============ -->
+    <div class="bot-block voice-block reveal">
+      <div class="block-glow cyan"></div>
+      <div class="bot-top">
+        <div class="bot-pfp cyan-glow"><img src="voice-logo.png" alt="SyncInk Voice"></div>
+        <div class="bot-meta">
+          <div class="bot-tag-row">
+            <span class="btag cyan">Voice</span><span class="btag cyan">Automation</span><span class="btag yellow">Coming Soon</span>
+          </div>
+          <div class="bot-name-row">
+            <span class="bot-bname">SyncInk&copy; Voice</span>
+          </div>
+          <div class="bot-bdesc">Advanced voice channel management — dynamic channel creation, custom naming patterns, user limits, and real-time voice analytics. The future of Discord voice organization.</div>
+          <div class="bot-actions-row">
+            <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener" class="bbot-btn cyan">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              Get Notified
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="block-divider" style="margin-bottom:1.5rem;"></div>
+      <div class="voice-feats">
+        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M12 15c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-2.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>Dynamic Channels</span>
+        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>User Limits</span>
+        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>Auto Management</span>
+        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11z"/></svg>Real-time Analytics</span>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <!-- ============ COMMUNITY ============ -->
+    <div class="community-section">
+      <div class="s-label reveal">Community</div>
+      <h2 class="s-heading reveal">Support <em>Server</em></h2>
+      <p style="color:var(--muted);font-size:1rem;margin-bottom:2rem;" class="reveal">Join the official SyncInk support server for help, updates, and discussions.</p>
+
+      <div class="srv-card reveal">
+        <div class="srv-icon-wrap">
+          <img src="https://cdn.discordapp.com/icons/1136319484459266100/ba66f3204080aec335d410249295408d.png?size=256" alt="SyncInk Support" id="srvIcon" onerror="this.src='main-bot.jpg'">
+          <div class="live-ring"></div>
+        </div>
+        <div class="srv-info">
+          <div class="srv-name" id="srvName">SyncInk Support</div>
+          <div class="srv-badge">
+            <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="12" height="12"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+            Official Discord Server
+          </div>
+          <div class="srv-stats">
+            <div>
+              <div class="srv-stat-val"><span class="srv-stat-dot grey"></span><span id="srvTotal">7</span></div>
+              <div style="font-size:.74rem;color:var(--muted);">Total Members</div>
+            </div>
+            <div>
+              <div class="srv-stat-val"><span class="srv-stat-dot green"></span><span id="srvOnline">4</span></div>
+              <div style="font-size:.74rem;color:var(--muted);">Online Now</div>
             </div>
           </div>
-          <div class="server-live">
-            <span class="live-dot"></span>
-            LIVE
-          </div>
-        </div>
-        <div class="server-stats">
-          <div class="server-stat">
-            <span class="stat-dot grey"></span>
-            <span class="stat-count" id="totalMembers">7</span>
-            <span class="stat-label">Members</span>
-          </div>
-          <div class="server-stat">
-            <span class="stat-dot green pulse"></span>
-            <span class="stat-count" id="onlineMembers">4</span>
-            <span class="stat-label">Online Now</span>
-          </div>
-        </div>
-        <p class="server-desc">
-          Get help with any SyncInk bot, report bugs, suggest features, and stay updated on new releases.
-        </p>
-        <div class="bot-btns">
-          <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener" class="btn btn-blue">
-            <svg viewBox="0 0 24 24" style="fill:#fff;width:16px;height:16px;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.101 18.08.114 18.1.132 18.112a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          <div class="live-pill"><span class="pdot"></span>Live Data</div>
+          <div class="srv-desc">Get help with any SyncInk bot, report bugs, suggest features, and stay updated on new releases and announcements.</div>
+          <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener" class="srv-join-btn">
+            <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
             Join Server
           </a>
         </div>
       </div>
-
-      <!-- Dashboard -->
-      <div class="comm-card purple-card reveal-card">
-        <div class="comm-card-glow-pu"></div>
-        <div class="dash-icon-box">
-          <svg viewBox="0 0 24 24">
-            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-          </svg>
-        </div>
-        <div class="dash-title">Ticket Bot Dashboard</div>
-        <p class="dash-desc">
-          Manage your SyncInk Ticket bot directly from the web. Configure roles, view ticket history, manage settings, and monitor your support system.
-        </p>
-        <ul class="dash-features">
-          <li>
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Configure roles and permissions</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Browse ticket transcripts</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Manage server staff</span>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Monitor real-time activity</span>
-          </li>
-        </ul>
-        <div class="bot-btns">
-          <a href="https://syncink-discord-ticketbot.up.railway.app/" target="_blank" rel="noopener" class="btn btn-purple">
-            <svg viewBox="0 0 24 24" style="fill:none;stroke:#0e0620;width:16px;height:16px;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            Open Dashboard
-          </a>
-        </div>
-      </div>
-
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    Built by <a href="index.html">SyncInk</a> &nbsp;·&nbsp; <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener">Support Server</a>
-  </footer>
+  </div><!-- /container -->
 
-</div><!-- /page-wrap -->
+  <footer><p>Built by <a href="index.html">SyncInk</a> &middot; <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener">Support Server</a></p></footer>
+</div><!-- /page -->
 
 <script>
-// ===== PARTICLE CANVAS =====
+// Theme toggle
+var tt=document.getElementById('tt'),moon=document.getElementById('moon'),sun=document.getElementById('sun');
+function updIcon(){var d=document.documentElement.getAttribute('data-theme')==='dark';moon.style.display=d?'block':'none';sun.style.display=d?'none':'block';}
+updIcon();
+tt.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme'),n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);updIcon();});
+
+// Particle canvas
+var canvas=document.getElementById('bgCanvas'),ctx=canvas.getContext('2d'),W,H,pts;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+function Pt(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.28;this.vy=(Math.random()-.5)*.28;this.r=Math.random()*1.4+.3;this.a=Math.random()*.38+.08;}
+Pt.prototype.upd=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W)this.vx*=-1;if(this.y<0||this.y>H)this.vy*=-1;};
+pts=Array.from({length:72},function(){return new Pt();});
+var cols=['#5865F2','#00d4ff','#7289da'];
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(function(p){p.upd();ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=cols[Math.floor(Math.random()*3)];ctx.globalAlpha=p.a;ctx.fill();});
+  ctx.globalAlpha=1;
+  for(var i=0;i<pts.length;i++){for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<105){ctx.beginPath();ctx.strokeStyle='#5865F2';ctx.globalAlpha=(1-d/105)*.055;ctx.lineWidth=.5;ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke();}}}
+  ctx.globalAlpha=1;requestAnimationFrame(draw);
+}
+draw();
+
+// Scroll reveal
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('v');},i*70);obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -35px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// Copy buttons
 (function(){
-  const canvas = document.getElementById('bgCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-  let particlePalette = ['#5865F2','#00d4ff','#7289da'];
-  let lineColor = '#5865F2';
-  let orbColors = ['rgba(88,101,242,0.08)','rgba(0,212,255,0.06)','rgba(88,101,242,0.05)'];
-  let particleCount = 120;
-  let particleSizeMin = 0.3;
-  let particleSizeMax = 1.8;
-  let particleOpacityMin = 0.1;
-  let particleOpacityMax = 0.58;
-  let linkDistance = 100;
-  let lineAlpha = 0.08;
-  let lineWidth = 0.5;
-  let orbScale = 1;
+  var CI='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+  var OK='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>';
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.copy-btn');
+    if(!btn)return;
+    navigator.clipboard.writeText(btn.dataset.cmd||'').then(function(){
+      btn.innerHTML=OK;btn.classList.add('copied');
+      setTimeout(function(){btn.innerHTML=CI;btn.classList.remove('copied');},1500);
+    }).catch(function(){});
+  });
+})();
 
-  function readVar(name, fallback){
-    const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-    return v || fallback;
-  }
-  function readNum(name, fallback){
-    const v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name));
-    return isNaN(v) ? fallback : v;
-  }
-  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-
-  class Particle {
-    constructor(){ this.reset(); }
-    recolor(){
-      const idx = Math.floor(Math.random()*particlePalette.length);
-      this.color = particlePalette[idx] || '#5865F2';
-    }
-    reset(){
-      this.x = Math.random()*W; this.y = Math.random()*H;
-      const ss = Math.max(0.1,particleSizeMax-particleSizeMin);
-      const os = Math.max(0.01,particleOpacityMax-particleOpacityMin);
-      this.size = Math.random()*ss+particleSizeMin;
-      this.speedX = (Math.random()-0.5)*0.3;
-      this.speedY = (Math.random()-0.5)*0.3;
-      this.opacity = Math.random()*os+particleOpacityMin;
-      this.recolor();
-    }
-    update(){ this.x+=this.speedX; this.y+=this.speedY; if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset(); }
-    draw(){ ctx.save(); ctx.globalAlpha=this.opacity; ctx.fillStyle=this.color; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); ctx.restore(); }
-  }
-
-  for(let i=0;i<particleCount;i++) particles.push(new Particle());
-
-  function refreshTheme(){
-    particlePalette = [
-      readVar('--canvas-particle-a','#5865F2'),
-      readVar('--canvas-particle-b','#00d4ff'),
-      readVar('--canvas-particle-c','#7289da')
-    ];
-    lineColor = readVar('--canvas-line','#5865F2');
-    orbColors = [
-      readVar('--orb-1','rgba(88,101,242,0.08)'),
-      readVar('--orb-2','rgba(0,212,255,0.06)'),
-      readVar('--orb-3','rgba(88,101,242,0.05)')
-    ];
-    particleSizeMin = readNum('--particle-size-min',0.3);
-    particleSizeMax = readNum('--particle-size-max',1.8);
-    particleOpacityMin = readNum('--particle-opacity-min',0.1);
-    particleOpacityMax = readNum('--particle-opacity-max',0.58);
-    linkDistance = readNum('--canvas-link-distance',100);
-    lineAlpha = readNum('--canvas-line-alpha',0.08);
-    lineWidth = readNum('--canvas-line-width',0.5);
-    orbScale = readNum('--orb-radius-scale',1);
-    let target = Math.max(80,Math.round(readNum('--particle-count',120)));
-    if(target>particles.length){ for(let i=particles.length;i<target;i++) particles.push(new Particle()); }
-    else if(target<particles.length){ particles.splice(target); }
-    particleCount = target;
-    particles.forEach(p=>p.reset());
-  }
-  refreshTheme();
-
-  const orbs = [
-    {x:0.15,y:0.2,r:300,ci:0,sp:0.0003},
-    {x:0.85,y:0.7,r:250,ci:1,sp:0.0004},
-    {x:0.5,y:0.9,r:200,ci:2,sp:0.0005},
-  ];
-  let t=0;
-  function drawFrame(){
-    ctx.clearRect(0,0,W,H); t+=0.01;
-    orbs.forEach((o,i)=>{
-      const ox=(o.x+Math.sin(t*o.sp*1000+i)*0.05)*W;
-      const oy=(o.y+Math.cos(t*o.sp*1200+i)*0.04)*H;
-      const r=o.r*orbScale;
-      const g=ctx.createRadialGradient(ox,oy,0,ox,oy,r);
-      g.addColorStop(0,orbColors[o.ci]||orbColors[0]);
-      g.addColorStop(1,'transparent');
-      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(ox,oy,r,0,Math.PI*2); ctx.fill();
-    });
-    particles.forEach(p=>{p.update();p.draw();});
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<linkDistance){
-          ctx.save(); ctx.globalAlpha=(1-dist/linkDistance)*lineAlpha;
-          ctx.strokeStyle=lineColor; ctx.lineWidth=lineWidth;
-          ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); ctx.restore();
-        }
+// Live server data
+function fetchSrv(){
+  fetch('https://discord.com/api/v9/invites/FnsJYbmW4A?with_counts=true')
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.guild){
+        var t=document.getElementById('srvTotal'),o=document.getElementById('srvOnline'),n=document.getElementById('srvName'),ic=document.getElementById('srvIcon');
+        if(t)t.textContent=d.approximate_member_count||7;
+        if(o)o.textContent=d.approximate_presence_count||4;
+        if(n&&d.guild.name)n.textContent=d.guild.name;
+        if(ic&&d.guild.icon)ic.src='https://cdn.discordapp.com/icons/'+d.guild.id+'/'+d.guild.icon+'.png?size=256';
       }
-    }
-    requestAnimationFrame(drawFrame);
-  }
-  drawFrame();
-
-  // Re-read theme on data-theme change
-  new MutationObserver(refreshTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-})();
-
-// ===== THEME TOGGLE =====
-(function(){
-  const btn = document.getElementById('themeToggle');
-  if(!btn) return;
-  btn.addEventListener('click',()=>{
-    const root = document.documentElement;
-    const current = root.getAttribute('data-theme');
-    const next = current === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', next);
-    try{ localStorage.setItem('theme', next); }catch(_){}
-  });
-})();
-
-// ===== HAMBURGER =====
-(function(){
-  const ham = document.getElementById('hamburger');
-  const menu = document.getElementById('mobileMenu');
-  if(!ham||!menu) return;
-  ham.addEventListener('click',()=>{
-    ham.classList.toggle('open');
-    menu.classList.toggle('open');
-    document.body.style.overflow = menu.classList.contains('open')?'hidden':'';
-  });
-  menu.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click',()=>{
-      ham.classList.remove('open');
-      menu.classList.remove('open');
-      document.body.style.overflow='';
-    });
-  });
-})();
-
-// ===== NAV BACKGROUND SCROLL =====
-(function(){
-  const nav = document.getElementById('mainNav');
-  if(!nav) return;
-  function applyBg(){
-    const solid = getComputedStyle(document.documentElement).getPropertyValue('--nav-bg-solid').trim();
-    const trans = getComputedStyle(document.documentElement).getPropertyValue('--nav-bg').trim();
-    nav.style.background = window.scrollY > 40 ? solid : trans;
-  }
-  applyBg();
-  window.addEventListener('scroll', applyBg, {passive:true});
-  new MutationObserver(applyBg).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-})();
-
-// ===== SCROLL REVEAL =====
-(function(){
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal-card').forEach(el=>obs.observe(el));
-})();
-
-// ===== LIVE SERVER DATA =====
-(function(){
-  const INVITE_CODE = 'FnsJYbmW4A';
-  const API_URL = `https://discord.com/api/v9/invites/${INVITE_CODE}?with_counts=true`;
-  const nameEl = document.getElementById('serverName');
-  const totalEl = document.getElementById('totalMembers');
-  const onlineEl = document.getElementById('onlineMembers');
-
-  async function fetchServerData(){
-    try{
-      const res = await fetch(API_URL);
-      if(!res.ok) return;
-      const data = await res.json();
-      if(nameEl && data.guild && data.guild.name) nameEl.textContent = data.guild.name;
-      if(totalEl && data.approximate_member_count) totalEl.textContent = data.approximate_member_count.toLocaleString();
-      if(onlineEl && data.approximate_presence_count) onlineEl.textContent = data.approximate_presence_count.toLocaleString();
-    } catch(err){
-      // Fallback values already in HTML
-      console.log('Discord invite fetch error:',err);
-    }
-  }
-  fetchServerData();
-  setInterval(fetchServerData, 60000);
-})();
+    }).catch(function(){});
+}
+fetchSrv();setInterval(fetchSrv,60000);
 </script>
 </body>
 </html>
