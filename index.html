@@ -1234,6 +1234,78 @@ section{position:relative;z-index:10;}
 .bot-name{font-size:1.8rem;font-weight:900;margin-bottom:0.3rem;letter-spacing:-0.02em;color:var(--text);}
 .bot-desc{font-size:0.95rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;}
 
+/* ===== BOTS TEASER GRID (portfolio section) ===== */
+.bots-teaser-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+@media(max-width:900px){.bots-teaser-grid{grid-template-columns:1fr;}}
+.bt-card{
+  position:relative;overflow:hidden;border-radius:20px;
+  border:1px solid rgba(88,101,242,0.18);
+  background:linear-gradient(145deg,rgba(13,19,41,0.92),rgba(16,24,48,0.7));
+  box-shadow:0 16px 48px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.06);
+  padding:1.8rem;display:flex;gap:1.2rem;align-items:flex-start;
+  transition:transform 0.32s cubic-bezier(0.175,0.885,0.32,1.275),box-shadow 0.32s ease;
+}
+:root[data-theme="light"] .bt-card{background:rgba(255,255,255,0.82);box-shadow:0 8px 28px rgba(42,68,162,0.1);}
+.bt-card:hover{transform:translateY(-4px);}
+.bt-card.bt-radio{border-color:rgba(235,69,158,0.2);}
+.bt-card.bt-ticket{border-color:rgba(147,51,234,0.2);}
+.bt-card.bt-voice{border-color:rgba(0,212,255,0.18);}
+.bt-glow{position:absolute;top:-40%;right:-15%;width:240px;height:240px;border-radius:50%;pointer-events:none;}
+.bt-glow-blue{background:radial-gradient(circle,rgba(88,101,242,0.15),transparent 65%);}
+.bt-glow-pink{background:radial-gradient(circle,rgba(235,69,158,0.15),transparent 65%);}
+.bt-glow-purple{background:radial-gradient(circle,rgba(147,51,234,0.15),transparent 65%);}
+.bt-glow-cyan{background:radial-gradient(circle,rgba(0,212,255,0.14),transparent 65%);}
+.bt-avatar{
+  width:72px;height:72px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:2px solid rgba(255,255,255,0.12);
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+}
+.bt-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+.bt-content{flex:1;min-width:0;}
+.bt-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.55rem;}
+.bt-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:999px;border:1px solid;font-weight:700;}
+.bt-tag-blue{border-color:rgba(88,101,242,0.5);color:#7289da;background:rgba(88,101,242,0.1);}
+.bt-tag-pink{border-color:rgba(235,69,158,0.5);color:#eb459e;background:rgba(235,69,158,0.1);}
+.bt-tag-purple{border-color:rgba(147,51,234,0.5);color:#c084fc;background:rgba(147,51,234,0.1);}
+.bt-tag-cyan{border-color:rgba(0,212,255,0.5);color:#00d4ff;background:rgba(0,212,255,0.08);}
+.bt-tag-yellow{border-color:rgba(234,179,8,0.5);color:#eab308;background:rgba(234,179,8,0.08);}
+.bt-name{font-size:1.15rem;font-weight:800;color:var(--text);letter-spacing:-0.01em;margin-bottom:0.4rem;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}
+.bt-icons{display:inline-flex;align-items:center;gap:4px;}
+.bt-desc{font-size:0.86rem;color:var(--muted);line-height:1.6;margin-bottom:0.9rem;}
+.bt-plat-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.9rem;}
+.bt-plat{display:inline-flex;align-items:center;gap:0.3rem;padding:0.2rem 0.55rem;border-radius:6px;font-size:0.73rem;font-weight:600;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);}
+.bt-plat svg{width:12px;height:12px;fill:currentColor;flex-shrink:0;}
+.bt-plat.spotify{color:#1ED760;}.bt-plat.ytmusic{color:#ff0000;}.bt-plat.soundcloud{color:#FF5500;}.bt-plat.deezer{color:#FEAA2D;}.bt-plat.tidal{color:#5EB7D7;}
+.bt-actions{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.bt-btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.44rem 1rem;border-radius:8px;font-size:0.82rem;font-weight:700;text-decoration:none;border:1px solid;transition:all 0.22s cubic-bezier(0.175,0.885,0.32,1.275);}
+.bt-btn:hover{transform:translateY(-2px);}
+.bt-btn-blue{background:linear-gradient(135deg,rgba(88,101,242,0.3),rgba(88,101,242,0.12));border-color:rgba(88,101,242,0.5);color:#fff;}
+.bt-btn-blue:hover{box-shadow:0 0 18px rgba(88,101,242,0.35);}
+.bt-btn-pink{background:linear-gradient(135deg,rgba(235,69,158,0.25),rgba(235,69,158,0.1));border-color:rgba(235,69,158,0.5);color:#eb459e;}
+.bt-btn-pink:hover{box-shadow:0 0 18px rgba(235,69,158,0.3);}
+.bt-btn-purple{background:linear-gradient(135deg,rgba(147,51,234,0.25),rgba(147,51,234,0.1));border-color:rgba(147,51,234,0.5);color:#c084fc;}
+.bt-btn-purple:hover{box-shadow:0 0 18px rgba(147,51,234,0.3);}
+.bt-btn-cyan{background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(0,212,255,0.06));border-color:rgba(0,212,255,0.4);color:#00d4ff;}
+.bt-btn-cyan:hover{box-shadow:0 0 18px rgba(0,212,255,0.25);}
+/* CTA strip */
+.bots-cta{margin-top:2rem;text-align:center;}
+.bots-cta-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.8rem 2rem;border-radius:12px;
+  background:linear-gradient(135deg,rgba(88,101,242,0.2),rgba(0,212,255,0.1));
+  border:1px solid rgba(88,101,242,0.35);
+  color:var(--text);font-size:0.95rem;font-weight:700;text-decoration:none;
+  transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+  box-shadow:0 4px 20px rgba(88,101,242,0.15);
+}
+.bots-cta-btn:hover{
+  transform:translateY(-3px);
+  background:linear-gradient(135deg,rgba(88,101,242,0.32),rgba(0,212,255,0.18));
+  box-shadow:0 8px 32px rgba(88,101,242,0.3);
+  border-color:rgba(0,212,255,0.5);
+}
+
+
 /* Platform Tags Styling - Professional Pill Shapes */
 .bot-platforms{display:flex;gap:0.65rem;margin-bottom:1.5rem;flex-wrap:wrap;}
 .plat-tag{
@@ -2626,6 +2698,146 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
 </section>
 
 <section class="section-pad skills-bg" id="bots">
+  <div class="container">
+    <div class="s-label reveal">SyncInk Ecosystem</div>
+    <h2 class="s-heading reveal">Official <em>Bots</em></h2>
+    <p class="s-sub reveal" style="color:var(--muted);font-size:1rem;max-width:580px;margin-bottom:3rem;">Handcrafted Discord bots built with performance, simplicity, and community in mind.</p>
+
+    <div class="bots-teaser-grid reveal">
+
+      <!-- SyncInk Main -->
+      <div class="bt-card">
+        <div class="bt-glow bt-glow-blue"></div>
+        <div class="bt-avatar">
+          <img src="main-bot.jpg" alt="SyncInk Bot">
+        </div>
+        <div class="bt-content">
+          <div class="bt-tags">
+            <span class="bt-tag bt-tag-blue">Multi-Purpose</span>
+            <span class="bt-tag bt-tag-blue">Economy</span>
+            <span class="bt-tag bt-tag-blue">Moderation</span>
+          </div>
+          <div class="bt-name">SyncInk&copy;
+            <span class="bt-icons">
+              <img src="icons/sync-robot.png" alt="" style="width:20px;height:20px;object-fit:contain;">
+              <img src="icons/sync-tools.png" alt="" style="width:20px;height:20px;object-fit:contain;">
+              <img src="icons/sync-code.png" alt="" style="width:20px;height:20px;object-fit:contain;">
+            </span>
+          </div>
+          <p class="bt-desc">The ultimate multi-purpose bot with economy, casino, mini-games, and moderation. One bot to rule them all.</p>
+          <div class="bt-actions">
+            <a href="https://discord.com/oauth2/authorize?client_id=1500289929731768472" target="_blank" rel="noopener" class="bt-btn bt-btn-blue">
+              <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="16" height="16"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+              Invite Bot
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SyncInk Radio -->
+      <div class="bt-card bt-radio">
+        <div class="bt-glow bt-glow-pink"></div>
+        <div class="bt-avatar">
+          <img src="radio-bot.jpg" alt="SyncInk Radio">
+        </div>
+        <div class="bt-content">
+          <div class="bt-tags">
+            <span class="bt-tag bt-tag-pink">Music</span>
+            <span class="bt-tag bt-tag-pink">Radio</span>
+            <span class="bt-tag bt-tag-pink">Audio</span>
+          </div>
+          <div class="bt-name">SyncInk&copy; Radio
+            <span class="bt-icons">
+              <img src="icons/sync-robot.png" alt="" style="width:20px;height:20px;object-fit:contain;">
+              <img src="icons/sync-radio-logo.png" alt="" style="width:55px;height:55px;object-fit:contain;margin-left:-8px;">
+            </span>
+          </div>
+          <p class="bt-desc">High-quality audio streaming from Spotify, YouTube Music, SoundCloud, Apple Music, Deezer & TIDAL.</p>
+          <div class="bt-plat-row">
+            <span class="bt-plat spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</span>
+            <span class="bt-plat ytmusic"><svg viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>YT Music</span>
+            <span class="bt-plat soundcloud"><svg viewBox="0 0 24 24"><path d="M11.52 14.532v-6.326c0-.269-.17-.436-.395-.436-.226 0-.397.167-.397.436v6.23c0 .268.171.435.397.435.225 0 .395-.167.395-.435zm-1.732 0V9.362c0-.268-.169-.434-.396-.434-.225 0-.395.166-.395.434v5.074c0 .268.17.435.395.435.227 0 .396-.167.396-.435zm-1.73 0V9.985c0-.268-.17-.434-.397-.434-.226 0-.395.166-.395.434v4.453c0 .268.169.435.395.435.227 0 .397-.167.397-.435zm-1.732 0v-3.83c0-.268-.17-.434-.396-.434-.226 0-.396.166-.396.434v3.736c0 .268.17.435.396.435.226 0 .396-.167.396-.435zm-1.73 0v-3.21c0-.268-.17-.434-.397-.434-.226 0-.396.166-.396.434v3.115c0 .268.17.435.396.435.227 0 .397-.167.397-.435zM2.866 14.437v-2.588c0-.268-.169-.434-.395-.434-.227 0-.396.166-.396.434v2.494c0 .268.169.435.396.435.226 0 .395-.167.395-.435zm-1.73 0v-1.966c0-.269-.171-.435-.397-.435-.225 0-.395.166-.395.435v1.872c0 .268.17.435.395.435.226 0 .397-.167.397-.435zm12.119.094h6.273c1.755 0 3.176-1.425 3.176-3.184 0-1.758-1.421-3.183-3.176-3.183a3.132 3.132 0 0 0-.78.097c-.598-1.95-2.433-3.355-4.6-3.355-1.972 0-3.672 1.184-4.389 2.898-.088-.005-.179-.01-.269-.01-.226 0-.395.166-.395.434v5.856c0 .268.169.435.395.435z"/></svg>SoundCloud</span>
+            <span class="bt-plat deezer"><svg viewBox="0 0 24 24"><path d="M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.027h5.189V8.38h-5.19zm12.54 0v3.027H24V8.38h-5.19zM6.27 12.594v3.027h5.189v-3.027h-5.19zm6.271 0v3.027h5.19v-3.027h-5.19zm6.27 0v3.027H24v-3.027h-5.19zM0 16.81v3.029h5.19v-3.03H0zm6.27 0v3.029h5.189v-3.03h-5.19zm6.271 0v3.029h5.19v-3.03h-5.19zm6.27 0v3.029H24v-3.03h-5.19Z"/></svg>Deezer</span>
+            <span class="bt-plat tidal"><svg viewBox="0 0 24 24"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996 4.004 12l4.004-4.004L12.012 12l-4.004 4.004 4.004 4.004 4.004-4.004L12.012 12l4.004-4.004-4.004-4.004zM16.042 7.996l3.979-3.979L24 7.996l-3.979 3.979z"/></svg>TIDAL</span>
+          </div>
+          <div class="bt-actions">
+            <a href="https://discord.com/oauth2/authorize?client_id=1500567606648897819" target="_blank" rel="noopener" class="bt-btn bt-btn-pink">
+              <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="16" height="16"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+              Invite Radio
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SyncInk Ticket -->
+      <div class="bt-card bt-ticket">
+        <div class="bt-glow bt-glow-purple"></div>
+        <div class="bt-avatar">
+          <img src="ticket-logo.png" alt="SyncInk Ticket">
+        </div>
+        <div class="bt-content">
+          <div class="bt-tags">
+            <span class="bt-tag bt-tag-purple">Support Tickets</span>
+            <span class="bt-tag bt-tag-purple">Automation</span>
+            <span class="bt-tag bt-tag-purple">Transcripts</span>
+          </div>
+          <div class="bt-name">SyncInk&copy; Ticket
+            <span class="bt-icons">
+              <img src="icons/sync-robot.png" alt="" style="width:20px;height:20px;object-fit:contain;">
+              <img src="icons/sync-code.png" alt="" style="width:20px;height:20px;object-fit:contain;">
+              <img src="icons/syncink-ticket.png" alt="" style="width:20px;height:20px;object-fit:contain;">
+            </span>
+          </div>
+          <p class="bt-desc">Next-gen ticket bot with private threads, auto-claim, transcripts, and advanced transfer systems.</p>
+          <div class="bt-actions">
+            <a href="https://discord.com/oauth2/authorize?client_id=1513075101992747158" target="_blank" rel="noopener" class="bt-btn bt-btn-purple">
+              <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="16" height="16"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+              Invite Bot
+            </a>
+            <a href="https://syncink-discord-ticketbot.up.railway.app/" target="_blank" rel="noopener" class="bt-btn bt-btn-cyan">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+              Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SyncInk Voice -->
+      <div class="bt-card bt-voice">
+        <div class="bt-glow bt-glow-cyan"></div>
+        <div class="bt-avatar">
+          <img src="voice-logo.png" alt="SyncInk Voice">
+        </div>
+        <div class="bt-content">
+          <div class="bt-tags">
+            <span class="bt-tag bt-tag-cyan">Voice</span>
+            <span class="bt-tag bt-tag-cyan">Automation</span>
+            <span class="bt-tag bt-tag-yellow">Coming Soon</span>
+          </div>
+          <div class="bt-name">SyncInk&copy; Voice</div>
+          <p class="bt-desc">Advanced voice channel management — dynamic channels, custom naming, user limits, and real-time voice analytics.</p>
+          <div class="bt-actions">
+            <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener" class="bt-btn bt-btn-cyan">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              Get Notified
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="bots-cta reveal">
+      <a href="bots.html" class="bots-cta-btn">
+        <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="20" height="20"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+        Explore All Bots — Full Details, Commands &amp; More ↗
+      </a>
+    </div>
+
+  </div>
+</section>
+
   <div class="container bots-wrap">
     
     <div>
