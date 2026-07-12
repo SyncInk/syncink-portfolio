@@ -182,6 +182,20 @@ nav{
 .d-body a { color: #00d4ff; text-decoration: none; }
 .d-body a:hover { text-decoration: underline; }
 
+.d-h1 { font-size:1.5rem; font-weight:900; margin:2rem 0 1rem; color:#fff; }
+.d-h2 { font-size:1.3rem; font-weight:800; margin:1.8rem 0 0.8rem; color:#fff; }
+.d-h3 { font-size:1.15rem; font-weight:800; margin:1.5rem 0 0.5rem; color:#fff; }
+:root[data-theme="light"] .d-h1, :root[data-theme="light"] .d-h2, :root[data-theme="light"] .d-h3 { color:#111827; }
+
+.d-blockquote { border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:2px; margin-bottom:2px; color:#b9bbbe; }
+:root[data-theme="light"] .d-blockquote { border-left-color: #d1d5db; color: #6b7280; }
+
+.d-code { background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px; }
+:root[data-theme="light"] .d-code { background:rgba(0,0,0,0.05); color:#111827; }
+
+.d-link { color:var(--cyan); text-decoration:none; }
+.d-link:hover { text-decoration:underline; }
+
 .loading {
   text-align: center;
   color: #949ba4;
@@ -279,20 +293,20 @@ function formatDiscordText(text) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); // escape html
 
   // Markdown Links [text](url)
-  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:#00d4ff;text-decoration:none;">$1</a>');
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" class="d-link">$1</a>');
 
   // Headings
-  html = html.replace(/^### (.*?)$/gm, '<h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:1.5rem 0 0.5rem;">$1</h3>');
-  html = html.replace(/^## (.*?)$/gm, '<h2 style="font-size:1.3rem;font-weight:800;color:#fff;margin:1.8rem 0 0.8rem;">$1</h2>');
-  html = html.replace(/^# (.*?)$/gm, '<h1 style="font-size:1.5rem;font-weight:900;color:#fff;margin:2rem 0 1rem;">$1</h1>');
+  html = html.replace(/^### (.*?)$/gm, '<h3 class="d-h3">$1</h3>');
+  html = html.replace(/^## (.*?)$/gm, '<h2 class="d-h2">$1</h2>');
+  html = html.replace(/^# (.*?)$/gm, '<h1 class="d-h1">$1</h1>');
 
   // Multiline blockquote (>>> )
   if (html.includes('&gt;&gt;&gt; ')) {
-    html = html.replace(/&gt;&gt;&gt; ([\s\S]*)$/, '<div style="border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:4px; margin-bottom:4px; color:#b9bbbe;">$1</div>');
+    html = html.replace(/&gt;&gt;&gt; ([\s\S]*)$/, '<div class="d-blockquote">$1</div>');
   }
   
   // Single line blockquote (> )
-  html = html.replace(/^&gt; (.*?)$/gm, '<div style="border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:2px; margin-bottom:2px; color:#b9bbbe;">$1</div>');
+  html = html.replace(/^&gt; (.*?)$/gm, '<div class="d-blockquote">$1</div>');
 
   // Custom Emojis
   html = html.replace(/&lt;a?:([a-zA-Z0-9_]+):(\d+)&gt;/g, '<img src="https://cdn.discordapp.com/emojis/$2.png?v=1" alt=":$1:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />');
@@ -303,10 +317,10 @@ function formatDiscordText(text) {
              .replace(/\*(.*?)\*/g, '<em>$1</em>')
              .replace(/__(.*?)__/g, '<u>$1</u>')
              .replace(/~~(.*?)~~/g, '<del>$1</del>')
-             .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">$1</code>');
+             .replace(/`([^`]+)`/g, '<code class="d-code">$1</code>');
              
   // Raw URLs (not already part of an anchor tag)
-  html = html.replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:#00d4ff;text-decoration:none;">$1</a>');
+  html = html.replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" class="d-link">$1</a>');
   
   // Newlines
   html = html.replace(/\n/g, '<br>');
