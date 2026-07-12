@@ -178,6 +178,12 @@ nav{
 .tkt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;padding:0 2rem 1.5rem;}
 @media(max-width:700px){.tkt-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:450px){.tkt-grid{grid-template-columns:1fr;}}
+.tkt-media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:0 2rem 1.5rem;}
+@media(max-width:700px){.tkt-media-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:450px){.tkt-media-grid{grid-template-columns:1fr;}}
+.tkt-media-card{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);box-shadow:0 10px 30px -10px rgba(0,0,0,0.5);}
+.tkt-media-card img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);}
+.tkt-media-card:hover img{transform:scale(1.05);}
 .tkt-feat{border-radius:12px;background:rgba(147,51,234,.05);border:1px solid rgba(147,51,234,.15);padding:.9rem;transition:all .2s;}
 .tkt-feat:hover{background:rgba(147,51,234,.1);border-color:rgba(147,51,234,.3);}
 .tkt-feat-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:.3rem;}
@@ -540,6 +546,20 @@ footer a:hover{color:var(--cyan);}
         <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Permission Controls</div><div class="tkt-feat-desc">Fine-grained controls for admin, staff, and devs.</div></div>
         <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Fast Configuration</div><div class="tkt-feat-desc">Minimal setup with slash commands, instant deploy.</div></div>
       </div>
+      
+      <!-- Ticket Media -->
+      <div class="tkt-media-grid">
+        <div class="tkt-media-card">
+          <img src="ticket-panel.png" alt="Ticket Panel">
+        </div>
+        <div class="tkt-media-card">
+          <img src="ticket-thread.png" alt="Ticket Thread">
+        </div>
+        <div class="tkt-media-card">
+          <img src="ticket-type.jpeg" alt="Ticket Type">
+        </div>
+      </div>
+
       <!-- Setup Steps -->
       <div class="ticket-setup">
         <div class="ticket-setup-card">
