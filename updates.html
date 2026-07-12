@@ -61,14 +61,13 @@ nav{
 .d-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   margin-bottom: 2.5rem;
 }
 .d-header-icon {
-  font-size: 2.5rem;
-  transform: rotate(-15deg);
-  display: inline-block;
-  line-height: 1;
+  width: 44px;
+  height: 44px;
+  fill: #f97316;
 }
 .d-header-text h1 {
   font-size: 2.2rem;
@@ -94,6 +93,7 @@ nav{
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeUp 0.6s var(--ease-out) forwards;
 }
 :root[data-theme="light"] .d-card { background: #fff; box-shadow: 0 10px 30px rgba(42,68,162,0.1); border: 1px solid rgba(42,68,162,0.1); }
 .d-card:hover {
@@ -101,6 +101,11 @@ nav{
   box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 :root[data-theme="light"] .d-card:hover { box-shadow: 0 15px 40px rgba(42,68,162,0.15); }
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(28px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 
 .d-card-top {
   height: 5px;
@@ -168,29 +173,27 @@ nav{
   line-height: 1.7;
 }
 :root[data-theme="light"] .d-body { color: #374151; }
-.d-body p {
-  margin-bottom: 1.2rem;
-}
-.d-body ul {
-  list-style: none;
-  padding: 0;
-}
-.d-body li {
-  position: relative;
-  margin-bottom: 0.8rem;
-  padding-left: 1.2rem;
-}
-.d-body li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #8b5cf6;
-  font-weight: 900;
-}
+.d-body p { margin-bottom: 1.2rem; }
+.d-body ul { list-style: none; padding: 0; }
+.d-body li { position: relative; margin-bottom: 0.8rem; padding-left: 1.2rem; }
+.d-body li::before { content: "•"; position: absolute; left: 0; color: #8b5cf6; font-weight: 900; }
+.d-body strong { font-weight: 800; color: #fff; }
+:root[data-theme="light"] .d-body strong { color: #111827; }
+.d-body a { color: #00d4ff; text-decoration: none; }
+.d-body a:hover { text-decoration: underline; }
 
-/* ===== REVEAL ===== */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);}
-.reveal.v{opacity:1;transform:none;}
+.loading {
+  text-align: center;
+  color: #949ba4;
+  padding: 40px;
+  font-weight: 600;
+}
+.loading svg {
+  animation: spin 1s linear infinite;
+  fill: #5865F2;
+  margin-bottom: 10px;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
 
 /* ===== FOOTER ===== */
 footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:.84rem;}
@@ -211,9 +214,9 @@ footer a:hover{color:var(--cyan);}
     <li><a href="./#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <a href="./" class="btn-back">
+    <a href="bots" class="btn-back">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
-      Portfolio
+      Back to Bots
     </a>
     <button class="theme-toggle" id="tt" aria-label="Toggle theme">
       <svg id="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -225,61 +228,18 @@ footer a:hover{color:var(--cyan);}
 <div class="page">
   <div class="d-container">
     
-    <header class="d-header reveal">
-      <div class="d-header-icon">📣</div>
+    <header class="d-header">
+      <svg class="d-header-icon" viewBox="0 0 24 24"><path d="M21 10.05v3.9c0 1.25-1 2.26-2.25 2.26H17v1.89c0 1.05-.85 1.9-1.9 1.9h-1.2c-1.05 0-1.9-.85-1.9-1.9v-2.09l-3.32 1.9c-.89.51-2.01-.13-2.01-1.15V7.24c0-1.02 1.12-1.66 2.01-1.15l3.32 1.9V5.9c0-1.05.85-1.9 1.9-1.9h1.2C16.15 4 17 4.85 17 5.9v1.89h1.75C20 7.79 21 8.8 21 10.05zM5 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
       <div class="d-header-text">
         <h1>Changelogs</h1>
         <p>Fresh updates, small improvements, and polished changes shipped to Worldwide</p>
       </div>
     </header>
 
-    <!-- Update 1 -->
-    <div class="d-card reveal">
-      <div class="d-card-top gradient-1"></div>
-      <div class="d-card-inner">
-        <h2 class="d-title">✨ Orbits</h2>
-        <div class="d-meta">
-          <span class="d-badge">
-            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> 
-            12 Jul 2026, 12:04
-          </span>
-          <span class="d-posted">Posted by <span class="d-author">FLAME</span></span>
-        </div>
-        <div class="d-body">
-          <p>📣 This is the new Safe currency we have been working on for a while to make sure it's ready for release!</p>
-          <ul>
-            <li>1 Orbit = 100,000 Cookies</li>
-            <li>Orbits Cannot be robbed or heisted</li>
-            <li>To convert from Cookies to Orbits, use the command: ?convert {amount} orbit, and it will transfer from your jar to Orbits</li>
-            <li>The cookies Jar is always separate from Orbits, but your total amount of cookies is affected when you use the ?bal command</li>
-            <li>Orbits Do Not affect roles like Richest of the Week; it's only impacted by the Cookies in your jar<br><br>Ex: having so many Orbits in balance won't grant Richest of the Week, you need to have cookies instead</li>
-            <li>🛒 Orbits can be spent or bought in #shop channel so far</li>
-            <li>So far, there is no way to convert back from Orbits to Cookies, but this part might get updated; we will let you know!</li>
-            <li>I hope you enjoyed this quick, dedicated guide. For any questions, you know where to ask</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Update 2 -->
-    <div class="d-card reveal">
-      <div class="d-card-top gradient-2"></div>
-      <div class="d-card-inner">
-        <h2 class="d-title">✨ Major Changes</h2>
-        <div class="d-meta">
-          <span class="d-badge">
-            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> 
-            10 Jul 2026, 23:03
-          </span>
-          <span class="d-posted">Posted by <span class="d-author">FLAME</span></span>
-        </div>
-        <div class="d-body">
-          <p>📣 We have been working so hard to introduce new ideas to this amazing community, and we will share with you the new updates step by step so everyone can understand what we brought forth!</p>
-          <ul>
-            <li>Orbits: is now a new currency that is available at the #shop channel or through conversion<br><br>- 100k Cookies = 1 Orbit<br>- ?convert (amount) orbits<br>Ex. ?convert 1 orbit<br>- This currency cannot be robbed or heisted away from you; it's 100% safe<br><br>-- There will be more coming to this currency, so stay tuned for that!</li>
-            <li style="margin-top:1.5rem">🚀 We've built a custom Voice Channel system to make things easier and more fun for everyone! Here's how it works:<br><br>- Hop into the Hub – There's a special "Create VC" voice channel. Just join it, and a private temporary voice channel is created just for you within seconds.<br><br>- You're the Owner – Every temp VC comes with a control panel that gives you full control over your channel. You decide who can join, who can't, and how it behaves.<br><br>- Lock & Ghost – Want privacy? Lock your channel so nobody can join. Want total peace? Ghost it so nobody even sees it in the channel list.</li>
-          </ul>
-        </div>
+    <div id="announcements-list">
+      <div class="loading">
+        <svg viewBox="0 0 24 24" width="32" height="32"><path d="M12 2v4a6 6 0 0 1 6 6h4a10 10 0 0 0-10-10z"/></svg>
+        <p>Syncing Live Announcements...</p>
       </div>
     </div>
 
@@ -312,9 +272,99 @@ function draw(){
 }
 draw();
 
-// Scroll reveal
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('v');},i*70);obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -35px 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+// Formatting utilities
+function formatDiscordText(text) {
+  if (!text) return '';
+  return text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') // escape html
+    .replace(/&lt;a?:([a-zA-Z0-9_]+):(\d+)&gt;/g, '<img src="https://cdn.discordapp.com/emojis/$2.png?v=1" alt=":$1:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />')
+    .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/__(.*?)__/g, '<u>$1</u>')
+    .replace(/~~(.*?)~~/g, '<del>$1</del>')
+    .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">$1</code>')
+    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
+    .replace(/\n/g, '<br>');
+}
+
+function formatDate(isoString) {
+  const d = new Date(isoString);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let hours = d.getHours();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  const mins = d.getMinutes().toString().padStart(2, '0');
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}, ${hours}:${mins} ${ampm}`;
+}
+
+// Fetch and render JSON
+async function loadAnnouncements() {
+  const container = document.getElementById('announcements-list');
+  try {
+    // Add cache-busting query to avoid stale data
+    const res = await fetch('./data/announcements.json?t=' + new Date().getTime());
+    if (!res.ok) throw new Error('Data not found');
+    const msgs = await res.json();
+    
+    if (msgs.length === 0) {
+      container.innerHTML = '<p class="loading">No recent announcements found.</p>';
+      return;
+    }
+    
+    let html = '';
+    msgs.forEach((msg, index) => {
+      const gradClass = 'gradient-' + ((index % 3) + 1);
+      
+      let title = "Announcement";
+      let bodyContent = msg.content;
+      
+      // Attempt to extract a title if the first line is prominent (starts with emoji, #, or **)
+      const firstLineMatch = msg.content.match(/^([^\n]+)\n([\s\S]*)$/);
+      if (firstLineMatch) {
+        let firstLine = firstLineMatch[1].trim();
+        // Check if it has title characteristics
+        if (/^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]|#|\*\*|<a?:)/.test(firstLine)) {
+          title = formatDiscordText(firstLine);
+          bodyContent = firstLineMatch[2];
+        }
+      } else {
+        // If it's a single line and short, it might be the title itself
+        if (msg.content.length < 50) {
+          title = formatDiscordText(msg.content);
+          bodyContent = '';
+        }
+      }
+      
+      const parsedBody = formatDiscordText(bodyContent);
+      
+      html += `
+      <div class="d-card" style="animation-delay: ${index * 0.1}s;">
+        <div class="d-card-top ${gradClass}"></div>
+        <div class="d-card-inner">
+          <h2 class="d-title">${title}</h2>
+          <div class="d-meta">
+            <span class="d-badge">
+              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> 
+              ${formatDate(msg.timestamp)}
+            </span>
+            <span class="d-posted">Posted by <span class="d-author">${msg.author}</span></span>
+          </div>
+          <div class="d-body">
+            ${parsedBody}
+          </div>
+        </div>
+      </div>
+      `;
+    });
+    container.innerHTML = html;
+  } catch(e) {
+    console.error(e);
+    container.innerHTML = '<p class="loading">Syncing live announcements failed. Please try again later.</p>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadAnnouncements);
 </script>
 </body>
 </html>
