@@ -175,15 +175,23 @@ nav{
 
 /* ===== TICKET FEATURES ===== */
 .ticket-banner{width:100%;border-radius:16px 16px 0 0;overflow:hidden;max-height:200px;object-fit:cover;display:block;}
-.tkt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;padding:0 2rem 1.5rem;}
-@media(max-width:700px){.tkt-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:450px){.tkt-grid{grid-template-columns:1fr;}}
-.tkt-media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:0 2rem 1.5rem;}
+.tkt-media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0 2rem 1.5rem;}
 @media(max-width:700px){.tkt-media-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:450px){.tkt-media-grid{grid-template-columns:1fr;}}
-.tkt-media-card{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);box-shadow:0 10px 30px -10px rgba(0,0,0,0.5);}
-.tkt-media-card img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);}
-.tkt-media-card:hover img{transform:scale(1.05);}
+.tkt-media-card{position:relative;border-radius:16px;overflow:hidden;border:2px solid rgba(147,51,234,0.15);background:rgba(20,20,30,0.8);box-shadow:0 15px 35px -10px rgba(0,0,0,0.6);cursor:zoom-in;transition:all 0.3s ease;}
+.tkt-media-card:hover{border-color:rgba(147,51,234,0.5);transform:translateY(-5px);box-shadow:0 20px 40px -10px rgba(147,51,234,0.2);}
+.tkt-media-card-title{position:absolute;top:0;left:0;right:0;padding:0.8rem 1.2rem;background:linear-gradient(to bottom,rgba(10,10,15,0.95),transparent);font-weight:700;font-size:0.95rem;color:#e9d5ff;z-index:2;pointer-events:none;text-shadow:0 2px 4px rgba(0,0,0,0.8);}
+.tkt-media-card img{width:100%;height:auto;display:block;transition:transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275);}
+.tkt-media-card:hover img{transform:scale(1.06);}
+
+.media-lightbox{display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;overflow:hidden;background-color:rgba(0,0,0,0.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;flex-direction:column;opacity:0;transition:opacity 0.3s ease;}
+.media-lightbox.show{display:flex;opacity:1;}
+.lightbox-content{max-width:90%;max-height:80vh;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,0.7);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275);border:1px solid rgba(255,255,255,0.1);}
+.media-lightbox.show .lightbox-content{transform:scale(1);}
+.lightbox-caption{margin-top:1.5rem;font-size:1.2rem;font-weight:700;color:#fff;text-align:center;}
+.lightbox-close{position:absolute;top:20px;right:35px;color:#f1f1f1;font-size:40px;font-weight:bold;cursor:pointer;transition:0.3s;}
+.lightbox-close:hover{color:#c084fc;}
 .tkt-feat{border-radius:12px;background:rgba(147,51,234,.05);border:1px solid rgba(147,51,234,.15);padding:.9rem;transition:all .2s;}
 .tkt-feat:hover{background:rgba(147,51,234,.1);border-color:rgba(147,51,234,.3);}
 .tkt-feat-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:.3rem;}
@@ -549,13 +557,16 @@ footer a:hover{color:var(--cyan);}
       
       <!-- Ticket Media -->
       <div class="tkt-media-grid">
-        <div class="tkt-media-card">
+        <div class="tkt-media-card" onclick="openLightbox(this)">
+          <div class="tkt-media-card-title">Ticket Panel</div>
           <img src="ticket-panel.png" alt="Ticket Panel">
         </div>
-        <div class="tkt-media-card">
+        <div class="tkt-media-card" onclick="openLightbox(this)">
+          <div class="tkt-media-card-title">Ticket Thread</div>
           <img src="ticket-thread.png" alt="Ticket Thread">
         </div>
-        <div class="tkt-media-card">
+        <div class="tkt-media-card" onclick="openLightbox(this)">
+          <div class="tkt-media-card-title">Ticket Type</div>
           <img src="ticket-type.jpeg" alt="Ticket Type">
         </div>
       </div>
@@ -718,6 +729,35 @@ function fetchSrv(){
     }).catch(function(){});
 }
 fetchSrv();setInterval(fetchSrv,60000);
+</script>
+
+<!-- Lightbox Modal -->
+<div id="media-lightbox" class="media-lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+  <div id="lightbox-caption" class="lightbox-caption"></div>
+</div>
+
+<script>
+  function openLightbox(card) {
+    const img = card.querySelector('img');
+    const title = card.querySelector('.tkt-media-card-title').innerText;
+    const lightbox = document.getElementById('media-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    
+    lightboxImg.src = img.src;
+    lightboxCaption.innerText = title;
+    
+    lightbox.style.display = 'flex';
+    setTimeout(() => lightbox.classList.add('show'), 10);
+  }
+  
+  function closeLightbox() {
+    const lightbox = document.getElementById('media-lightbox');
+    lightbox.classList.remove('show');
+    setTimeout(() => lightbox.style.display = 'none', 300);
+  }
 </script>
 </body>
 </html>
