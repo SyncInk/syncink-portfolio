@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="SyncInk Official Bots — Full details, commands, and features for SyncInk, Radio, Ticket and Voice bots."/>
-<title>Sync Ink | Bots</title>
+<title>Sync Ink | Updates</title>
 <link rel="icon" type="image/svg+xml" href="si-favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -310,6 +310,25 @@ nav{
 footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:.84rem;}
 footer a{color:var(--blue2);text-decoration:none;}
 footer a:hover{color:var(--cyan);}
+/* ===== TIMELINE ===== */
+.timeline-section{padding:0 2rem 60px;}
+.timeline{position:relative;max-width:800px;margin:0 auto;padding-left:40px;}
+.timeline::before{content:'';position:absolute;top:0;bottom:0;left:14px;width:2px;background:linear-gradient(to bottom,var(--cyan),rgba(0,212,255,0.1));}
+.t-card{position:relative;margin-bottom:2.5rem;}
+.t-dot{position:absolute;left:-45px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--cyan);box-shadow:0 0 15px rgba(0,212,255,0.6);border:3px solid var(--bg);}
+.t-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;}
+.t-content:hover{background:rgba(255,255,255,.05);border-color:rgba(0,212,255,.3);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+.t-date{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--cyan);margin-bottom:.5rem;display:inline-block;letter-spacing:1px;text-transform:uppercase;}
+.t-title{font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:.5rem;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;}
+.t-tag{font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(0,212,255,0.1);color:var(--cyan);border:1px solid rgba(0,212,255,0.3);text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;}
+.t-list{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:0.8rem;}
+.t-list li{font-size:0.95rem;color:var(--muted);display:flex;align-items:flex-start;gap:0.6rem;line-height:1.5;}
+.badge-new{color:#57f287;font-weight:800;font-size:0.75rem;text-transform:uppercase;flex-shrink:0;margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
+.badge-new svg{width:14px;height:14px;fill:#57f287;}
+.badge-fix{color:#eb459e;font-weight:800;font-size:0.75rem;text-transform:uppercase;flex-shrink:0;margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
+.badge-fix svg{width:14px;height:14px;fill:#eb459e;}
+.badge-imp{color:#5865F2;font-weight:800;font-size:0.75rem;text-transform:uppercase;flex-shrink:0;margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
+.badge-imp svg{width:14px;height:14px;fill:#5865F2;}
 </style>
 </head>
 <body>
@@ -321,7 +340,7 @@ footer a:hover{color:var(--cyan);}
     <li><a href="./#about">About</a></li>
     <li><a href="./#skills">Skills</a></li>
     <li><a href="./#work">Work</a></li>
-    <li><a href="bots" class="active">Bots</a></li>
+    <li><a href="bots">Bots</a></li>
     <li><a href="./#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
@@ -441,240 +460,54 @@ footer a:hover{color:var(--cyan);}
               <li class="cmd-item"><span class="cmd-name">?truth/dare</span><span class="cmd-desc">Random truth or dare</span><button class="copy-btn" data-cmd="?truth/dare" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
               <li class="cmd-item"><span class="cmd-name">?help</span><span class="cmd-desc">Show full command list</span><button class="copy-btn" data-cmd="?help" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+  <header class="hero">
+    <div class="kicker">Changelog & Releases</div>
+    <h1><em>SyncInk</em> Updates</h1>
+    <p>Fresh updates, small improvements, and polished changes shipped to whole syncink official bots.</p>
+  </header>
 
-    <!-- ============ BOT 2: RADIO ============ -->
-    <div class="bot-block radio-block reveal">
-      <div class="block-glow pink"></div>
-      <div class="bot-top">
-        <div class="bot-pfp radio-glow"><img src="radio-bot.jpg" alt="SyncInk Radio"></div>
-        <div class="bot-meta">
-          <div class="bot-tag-row">
-            <span class="btag pink">Music</span><span class="btag pink">Radio</span><span class="btag pink">Audio</span>
-          </div>
-          <div class="bot-name-row">
-            <span class="bot-bname">SyncInk&copy; Radio</span>
-            <span class="bot-icons">
-              <img src="icons/sync-robot.png" alt="">
-              <img src="icons/sync-code.png" alt="">
-              <img src="https://cdn3.emoji.gg/emojis/68380-music-note.png" alt="Music Note">
-            </span>
-          </div>
-          <div class="bot-bdesc">High-quality audio streaming. Search by name or drop a link — it handles everything seamlessly.</div>
-          <div class="bot-actions-row">
-            <a href="https://discord.com/oauth2/authorize?client_id=1500567606648897819" target="_blank" rel="noopener" class="bbot-btn pink">
-              <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              Invite Radio
-            </a>
-          </div>
-          <div class="bot-legal">
-            <a href="updates">Updates</a>
-          </div>
+  <div class="container timeline-section">
+    <div class="timeline reveal">
+      
+      <!-- Update Node 1 -->
+      <div class="t-card">
+        <div class="t-dot"></div>
+        <div class="t-content">
+          <div class="t-date">Jul 12, 2026</div>
+          <div class="t-title">Dashboard & Links Expansion <span class="t-tag">SyncInk Ticket</span><span class="t-tag">SyncInk Voice</span></div>
+          <ul class="t-list">
+            <li>
+              <span class="badge-imp"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>Improved</span>
+              Added direct legal links (Privacy Policy, Terms of Service, FAQ) to the official bot action cards for easier access.
+            </li>
+            <li>
+              <span class="badge-new"><svg viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>New</span>
+              Highlighted full dashboard customizability capabilities (Panel, Ticket Types, Mentions) directly on the portfolio features list.
+            </li>
+            <li>
+              <span class="badge-fix"><svg viewBox="0 0 24 24"><path d="M21 12A9 9 0 1112 3A9 9 0 0121 12Z" stroke="currentColor" stroke-width="2"/><path d="M15 9L9 15M9 9L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Fixed</span>
+              Restored the premium stacked layout for feature lists and resolved the image stretching bug in the media grid.
+            </li>
+          </ul>
         </div>
-      </div>
-      <!-- Platforms -->
-      <div class="plat-strip">
-        <span class="pt spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</span>
-        <span class="pt ytmusic"><svg viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>YouTube Music</span>
-        <span class="pt soundcloud"><svg viewBox="0 0 24 24"><path d="M11.52 14.532v-6.326c0-.269-.17-.436-.395-.436-.226 0-.397.167-.397.436v6.23c0 .268.171.435.397.435.225 0 .395-.167.395-.435zm-1.732 0V9.362c0-.268-.169-.434-.396-.434-.225 0-.395.166-.395.434v5.074c0 .268.17.435.395.435.227 0 .396-.167.396-.435zm-1.73 0V9.985c0-.268-.17-.434-.397-.434-.226 0-.395.166-.395.434v4.453c0 .268.169.435.395.435.227 0 .397-.167.397-.435zm-1.732 0v-3.83c0-.268-.17-.434-.396-.434-.226 0-.396.166-.396.434v3.736c0 .268.17.435.396.435.226 0 .396-.167.396-.435zm-1.73 0v-3.21c0-.268-.17-.434-.397-.434-.226 0-.396.166-.396.434v3.115c0 .268.17.435.396.435.227 0 .397-.167.397-.435zM2.866 14.437v-2.588c0-.268-.169-.434-.395-.434-.227 0-.396.166-.396.434v2.494c0 .268.169.435.396.435.226 0 .395-.167.395-.435zm-1.73 0v-1.966c0-.269-.171-.435-.397-.435-.225 0-.395.166-.395.435v1.872c0 .268.17.435.395.435.226 0 .397-.167.397-.435zm12.119.094h6.273c1.755 0 3.176-1.425 3.176-3.184 0-1.758-1.421-3.183-3.176-3.183a3.132 3.132 0 0 0-.78.097c-.598-1.95-2.433-3.355-4.6-3.355-1.972 0-3.672 1.184-4.389 2.898-.088-.005-.179-.01-.269-.01-.226 0-.395.166-.395.434v5.856c0 .268.169.435.395.435z"/></svg>SoundCloud</span>
-        <span class="pt apple"><svg viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324.378-.082.758-.153 1.134-.24.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234-.16.01-.318.035-.475.066-.76.15-1.52.303-2.28.456l-2.325.47-1.374.278c-.016.003-.032.01-.048.013-.277.077-.377.203-.39.49-.002.042 0 .086 0 .13-.002 2.602 0 5.204-.003 7.805 0 .42-.047.836-.215 1.227-.278.64-.77 1.04-1.434 1.233-.35.1-.71.16-1.075.172-.96.036-1.755-.6-1.92-1.544-.14-.812.23-1.685 1.154-2.075.357-.15.73-.232 1.108-.31.287-.06.575-.116.86-.177.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882 0-.123.013-.25.042-.37.07-.285.273-.448.546-.518.255-.066.515-.112.774-.165.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403.22-.043.442-.088.663-.106.31-.025.523.17.554.482.008.073.012.148.012.223.002 1.91.002 3.822 0 5.732z"/></svg>Apple Music</span>
-        <span class="pt deezer"><svg viewBox="0 0 24 24"><path d="M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.027h5.189V8.38h-5.19zm12.54 0v3.027H24V8.38h-5.19zM6.27 12.594v3.027h5.189v-3.027h-5.19zm6.271 0v3.027h5.19v-3.027h-5.19zm6.27 0v3.027H24v-3.027h-5.19zM0 16.81v3.029h5.19v-3.03H0zm6.27 0v3.029h5.189v-3.03h-5.19zm6.271 0v3.029h5.19v-3.03h-5.19zm6.27 0v3.029H24v-3.03h-5.19Z"/></svg>Deezer</span>
-        <span class="pt tidal"><svg viewBox="0 0 24 24"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996 4.004 12l4.004-4.004L12.012 12l-4.004 4.004 4.004 4.004 4.004-4.004L12.012 12l4.004-4.004-4.004-4.004zM16.042 7.996l3.979-3.979L24 7.996l-3.979 3.979z"/></svg>TIDAL</span>
-      </div>
-      <div class="block-divider" style="margin-bottom:1.5rem;"></div>
-      <!-- Radio Commands -->
-      <div class="cmd-section">
-        <div class="cmd-section-title">Slash Commands</div>
-        <div class="radio-cmds">
-          <div class="rcmd"><div class="rcmd-name">/play <button class="copy-btn" data-cmd="/play" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Play from URL or search term</div></div>
-          <div class="rcmd"><div class="rcmd-name">/search <button class="copy-btn" data-cmd="/search" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Search supported platforms</div></div>
-          <div class="rcmd"><div class="rcmd-name">/shuffle <button class="copy-btn" data-cmd="/shuffle" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Shuffle the queue</div></div>
-          <div class="rcmd"><div class="rcmd-name">/skip <button class="copy-btn" data-cmd="/skip" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Skip to next track(s)</div></div>
-          <div class="rcmd"><div class="rcmd-name">/queue list <button class="copy-btn" data-cmd="/queue list" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Show current queue</div></div>
-          <div class="rcmd"><div class="rcmd-name">/np <button class="copy-btn" data-cmd="/np" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Show current track info</div></div>
-          <div class="rcmd"><div class="rcmd-name">/lyrics <button class="copy-btn" data-cmd="/lyrics" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Search track lyrics</div></div>
-          <div class="rcmd"><div class="rcmd-name">/loop all <button class="copy-btn" data-cmd="/loop all" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Loop whole queue</div></div>
-          <div class="rcmd"><div class="rcmd-name">/loop current <button class="copy-btn" data-cmd="/loop current" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Loop current track</div></div>
-          <div class="rcmd"><div class="rcmd-name">/volume <button class="copy-btn" data-cmd="/volume" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Adjust player volume</div></div>
-          <div class="rcmd"><div class="rcmd-name">/bassboost <button class="copy-btn" data-cmd="/bassboost" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Tweak bass settings</div></div>
-          <div class="rcmd"><div class="rcmd-name">/8d <button class="copy-btn" data-cmd="/8d" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Toggle 8D audio filter</div></div>
-          <div class="rcmd"><div class="rcmd-name">/autoplay <button class="copy-btn" data-cmd="/autoplay" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Toggle autoplay</div></div>
-          <div class="rcmd"><div class="rcmd-name">/seek <button class="copy-btn" data-cmd="/seek" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Seek to specific time</div></div>
-          <div class="rcmd"><div class="rcmd-name">/remove <button class="copy-btn" data-cmd="/remove" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Remove track from queue</div></div>
-          <div class="rcmd"><div class="rcmd-name">/pause /resume <button class="copy-btn" data-cmd="/pause /resume" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Pause/Resume playback</div></div>
-          <div class="rcmd"><div class="rcmd-name">/previous <button class="copy-btn" data-cmd="/previous" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Go to previous track</div></div>
-          <div class="rcmd"><div class="rcmd-name">/help <button class="copy-btn" data-cmd="/help" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Lists all commands</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ BOT 3: TICKET ============ -->
-    <div class="bot-block ticket-block reveal">
-      <div class="block-glow purple"></div>
-      <div class="bot-top">
-        <div class="bot-pfp purple-glow"><img src="ticket-logo.png" alt="SyncInk Ticket"></div>
-        <div class="bot-meta">
-          <div class="bot-tag-row">
-            <span class="btag purple">Support Tickets</span><span class="btag purple">Automation</span><span class="btag purple">Transcripts</span>
-          </div>
-          <div class="bot-name-row">
-            <span class="bot-bname">SyncInk&copy; Ticket</span>
-            <span class="bot-icons">
-              <img src="icons/sync-robot.png" alt="">
-              <img src="icons/sync-code.png" alt="">
-              <img src="icons/syncink-ticket.png" alt="">
-            </span>
-          </div>
-          <div class="bot-bdesc-bold">Powerful. Automated. Professional.</div>
-          <div class="bot-bdesc">A next-generation Discord ticket bot built for modern communities. SyncInk Ticket combines private-thread infrastructure, intelligent claim systems, automated transcripts, advanced transfers, and premium workflows into one seamless support experience.</div>
-          <div class="bot-actions-row">
-            <a href="https://discord.com/oauth2/authorize?client_id=1513075101992747158" target="_blank" rel="noopener" class="bbot-btn purple">
-              <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              Invite Bot
-            </a>
-            <a href="https://syncink-discord-ticketbot.up.railway.app/" target="_blank" rel="noopener" class="bbot-btn cyan">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-              Open Dashboard
-            </a>
-          </div>
-          <div class="bot-legal">
-            <a href="https://syncink-discord-ticketbot.up.railway.app/privacy" target="_blank" rel="noopener">Privacy Policy</a> • 
-            <a href="https://syncink-discord-ticketbot.up.railway.app/terms" target="_blank" rel="noopener">Terms of Service</a> • 
-            <a href="https://syncink-discord-ticketbot.up.railway.app/faq" target="_blank" rel="noopener">FAQ</a> • 
-            <a href="updates">Updates</a>
-          </div>
-        </div>
-      </div>
-      <div class="block-divider" style="margin-bottom:1.5rem;"></div>
-      <!-- Ticket Features -->
-      <div class="tkt-grid">
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M2 3.9934C2 3.44476 2.45531 3 2.9918 3H5.0082C5.55595 3 6 3.44495 6 3.9934V15C6 16.1046 6.89543 17 8 17H11V15.0066C11 14.453 11.4447 14 11.9812 14H14.0188C14.5665 14 15 14.455 15 15.0066V17H20.0066C20.5552 17 21 17.4553 21 17.9918V20.0082C21 20.556 20.555 21 20.0066 21H8C4.68629 21 2 18.3137 2 15V3.9934Z"/><path d="M21 5C21 3.89543 20.1046 3 19 3H15C13.8954 3 13 3.89543 13 5V9C13 10.1046 13.8954 11 15 11H19C20.1046 11 21 10.1046 21 9V5Z"/></svg>Private Threads</div><div class="tkt-feat-desc">Lightweight private threads instead of cluttering channels.</div></div>
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>Dynamic Modals</div><div class="tkt-feat-desc">Interactive forms collect info before ticket creation.</div></div>
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>Auto-Claim System</div><div class="tkt-feat-desc">Staff auto-assigned when they reply to a ticket.</div></div>
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Mention-Claiming</div><div class="tkt-feat-desc">Auto-adds staff when mentioned inside a ticket.</div></div>
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M16 1l-2.29 2.29 4.88 4.88-14.88.01v3h14.88l-4.88 4.88L16 19l9-9z"/></svg>Advanced Transfers</div><div class="tkt-feat-desc">Transfer between teams using dropdown menus.</div></div>
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>Auto-Transcripts</div><div class="tkt-feat-desc">Full logs generated automatically when ticket closes.</div></div>
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Permission Controls</div><div class="tkt-feat-desc">Fine-grained controls for admin, staff, and devs.</div></div>
-        <div class="tkt-feat"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Fast Configuration</div><div class="tkt-feat-desc">Minimal setup with slash commands, instant deploy.</div></div>
-        <div class="tkt-feat" style="grid-column: 1 / -1; background: rgba(147,51,234,0.08); border-color: rgba(147,51,234,0.3);"><div class="tkt-feat-title"><svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>Fully Customizable Dashboard</div><div class="tkt-feat-desc">The entire ticket panel UI, ticket category types, and automated staff mention/ping behaviors are completely customizable directly through our intuitive web dashboard.</div></div>
       </div>
       
-      <!-- Ticket Media -->
-      <div class="tkt-media-grid">
-        <div class="tkt-media-card" onclick="openLightbox(this)">
-          <div class="tkt-media-card-title">Ticket Panel</div>
-          <img src="ticket-panel.png" alt="Ticket Panel">
-        </div>
-        <div class="tkt-media-card" onclick="openLightbox(this)">
-          <div class="tkt-media-card-title">Ticket Thread</div>
-          <img src="ticket-thread.png" alt="Ticket Thread">
-        </div>
-        <div class="tkt-media-card" onclick="openLightbox(this)">
-          <div class="tkt-media-card-title">Ticket Type</div>
-          <img src="ticket-type.jpeg" alt="Ticket Type">
+      <!-- Update Node 2 -->
+      <div class="t-card">
+        <div class="t-dot"></div>
+        <div class="t-content">
+          <div class="t-date">Jul 10, 2026</div>
+          <div class="t-title">Initial Launch <span class="t-tag">Ecosystem</span></div>
+          <ul class="t-list">
+            <li>
+              <span class="badge-new"><svg viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>New</span>
+              Successfully deployed the SyncInk Portfolio, featuring SyncInk Radio, SyncInk Ticket, and SyncInk Voice.
+            </li>
+          </ul>
         </div>
       </div>
 
-      <!-- Setup Steps -->
-      <div class="ticket-setup">
-        <div class="ticket-setup-card">
-          <div class="ticket-setup-title"><svg viewBox="0 0 24 24" width="20" height="20" fill="#c084fc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Easy Setup</div>
-          <div class="ticket-steps">
-            <div class="ticket-step"><div class="step-num">1</div>Invite SyncInk Ticket to your server</div>
-            <div class="ticket-step"><div class="step-num">2</div>Configure using <code>/ticket-config</code></div>
-            <div class="ticket-step"><div class="step-num">3</div>Go to your desired ticket channel</div>
-            <div class="ticket-step"><div class="step-num">4</div>Type <code>/ticket-panel</code></div>
-            <div class="ticket-step"><div class="step-num">5</div>Your advanced ticket system is instantly ready!</div>
-          </div>
-        </div>
-      </div>
-      <div class="tech-tags">
-        <span class="tech-tag">Node.js</span>
-        <span class="tech-tag">Discord.js</span>
-        <span class="tech-tag">Advanced Thread System</span>
-        <span class="tech-tag">Slash Commands API</span>
-      </div>
     </div>
-
-    <!-- ============ BOT 4: VOICE ============ -->
-    <div class="bot-block voice-block reveal">
-      <div class="block-glow cyan"></div>
-      <div class="bot-top">
-        <div class="bot-pfp cyan-glow"><img src="voice-logo.png" alt="SyncInk Voice"></div>
-        <div class="bot-meta">
-          <div class="bot-tag-row">
-            <span class="btag cyan">Voice</span><span class="btag cyan">Automation</span>
-          </div>
-          <div class="bot-name-row">
-            <span class="bot-bname">SyncInk&copy; Voice</span>
-            <span class="bot-icons">
-              <img src="icons/sync-robot.png" alt="">
-              <img src="icons/sync-code.png" alt="">
-              <img src="https://cdn3.emoji.gg/emojis/4767-voice-event.png" alt="Voice Event">
-            </span>
-          </div>
-          <div class="bot-bdesc">Advanced voice channel management — dynamic channel creation, custom naming patterns, user limits, and real-time voice analytics. The future of Discord voice organization.</div>
-          <div class="bot-actions-row">
-            <a href="https://discord.com/oauth2/authorize?client_id=1516578887109181520&permissions=823151632&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener" class="bbot-btn cyan">
-              <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              Invite Bot
-            </a>
-            <a href="https://syncink-voice-production.up.railway.app" target="_blank" rel="noopener" class="bbot-btn blue">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-              Open Dashboard
-            </a>
-          </div>
-          <div class="bot-legal">
-            <a href="https://syncink-voice-production.up.railway.app/privacy" target="_blank" rel="noopener">Privacy Policy</a> • 
-            <a href="https://syncink-voice-production.up.railway.app/terms" target="_blank" rel="noopener">Terms of Service</a> • 
-            <a href="https://syncink-voice-production.up.railway.app/faq" target="_blank" rel="noopener">FAQ</a> • 
-            <a href="updates">Updates</a>
-          </div>
-        </div>
-      </div>
-      <div class="block-divider" style="margin-bottom:1.5rem;"></div>
-      <div class="voice-feats">
-        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M12 15c1.66 0 3-1.34 3-3V6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-2.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>Dynamic Channels</span>
-        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>User Limits</span>
-        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>Auto Management</span>
-        <span class="vfeat"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11z"/></svg>Real-time Analytics</span>
-      </div>
-    </div>
-
-    <div class="hr"></div>
-
-    <!-- ============ COMMUNITY ============ -->
-    <div class="community-section">
-      <div class="s-label reveal">Community</div>
-      <h2 class="s-heading reveal">Support <em>Server</em></h2>
-      <p style="color:var(--muted);font-size:1rem;margin-bottom:2rem;" class="reveal">Join the official SyncInk support server for help, updates, and discussions.</p>
-
-      <div class="srv-card reveal">
-        <div class="srv-icon-wrap">
-          <img src="https://cdn.discordapp.com/icons/1136319484459266100/ba66f3204080aec335d410249295408d.png?size=256" alt="SyncInk Support" id="srvIcon" onerror="this.src='main-bot.jpg'">
-        </div>
-        <div class="srv-info">
-          <div class="srv-title-row">
-            <div class="srv-name" id="srvName">SyncInk Support</div>
-            <img src="https://cdn3.emoji.gg/emojis/9069-community-server-white.png" alt="Community" class="srv-community-icon">
-          </div>
-          <div class="srv-stats-row">
-            <div class="srv-stat-item"><div class="srv-stat-dot green"></div><span id="srvOnline">4</span> Online</div>
-            <div class="srv-stat-item"><div class="srv-stat-dot grey"></div><span id="srvTotal">7</span> Members</div>
-          </div>
-          <div class="srv-est">Est. Jun 2026</div>
-          <div class="srv-desc">Official support server for SyncInk. Get support, report bugs, suggest features, stay updated, and be among the first to access new releases.</div>
-          <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener" class="srv-join-btn">
-            <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-            Join Server
-          </a>
-        </div>
-      </div>
-    </div>
-
   </div><!-- /container -->
 
   <footer><p>Built by <a href="./">SyncInk</a> &middot; <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener">Support Server</a></p></footer>
