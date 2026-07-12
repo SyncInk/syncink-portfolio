@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="SyncInk Official Bots — Full details, commands, and features for SyncInk, Radio, Ticket and Voice bots."/>
+<meta name="description" content="SyncInk Changelogs — Fresh updates, small improvements, and polished changes."/>
 <title>Sync Ink | Updates</title>
 <link rel="icon" type="image/svg+xml" href="si-favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -43,7 +43,6 @@ nav{
 .nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;}
 .nav-links a{font-size:.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color .2s;}
 .nav-links a:hover,.nav-links a.active{color:var(--text);}
-.nav-links a.active{color:var(--cyan);}
 .nav-right{display:flex;align-items:center;gap:.8rem;}
 .btn-back{display:flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.82rem;font-weight:600;text-decoration:none;transition:all .2s;}
 .btn-back:hover{color:var(--text);border-color:var(--blue);background:rgba(88,101,242,.08);}
@@ -52,283 +51,151 @@ nav{
 .theme-toggle svg{width:16px;height:16px;fill:currentColor;}
 @media(max-width:768px){.nav-links{display:none;}.nav{padding:0 1rem;}}
 
-/* ===== HERO ===== */
-.hero{padding:110px 2rem 50px;text-align:center;}
-.kicker{display:inline-flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue3);padding:.35rem .9rem;border-radius:999px;border:1px solid rgba(88,101,242,.25);background:rgba(88,101,242,.08);margin-bottom:1.4rem;}
-.hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,var(--text) 0%,var(--blue2) 50%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero h1 em{font-style:normal;color:var(--cyan);-webkit-text-fill-color:var(--cyan);}
-.hero p{font-size:1rem;color:var(--muted);max-width:520px;margin:0 auto;}
-
-/* ===== CONTAINER ===== */
-.container{max-width:1060px;margin:0 auto;padding:0 2rem;}
-
-/* ===== SECTION LABEL ===== */
-.s-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem;}
-.s-heading{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;letter-spacing:-.02em;color:var(--text);margin-bottom:.8rem;}
-.s-heading em{font-style:normal;color:var(--cyan);}
-
-/* ===== BOT SECTION WRAPPER ===== */
-.bots-section{padding:0 0 60px;}
-.bot-block{
-  position:relative;overflow:hidden;border-radius:22px;
-  border:1px solid var(--border);
-  background:linear-gradient(145deg,rgba(11,16,36,0.94),rgba(13,19,41,0.72));
-  box-shadow:0 20px 60px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.06);
-  margin-bottom:2.5rem;
-}
-:root[data-theme="light"] .bot-block{background:rgba(255,255,255,.86);box-shadow:0 8px 30px rgba(42,68,162,.1);}
-.bot-block.radio-block{border-color:rgba(235,69,158,.22);}
-.bot-block.ticket-block{border-color:rgba(147,51,234,.22);}
-.bot-block.voice-block{border-color:rgba(139,92,246,.25);}
-.block-glow{position:absolute;top:-30%;right:-10%;width:280px;height:280px;border-radius:50%;pointer-events:none;}
-.block-glow.blue{background:radial-gradient(circle,rgba(88,101,242,.15),transparent 65%);}
-.block-glow.pink{background:radial-gradient(circle,rgba(235,69,158,.16),transparent 65%);}
-.block-glow.purple{background:radial-gradient(circle,rgba(147,51,234,.16),transparent 65%);}
-.block-glow.cyan{background:radial-gradient(circle,rgba(0,212,255,.13),transparent 65%);}
-.block-glow.violet{background:radial-gradient(circle,rgba(139,92,246,.16),transparent 65%);}
-
-/* ===== BOT HEADER ===== */
-.bot-top{padding:2rem 2rem 1.5rem;display:flex;align-items:flex-start;gap:1.4rem;flex-wrap:wrap;}
-.bot-pfp{
-  width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;
-  border:2.5px solid rgba(255,255,255,.14);
-  box-shadow:0 8px 24px rgba(0,0,0,.35);
-  animation:pfpFloat 4s ease-in-out infinite;
-}
-.bot-pfp img{width:100%;height:100%;object-fit:cover;display:block;}
-@keyframes pfpFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
-.bot-pfp.radio-glow{box-shadow:0 8px 24px rgba(235,69,158,.35);}
-.bot-pfp.purple-glow{box-shadow:0 8px 24px rgba(147,51,234,.35);}
-.bot-pfp.cyan-glow{box-shadow:0 8px 24px rgba(0,212,255,.3);}
-.bot-pfp.violet-glow{box-shadow:0 8px 24px rgba(139,92,246,.35);}
-.bot-meta{flex:1;min-width:0;}
-.bot-tag-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.5rem;}
-.btag{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;padding:.2rem .5rem;border-radius:999px;border:1px solid;font-weight:700;}
-.btag.blue{border-color:rgba(88,101,242,.55);color:var(--blue2);background:rgba(88,101,242,.1);}
-.btag.pink{border-color:rgba(235,69,158,.55);color:var(--accent);background:rgba(235,69,158,.1);}
-.btag.purple{border-color:rgba(147,51,234,.55);color:#c084fc;background:rgba(147,51,234,.1);}
-.btag.cyan{border-color:rgba(0,212,255,.5);color:var(--cyan);background:rgba(0,212,255,.08);}
-.btag.yellow{border-color:rgba(234,179,8,.5);color:#eab308;background:rgba(234,179,8,.08);}
-.btag.violet{border-color:rgba(139,92,246,.55);color:#c4b5fd;background:rgba(139,92,246,.1);}
-.bot-name-row{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.5rem;}
-.bot-bname{font-size:1.75rem;font-weight:900;letter-spacing:-.02em;color:var(--text);}
-.bot-icons{display:inline-flex;align-items:center;gap:5px;}
-.bot-icons img{width:24px;height:24px;object-fit:contain;display:block;}
-.bot-icons img.radio-logo{width:80px;height:80px;margin-left:-10px;}
-.bot-bdesc{font-size:.95rem;color:var(--muted);line-height:1.65;max-width:700px;}
-.bot-bdesc-bold{font-weight:700;color:#e9d5ff;margin-bottom:.3rem;}
-.bot-actions-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.1rem;}
-.bot-legal{margin-top:0.8rem;font-size:0.75rem;color:rgba(255,255,255,.5);display:flex;gap:0.5rem;align-items:center;padding-left:2px;}
-.bot-legal a{color:rgba(255,255,255,.6);text-decoration:none;transition:color 0.2s ease;}
-.bot-legal a:hover{color:#fff;text-decoration:underline;}
-.bbot-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.52rem 1.15rem;border-radius:10px;font-size:.88rem;font-weight:700;text-decoration:none;border:1px solid;transition:all .22s var(--spring);cursor:pointer;background:transparent;}
-.bbot-btn:hover{transform:translateY(-2px);}
-.bbot-btn.blue{background:linear-gradient(135deg,rgba(88,101,242,.32),rgba(88,101,242,.14));border-color:rgba(88,101,242,.55);color:#fff;}
-.bbot-btn.blue:hover{box-shadow:0 0 22px rgba(88,101,242,.38);}
-.bbot-btn.pink{background:linear-gradient(135deg,rgba(235,69,158,.28),rgba(235,69,158,.1));border-color:rgba(235,69,158,.55);color:var(--accent);}
-.bbot-btn.pink:hover{box-shadow:0 0 22px rgba(235,69,158,.35);}
-.bbot-btn.purple{background:linear-gradient(135deg,rgba(147,51,234,.28),rgba(147,51,234,.1));border-color:rgba(147,51,234,.55);color:#c084fc;}
-.bbot-btn.purple:hover{box-shadow:0 0 22px rgba(147,51,234,.35);}
-.bbot-btn.cyan{background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(0,212,255,.06));border-color:rgba(0,212,255,.45);color:var(--cyan);}
-.bbot-btn.cyan:hover{box-shadow:0 0 22px rgba(0,212,255,.28);}
-.bbot-btn.violet{background:linear-gradient(135deg,rgba(139,92,246,.28),rgba(139,92,246,.1));border-color:rgba(139,92,246,.55);color:#c4b5fd;}
-.bbot-btn.violet:hover{box-shadow:0 0 22px rgba(139,92,246,.35);}
-.bbot-btn svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
-
-/* ===== PLATFORM TAGS ===== */
-.plat-strip{display:flex;flex-wrap:wrap;gap:.6rem;padding:0 2rem 1.5rem;}
-.pt{display:inline-flex;align-items:center;gap:.38rem;padding:.28rem .7rem;border-radius:8px;font-size:.8rem;font-weight:700;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);}
-.pt svg{width:15px;height:15px;fill:currentColor;}
-.pt.spotify{color:#1ED760;border-color:rgba(30,215,96,.2);}
-.pt.ytmusic{color:#ff0000;border-color:rgba(255,0,0,.2);}
-.pt.soundcloud{color:#FF5500;border-color:rgba(255,85,0,.2);}
-.pt.apple{color:#fc3c44;border-color:rgba(252,60,68,.2);}
-.pt.deezer{color:#FEAA2D;border-color:rgba(254,170,45,.2);}
-.pt.tidal{color:#5EB7D7;border-color:rgba(94,183,215,.2);}
-
-/* ===== COMMAND GRID ===== */
-.cmd-section{padding:0 2rem 2rem;}
-.cmd-section-title{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue3);margin-bottom:.9rem;}
-.cmd-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
-@media(max-width:650px){.cmd-grid-2{grid-template-columns:1fr;}}
-.cmd-cat{border-radius:14px;background:rgba(255,255,255,.03);border:1px solid;padding:1rem;}
-.cmd-cat.gold{border-color:rgba(234,179,8,.2);}.cmd-cat.purple{border-color:rgba(139,92,246,.2);}.cmd-cat.blue{border-color:rgba(59,130,246,.2);}.cmd-cat.green{border-color:rgba(34,197,94,.2);}
-.cmd-cat-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem;font-weight:800;font-size:.92rem;}
-.cmd-cat-head.gold{color:#eab308;}.cmd-cat-head.purple{color:#a78bfa;}.cmd-cat-head.blue{color:#60a5fa;}.cmd-cat-head.green{color:#4ade80;}
-.cmd-cat-head img{width:22px;height:22px;object-fit:contain;}
-.cmd-cat-head svg{width:22px;height:22px;}
-.cmd-list{list-style:none;display:flex;flex-direction:column;gap:.32rem;}
-.cmd-item{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.28rem .38rem;border-radius:6px;transition:background .18s;}
-.cmd-item:hover{background:rgba(255,255,255,.04);}
-.cmd-name{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:var(--blue2);flex-shrink:0;}
-.cmd-desc{font-size:.78rem;color:var(--muted);text-align:right;flex:1;}
-.copy-btn{background:transparent;border:none;cursor:pointer;color:var(--muted);padding:2px 4px;border-radius:4px;transition:all .15s;flex-shrink:0;}
-.copy-btn:hover{color:var(--text);background:rgba(255,255,255,.06);}
-.copy-btn.copied{color:var(--green);}
-
-/* ===== RADIO CMD GRID ===== */
-.radio-cmds{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;padding:0 2rem 2rem;}
-@media(max-width:600px){.radio-cmds{grid-template-columns:repeat(2,1fr);}}
-.rcmd{border-radius:10px;background:rgba(235,69,158,.05);border:1px solid rgba(235,69,158,.15);padding:.7rem .85rem;}
-.rcmd-name{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--accent);display:flex;align-items:center;justify-content:space-between;margin-bottom:.18rem;}
-.rcmd-desc{font-size:.75rem;color:var(--muted);}
-
-/* ===== TICKET FEATURES ===== */
-.ticket-banner{width:100%;border-radius:16px 16px 0 0;overflow:hidden;max-height:200px;object-fit:cover;display:block;}
-
-.tkt-media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:0 2rem 1.5rem;}
-@media(max-width:700px){.tkt-media-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:450px){.tkt-media-grid{grid-template-columns:1fr;}}
-.tkt-media-card{position:relative;aspect-ratio:1/1;border-radius:16px;overflow:hidden;border:2px solid rgba(147,51,234,0.15);background:rgba(20,20,30,0.8);box-shadow:0 15px 35px -10px rgba(0,0,0,0.6);cursor:zoom-in;transition:all 0.3s ease;}
-.tkt-media-card:hover{border-color:rgba(147,51,234,0.5);transform:translateY(-5px);box-shadow:0 20px 40px -10px rgba(147,51,234,0.2);}
-.tkt-media-card-title{position:absolute;top:0;left:0;right:0;padding:0.8rem 1.2rem;background:linear-gradient(to bottom,rgba(10,10,15,0.95),transparent);font-weight:700;font-size:0.95rem;color:#e9d5ff;z-index:2;pointer-events:none;text-shadow:0 2px 4px rgba(0,0,0,0.8);}
-.tkt-media-card img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275);}
-.tkt-media-card:hover img{transform:scale(1.06);}
-
-.media-lightbox{display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;overflow:hidden;background-color:rgba(0,0,0,0.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;flex-direction:column;opacity:0;transition:opacity 0.3s ease;}
-.media-lightbox.show{display:flex;opacity:1;}
-.lightbox-content{max-width:90%;max-height:80vh;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,0.7);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275);border:1px solid rgba(255,255,255,0.1);}
-.media-lightbox.show .lightbox-content{transform:scale(1);}
-.lightbox-caption{margin-top:1.5rem;font-size:1.2rem;font-weight:700;color:#fff;text-align:center;}
-.lightbox-close{position:absolute;top:20px;right:35px;color:#f1f1f1;font-size:40px;font-weight:bold;cursor:pointer;transition:0.3s;}
-.lightbox-close:hover{color:#c084fc;}
-.tkt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;padding:0 2rem 1.5rem;}
-@media(max-width:700px){.tkt-grid{grid-template-columns:1fr;}}
-@media(max-width:450px){.tkt-grid{padding:0 1rem 1.5rem;}}
-.tkt-feat{background:rgba(147,51,234,0.04);border:1px solid rgba(147,51,234,0.15);border-radius:12px;padding:1.2rem 1.5rem;transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
-.tkt-feat:hover{background:rgba(147,51,234,0.08);transform:translateY(-4px);box-shadow:0 10px 20px -5px rgba(147,51,234,0.15);border-color:rgba(147,51,234,0.3);}
-.tkt-feat-title{display:flex;align-items:center;gap:0.6rem;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:0.3rem;}
-.tkt-feat-title svg{width:20px;height:20px;fill:#c084fc;flex-shrink:0;}
-.tkt-feat-desc{font-size:0.85rem;color:var(--muted);line-height:1.5;}
-
-/* ===== TICKET SETUP ===== */
-.ticket-setup{padding:0 2rem 1.5rem;}
-.ticket-setup-card{border-radius:14px;background:rgba(147,51,234,.06);border:1px solid rgba(147,51,234,.18);padding:1.2rem 1.5rem;}
-.ticket-setup-title{display:flex;align-items:center;gap:.5rem;font-weight:800;color:#c084fc;margin-bottom:.9rem;}
-.ticket-steps{display:flex;flex-direction:column;gap:.45rem;}
-.ticket-step{display:flex;align-items:flex-start;gap:.6rem;font-size:.86rem;color:var(--muted);}
-.step-num{min-width:20px;height:20px;border-radius:50%;background:rgba(147,51,234,.3);border:1px solid rgba(147,51,234,.5);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#c084fc;flex-shrink:0;margin-top:1px;}
-.ticket-step code{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#c084fc;background:rgba(147,51,234,.15);padding:.1rem .35rem;border-radius:4px;}
-
-/* ===== TECH TAGS ===== */
-.tech-tags{display:flex;flex-wrap:wrap;gap:.5rem;padding:0 2rem 1.5rem;}
-.tech-tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.25rem .6rem;border-radius:6px;background:rgba(147,51,234,.08);border:1px solid rgba(147,51,234,.2);color:#c084fc;}
-
-/* ===== VOICE FEATURES ===== */
-.voice-feats{display:flex;flex-wrap:wrap;gap:.6rem;padding:0 2rem 2rem;}
-.vfeat{display:inline-flex;align-items:center;gap:.4rem;padding:.32rem .75rem;border-radius:8px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);font-size:.82rem;color:var(--cyan);font-weight:600;transition:all .2s;}
-.vfeat:hover{background:rgba(0,212,255,.12);}
-.vfeat svg{width:14px;height:14px;fill:var(--cyan);}
-.vfeat.violet{background:rgba(139,92,246,.08);border-color:rgba(139,92,246,.25);color:#c4b5fd;}
-.vfeat.violet:hover{background:rgba(139,92,246,.15);}
-.vfeat.violet svg{fill:#c4b5fd;}
-
-/* ===== DIVIDER ===== */
-.block-divider{height:1px;background:rgba(255,255,255,.06);margin:0 1.5rem;}
-:root[data-theme="light"] .block-divider{background:rgba(0,0,0,.07);}
-
-/* ===== COMMUNITY ===== */
-.community-section{padding:0 0 80px;}
-.srv-card{
-  position:relative;overflow:hidden;border-radius:24px;
-  background:linear-gradient(145deg,rgba(11,16,36,.95),rgba(16,28,64,.8));
-  border:1px solid rgba(88,101,242,.25);
-  box-shadow:0 24px 70px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);
-  display:flex; align-items:center; gap: 2.8rem; padding: 3rem;
-  max-width: 850px; margin: 0 auto;
-  transition:transform .35s var(--spring),box-shadow .35s ease;
-}
-:root[data-theme="light"] .srv-card{background:rgba(255,255,255,.9);}
-.srv-card:hover{transform:translateY(-4px);box-shadow:0 36px 90px rgba(0,0,0,.4),0 0 0 1px rgba(88,101,242,.4);}
-.srv-card::before{content:'';position:absolute;top:-40%;right:-10%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(88,101,242,.18),transparent 65%);pointer-events:none;}
-.srv-card::after{content:'';position:absolute;bottom:-30%;left:-10%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.15),transparent 65%);pointer-events:none;}
-
-.srv-icon-wrap{
-  position:relative;flex-shrink:0;
-  width:120px;height:120px;border-radius:28px;
-  overflow:hidden;
-  border:3px solid rgba(88,101,242,.5);
-  box-shadow:0 0 30px rgba(88,101,242,.4),0 0 60px rgba(88,101,242,.15);
-  background: #000;
-}
-.srv-icon-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
-
-.srv-info{flex:1;min-width:220px;}
-.srv-title-row {
-  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; flex-wrap: wrap;
-}
-.srv-name{
-  font-size:1.85rem;font-weight:900;letter-spacing:-.02em;color:var(--text);
-}
-.srv-community-icon { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
-
-.srv-stats-row {
-  display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
-  font-size: 0.95rem; color: var(--muted); font-weight: 600; margin-bottom: 0.4rem;
-}
-.srv-stat-item {
-  display: flex; align-items: center; gap: 0.45rem;
-}
-.srv-stat-dot {
-  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-}
-.srv-stat-dot.green { background: #57f287; box-shadow: 0 0 10px rgba(87,242,135,0.6); }
-.srv-stat-dot.grey { background: rgba(255,255,255,0.4); }
-:root[data-theme="light"] .srv-stat-dot.grey { background: rgba(0,0,0,0.3); }
-
-.srv-est {
-  font-size: 0.9rem; color: var(--muted); font-weight: 600; margin-bottom: 1.2rem;
+/* ===== DISCORD-STYLE ANNOUNCEMENTS ===== */
+.d-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 110px 2rem 60px;
 }
 
-.srv-desc{font-size:0.95rem;color:var(--muted);line-height:1.6;margin-bottom:1.8rem; max-width: 580px;}
-
-.srv-join-btn{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.8rem 2rem;border-radius:12px;font-size:1rem;font-weight:800;
-  text-decoration:none;
-  background:linear-gradient(135deg,#5865F2,#7289da);
-  border:none;color:#fff;
-  box-shadow:0 8px 24px rgba(88,101,242,.4);
-  transition:all .25s var(--spring);
+.d-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
 }
-.srv-join-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(88,101,242,.6);}
-.srv-join-btn svg{width:20px;height:20px;fill:currentColor;}
+.d-header-icon {
+  font-size: 2.5rem;
+  transform: rotate(-15deg);
+  display: inline-block;
+  line-height: 1;
+}
+.d-header-text h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+:root[data-theme="light"] .d-header-text h1 { color: #101b3d; }
+.d-header-text p {
+  font-size: 1rem;
+  color: #949ba4;
+  font-weight: 500;
+}
+:root[data-theme="light"] .d-header-text p { color: #4d618a; }
 
-@media(max-width: 650px) {
-  .srv-card { flex-direction: column; text-align: center; padding: 2.2rem; gap: 1.5rem; }
-  .srv-title-row, .srv-stats-row { justify-content: center; }
+.d-card {
+  background: #2b2d31;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+:root[data-theme="light"] .d-card { background: #fff; box-shadow: 0 10px 30px rgba(42,68,162,0.1); border: 1px solid rgba(42,68,162,0.1); }
+.d-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+:root[data-theme="light"] .d-card:hover { box-shadow: 0 15px 40px rgba(42,68,162,0.15); }
+
+.d-card-top {
+  height: 5px;
+  width: 100%;
+}
+.gradient-1 { background: linear-gradient(90deg, #f97316, #ec4899, #8b5cf6, #3b82f6); }
+.gradient-2 { background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6, #d946ef); }
+.gradient-3 { background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6); }
+
+.d-card-inner {
+  padding: 1.8rem 2.2rem;
+}
+@media(max-width: 600px) { .d-card-inner { padding: 1.4rem; } }
+
+.d-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #f2f3f5;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
+}
+:root[data-theme="light"] .d-title { color: #111827; }
+
+.d-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.d-badge {
+  background: #1e1f22;
+  color: #dbdee1;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+:root[data-theme="light"] .d-badge { background: #f3f4f6; color: #4b5563; }
+.d-badge svg { width: 14px; height: 14px; fill: currentColor; }
+.d-posted {
+  font-size: 0.8rem;
+  color: #949ba4;
+  font-weight: 500;
+}
+:root[data-theme="light"] .d-posted { color: #6b7280; }
+.d-author {
+  color: #dbdee1;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+:root[data-theme="light"] .d-author { color: #111827; }
+
+.d-body {
+  color: #dbdee1;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+:root[data-theme="light"] .d-body { color: #374151; }
+.d-body p {
+  margin-bottom: 1.2rem;
+}
+.d-body ul {
+  list-style: none;
+  padding: 0;
+}
+.d-body li {
+  position: relative;
+  margin-bottom: 0.8rem;
+  padding-left: 1.2rem;
+}
+.d-body li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #8b5cf6;
+  font-weight: 900;
 }
 
 /* ===== REVEAL ===== */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);}
 .reveal.v{opacity:1;transform:none;}
 
-/* ===== HR ===== */
-.hr{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 0 60px;}
-
 /* ===== FOOTER ===== */
 footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:.84rem;}
 footer a{color:var(--blue2);text-decoration:none;}
 footer a:hover{color:var(--cyan);}
-/* ===== TIMELINE ===== */
-.timeline-section{padding:0 2rem 60px;}
-.timeline{position:relative;max-width:800px;margin:0 auto;padding-left:40px;}
-.timeline::before{content:'';position:absolute;top:0;bottom:0;left:14px;width:2px;background:linear-gradient(to bottom,var(--cyan),rgba(0,212,255,0.1));}
-.t-card{position:relative;margin-bottom:2.5rem;}
-.t-dot{position:absolute;left:-45px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--cyan);box-shadow:0 0 15px rgba(0,212,255,0.6);border:3px solid var(--bg);}
-.t-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;}
-.t-content:hover{background:rgba(255,255,255,.05);border-color:rgba(0,212,255,.3);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3);}
-.t-date{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--cyan);margin-bottom:.5rem;display:inline-block;letter-spacing:1px;text-transform:uppercase;}
-.t-title{font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:.5rem;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;}
-.t-tag{font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(0,212,255,0.1);color:var(--cyan);border:1px solid rgba(0,212,255,0.3);text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;}
-.t-list{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:0.8rem;}
-.t-list li{font-size:0.95rem;color:var(--muted);display:flex;align-items:flex-start;gap:0.6rem;line-height:1.5;}
-.badge-new{color:#57f287;font-weight:800;font-size:0.75rem;text-transform:uppercase;flex-shrink:0;margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
-.badge-new svg{width:14px;height:14px;fill:#57f287;}
-.badge-fix{color:#eb459e;font-weight:800;font-size:0.75rem;text-transform:uppercase;flex-shrink:0;margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
-.badge-fix svg{width:14px;height:14px;fill:#eb459e;}
-.badge-imp{color:#5865F2;font-weight:800;font-size:0.75rem;text-transform:uppercase;flex-shrink:0;margin-top:2px;display:inline-flex;align-items:center;gap:4px;}
-.badge-imp svg{width:14px;height:14px;fill:#5865F2;}
 </style>
 </head>
 <body>
@@ -356,162 +223,70 @@ footer a:hover{color:var(--cyan);}
 </nav>
 
 <div class="page">
-  <!-- HERO -->
-  <div class="hero">
-    <div class="kicker">
-      <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" clip-rule="evenodd" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-      SyncInk Ecosystem
+  <div class="d-container">
+    
+    <header class="d-header reveal">
+      <div class="d-header-icon">📣</div>
+      <div class="d-header-text">
+        <h1>Changelogs</h1>
+        <p>Fresh updates, small improvements, and polished changes shipped to Worldwide</p>
+      </div>
+    </header>
+
+    <!-- Update 1 -->
+    <div class="d-card reveal">
+      <div class="d-card-top gradient-1"></div>
+      <div class="d-card-inner">
+        <h2 class="d-title">✨ Orbits</h2>
+        <div class="d-meta">
+          <span class="d-badge">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> 
+            12 Jul 2026, 12:04
+          </span>
+          <span class="d-posted">Posted by <span class="d-author">FLAME</span></span>
+        </div>
+        <div class="d-body">
+          <p>📣 This is the new Safe currency we have been working on for a while to make sure it's ready for release!</p>
+          <ul>
+            <li>1 Orbit = 100,000 Cookies</li>
+            <li>Orbits Cannot be robbed or heisted</li>
+            <li>To convert from Cookies to Orbits, use the command: ?convert {amount} orbit, and it will transfer from your jar to Orbits</li>
+            <li>The cookies Jar is always separate from Orbits, but your total amount of cookies is affected when you use the ?bal command</li>
+            <li>Orbits Do Not affect roles like Richest of the Week; it's only impacted by the Cookies in your jar<br><br>Ex: having so many Orbits in balance won't grant Richest of the Week, you need to have cookies instead</li>
+            <li>🛒 Orbits can be spent or bought in #shop channel so far</li>
+            <li>So far, there is no way to convert back from Orbits to Cookies, but this part might get updated; we will let you know!</li>
+            <li>I hope you enjoyed this quick, dedicated guide. For any questions, you know where to ask</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <h1>Official <em>Bots</em></h1>
-    <p>Handcrafted Discord bots built for performance, simplicity, and community. Invite, explore, and level up your server.</p>
+
+    <!-- Update 2 -->
+    <div class="d-card reveal">
+      <div class="d-card-top gradient-2"></div>
+      <div class="d-card-inner">
+        <h2 class="d-title">✨ Major Changes</h2>
+        <div class="d-meta">
+          <span class="d-badge">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> 
+            10 Jul 2026, 23:03
+          </span>
+          <span class="d-posted">Posted by <span class="d-author">FLAME</span></span>
+        </div>
+        <div class="d-body">
+          <p>📣 We have been working so hard to introduce new ideas to this amazing community, and we will share with you the new updates step by step so everyone can understand what we brought forth!</p>
+          <ul>
+            <li>Orbits: is now a new currency that is available at the #shop channel or through conversion<br><br>- 100k Cookies = 1 Orbit<br>- ?convert (amount) orbits<br>Ex. ?convert 1 orbit<br>- This currency cannot be robbed or heisted away from you; it's 100% safe<br><br>-- There will be more coming to this currency, so stay tuned for that!</li>
+            <li style="margin-top:1.5rem">🚀 We've built a custom Voice Channel system to make things easier and more fun for everyone! Here's how it works:<br><br>- Hop into the Hub – There's a special "Create VC" voice channel. Just join it, and a private temporary voice channel is created just for you within seconds.<br><br>- You're the Owner – Every temp VC comes with a control panel that gives you full control over your channel. You decide who can join, who can't, and how it behaves.<br><br>- Lock & Ghost – Want privacy? Lock your channel so nobody can join. Want total peace? Ghost it so nobody even sees it in the channel list.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <div class="container bots-section">
-
-    <!-- ============ BOT 1: SYNCINK MAIN ============ -->
-    <div class="bot-block reveal">
-      <div class="block-glow blue"></div>
-      <div class="bot-top">
-        <div class="bot-pfp"><img src="main-bot.jpg" alt="SyncInk Bot"></div>
-        <div class="bot-meta">
-          <div class="bot-tag-row">
-            <span class="btag blue">Multi-Purpose</span>
-            <span class="btag blue">Economy</span>
-            <span class="btag blue">Moderation</span>
-          </div>
-          <div class="bot-name-row">
-            <span class="bot-bname">SyncInk&copy;</span>
-            <span class="bot-icons">
-              <img src="icons/sync-robot.png" alt="">
-              <img src="icons/sync-tools.png" alt="">
-              <img src="icons/sync-code.png" alt="">
-            </span>
-          </div>
-          <div class="bot-bdesc">The ultimate multi-purpose bot loaded with economy, mini-games, fun commands, and solid server moderation features. One bot to rule them all.</div>
-          <div class="bot-actions-row">
-            <a href="https://discord.com/oauth2/authorize?client_id=1500289929731768472" target="_blank" rel="noopener" class="bbot-btn blue">
-              <svg viewBox="0 0 127.14 96.36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              Invite SyncInk
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="block-divider"></div>
-      <div class="cmd-section" style="padding-top:1.5rem;">
-        <div class="cmd-section-title">Commands</div>
-        <div class="cmd-grid-2">
-          <div class="cmd-cat gold">
-            <div class="cmd-cat-head gold">
-              <img src="icons/eco-chart.png" alt=""><img src="icons/eco-money.png" alt="">
-              Economy
-            </div>
-            <ul class="cmd-list">
-              <li class="cmd-item"><span class="cmd-name">?bal</span><span class="cmd-desc">View cookie balance</span><button class="copy-btn" data-cmd="?bal" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?dep</span><span class="cmd-desc">Deposit cookies into vault</span><button class="copy-btn" data-cmd="?dep" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?with</span><span class="cmd-desc">Withdraw from vault</span><button class="copy-btn" data-cmd="?with" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?daily</span><span class="cmd-desc">Claim daily reward</span><button class="copy-btn" data-cmd="?daily" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?weekly</span><span class="cmd-desc">Claim weekly reward</span><button class="copy-btn" data-cmd="?weekly" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?work</span><span class="cmd-desc">Work for cookies</span><button class="copy-btn" data-cmd="?work" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?give</span><span class="cmd-desc">Give cookies to someone</span><button class="copy-btn" data-cmd="?give" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-            </ul>
-          </div>
-          <div class="cmd-cat purple">
-            <div class="cmd-cat-head purple">
-              <img src="icons/casino-gem.png" alt=""><img src="icons/casino-cards.png" alt="">
-              Casino
-            </div>
-            <ul class="cmd-list">
-              <li class="cmd-item"><span class="cmd-name">?bet</span><span class="cmd-desc">High/Low bet game</span><button class="copy-btn" data-cmd="?bet" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?cr</span><span class="cmd-desc">Crash game</span><button class="copy-btn" data-cmd="?cr" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?slots</span><span class="cmd-desc">Play Slot machine</span><button class="copy-btn" data-cmd="?slots" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?cf</span><span class="cmd-desc">Coin flip (heads/tails)</span><button class="copy-btn" data-cmd="?cf" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?dice</span><span class="cmd-desc">Dice guess (x5 payout)</span><button class="copy-btn" data-cmd="?dice" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?bj</span><span class="cmd-desc">Play Blackjack</span><button class="copy-btn" data-cmd="?bj" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?rl</span><span class="cmd-desc">Play Roulette</span><button class="copy-btn" data-cmd="?rl" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-            </ul>
-          </div>
-          <div class="cmd-cat blue">
-            <div class="cmd-cat-head blue">
-              <img src="icons/mod-hammer.png" alt="">
-              <svg viewBox="0 0 24 24" fill="#5865F2"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"/></svg>
-              Moderation &amp; Settings
-            </div>
-            <ul class="cmd-list">
-              <li class="cmd-item"><span class="cmd-name">?ban/kick</span><span class="cmd-desc">Ban or kick members</span><button class="copy-btn" data-cmd="?ban/kick" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?mute/warn</span><span class="cmd-desc">Timeout or warn users</span><button class="copy-btn" data-cmd="?mute/warn" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?clear</span><span class="cmd-desc">Purge messages (max 100)</span><button class="copy-btn" data-cmd="?clear" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?lock</span><span class="cmd-desc">Lock/Unlock channel</span><button class="copy-btn" data-cmd="?lock" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?setwelcome</span><span class="cmd-desc">Set welcome channel</span><button class="copy-btn" data-cmd="?setwelcome" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?setlog</span><span class="cmd-desc">Set server log channel</span><button class="copy-btn" data-cmd="?setlog" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?setauthorole</span><span class="cmd-desc">Set auto-role on join</span><button class="copy-btn" data-cmd="?setauthorole" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-            </ul>
-          </div>
-          <div class="cmd-cat green">
-            <div class="cmd-cat-head green">
-              <img src="icons/fun-camera.png" alt=""><img src="icons/fun-stats.png" alt=""><img src="icons/fun-crime.png" alt="">
-              Fun, Stats &amp; Crime
-            </div>
-            <ul class="cmd-list">
-              <li class="cmd-item"><span class="cmd-name">?rob/heist</span><span class="cmd-desc">Rob users / start group heist</span><button class="copy-btn" data-cmd="?rob/heist" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?cd</span><span class="cmd-desc">Check your active cooldowns</span><button class="copy-btn" data-cmd="?cd" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?lvl</span><span class="cmd-desc">View your level &amp; XP</span><button class="copy-btn" data-cmd="?lvl" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?msgs/vctime</span><span class="cmd-desc">View activity stats</span><button class="copy-btn" data-cmd="?msgs/vctime" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?lb</span><span class="cmd-desc">Global cookie leaderboard</span><button class="copy-btn" data-cmd="?lb" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?truth/dare</span><span class="cmd-desc">Random truth or dare</span><button class="copy-btn" data-cmd="?truth/dare" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-              <li class="cmd-item"><span class="cmd-name">?help</span><span class="cmd-desc">Show full command list</span><button class="copy-btn" data-cmd="?help" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-            </ul>
-  <header class="hero">
-    <div class="kicker">Changelog & Releases</div>
-    <h1><em>SyncInk</em> Updates</h1>
-    <p>Fresh updates, small improvements, and polished changes shipped to whole syncink official bots.</p>
-  </header>
-
-  <div class="container timeline-section">
-    <div class="timeline reveal">
-      
-      <!-- Update Node 1 -->
-      <div class="t-card">
-        <div class="t-dot"></div>
-        <div class="t-content">
-          <div class="t-date">Jul 12, 2026</div>
-          <div class="t-title">Dashboard & Links Expansion <span class="t-tag">SyncInk Ticket</span><span class="t-tag">SyncInk Voice</span></div>
-          <ul class="t-list">
-            <li>
-              <span class="badge-imp"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>Improved</span>
-              Added direct legal links (Privacy Policy, Terms of Service, FAQ) to the official bot action cards for easier access.
-            </li>
-            <li>
-              <span class="badge-new"><svg viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>New</span>
-              Highlighted full dashboard customizability capabilities (Panel, Ticket Types, Mentions) directly on the portfolio features list.
-            </li>
-            <li>
-              <span class="badge-fix"><svg viewBox="0 0 24 24"><path d="M21 12A9 9 0 1112 3A9 9 0 0121 12Z" stroke="currentColor" stroke-width="2"/><path d="M15 9L9 15M9 9L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Fixed</span>
-              Restored the premium stacked layout for feature lists and resolved the image stretching bug in the media grid.
-            </li>
-          </ul>
-        </div>
-      </div>
-      
-      <!-- Update Node 2 -->
-      <div class="t-card">
-        <div class="t-dot"></div>
-        <div class="t-content">
-          <div class="t-date">Jul 10, 2026</div>
-          <div class="t-title">Initial Launch <span class="t-tag">Ecosystem</span></div>
-          <ul class="t-list">
-            <li>
-              <span class="badge-new"><svg viewBox="0 0 24 24"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>New</span>
-              Successfully deployed the SyncInk Portfolio, featuring SyncInk Radio, SyncInk Ticket, and SyncInk Voice.
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div><!-- /container -->
-
+  
   <footer><p>Built by <a href="./">SyncInk</a> &middot; <a href="https://discord.gg/FnsJYbmW4A" target="_blank" rel="noopener">Support Server</a></p></footer>
-</div><!-- /page -->
+</div>
 
 <script>
 // Theme toggle
@@ -540,65 +315,6 @@ draw();
 // Scroll reveal
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('v');},i*70);obs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -35px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
-
-// Copy buttons
-(function(){
-  var CI='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-  var OK='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"/></svg>';
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest('.copy-btn');
-    if(!btn)return;
-    navigator.clipboard.writeText(btn.dataset.cmd||'').then(function(){
-      btn.innerHTML=OK;btn.classList.add('copied');
-      setTimeout(function(){btn.innerHTML=CI;btn.classList.remove('copied');},1500);
-    }).catch(function(){});
-  });
-})();
-
-// Live server data
-function fetchSrv(){
-  fetch('https://discord.com/api/v9/invites/FnsJYbmW4A?with_counts=true')
-    .then(function(r){return r.json();})
-    .then(function(d){
-      if(d.guild){
-        var t=document.getElementById('srvTotal'),o=document.getElementById('srvOnline'),n=document.getElementById('srvName'),ic=document.getElementById('srvIcon');
-        if(t)t.textContent=d.approximate_member_count||7;
-        if(o)o.textContent=d.approximate_presence_count||4;
-        if(n&&d.guild.name)n.textContent=d.guild.name;
-        if(ic&&d.guild.icon)ic.src='https://cdn.discordapp.com/icons/'+d.guild.id+'/'+d.guild.icon+'.png?size=256';
-      }
-    }).catch(function(){});
-}
-fetchSrv();setInterval(fetchSrv,60000);
-</script>
-
-<!-- Lightbox Modal -->
-<div id="media-lightbox" class="media-lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close">&times;</span>
-  <img class="lightbox-content" id="lightbox-img">
-  <div id="lightbox-caption" class="lightbox-caption"></div>
-</div>
-
-<script>
-  function openLightbox(card) {
-    const img = card.querySelector('img');
-    const title = card.querySelector('.tkt-media-card-title').innerText;
-    const lightbox = document.getElementById('media-lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    
-    lightboxImg.src = img.src;
-    lightboxCaption.innerText = title;
-    
-    lightbox.style.display = 'flex';
-    setTimeout(() => lightbox.classList.add('show'), 10);
-  }
-  
-  function closeLightbox() {
-    const lightbox = document.getElementById('media-lightbox');
-    lightbox.classList.remove('show');
-    setTimeout(() => lightbox.style.display = 'none', 300);
-  }
 </script>
 </body>
 </html>
