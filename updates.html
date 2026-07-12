@@ -275,17 +275,49 @@ draw();
 // Formatting utilities
 function formatDiscordText(text) {
   if (!text) return '';
-  return text
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') // escape html
-    .replace(/&lt;a?:([a-zA-Z0-9_]+):(\d+)&gt;/g, '<img src="https://cdn.discordapp.com/emojis/$2.png?v=1" alt=":$1:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />')
-    .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/__(.*?)__/g, '<u>$1</u>')
-    .replace(/~~(.*?)~~/g, '<del>$1</del>')
-    .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">$1</code>')
-    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:#00d4ff;text-decoration:none;">$1</a>')
-    .replace(/\n/g, '<br>');
+  let html = text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); // escape html
+
+  // Markdown Links [text](url)
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:#00d4ff;text-decoration:none;">$1</a>');
+
+  // Headings
+  html = html.replace(/^### (.*?)$/gm, '<h3 style="font-size:1.15rem;font-weight:800;color:#fff;margin:1.5rem 0 0.5rem;">$1</h3>');
+  html = html.replace(/^## (.*?)$/gm, '<h2 style="font-size:1.3rem;font-weight:800;color:#fff;margin:1.8rem 0 0.8rem;">$1</h2>');
+  html = html.replace(/^# (.*?)$/gm, '<h1 style="font-size:1.5rem;font-weight:900;color:#fff;margin:2rem 0 1rem;">$1</h1>');
+
+  // Multiline blockquote (>>> )
+  if (html.includes('&gt;&gt;&gt; ')) {
+    html = html.replace(/&gt;&gt;&gt; ([\s\S]*)$/, '<div style="border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:4px; margin-bottom:4px; color:#b9bbbe;">$1</div>');
+  }
+  
+  // Single line blockquote (> )
+  html = html.replace(/^&gt; (.*?)$/gm, '<div style="border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:2px; margin-bottom:2px; color:#b9bbbe;">$1</div>');
+
+  // Custom Emojis
+  html = html.replace(/&lt;a?:([a-zA-Z0-9_]+):(\d+)&gt;/g, '<img src="https://cdn.discordapp.com/emojis/$2.png?v=1" alt=":$1:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />');
+  
+  // Basic formatting
+  html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+             .replace(/\*(.*?)\*/g, '<em>$1</em>')
+             .replace(/__(.*?)__/g, '<u>$1</u>')
+             .replace(/~~(.*?)~~/g, '<del>$1</del>')
+             .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">$1</code>');
+             
+  // Raw URLs (not already part of an anchor tag)
+  html = html.replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:#00d4ff;text-decoration:none;">$1</a>');
+  
+  // Newlines
+  html = html.replace(/\n/g, '<br>');
+  
+  // Cleanup rogue `<br>` after block elements to prevent huge gaps
+  html = html.replace(/<\/h1><br>/g, '</h1>');
+  html = html.replace(/<\/h2><br>/g, '</h2>');
+  html = html.replace(/<\/h3><br>/g, '</h3>');
+  html = html.replace(/<\/div><br>/g, '</div>');
+
+  return html;
 }
 
 function formatDate(isoString) {
@@ -358,6 +390,8 @@ async function loadAnnouncements() {
          title = msg.author + " Update";
       }
       
+      const authorLink = msg.author_id ? `https://discord.com/users/${msg.author_id}` : `https://discord.gg/FnsJYbmW4A`;
+      
       html += `
       <div class="d-card" style="animation-delay: ${index * 0.1}s;">
         <div class="d-card-top ${gradClass}"></div>
@@ -368,7 +402,7 @@ async function loadAnnouncements() {
               <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> 
               ${formatDate(msg.timestamp)}
             </span>
-            <span class="d-posted">Posted by <span class="d-author">${msg.author}</span></span>
+            <span class="d-posted">Posted by <a href="${authorLink}" target="_blank" class="d-author" style="text-decoration:none;">${msg.author}</a></span>
           </div>
           <div class="d-body">
             ${bodyHtml}

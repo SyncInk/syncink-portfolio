@@ -37,6 +37,7 @@ const req = https.request(options, (res) => {
         content: msg.content,
         timestamp: msg.timestamp,
         author: msg.author.username,
+        author_id: msg.author.id,
         author_avatar: msg.author.avatar,
         embeds: msg.embeds,
         attachments: msg.attachments
