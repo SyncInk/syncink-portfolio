@@ -196,6 +196,31 @@ nav{
 .d-link { color:var(--cyan); text-decoration:none; }
 .d-link:hover { text-decoration:underline; }
 
+.d-mention {
+  background: rgba(88, 101, 242, 0.3);
+  color: #c9cdfb;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+.d-mention:hover {
+  background: #5865F2;
+  color: #fff;
+}
+:root[data-theme="light"] .d-mention {
+  background: rgba(88, 101, 242, 0.15);
+  color: #5865F2;
+}
+:root[data-theme="light"] .d-mention:hover {
+  background: #5865F2;
+  color: #fff;
+}
+
 .loading {
   text-align: center;
   color: #949ba4;
@@ -308,6 +333,18 @@ function formatDiscordText(text) {
   // Single line blockquote (> )
   html = html.replace(/^&gt; (.*?)$/gm, '<div class="d-blockquote">$1</div>');
 
+  // Mentions
+  html = html.replace(/&lt;#(\d+)&gt;/g, '<span class="d-mention">#channel</span>');
+  html = html.replace(/&lt;@!?(\d+)&gt;/g, '<span class="d-mention">@user</span>');
+  html = html.replace(/&lt;@&amp;(\d+)&gt;/g, '<span class="d-mention">@role</span>');
+  
+  // Discord Channel URLs
+  html = html.replace(/(https?:\/\/discord\.com\/channels\/\d+\/(\d+))/g, (match, url, channelId) => {
+    let name = "channel";
+    if (channelId === "1520460544811859968") name = "🚀・updates";
+    return `<a href="${url}" target="_blank" rel="noopener" class="d-mention"># ${name}</a>`;
+  });
+
   // Custom Emojis
   html = html.replace(/&lt;a?:([a-zA-Z0-9_]+):(\d+)&gt;/g, '<img src="https://cdn.discordapp.com/emojis/$2.png?v=1" alt=":$1:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />');
   
@@ -319,8 +356,8 @@ function formatDiscordText(text) {
              .replace(/~~(.*?)~~/g, '<del>$1</del>')
              .replace(/`([^`]+)`/g, '<code class="d-code">$1</code>');
              
-  // Raw URLs (not already part of an anchor tag)
-  html = html.replace(/(?<!href=")(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" class="d-link">$1</a>');
+  // Raw URLs (not already part of an anchor tag or mention)
+  html = html.replace(/(?<!href=")(https?:\/\/[^\s<"]+)/g, '<a href="$1" target="_blank" rel="noopener" class="d-link">$1</a>');
   
   // Newlines
   html = html.replace(/\n/g, '<br>');
@@ -405,6 +442,7 @@ async function loadAnnouncements() {
       }
       
       const authorLink = msg.author_id ? `https://discord.com/users/${msg.author_id}` : `https://discord.gg/FnsJYbmW4A`;
+      const avatarUrl = msg.author_avatar ? `https://cdn.discordapp.com/avatars/${msg.author_id}/${msg.author_avatar}.png` : 'https://cdn3.emoji.gg/emojis/494996-announcement.png';
       
       html += `
       <div class="d-card" style="animation-delay: ${index * 0.1}s;">
@@ -416,7 +454,13 @@ async function loadAnnouncements() {
               <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> 
               ${formatDate(msg.timestamp)}
             </span>
-            <span class="d-posted">Posted by <a href="${authorLink}" target="_blank" class="d-author" style="text-decoration:none;">${msg.author}</a></span>
+            <span class="d-posted">
+              Posted by 
+              <a href="${authorLink}" target="_blank" class="d-author" style="text-decoration:none; display:inline-flex; align-items:center;">
+                <img src="${avatarUrl}" alt="" style="width:18px;height:18px;border-radius:50%;margin-right:4px;">
+                ${msg.author}
+              </a>
+            </span>
           </div>
           <div class="d-body">
             ${bodyHtml}
