@@ -41,7 +41,7 @@ const req = https.request(options, (res) => {
         embeds: msg.embeds,
         attachments: msg.attachments
       }))
-      .filter(msg => msg.content.trim().length > 0 || (msg.embeds && msg.embeds.length > 0));
+      .filter(msg => (msg.content && msg.content.trim().length > 0) || (msg.embeds && msg.embeds.length > 0));
 
     if (!fs.existsSync('./data')) {
       fs.mkdirSync('./data');

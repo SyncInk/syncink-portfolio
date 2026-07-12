@@ -232,7 +232,7 @@ footer a:hover{color:var(--cyan);}
       <img src="https://cdn3.emoji.gg/emojis/494996-announcement.png" width="56" height="56" alt="Updates" style="margin-right: 0.2rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));">
       <div class="d-header-text">
         <h1>Updates</h1>
-        <p>Fresh updates, small improvements, and polished changes shipped to Worldwide</p>
+        <p>Stay up-to-date with the latest features, improvements, and essential fixes across the SyncInk ecosystem.</p>
       </div>
     </header>
 
@@ -284,7 +284,7 @@ function formatDiscordText(text) {
     .replace(/__(.*?)__/g, '<u>$1</u>')
     .replace(/~~(.*?)~~/g, '<del>$1</del>')
     .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">$1</code>')
-    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
+    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:#00d4ff;text-decoration:none;">$1</a>')
     .replace(/\n/g, '<br>');
 }
 
@@ -302,7 +302,6 @@ function formatDate(isoString) {
 async function loadAnnouncements() {
   const container = document.getElementById('announcements-list');
   try {
-    // Add cache-busting query to avoid stale data
     const res = await fetch('./data/announcements.json?t=' + new Date().getTime());
     if (!res.ok) throw new Error('Data not found');
     const msgs = await res.json();
@@ -317,26 +316,47 @@ async function loadAnnouncements() {
       const gradClass = 'gradient-' + ((index % 3) + 1);
       
       let title = "Announcement";
-      let bodyContent = msg.content;
+      let bodyHtml = "";
       
-      // Attempt to extract a title if the first line is prominent (starts with emoji, #, or **)
-      const firstLineMatch = msg.content.match(/^([^\n]+)\n([\s\S]*)$/);
-      if (firstLineMatch) {
-        let firstLine = firstLineMatch[1].trim();
-        // Check if it has title characteristics
-        if (/^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]|#|\*\*|<a?:)/.test(firstLine)) {
-          title = formatDiscordText(firstLine);
-          bodyContent = firstLineMatch[2];
-        }
-      } else {
-        // If it's a single line and short, it might be the title itself
-        if (msg.content.length < 50) {
+      // Handle normal content
+      if (msg.content && msg.content.trim().length > 0) {
+        const firstLineMatch = msg.content.match(/^([^\n]+)\n([\s\S]*)$/);
+        if (firstLineMatch && /^(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]|#|\*\*|<a?:)/.test(firstLineMatch[1].trim())) {
+          title = formatDiscordText(firstLineMatch[1].trim());
+          bodyHtml += formatDiscordText(firstLineMatch[2]);
+        } else if (msg.content.length < 50) {
           title = formatDiscordText(msg.content);
-          bodyContent = '';
+        } else {
+          bodyHtml += formatDiscordText(msg.content);
         }
       }
       
-      const parsedBody = formatDiscordText(bodyContent);
+      // Handle embeds
+      if (msg.embeds && msg.embeds.length > 0) {
+        msg.embeds.forEach(embed => {
+          if (embed.title) {
+            title = formatDiscordText(embed.title);
+          }
+          if (embed.description) {
+            bodyHtml += '<div style="margin-top: 1rem;">' + formatDiscordText(embed.description) + '</div>';
+          }
+          if (embed.fields && embed.fields.length > 0) {
+            bodyHtml += '<div style="margin-top: 1.5rem;">';
+            embed.fields.forEach(field => {
+              bodyHtml += '<div style="margin-bottom: 1rem;">';
+              bodyHtml += '<div style="font-weight: 800; color: #fff; margin-bottom: 0.2rem;">' + formatDiscordText(field.name) + '</div>';
+              bodyHtml += '<div style="color: #dbdee1;">' + formatDiscordText(field.value) + '</div>';
+              bodyHtml += '</div>';
+            });
+            bodyHtml += '</div>';
+          }
+        });
+      }
+      
+      // Fallback if no title could be parsed
+      if (!title || title === "Announcement") {
+         title = msg.author + " Update";
+      }
       
       html += `
       <div class="d-card" style="animation-delay: ${index * 0.1}s;">
@@ -351,7 +371,7 @@ async function loadAnnouncements() {
             <span class="d-posted">Posted by <span class="d-author">${msg.author}</span></span>
           </div>
           <div class="d-body">
-            ${parsedBody}
+            ${bodyHtml}
           </div>
         </div>
       </div>
