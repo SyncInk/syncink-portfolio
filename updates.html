@@ -154,18 +154,36 @@ nav{
 :root[data-theme="light"] .d-badge { background: #f3f4f6; color: #4b5563; }
 .d-badge svg { width: 14px; height: 14px; fill: currentColor; }
 .d-posted {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #949ba4;
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 :root[data-theme="light"] .d-posted { color: #6b7280; }
 .d-author {
   color: #dbdee1;
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.05);
+  padding: 4px 10px 4px 6px;
+  border-radius: 20px;
+  transition: background 0.2s;
 }
-:root[data-theme="light"] .d-author { color: #111827; }
+.d-author:hover {
+  background: rgba(255,255,255,0.1);
+}
+:root[data-theme="light"] .d-author { 
+  color: #111827; 
+  background: rgba(0,0,0,0.05);
+}
+:root[data-theme="light"] .d-author:hover { 
+  background: rgba(0,0,0,0.08);
+}
 
 .d-body {
   color: #dbdee1;
@@ -455,9 +473,9 @@ async function loadAnnouncements() {
               ${formatDate(msg.timestamp)}
             </span>
             <span class="d-posted">
-              Posted by 
-              <a href="${authorLink}" target="_blank" class="d-author" style="text-decoration:none; display:inline-flex; align-items:center;">
-                <img src="${avatarUrl}" alt="" style="width:18px;height:18px;border-radius:50%;margin-right:4px;">
+              <span style="opacity: 0.7;">Posted by</span>
+              <a href="${authorLink}" target="_blank" class="d-author">
+                <img src="${avatarUrl}" alt="" style="width:20px;height:20px;border-radius:50%;">
                 ${msg.author}
               </a>
             </span>
