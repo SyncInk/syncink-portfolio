@@ -1286,9 +1286,15 @@ section{position:relative;z-index:10;}
 .bt-card.bt-radio .bt-icons{transform:translateY(2px);}
 .bt-desc{font-size:0.86rem;color:var(--muted);line-height:1.6;margin-bottom:0.9rem;}
 .bt-plat-row{display:flex;flex-wrap:wrap;gap:0.46rem;margin-bottom:0.95rem;}
-.bt-plat{display:inline-flex;align-items:center;gap:0.32rem;padding:0.25rem 0.62rem;border-radius:8px;font-size:0.74rem;font-weight:700;background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);}
-.bt-plat svg{width:12px;height:12px;fill:currentColor;flex-shrink:0;}
-.bt-plat.spotify{color:#1ED760;}.bt-plat.ytmusic{color:#ff0000;}.bt-plat.soundcloud{color:#FF5500;}.bt-plat.apple{color:#ff3b4d;}.bt-plat.deezer{color:#FEAA2D;}.bt-plat.tidal{color:#5EB7D7;}
+.bt-plat{display:inline-flex;align-items:center;gap:0.38rem;padding:0.35rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:700;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);transition:all 0.3s ease;cursor:default;}
+.bt-plat:hover{background:rgba(255,255,255,0.06);transform:translateY(-1px);}
+.bt-plat svg{width:14px;height:14px;fill:currentColor;flex-shrink:0;}
+.bt-plat.spotify{color:#1ED760;}.bt-plat.spotify:hover{border-color:rgba(30,215,96,0.7);box-shadow:0 0 18px rgba(30,215,96,0.3), inset 0 0 8px rgba(30,215,96,0.1);}
+.bt-plat.ytmusic{color:#ff0000;}.bt-plat.ytmusic:hover{border-color:rgba(255,0,0,0.7);box-shadow:0 0 18px rgba(255,0,0,0.3), inset 0 0 8px rgba(255,0,0,0.1);}
+.bt-plat.soundcloud{color:#FF5500;}.bt-plat.soundcloud:hover{border-color:rgba(255,85,0,0.7);box-shadow:0 0 18px rgba(255,85,0,0.3), inset 0 0 8px rgba(255,85,0,0.1);}
+.bt-plat.apple{color:#ff3b4d;}.bt-plat.apple:hover{border-color:rgba(255,59,77,0.7);box-shadow:0 0 18px rgba(255,59,77,0.3), inset 0 0 8px rgba(255,59,77,0.1);}
+.bt-plat.deezer{color:#FEAA2D;}.bt-plat.deezer:hover{border-color:rgba(254,170,45,0.7);box-shadow:0 0 18px rgba(254,170,45,0.3), inset 0 0 8px rgba(254,170,45,0.1);}
+.bt-plat.tidal{color:#5EB7D7;}.bt-plat.tidal:hover{border-color:rgba(94,183,215,0.7);box-shadow:0 0 18px rgba(94,183,215,0.3), inset 0 0 8px rgba(94,183,215,0.1);}
 .bt-actions{display:flex;flex-wrap:wrap;gap:0.5rem;}
 .bt-legal{margin-top:0.75rem;font-size:0.75rem;color:rgba(255,255,255,.5);display:flex;gap:0.5rem;align-items:center;padding-left:2px;}
 .bt-legal a{color:rgba(255,255,255,.6);text-decoration:none;transition:color 0.2s ease;}

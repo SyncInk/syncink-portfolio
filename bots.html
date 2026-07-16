@@ -137,14 +137,15 @@ nav{
 
 /* ===== PLATFORM TAGS ===== */
 .plat-strip{display:flex;flex-wrap:wrap;gap:.6rem;padding:0 2rem 1.5rem;}
-.pt{display:inline-flex;align-items:center;gap:.38rem;padding:.28rem .7rem;border-radius:8px;font-size:.8rem;font-weight:700;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);}
+.pt{display:inline-flex;align-items:center;gap:.38rem;padding:0.35rem 0.8rem;border-radius:20px;font-size:.8rem;font-weight:700;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);transition:all 0.3s ease;cursor:default;}
+.pt:hover{background:rgba(255,255,255,0.06);transform:translateY(-1px);}
 .pt svg{width:15px;height:15px;fill:currentColor;}
-.pt.spotify{color:#1ED760;border-color:rgba(30,215,96,.2);}
-.pt.ytmusic{color:#ff0000;border-color:rgba(255,0,0,.2);}
-.pt.soundcloud{color:#FF5500;border-color:rgba(255,85,0,.2);}
-.pt.apple{color:#fc3c44;border-color:rgba(252,60,68,.2);}
-.pt.deezer{color:#FEAA2D;border-color:rgba(254,170,45,.2);}
-.pt.tidal{color:#5EB7D7;border-color:rgba(94,183,215,.2);}
+.pt.spotify{color:#1ED760;border-color:rgba(30,215,96,.2);}.pt.spotify:hover{border-color:rgba(30,215,96,0.7);box-shadow:0 0 18px rgba(30,215,96,0.3), inset 0 0 8px rgba(30,215,96,0.1);}
+.pt.ytmusic{color:#ff0000;border-color:rgba(255,0,0,.2);}.pt.ytmusic:hover{border-color:rgba(255,0,0,0.7);box-shadow:0 0 18px rgba(255,0,0,0.3), inset 0 0 8px rgba(255,0,0,0.1);}
+.pt.soundcloud{color:#FF5500;border-color:rgba(255,85,0,.2);}.pt.soundcloud:hover{border-color:rgba(255,85,0,0.7);box-shadow:0 0 18px rgba(255,85,0,0.3), inset 0 0 8px rgba(255,85,0,0.1);}
+.pt.apple{color:#fc3c44;border-color:rgba(252,60,68,.2);}.pt.apple:hover{border-color:rgba(252,60,68,0.7);box-shadow:0 0 18px rgba(252,60,68,0.3), inset 0 0 8px rgba(252,60,68,0.1);}
+.pt.deezer{color:#FEAA2D;border-color:rgba(254,170,45,.2);}.pt.deezer:hover{border-color:rgba(254,170,45,0.7);box-shadow:0 0 18px rgba(254,170,45,0.3), inset 0 0 8px rgba(254,170,45,0.1);}
+.pt.tidal{color:#5EB7D7;border-color:rgba(94,183,215,.2);}.pt.tidal:hover{border-color:rgba(94,183,215,0.7);box-shadow:0 0 18px rgba(94,183,215,0.3), inset 0 0 8px rgba(94,183,215,0.1);}
 
 /* ===== COMMAND GRID ===== */
 .cmd-section{padding:0 2rem 2rem;}
