@@ -313,62 +313,68 @@ footer a{color:var(--blue2);text-decoration:none;}
 footer a:hover{color:var(--cyan);}
 /* Premium Expand Toggle */
 .expand-btn-wrap {
-  text-align: center;
+  display: flex;
+  justify-content: flex-end;
   position: relative;
   z-index: 10;
-  margin: 1.5rem 0 -1rem 0;
+  padding: 0 2rem 1.5rem 0;
+  margin-top: -1rem;
 }
 .expand-bot-btn {
-  background: rgba(10, 15, 25, 0.8);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 30px;
-  padding: 0.5rem 1.4rem;
-  color: var(--muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 40px;
+  padding: 0.55rem 1.4rem;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: 'JetBrains Mono', monospace;
+  gap: 0.65rem;
+  font-family: 'Outfit', sans-serif;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  letter-spacing: 0.1em;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 1px rgba(255,255,255,0.05);
 }
 :root[data-theme="light"] .expand-bot-btn {
-  background: rgba(255,255,255,0.9);
-  border-color: rgba(42,68,162,0.15);
-  box-shadow: 0 4px 15px rgba(42,68,162,0.1);
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 8px 32px rgba(42,68,162,0.1), inset 0 1px 2px rgba(255,255,255,1);
+  color: var(--blue);
 }
 .expand-bot-btn:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  color: #fff;
 }
 :root[data-theme="light"] .expand-bot-btn:hover {
   background: #fff;
-  color: var(--text);
-  border-color: var(--blue);
-  box-shadow: 0 8px 25px rgba(42,68,162,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(42,68,162,0.15);
 }
 .expand-bot-btn .chevron-icon {
   transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   color: inherit;
 }
 .expand-bot-btn.active {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+  color: var(--muted);
 }
 :root[data-theme="light"] .expand-bot-btn.active {
-  background: #f8faff;
-  color: var(--blue);
-  border-color: var(--blue);
+  background: rgba(255,255,255,0.4);
+  box-shadow: none;
+  color: var(--muted);
 }
 .expand-bot-btn.active .chevron-icon {
   transform: rotate(180deg);
