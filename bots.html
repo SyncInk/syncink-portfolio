@@ -311,6 +311,88 @@ nav{
 footer{padding:2.5rem 2rem;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:.84rem;}
 footer a{color:var(--blue2);text-decoration:none;}
 footer a:hover{color:var(--cyan);}
+/* Premium Expand Toggle */
+.expand-btn-wrap {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  margin: 1.5rem 0 -1rem 0;
+}
+.expand-bot-btn {
+  background: rgba(10, 15, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 0.5rem 1.4rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+:root[data-theme="light"] .expand-bot-btn {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(42,68,162,0.15);
+  box-shadow: 0 4px 15px rgba(42,68,162,0.1);
+}
+.expand-bot-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+:root[data-theme="light"] .expand-bot-btn:hover {
+  background: #fff;
+  color: var(--text);
+  border-color: var(--blue);
+  box-shadow: 0 8px 25px rgba(42,68,162,0.2);
+}
+.expand-bot-btn .chevron-icon {
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  color: inherit;
+}
+.expand-bot-btn.active {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+:root[data-theme="light"] .expand-bot-btn.active {
+  background: #f8faff;
+  color: var(--blue);
+  border-color: var(--blue);
+}
+.expand-bot-btn.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.bot-extras {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.bot-extras-inner {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+              transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.bot-extras.expanded {
+  grid-template-rows: 1fr;
+}
+.bot-extras.expanded > .bot-extras-inner {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 </head>
 <body>
@@ -384,12 +466,14 @@ footer a:hover{color:var(--cyan);}
         </div>
       </div>
 
-      <div class="expand-btn-wrap" style="text-align: center; margin: 1.5rem 0 -1rem 0; position: relative; z-index: 10;">
-        <button class="expand-bot-btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; width: 36px; height: 36px; color: var(--muted); cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onclick="toggleBotExtras(this)" title="Toggle Details" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.color='var(--muted)';">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      <div class="expand-btn-wrap">
+        <button class="expand-bot-btn" onclick="toggleBotExtras(this)">
+          <span class="expand-text">View Details</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
       </div>
-      <div class="bot-extras" style="display: none; padding-top: 1rem;">
+      <div class="bot-extras">
+        <div class="bot-extras-inner">
 
       <div class="block-divider"></div>
       <div class="cmd-section" style="padding-top:1.5rem;">
@@ -454,9 +538,9 @@ footer a:hover{color:var(--cyan);}
               <li class="cmd-item"><span class="cmd-name">?lb</span><span class="cmd-desc">Global cookie leaderboard</span><button class="copy-btn" data-cmd="?lb" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
               <li class="cmd-item"><span class="cmd-name">?truth/dare</span><span class="cmd-desc">Random truth or dare</span><button class="copy-btn" data-cmd="?truth/dare" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
               <li class="cmd-item"><span class="cmd-name">?help</span><span class="cmd-desc">Show full command list</span><button class="copy-btn" data-cmd="?help" title="Copy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
-            </ul>
           </div>
         </div>
+      </div>
       </div>
       </div>
     </div>
@@ -492,12 +576,14 @@ footer a:hover{color:var(--cyan);}
         </div>
       </div>
 
-      <div class="expand-btn-wrap" style="text-align: center; margin: 1.5rem 0 -1rem 0; position: relative; z-index: 10;">
-        <button class="expand-bot-btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; width: 36px; height: 36px; color: var(--muted); cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onclick="toggleBotExtras(this)" title="Toggle Details" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.color='var(--muted)';">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      <div class="expand-btn-wrap">
+        <button class="expand-bot-btn" onclick="toggleBotExtras(this)">
+          <span class="expand-text">View Details</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
       </div>
-      <div class="bot-extras" style="display: none; padding-top: 1rem;">
+      <div class="bot-extras">
+        <div class="bot-extras-inner">
 
       <!-- Platforms -->
       <div class="plat-strip">
@@ -530,8 +616,8 @@ footer a:hover{color:var(--cyan);}
           <div class="rcmd"><div class="rcmd-name">/remove <button class="copy-btn" data-cmd="/remove" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Remove track from queue</div></div>
           <div class="rcmd"><div class="rcmd-name">/pause /resume <button class="copy-btn" data-cmd="/pause /resume" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Pause/Resume playback</div></div>
           <div class="rcmd"><div class="rcmd-name">/previous <button class="copy-btn" data-cmd="/previous" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Go to previous track</div></div>
-          <div class="rcmd"><div class="rcmd-name">/help <button class="copy-btn" data-cmd="/help" title="Copy" style="margin-left:auto"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div><div class="rcmd-desc">Lists all commands</div></div>
         </div>
+      </div>
       </div>
       </div>
     </div>
@@ -574,12 +660,14 @@ footer a:hover{color:var(--cyan);}
         </div>
       </div>
 
-      <div class="expand-btn-wrap" style="text-align: center; margin: 1.5rem 0 -1rem 0; position: relative; z-index: 10;">
-        <button class="expand-bot-btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; width: 36px; height: 36px; color: var(--muted); cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onclick="toggleBotExtras(this)" title="Toggle Details" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.color='var(--muted)';">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      <div class="expand-btn-wrap">
+        <button class="expand-bot-btn" onclick="toggleBotExtras(this)">
+          <span class="expand-text">View Details</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
       </div>
-      <div class="bot-extras" style="display: none; padding-top: 1rem;">
+      <div class="bot-extras">
+        <div class="bot-extras-inner">
 
       <div class="block-divider" style="margin-bottom:1.5rem;"></div>
       <!-- Ticket Features -->
@@ -627,8 +715,8 @@ footer a:hover{color:var(--cyan);}
       <div class="tech-tags">
         <span class="tech-tag">Node.js</span>
         <span class="tech-tag">Discord.js</span>
-        <span class="tech-tag">Advanced Thread System</span>
         <span class="tech-tag">Slash Commands API</span>
+      </div>
       </div>
       </div>
     </div>
@@ -670,12 +758,14 @@ footer a:hover{color:var(--cyan);}
         </div>
       </div>
 
-      <div class="expand-btn-wrap" style="text-align: center; margin: 1.5rem 0 -1rem 0; position: relative; z-index: 10;">
-        <button class="expand-bot-btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; width: 36px; height: 36px; color: var(--muted); cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onclick="toggleBotExtras(this)" title="Toggle Details" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.color='var(--muted)';">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon" style="transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      <div class="expand-btn-wrap">
+        <button class="expand-bot-btn" onclick="toggleBotExtras(this)">
+          <span class="expand-text">View Details</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
       </div>
-      <div class="bot-extras" style="display: none; padding-top: 1rem;">
+      <div class="bot-extras">
+        <div class="bot-extras-inner">
 
       <div class="block-divider" style="margin-bottom:1.5rem;"></div>
       <div class="voice-feats">
@@ -723,6 +813,7 @@ footer a:hover{color:var(--cyan);}
             For comprehensive configuration and advanced settings, please visit the <a href="https://syncink-voice-dashboard.up.railway.app" target="_blank" rel="noopener" style="color: #22d3ee; text-decoration: none; font-weight: 700; border-bottom: 1px dashed #22d3ee; padding-bottom: 1px; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Dashboard</a>.
           </div>
         </div>
+      </div>
       </div>
       </div>
     </div>
@@ -805,20 +896,49 @@ document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
   });
 })();
 
+// Premium slide sound synthesizer
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playPremiumSlideSound(isExpanding) {
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  
+  osc.type = 'sine';
+  const startFreq = isExpanding ? 300 : 200;
+  const endFreq = isExpanding ? 400 : 150;
+  
+  osc.frequency.setValueAtTime(startFreq, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(endFreq, audioCtx.currentTime + 0.15);
+  
+  gain.gain.setValueAtTime(0, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.05); // Super soft click
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+  
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.2);
+}
+
 // Toggle bot extras
 function toggleBotExtras(btn) {
   var extras = btn.parentElement.nextElementSibling;
-  var icon = btn.querySelector('.chevron-icon');
-  if (extras.style.display === 'none' || extras.style.display === '') {
-    extras.style.display = 'block';
-    icon.style.transform = 'rotate(180deg)';
-    btn.style.color = '#fff';
-    btn.style.borderColor = 'rgba(255,255,255,0.2)';
+  var text = btn.querySelector('.expand-text');
+  var isExpanded = extras.classList.contains('expanded');
+  
+  playPremiumSlideSound(!isExpanded);
+  
+  if (!isExpanded) {
+    extras.classList.add('expanded');
+    btn.classList.add('active');
+    if(text) text.textContent = 'Hide Details';
   } else {
-    extras.style.display = 'none';
-    icon.style.transform = 'rotate(0deg)';
-    btn.style.color = 'var(--muted)';
-    btn.style.borderColor = 'rgba(255,255,255,0.08)';
+    extras.classList.remove('expanded');
+    btn.classList.remove('active');
+    if(text) text.textContent = 'View Details';
   }
 }
 
