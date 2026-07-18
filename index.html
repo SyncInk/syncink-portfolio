@@ -1662,7 +1662,10 @@ section{position:relative;z-index:10;}
   text-align:center;
   text-decoration:none;
   color:inherit;
-  display:block;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03),0 10px 22px rgba(0,0,0,0.17);
   transition:transform .35s cubic-bezier(.22,.61,.36,1),border-color .35s ease,background .35s ease,box-shadow .42s ease;
 }
@@ -1716,8 +1719,9 @@ section{position:relative;z-index:10;}
   filter:none;
   transition:transform .35s ease,filter .35s ease,color .35s ease;
 }
-.soc-name{font-weight:800;font-size:0.92rem;margin-bottom:0.3rem;}
-.soc-handle{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);}
+.soc-name{font-weight:800;font-size:0.92rem;margin-bottom:0.3rem;width:100%;text-align:center;}
+.soc-handle{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--muted);width:100%;text-align:center;word-break:break-word;}
+.soc-card.mail .soc-handle{font-size:0.61rem;letter-spacing:-0.03em;}
 
 .soc-card:is(:hover,:focus-visible){
   transform:translateY(-4px);
