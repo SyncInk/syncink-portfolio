@@ -1647,7 +1647,8 @@ section{position:relative;z-index:10;}
 
 /* ============ SOCIALS ============ */
 .socials-bg{background:var(--bg2);}
-.socials-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+.socials-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2.5rem;}
+.socials-grid .soc-card{flex:1 1 calc(20% - 1.2rem);min-width:180px;max-width:260px;}
 .soc-card{
   --soc:#8fa6d0;
   --soc-rgb:143,166,208;
@@ -1750,6 +1751,7 @@ section{position:relative;z-index:10;}
 .soc-card.x{--soc:#E8EAF0;--soc-rgb:232,234,240;}
 .soc-card.ig{--soc:#DC2743;--soc-rgb:220,39,67;}
 .soc-card.gh{--soc:#E8EAF0;--soc-rgb:232,234,240;}
+.soc-card.mail{--soc:#00d4ff;--soc-rgb:0,212,255;}
 
 @keyframes bloomDrift{
   0%{transform:scale(1.01) translateY(0);filter:blur(11px);opacity:.7;}
@@ -1910,13 +1912,14 @@ nav,.hero-card,.bot-card,.interest-card,.sk-card,.cmd-category,.radio-cmd-tag,.p
   border-color:rgba(36,64,166,0.26);
   color:#3752a8;
 }
-:root[data-theme="light"] .soc-card.x,:root[data-theme="light"] .soc-card.gh{--soc:#1a2342;--soc-rgb:26,35,66;}
-.soc-card.x .soc-icon svg,.soc-card.gh .soc-icon svg{fill:currentColor;color:#e8eaf0;}
-:root[data-theme="light"] .soc-card.x .soc-icon svg,:root[data-theme="light"] .soc-card.gh .soc-icon svg{color:#1a2342;}
+:root[data-theme="light"] .soc-card.x,:root[data-theme="light"] .soc-card.gh,:root[data-theme="light"] .soc-card.mail{--soc:#1a2342;--soc-rgb:26,35,66;}
+.soc-card.x .soc-icon svg,.soc-card.gh .soc-icon svg,.soc-card.mail .soc-icon svg{fill:currentColor;color:#e8eaf0;}
+:root[data-theme="light"] .soc-card.x .soc-icon svg,:root[data-theme="light"] .soc-card.gh .soc-icon svg,:root[data-theme="light"] .soc-card.mail .soc-icon svg{color:#1a2342;}
 :root[data-theme="light"] .plat-tag.tidal{--brand:#1a2342;--brand-rgb:26,35,66;}
 
-@media(max-width:700px){.socials-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:360px){.socials-grid{grid-template-columns:1fr;}}
+@media(max-width:950px){.socials-grid .soc-card{flex:1 1 calc(33.333% - 1rem);max-width:none;}}
+@media(max-width:700px){.socials-grid .soc-card{flex:1 1 calc(50% - 1rem);}}
+@media(max-width:400px){.socials-grid .soc-card{flex:1 1 100%;max-width:none;}}
 /* ============ CONTACT ============ */
 .contact-wrap{text-align:center;max-width:700px;margin:0 auto;}
 .contact-heading{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;letter-spacing:-0.04em;line-height:0.95;margin-bottom:1.5rem;}
@@ -2942,6 +2945,13 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
         </span>
         <div class="soc-name">GitHub</div>
         <div class="soc-handle">SyncInk</div>
+      </a>
+      <a href="mailto:syncink.support@gmail.com" class="soc-card mail">
+        <span class="soc-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="#e8eaf0"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </span>
+        <div class="soc-name">Email</div>
+        <div class="soc-handle">syncink.support@gmail.com</div>
       </a>
     </div>
   </div>
