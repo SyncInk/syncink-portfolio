@@ -2358,6 +2358,51 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   0%{opacity:0;transform:translateY(20px);}
   100%{opacity:1;transform:translateY(0);}
 }
+
+/* ============ COMPREHENSIVE MOBILE OPTIMIZATIONS ============ */
+@media(max-width: 650px) {
+  /* Fix huge paddings that make cards too tall */
+  .hero { padding: 120px 1.5rem 50px; }
+  .section { padding: 4rem 1.5rem; }
+  
+  /* Fix Bot Teaser Cards squishing */
+  .bt-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.8rem 1.2rem;
+    gap: 1.2rem;
+  }
+  .bt-icon {
+    margin: 0 auto;
+  }
+  
+  /* Fix Bots Section Main Cards */
+  .bot-card {
+    padding: 1.8rem 1.2rem;
+  }
+  
+  /* Fix Process Cards */
+  .proc-card {
+    padding: 1.5rem 1.2rem;
+  }
+  
+  /* Fix Testimonial Cards */
+  .testi-card {
+    padding: 1.5rem 1.2rem;
+  }
+  
+  /* Buttons stretching */
+  .bt-actions {
+    justify-content: center;
+    width: 100%;
+  }
+  .bt-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @keyframes fadeRight{
   0%{opacity:0;transform:translateX(30px);}
   100%{opacity:1;transform:translateX(0);}
