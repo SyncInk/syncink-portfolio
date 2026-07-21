@@ -194,24 +194,24 @@ nav{
 .d-body p { margin-bottom: 0.8rem; }
 .d-body ul { list-style: none; padding: 0; }
 .d-body li { position: relative; margin-bottom: 0.4rem; padding-left: 1.2rem; }
-.d-body li::before { content: "•"; position: absolute; left: 0; color: #8b5cf6; font-weight: 900; }
-.d-body strong { font-weight: 800; color: #fff; }
+.d-body li::before { content: "•"; position: absolute; left: 0; color: #5865F2; font-weight: 900; }
+.d-body strong { font-weight: 700; color: #f2f3f5; }
 :root[data-theme="light"] .d-body strong { color: #111827; }
-.d-body a { color: #00d4ff; text-decoration: none; }
+.d-body a { color: #00a8fc; text-decoration: none; }
 .d-body a:hover { text-decoration: underline; }
 
-.d-h1 { font-size:1.5rem; font-weight:800; margin:1rem 0 0.5rem; color:#fff; }
-.d-h2 { font-size:1.25rem; font-weight:700; margin:0.8rem 0 0.4rem; color:#fff; }
-.d-h3 { font-size:1.1rem; font-weight:700; margin:0.6rem 0 0.3rem; color:#fff; }
+.d-h1 { font-size:1.5rem; font-weight:800; margin:1rem 0 0.5rem; color:#f2f3f5; }
+.d-h2 { font-size:1.25rem; font-weight:700; margin:0.8rem 0 0.4rem; color:#f2f3f5; }
+.d-h3 { font-size:1.1rem; font-weight:700; margin:0.6rem 0 0.3rem; color:#f2f3f5; }
 :root[data-theme="light"] .d-h1, :root[data-theme="light"] .d-h2, :root[data-theme="light"] .d-h3 { color:#111827; }
 
-.d-blockquote { border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:2px; margin-bottom:2px; color:#b9bbbe; }
-:root[data-theme="light"] .d-blockquote { border-left-color: #d1d5db; color: #6b7280; }
+.d-blockquote { border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:2px; margin-bottom:2px; color:#dbdee1; }
+:root[data-theme="light"] .d-blockquote { border-left-color: #d1d5db; color: #4b5563; }
 
-.d-code { background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px; }
+.d-code { background:#1e1f22; color:#dbdee1; padding:2px 4.5px; border-radius:4px; font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace; font-size: 0.875rem; }
 :root[data-theme="light"] .d-code { background:rgba(0,0,0,0.05); color:#111827; }
 
-.d-link { color:var(--cyan); text-decoration:none; }
+.d-link { color:#00a8fc; text-decoration:none; }
 .d-link:hover { text-decoration:underline; }
 
 .d-mention {
@@ -374,7 +374,7 @@ function formatDiscordText(text) {
              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
              .replace(/\*(.*?)\*/g, '<em>$1</em>')
              .replace(/__(.*?)__/g, '<u>$1</u>')
-             .replace(/(?<![A-Za-z0-9])_([^_]+)_(?![A-Za-z0-9])/g, '<em>$1</em>')
+             .replace(/(?<![A-Za-z0-9])_(.*?)_(?![A-Za-z0-9])/g, '<em>$1</em>')
              .replace(/~~(.*?)~~/g, '<del>$1</del>')
              .replace(/`([^`]+)`/g, '<code class="d-code">$1</code>');
              
