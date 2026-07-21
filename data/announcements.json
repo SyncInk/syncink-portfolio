@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "1529128177497280524",
+    "content": "#  <:announce:920051412329725982> SyncInk Ticket — Category Update is Live!\n\n_We’re excited to roll out a major update to **SyncInk Ticket**, bringing fully customizable ticket categories, improved dashboard performance, better analytics, and more powerful activity tracking._\n\n# <:syncclaimticket:1513812248957550683> What’s New with Categories?\n\n_`Ticket panel categories` and `transfer categories` are now **fully customizable** directly from the [dashboard](https://syncink-ticket-bot.up.railway.app/)._\n\n> <:topggDotPurple:921606879082315796><a:purplearrow:1360594346591912067> Add, remove, and edit categories\n> <:topggDotPurple:921606879082315796><a:purplearrow:1360594346591912067>Use your own **custom emojis**\n> <:topggDotPurple:921606879082315796><a:purplearrow:1360594346591912067>Supports both **animated and non-animated emojis**\n> <:topggDotPurple:921606879082315796><a:purplearrow:1360594346591912067>Customize ticket and transfer options independently\n\n# <a:endlessgears:609046319155380231> `How to Set It Up`<a:endlessgears:609046319155380231>﻿\n\n#  <:syncinkvoicename:1517255773405577416>Ticket Categories\n\n_To add, remove, or customize the categories displayed on your `ticket panel`:_\n\n> **Dashboard `→` Ticket Categories**\n> 🔗 [Open Ticket Categories](https://syncink-ticket-bot.up.railway.app/categories)\n\n# <:sync_ticket_transfer:1513904436785971211>Transfer Categories\n\n_To customize the options available when `transferring tickets`:_\n\n> **Dashboard `→` Transfer Options**\n> 🔗 [Open Transfer Options](https://syncink-ticket-bot.up.railway.app/transfer-options)\n\n# <a:sparklestars:831911200073580635>`More Improvements in This Update`<a:sparklestars:831911200073580635>﻿\n\n# <a:8422lightbluefireflames:1251513920821133313>Faster & More Stable Dashboard\n\n> The dashboard has been optimized for improved **speed, responsiveness, and stability**, making configuration `smoother` and `more reliable.`\n\n# <:IconStatusWebOnline:884924726814867457> Instant Online Transcripts\n\n> When a ticket is closed, its transcript is now **instantly saved online** and made available through the dashboard for easier access and record keeping.\n\n# <a:syncink_voice_alert:1518903037257846874>Ticket Analytics\n\n> Get simple, useful charts powered by the same **live ticket records and activity history** used throughout the dashboard.\n\n# <:syncink_admin:1518924309668823160>Dashboard Audit Logs\n\n> Every configuration update is recorded, including **who made the change and what was changed**, giving server administrators better visibility without affecting the bot’s core systems.\n\n# <:staff:314068430787706880>Staff Activity\n\n> View your **top operators** based on recent ticket actions and get a clearer picture of staff activity.\n\n# 📈Category Traffic\n\n> See how ticket activity is distributed across your panel categories and identify which categories receive the most traffic.\n\n# <:role_manager:1252322417863561357> Manage Your Ticket System\n\n> <:IconStatusWebOnline:884924726814867457><a:purplearrow:1360594346591912067>**[SyncInk Ticket Dashboard](https://syncink-ticket-bot.up.railway.app)**\n> Configure your categories, manage transfer options, review transcripts, monitor analytics, and customize your ticket system — all from one place.\n\n**Thank you for using SyncInk Ticket.<:02kai_heart:1402490077426225253>**\n<a:syncearthblurple:1519008181550842008> More improvements and features are on the way!\n\n`— SyncInk Development Team`<:syncink:1529119144749043852>",
+    "timestamp": "2026-07-21T14:09:27.343000+00:00",
+    "author": "sync_ink_001",
+    "author_id": "930306512864280607",
+    "author_avatar": "1b7fe6ac79dd5bd0346bc084abf15c07",
+    "embeds": [],
+    "attachments": []
+  },
+  {
+    "id": "1525979280842952834",
+    "content": "UPDATE CHANNEL IS SHIFTING TO https://discord.com/channels/1520457643842342912/1520460544811859968",
+    "timestamp": "2026-07-12T21:36:51.877000+00:00",
+    "author": "SyncInk",
+    "author_id": "1520522990280769727",
+    "author_avatar": "86107b908daa228238509d05bd1514bd",
+    "embeds": [],
+    "attachments": []
+  },
+  {
+    "id": "1525971023936225470",
+    "content": "# 🎉 **SyncInk Ticket Dashboard Update is Live!**\n\n## 🚀 Major Dashboard Update\n\nWe're excited to announce that the **SyncInk Ticket Dashboard** has received a **major update** with numerous improvements, new customization options, and important bug fixes.\n\n### ✨ What's New?\n\n> 🛠️ Fixed various dashboard bugs and improved overall stability.\n> 📂 You can now **customize your ticket category** directly from the dashboard.\n> ⚡ Improved performance and a smoother user experience.\n> 🎨 Enhanced interface with better customization options.\n> 🔧 Multiple quality-of-life improvements and backend optimizations.\n\n## 🌐 Dashboard\n\n➡️ [SyncInk Ticket Dashboard](https://syncink-discord-ticketbot.up.railway.app/?utm_source=chatgpt.com)\n\n## 💜 We Need Your Feedback!\n\nIf you encounter any issues or have suggestions for new features, please let us know in this server. Your feedback helps make **SyncInk** even better for everyone.\n\n> Thank you for supporting **SyncInk**! 🚀✨",
+    "timestamp": "2026-07-12T21:04:03.277000+00:00",
+    "author": "SyncInk",
+    "author_id": "1520522990280769727",
+    "author_avatar": "86107b908daa228238509d05bd1514bd",
+    "embeds": [],
+    "attachments": []
+  }
+]
