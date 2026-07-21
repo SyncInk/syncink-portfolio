@@ -375,7 +375,7 @@ function formatDiscordText(text) {
              .replace(/`([^`]+)`/g, '<code class="d-code">$1</code>');
              
   // Raw URLs (not already part of an anchor tag or mention)
-  html = html.replace(/(?<!href=")(https?:\/\/[^\s<"]+)/g, '<a href="$1" target="_blank" rel="noopener" class="d-link">$1</a>');
+  html = html.replace(/(?<!href="|src=")(https?:\/\/[^\s<"]+)/g, '<a href="$1" target="_blank" rel="noopener" class="d-link">$1</a>');
   
   // Newlines
   html = html.replace(/\n/g, '<br>');
