@@ -110,10 +110,16 @@ nav{
 .d-card-top {
   height: 5px;
   width: 100%;
+  background-size: 200% 100%;
+  animation: flowGradient 4s linear infinite;
 }
-.gradient-1 { background: linear-gradient(90deg, #f97316, #ec4899, #8b5cf6, #3b82f6); }
-.gradient-2 { background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6, #d946ef); }
-.gradient-3 { background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6); }
+@keyframes flowGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.gradient-1 { background: linear-gradient(90deg, #f97316, #ec4899, #8b5cf6, #3b82f6, #f97316, #ec4899, #8b5cf6, #3b82f6); }
+.gradient-2 { background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6, #d946ef, #06b6d4, #3b82f6, #8b5cf6, #d946ef); }
+.gradient-3 { background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6, #10b981, #3b82f6, #8b5cf6); }
 
 .d-card-inner {
   padding: 1.8rem 2.2rem;
