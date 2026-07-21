@@ -188,21 +188,21 @@ nav{
 .d-body {
   color: #dbdee1;
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.45;
 }
 :root[data-theme="light"] .d-body { color: #374151; }
-.d-body p { margin-bottom: 1.2rem; }
+.d-body p { margin-bottom: 0.8rem; }
 .d-body ul { list-style: none; padding: 0; }
-.d-body li { position: relative; margin-bottom: 0.8rem; padding-left: 1.2rem; }
+.d-body li { position: relative; margin-bottom: 0.4rem; padding-left: 1.2rem; }
 .d-body li::before { content: "•"; position: absolute; left: 0; color: #8b5cf6; font-weight: 900; }
 .d-body strong { font-weight: 800; color: #fff; }
 :root[data-theme="light"] .d-body strong { color: #111827; }
 .d-body a { color: #00d4ff; text-decoration: none; }
 .d-body a:hover { text-decoration: underline; }
 
-.d-h1 { font-size:1.5rem; font-weight:900; margin:2rem 0 1rem; color:#fff; }
-.d-h2 { font-size:1.3rem; font-weight:800; margin:1.8rem 0 0.8rem; color:#fff; }
-.d-h3 { font-size:1.15rem; font-weight:800; margin:1.5rem 0 0.5rem; color:#fff; }
+.d-h1 { font-size:1.5rem; font-weight:800; margin:1rem 0 0.5rem; color:#fff; }
+.d-h2 { font-size:1.25rem; font-weight:700; margin:0.8rem 0 0.4rem; color:#fff; }
+.d-h3 { font-size:1.1rem; font-weight:700; margin:0.6rem 0 0.3rem; color:#fff; }
 :root[data-theme="light"] .d-h1, :root[data-theme="light"] .d-h2, :root[data-theme="light"] .d-h3 { color:#111827; }
 
 .d-blockquote { border-left:4px solid #4f545c; padding-left:12px; margin-left:4px; margin-top:2px; margin-bottom:2px; color:#b9bbbe; }
@@ -364,13 +364,17 @@ function formatDiscordText(text) {
   });
 
   // Custom Emojis
-  html = html.replace(/&lt;a?:([a-zA-Z0-9_]+):(\d+)&gt;/g, '<img src="https://cdn.discordapp.com/emojis/$2.png?v=1" alt=":$1:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />');
+  html = html.replace(/&lt;(a?):([a-zA-Z0-9_]+):(\d+)&gt;/g, (match, isAnimated, name, id) => {
+    const ext = isAnimated ? 'gif' : 'png';
+    return `<img src="https://cdn.discordapp.com/emojis/${id}.${ext}?v=1" alt=":${name}:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />`;
+  });
   
   // Basic formatting
   html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
              .replace(/\*(.*?)\*/g, '<em>$1</em>')
              .replace(/__(.*?)__/g, '<u>$1</u>')
+             .replace(/(?<![A-Za-z0-9])_([^_]+)_(?![A-Za-z0-9])/g, '<em>$1</em>')
              .replace(/~~(.*?)~~/g, '<del>$1</del>')
              .replace(/`([^`]+)`/g, '<code class="d-code">$1</code>');
              
