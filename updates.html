@@ -118,7 +118,14 @@ nav{
 .d-card-inner {
   padding: 1.8rem 2.2rem;
 }
-@media(max-width: 600px) { .d-card-inner { padding: 1.4rem; } }
+@media(max-width: 650px) { 
+  .d-card-inner { padding: 1.2rem; }
+  .d-title { font-size: 1.25rem !important; }
+  .d-h1 { font-size: 1.2rem !important; }
+  .d-h2 { font-size: 1.1rem !important; }
+  .d-h3 { font-size: 1.05rem !important; }
+  .d-body { font-size: 0.95rem !important; }
+}
 
 .d-title {
   font-size: 1.6rem;
@@ -366,7 +373,7 @@ function formatDiscordText(text) {
   // Custom Emojis
   html = html.replace(/&lt;(a?):([a-zA-Z0-9_]+):(\d+)&gt;/g, (match, isAnimated, name, id) => {
     const ext = isAnimated ? 'gif' : 'png';
-    return `<img src="https://cdn.discordapp.com/emojis/${id}.${ext}?v=1" alt=":${name}:" style="width:1.4em;height:1.4em;vertical-align:bottom;display:inline-block;margin:0 2px;" />`;
+    return `<img src="https://cdn.discordapp.com/emojis/${id}.${ext}?v=1" alt=":${name}:" style="width:1.375em;height:1.375em;vertical-align:-0.2em;display:inline-block;margin:0 1px;" />`;
   });
   
   // Basic formatting
