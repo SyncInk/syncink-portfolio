@@ -379,7 +379,7 @@ function formatDiscordText(text) {
   // Custom Emojis
   html = html.replace(/&lt;(a?):([a-zA-Z0-9_]+):(\d+)&gt;/g, (match, isAnimated, name, id) => {
     const ext = isAnimated ? 'gif' : 'png';
-    return `<img src="https://cdn.discordapp.com/emojis/${id}.${ext}?v=1" alt=":${name}:" style="width:1.375em;height:1.375em;vertical-align:-0.2em;display:inline-block;margin:0 1px;" />`;
+    return `<img src="https://cdn.discordapp.com/emojis/${id}.${ext}?v=1" alt=":${name}:" style="width:1.375em;height:1.375em;vertical-align:middle;margin:-2px 2px 0;display:inline-block;" />`;
   });
   
   // Basic formatting
