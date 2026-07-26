@@ -224,6 +224,31 @@ nav{
 .d-code { background:#1e1f22; color:#dbdee1; padding:2px 4.5px; border-radius:4px; font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace; font-size: 0.9em; }
 :root[data-theme="light"] .d-code { background:rgba(0,0,0,0.05); color:#111827; }
 
+.d-code-block {
+  background: #1e1f22;
+  color: #dbdee1;
+  padding: 0.6rem;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  margin: 0.6rem 0;
+  overflow-x: auto;
+  border: 1px solid #111214;
+}
+:root[data-theme="light"] .d-code-block { background: #f2f3f5; color: #111827; border-color: #e5e7eb; }
+.d-code-block.diff { padding: 0.6rem 0; }
+.d-diff-normal { padding: 0 0.6rem; }
+.d-diff-minus {
+  background: rgba(250, 119, 124, 0.15);
+  color: #ff7b72;
+  padding: 0 0.6rem;
+}
+.d-diff-plus {
+  background: rgba(144, 238, 144, 0.15);
+  color: #58a6ff;
+  padding: 0 0.6rem;
+}
+
 .d-link { color:#00a8fc; text-decoration:none; }
 .d-link:hover { text-decoration:underline; }
 
@@ -408,6 +433,20 @@ function formatDiscordText(text) {
     return `<img src="https://cdn.discordapp.com/emojis/${id}.${ext}?v=1" alt=":${name}:" style="width:1.375em;height:1.375em;vertical-align:middle;margin:-2px 2px 0;display:inline-block;" />`;
   });
   
+  // Multiline Code Blocks (e.g. ```diff)
+  html = html.replace(/```([a-z0-9]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+    if (lang === 'diff') {
+      const lines = code.split('\n');
+      const formatted = lines.map(line => {
+        if (line.startsWith('-')) return `<div class="d-diff-minus">${line}</div>`;
+        if (line.startsWith('+')) return `<div class="d-diff-plus">${line}</div>`;
+        return `<div class="d-diff-normal">${line}</div>`;
+      }).join('');
+      return `<div class="d-code-block diff">${formatted}</div>`;
+    }
+    return `<div class="d-code-block">${code}</div>`;
+  });
+
   // Basic formatting
   html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
