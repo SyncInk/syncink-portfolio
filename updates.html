@@ -434,9 +434,9 @@ function formatDiscordText(text) {
   });
   
   // Multiline Code Blocks (e.g. ```diff)
-  html = html.replace(/```([a-z0-9]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+  html = html.replace(/```([a-z0-9]*)\r?\n([\s\S]*?)```/g, (match, lang, code) => {
     if (lang === 'diff') {
-      const lines = code.split('\n');
+      const lines = code.split(/\r?\n/);
       const formatted = lines.map(line => {
         if (line.startsWith('-')) return `<div class="d-diff-minus">${line}</div>`;
         if (line.startsWith('+')) return `<div class="d-diff-plus">${line}</div>`;
@@ -553,6 +553,15 @@ async function loadAnnouncements() {
           }
           embedHtml += `</div>`; // end d-embed
           bodyHtml += embedHtml;
+        });
+      }
+      
+      // Handle attachments
+      if (msg.attachments && msg.attachments.length > 0) {
+        msg.attachments.forEach(attachment => {
+          if (attachment.content_type && attachment.content_type.startsWith('image/')) {
+            bodyHtml += `<div style="margin-top: 1rem;"><img src="${attachment.url}" alt="${attachment.filename || 'Attachment'}" style="max-width: 100%; border-radius: 8px; max-height: 400px; object-fit: contain; border: 1px solid rgba(255,255,255,0.1);" loading="lazy" /></div>`;
+          }
         });
       }
       
