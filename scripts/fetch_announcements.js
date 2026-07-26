@@ -2,7 +2,7 @@ const fs = require('fs');
 const https = require('https');
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
-const CHANNEL_ID = '1520460544811859968';
+const CHANNEL_ID = '1520460505196662836';
 
 if (!TOKEN) {
   console.error('No DISCORD_BOT_TOKEN provided.');
