@@ -387,12 +387,15 @@ function formatDiscordText(text) {
              .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
              .replace(/\*(.*?)\*/g, '<em>$1</em>')
              .replace(/__(.*?)__/g, '<u>$1</u>')
-             .replace(/(?<![A-Za-z0-9])_(.*?)_(?![A-Za-z0-9])/g, '<em>$1</em>')
+             .replace(/(^|[^A-Za-z0-9])_(.*?)_(?=[^A-Za-z0-9]|$)/g, '$1<em>$2</em>')
              .replace(/~~(.*?)~~/g, '<del>$1</del>')
              .replace(/`([^`]+)`/g, '<code class="d-code">$1</code>');
              
   // Raw URLs (not already part of an anchor tag or mention)
-  html = html.replace(/(?<!href="|src=")(https?:\/\/[^\s<"]+)/g, '<a href="$1" target="_blank" rel="noopener" class="d-link">$1</a>');
+  html = html.replace(/(href="|src=")?(https?:\/\/[^\s<"]+)/g, (match, attr, url) => {
+    if (attr) return match;
+    return `<a href="${url}" target="_blank" rel="noopener" class="d-link">${url}</a>`;
+  });
   
   // Newlines
   html = html.replace(/\n/g, '<br>');
