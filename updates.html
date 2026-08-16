@@ -577,6 +577,11 @@ async function loadAnnouncements() {
           avatarUrl = `https://cdn.discordapp.com/guilds/${msg.guild_id}/users/${msg.author_id}/avatars/${msg.author_avatar}.png`;
       }
       
+      // Override with local image
+      if (msg.author_id === "902097486820466728" || msg.author === "sync_ink_001") {
+          avatarUrl = "SyncInk Server Logo.png";
+      }
+      
       html += `
       <div class="d-card" style="animation-delay: ${index * 0.1}s;">
         <div class="d-card-top ${gradClass}"></div>
