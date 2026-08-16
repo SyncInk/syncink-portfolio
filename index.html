@@ -4250,7 +4250,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 3. Sync Avatar Automatically!
         const pfpImg = document.getElementById('profile-img');
-        if (pfpImg) pfpImg.src = "SyncInk Server Logo.png";
+        if (pfpImg && data.discord_user && data.discord_user.avatar) {
+          const avatarExt = data.discord_user.avatar.startsWith('a_') ? 'gif' : 'png';
+          pfpImg.src = `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.${avatarExt}?size=512`;
+        }
 
         // 4. Sync Discord Display Name Automatically!
         if (data.discord_user) {
