@@ -571,7 +571,11 @@ async function loadAnnouncements() {
       }
       
       const authorLink = msg.author_id ? `https://discord.com/users/${msg.author_id}` : `https://discord.gg/FnsJYbmW4A`;
-      const avatarUrl = msg.author_avatar ? `https://cdn.discordapp.com/avatars/${msg.author_id}/${msg.author_avatar}.png` : 'https://cdn3.emoji.gg/emojis/494996-announcement.png';
+      
+      let avatarUrl = msg.author_avatar ? `https://cdn.discordapp.com/avatars/${msg.author_id}/${msg.author_avatar}.png` : 'https://cdn3.emoji.gg/emojis/494996-announcement.png';
+      if (msg.is_server_avatar && msg.guild_id) {
+          avatarUrl = `https://cdn.discordapp.com/guilds/${msg.guild_id}/users/${msg.author_id}/avatars/${msg.author_avatar}.png`;
+      }
       
       html += `
       <div class="d-card" style="animation-delay: ${index * 0.1}s;">

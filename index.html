@@ -4250,10 +4250,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 3. Sync Avatar Automatically!
         if (data.discord_user && data.discord_user.avatar) {
-          const ext = data.discord_user.avatar.startsWith('a_') ? 'gif' : 'webp';
-          const pfpUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${data.discord_user.avatar}.${ext}?size=512`;
-          const pfpImg = document.getElementById('profile-img');
-          if (pfpImg) pfpImg.src = pfpUrl;
+          let ext = data.discord_user.avatar.startsWith('a_') ? 'gif' : 'webp';
+          let pfpUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${data.discord_user.avatar}.${ext}?size=512`;
+          
+          fetch('./data/profile.json?t=' + new Date().getTime())
+            .then(res => res.json())
+            .then(profile => {
+               if (profile.server_avatar && profile.guild_id) {
+                 ext = profile.server_avatar.startsWith('a_') ? 'gif' : 'webp';
+                 pfpUrl = `https://cdn.discordapp.com/guilds/${profile.guild_id}/users/${DISCORD_ID}/avatars/${profile.server_avatar}.${ext}?size=512`;
+               }
+               const pfpImg = document.getElementById('profile-img');
+               if (pfpImg) pfpImg.src = pfpUrl;
+            })
+            .catch(() => {
+               const pfpImg = document.getElementById('profile-img');
+               if (pfpImg) pfpImg.src = pfpUrl;
+            });
         }
 
         // 4. Sync Discord Display Name Automatically!
