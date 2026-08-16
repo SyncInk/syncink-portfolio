@@ -907,7 +907,7 @@ footer a:hover{color:var(--cyan);}
 
       <div class="srv-card reveal">
         <div class="srv-icon-wrap">
-          <img src="https://cdn.discordapp.com/icons/1136319484459266100/ba66f3204080aec335d410249295408d.png?size=256" alt="SyncInk Support" id="srvIcon" onerror="this.src='main-bot.jpg'">
+          <img src="SyncInk Server Logo.png" alt="SyncInk Support" id="srvIcon" onerror="this.src='main-bot.jpg'">
         </div>
         <div class="srv-info">
           <div class="srv-title-row">
@@ -1031,7 +1031,6 @@ function fetchSrv(){
         if(t)t.textContent=d.approximate_member_count||7;
         if(o)o.textContent=d.approximate_presence_count||4;
         if(n&&d.guild.name)n.textContent=d.guild.name;
-        if(ic&&d.guild.icon)ic.src='https://cdn.discordapp.com/icons/'+d.guild.id+'/'+d.guild.icon+'.png?size=256';
       }
     }).catch(function(){});
 }
