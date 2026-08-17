@@ -245,43 +245,56 @@
           </div>
           <div class="form-group" style="flex: 2; min-width: 200px;">
             <label>Timezone & Availability <span class="req">*</span></label>
-            <input type="text" id="timezone" class="form-control" placeholder="e.g. EST, 4 hours/day">
-            <div class="error-msg" id="err-timezone">Please provide your availability.</div>
+            <select id="timezone" class="form-control" style="appearance: auto; padding-right: 1.5rem; color-scheme: inherit;">
+              <option value="" disabled selected>Select your availability</option>
+              <option value="EST / 1-3 hours">EST / 1-3 hours per day</option>
+              <option value="EST / 4+ hours">EST / 4+ hours per day</option>
+              <option value="CST / 1-3 hours">CST / 1-3 hours per day</option>
+              <option value="CST / 4+ hours">CST / 4+ hours per day</option>
+              <option value="PST / 1-3 hours">PST / 1-3 hours per day</option>
+              <option value="PST / 4+ hours">PST / 4+ hours per day</option>
+              <option value="GMT (UK/EU) / 1-3 hours">GMT (UK/EU) / 1-3 hours per day</option>
+              <option value="GMT (UK/EU) / 4+ hours">GMT (UK/EU) / 4+ hours per day</option>
+              <option value="IST (Asia) / 1-3 hours">IST (Asia) / 1-3 hours per day</option>
+              <option value="IST (Asia) / 4+ hours">IST (Asia) / 4+ hours per day</option>
+              <option value="Other / Flexible">Other Timezone / Flexible</option>
+            </select>
+            <div class="error-msg" id="err-timezone">Please select your availability.</div>
           </div>
         </div>
 
         <div class="form-group">
           <label>Why do you want to join the Staff team? <span class="req">*</span></label>
-          <textarea id="staff_reason" class="form-control" placeholder="Explain your motivation..."></textarea>
-          <div class="char-count" id="count-staff_reason">0 / 50 min characters</div>
+          <textarea id="staff_reason" class="form-control" placeholder="Explain your motivation..." maxlength="1024"></textarea>
+          <div class="char-count" id="count-staff_reason">0 / 1024 max (Min 50)</div>
           <div class="error-msg" id="err-staff_reason">Please write at least 50 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Past Moderation Experience <span class="req">*</span></label>
-          <textarea id="staff_exp" class="form-control" placeholder="List your previous moderation experience..."></textarea>
-          <div class="char-count" id="count-staff_exp">0 / 50 min characters</div>
+          <textarea id="staff_exp" class="form-control" placeholder="List your previous moderation experience..." maxlength="1024"></textarea>
+          <div class="char-count" id="count-staff_exp">0 / 1024 max (Min 50)</div>
           <div class="error-msg" id="err-staff_exp">Please write at least 50 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Scenario 1: A user is spamming the chat and bypassing filters. What do you do? <span class="req">*</span></label>
-          <textarea id="staff_scen1" class="form-control" placeholder="Explain your actions step by step..."></textarea>
-          <div class="char-count" id="count-staff_scen1">0 / 50 min characters</div>
+          <textarea id="staff_scen1" class="form-control" placeholder="Explain your actions step by step..." maxlength="1024"></textarea>
+          <div class="char-count" id="count-staff_scen1">0 / 1024 max (Min 50)</div>
           <div class="error-msg" id="err-staff_scen1">Please write at least 50 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Scenario 2: Two active members are having a heated argument that is escalating into insults. How do you de-escalate it? <span class="req">*</span></label>
-          <textarea id="staff_scen2" class="form-control" placeholder="Explain how you handle conflicts..."></textarea>
-          <div class="char-count" id="count-staff_scen2">0 / 50 min characters</div>
+          <textarea id="staff_scen2" class="form-control" placeholder="Explain how you handle conflicts..." maxlength="1024"></textarea>
+          <div class="char-count" id="count-staff_scen2">0 / 1024 max (Min 50)</div>
           <div class="error-msg" id="err-staff_scen2">Please write at least 50 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Scenario 3: A user accuses another staff member of abuse of power. How do you handle the situation? <span class="req">*</span></label>
-          <textarea id="staff_scen3" class="form-control" placeholder="Explain your investigation process..."></textarea>
-          <div class="char-count" id="count-staff_scen3">0 / 50 min characters</div>
+          <textarea id="staff_scen3" class="form-control" placeholder="Explain your investigation process..." maxlength="1024"></textarea>
+          <div class="char-count" id="count-staff_scen3">0 / 1024 max (Min 50)</div>
           <div class="error-msg" id="err-staff_scen3">Please write at least 50 characters.</div>
         </div>
 
@@ -335,7 +348,7 @@
       const countEl = document.getElementById('count-' + id);
       el.addEventListener('input', () => {
         const len = el.value.trim().length;
-        countEl.textContent = `${len} / 50 min characters`;
+        countEl.textContent = `${len} / 1024 max (Min 50)`;
         if(len >= 50) {
           countEl.className = 'char-count valid';
         } else if(len > 0) {

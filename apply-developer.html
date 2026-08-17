@@ -270,15 +270,15 @@
 
         <div class="form-group">
           <label>Have you ever made a Discord Bot before? What libraries did you use? <span class="req">*</span></label>
-          <textarea id="dev_bot_exp" class="form-control" placeholder="Tell us about your bot development experience..."></textarea>
-          <div class="char-count" id="count-dev_bot_exp">0 / 50 min characters</div>
+          <textarea id="dev_bot_exp" class="form-control" placeholder="Tell us about your bot development experience..." maxlength="1024"></textarea>
+          <div class="char-count" id="count-dev_bot_exp">0 / 1024 max (Min 50)</div>
           <div class="error-msg" id="err-dev_bot_exp">Please write at least 50 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Describe a complex feature you've implemented in a project <span class="req">*</span></label>
-          <textarea id="dev_complex" class="form-control" placeholder="Explain the feature and how you built it..."></textarea>
-          <div class="char-count" id="count-dev_complex">0 / 50 min characters</div>
+          <textarea id="dev_complex" class="form-control" placeholder="Explain the feature and how you built it..." maxlength="1024"></textarea>
+          <div class="char-count" id="count-dev_complex">0 / 1024 max (Min 50)</div>
           <div class="error-msg" id="err-dev_complex">Please write at least 50 characters.</div>
         </div>
         
@@ -338,7 +338,7 @@
       const countEl = document.getElementById('count-' + id);
       el.addEventListener('input', () => {
         const len = el.value.trim().length;
-        countEl.textContent = `${len} / 50 min characters`;
+        countEl.textContent = `${len} / 1024 max (Min 50)`;
         if(len >= 50) {
           countEl.className = 'char-count valid';
         } else if(len > 0) {
