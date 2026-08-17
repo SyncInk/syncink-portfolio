@@ -159,6 +159,23 @@
       color: var(--text);
     }
 
+    .profile-card {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 12px;
+      background: rgba(0,0,0,0.15);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .profile-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
     textarea.form-control {
       min-height: 120px;
       resize: vertical;
@@ -264,7 +281,7 @@
           <label>Discord ID <span class="req">*</span></label>
           <input type="text" id="discord_id" class="form-control" placeholder="18-20 digit ID">
           <div class="error-msg" id="err-discord_id">Please enter a valid 17-20 digit Discord ID.</div>
-          <div id="discord-profile" style="display: none; align-items: center; gap: 12px; margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid var(--border);">
+          <div id="discord-profile" class="profile-card">
              <img id="dp-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%;">
              <div style="flex: 1;">
                <div id="dp-name" style="font-weight: 700; color: var(--text);"></div>
@@ -418,7 +435,11 @@
 
     didInput.addEventListener('input', () => {
       clearTimeout(dTimeout);
-      dProfile.style.display = 'none';
+      dProfile.classList.remove('show');
+      setTimeout(() => {
+        if (!dProfile.classList.contains('show')) dProfile.style.display = 'none';
+      }, 400); // match transition duration
+
       const val = didInput.value.trim();
       if (/^\d{17,20}$/.test(val)) {
         dTimeout = setTimeout(async () => {
@@ -430,6 +451,8 @@
                dTag.textContent = '@' + json.data.username;
                dAvatar.src = json.data.avatarURL || 'https://cdn.discordapp.com/embed/avatars/0.png';
                dProfile.style.display = 'flex';
+               // trigger reflow then add show class for animation
+               setTimeout(() => dProfile.classList.add('show'), 10);
             }
           } catch(e) {}
         }, 500);
