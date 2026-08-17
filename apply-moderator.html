@@ -130,6 +130,20 @@
       box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
     }
 
+    select.form-control {
+      cursor: pointer;
+      color-scheme: dark;
+    }
+
+    :root[data-theme="light"] select.form-control {
+      color-scheme: light;
+    }
+
+    select.form-control option {
+      background-color: var(--surface);
+      color: var(--text);
+    }
+
     textarea.form-control {
       min-height: 120px;
       resize: vertical;
