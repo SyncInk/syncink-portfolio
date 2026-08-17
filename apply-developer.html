@@ -263,6 +263,12 @@
         </div>
 
         <div class="form-group">
+          <label>Where are you from? <span class="req">*</span></label>
+          <input type="text" id="timezone" class="form-control" placeholder="Ex. England, America, Egypt" maxlength="100">
+          <div class="error-msg" id="err-timezone">Please enter your region.</div>
+        </div>
+
+        <div class="form-group">
           <label>GitHub or Portfolio URL <span class="req">*</span></label>
           <input type="text" id="dev_portfolio" class="form-control" placeholder="https://github.com/yourname">
           <div class="error-msg" id="err-dev_portfolio">Please provide a valid URL.</div>
@@ -363,6 +369,7 @@
       const data = {
         discord_id: document.getElementById('discord_id').value.trim(),
         age: document.getElementById('age').value,
+        timezone: document.getElementById('timezone').value.trim(),
         langs: document.getElementById('dev_langs').value.trim(),
         portfolio: document.getElementById('dev_portfolio').value.trim(),
         bot_exp: document.getElementById('dev_bot_exp').value.trim(),
@@ -371,6 +378,7 @@
 
       if (!/^\d{17,20}$/.test(data.discord_id)) { isValid = false; showError('discord_id'); }
       if (!data.age || parseInt(data.age) < 13) { isValid = false; showError('age'); }
+      if (data.timezone.length < 2) { isValid = false; showError('timezone'); }
       if (data.langs.length < 2) { isValid = false; showError('dev_langs'); }
       if (data.portfolio.length < 5) { isValid = false; showError('dev_portfolio'); }
       if (data.bot_exp.length < 15) { isValid = false; showError('dev_bot_exp'); }
@@ -393,6 +401,7 @@
           fields: [
             { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (${data.discord_id})`, inline: true },
             { name: "<:age:1166714364905148498> Age", value: data.age, inline: true },
+            { name: "🌎 Region", value: data.timezone, inline: true },
             { name: "<:tech:1513328514529624185> Languages/Tech", value: data.langs, inline: false },
             { name: "<:link:904792338512105523> Portfolio/GitHub", value: data.portfolio, inline: false },
             { name: "<:bot:1538932141273120828> Bot Experience", value: data.bot_exp, inline: false },
