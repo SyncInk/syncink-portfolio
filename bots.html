@@ -953,6 +953,49 @@ footer a:hover{color:var(--cyan);}
     <div class="hr"></div>
 
     <!-- ============ JOIN THE TEAM ============ -->
+    <style>
+      .b-card {
+        background: rgba(15,20,25,0.4);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .b-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      }
+      .b-icon {
+        margin-bottom: 1rem;
+      }
+      .b-btn {
+        display: inline-flex;
+        background: #5865F2;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+      .b-btn:hover {
+        background: #4752c4;
+      }
+      .b-desc {
+        color: rgba(255,255,255,0.8);
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+      :root[data-theme="light"] .b-card {
+        background: rgba(255,255,255,0.9);
+        border-color: rgba(0,0,0,0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      }
+      :root[data-theme="light"] .b-desc {
+        color: rgba(0,0,0,0.7);
+      }
+    </style>
     <div class="team-section" style="margin-bottom: 4rem;">
       <div class="s-label reveal">Applications</div>
       <h2 class="s-heading reveal">Join the <em>Team</em></h2>
@@ -965,7 +1008,7 @@ footer a:hover{color:var(--cyan);}
           <div class="b-icon">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           </div>
-          <h3 class="b-name" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Staff / Mod / Admin</h3>
+          <h3 class="b-name" style="margin-top: 0.5rem; margin-bottom: 0.5rem; font-size: 1.25rem;">Staff / Mod / Admin</h3>
           <p class="b-desc" style="flex-grow: 1;">Passionate about community management? Apply to become a moderator or admin to keep our server safe, active, and welcoming.</p>
           <div class="b-links" style="margin-top: 1.5rem;">
             <a href="apply.html?role=staff" class="b-btn" style="width: 100%; text-align: center; justify-content: center; font-weight: 600;">Apply for Staff</a>
@@ -977,7 +1020,7 @@ footer a:hover{color:var(--cyan);}
           <div class="b-icon">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
           </div>
-          <h3 class="b-name" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Developer</h3>
+          <h3 class="b-name" style="margin-top: 0.5rem; margin-bottom: 0.5rem; font-size: 1.25rem;">Developer</h3>
           <p class="b-desc" style="flex-grow: 1;">Are you a skilled programmer? Join our special development team to build powerful new features and maintain SyncInk bots.</p>
           <div class="b-links" style="margin-top: 1.5rem;">
             <a href="apply.html?role=developer" class="b-btn" style="width: 100%; text-align: center; justify-content: center; font-weight: 600;">Apply for Developer</a>

@@ -5,8 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Join the Team | SyncInk</title>
   <link rel="icon" href="SyncInk Server Logo.png" type="image/png">
-  <link rel="stylesheet" href="index.css">
   <style>
+    /* Global Base CSS */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      color-scheme:dark;
+      --bg:#060812;--bg2:#0d1117;--surface:#111827;--border:rgba(88,101,242,0.18);
+      --blue:#5865F2;--blue2:#7289da;--blue3:#99aab5;--cyan:#00d4ff;--accent:#eb459e;
+      --green:#57f287;--text:#e8eaf0;--muted:#8b95a8;
+      --card:rgba(15,20,25,0.4);
+    }
+    :root[data-theme="light"]{
+      color-scheme:light;--bg:#eef4ff;--bg2:#e2ebff;--surface:#fff;--border:rgba(42,68,162,0.22);
+      --blue:#3F5CF4;--blue2:#5973F5;--blue3:#4f618d;--cyan:#00b8cc;--accent:#d93d8f;
+      --green:#16b875;--text:#101b3d;--muted:#4d618a;
+      --card:rgba(255,255,255,0.9);
+    }
+    body{
+      font-family:'Outfit',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    #bgCanvas{position:fixed;inset:0;z-index:-1;pointer-events:none;}
+    
+    /* Navbar CSS */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 2rem;height:60px;
+      background:rgba(6,8,18,0.82);backdrop-filter:blur(24px);
+      border-bottom:1px solid var(--border);
+    }
+    :root[data-theme="light"] nav{background:rgba(238,244,255,0.9);}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.1rem;color:var(--text);text-decoration:none;}
+    .logo img{width:30px;height:30px;border-radius:8px;}
+    .nav-links{display:flex;align-items:center;gap:1.4rem;list-style:none;}
+    .nav-links a{font-size:.88rem;font-weight:600;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--text);}
+    .theme-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:all .2s;}
+    .theme-toggle:hover{color:var(--text);border-color:var(--blue);background:rgba(88,101,242,.1);}
+    
     /* Application Form specific styles */
     .app-container {
       max-width: 800px;
