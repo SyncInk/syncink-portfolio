@@ -4191,10 +4191,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
       if (data.badges && data.badges.length > 0) {
-        const badgesEl = document.getElementById('discord-badges');
-        if (badgesEl) {
-          badgesEl.innerHTML = data.badges.map(b => `<img class="discord-badge-icon" src="https://cdn.discordapp.com/badge-icons/${b.icon}.png" alt="${b.description}" title="${b.description}">`).join('');
-        }
+        window.dcdnBadges = data.badges;
+        renderMergedBadges();
       }
     } catch (e) {
       console.log("Static profile sync error:", e);
@@ -4261,6 +4259,49 @@ document.addEventListener("DOMContentLoaded", () => {
           const nameEl = document.getElementById('discord-name');
           if (nameEl) nameEl.textContent = dispName;
         }
+
+        // 5. Sync Badges through Lanyard (public_flags + KV)
+        if (data.discord_user && data.discord_user.public_flags !== undefined) {
+          const badgeMap = {
+            1: { id: "staff", icon: "5e74e9b61934fc1f67c65515d1f7e60d", desc: "Discord Staff" },
+            2: { id: "partner", icon: "3f9748e53446a137a052f3454e2de41e", desc: "Partnered Server Owner" },
+            4: { id: "hypesquad", icon: "bf01d1073931f921909045f3a39fd264", desc: "HypeSquad Events" },
+            8: { id: "bug_hunter_1", icon: "2717692c7dca7289b35293e2fcb709e0", desc: "Bug Hunter Level 1" },
+            64: { id: "hypesquad_bravery", icon: "8a88d63823d8a71cd5e390baa45efa02", desc: "HypeSquad Bravery" },
+            128: { id: "hypesquad_brilliance", icon: "011940fd013da14a3bae1728e25a4c18", desc: "HypeSquad Brilliance" },
+            256: { id: "hypesquad_balance", icon: "3aa41de486fa12454c3761e8e223442e", desc: "HypeSquad Balance" },
+            512: { id: "early_supporter", icon: "708cb508306efc243eeed023ced34b6a", desc: "Early Supporter" },
+            16384: { id: "bug_hunter_2", icon: "848f79194d4b162a8650f9687e14fbbe", desc: "Bug Hunter Level 2" },
+            4194304: { id: "active_developer", icon: "cb85a06b9090ca20c1ce2462bc6ea8ec", desc: "Active Developer" }
+          };
+          
+          let userBadges = [];
+          const flags = data.discord_user.public_flags;
+          
+          for (const [bit, badge] of Object.entries(badgeMap)) {
+            if ((flags & parseInt(bit)) === parseInt(bit)) {
+              userBadges.push(badge);
+            }
+          }
+          
+          // Check Lanyard KV for custom badges (like Nitro, Boost, etc.)
+          if (data.kv && data.kv.badges) {
+            try {
+              const kvBadges = JSON.parse(data.kv.badges);
+              if (Array.isArray(kvBadges)) {
+                userBadges = [...userBadges, ...kvBadges];
+              }
+            } catch(e) {}
+          }
+
+          window.lanyardBadges = userBadges.map(b => ({
+            id: b.id || b.icon,
+            icon: b.icon,
+            description: b.desc || b.description
+          }));
+          renderMergedBadges();
+        }
+
         renderActivities(data);
 
       } else {
@@ -4277,6 +4318,23 @@ document.addEventListener("DOMContentLoaded", () => {
       renderActivities({});
     }
   }
+
+  function renderMergedBadges() {
+    const badgesEl = document.getElementById('discord-badges');
+    if (!badgesEl) return;
+    
+    const dcdn = window.dcdnBadges || [];
+    const lany = window.lanyardBadges || [];
+    
+    // Merge by icon hash to prevent duplicates
+    const mergedMap = {};
+    dcdn.forEach(b => { if(b.icon) mergedMap[b.icon] = b; });
+    lany.forEach(b => { if(b.icon) mergedMap[b.icon] = b; });
+    
+    const finalBadges = Object.values(mergedMap);
+    badgesEl.innerHTML = finalBadges.map(b => `<img class="discord-badge-icon" src="https://cdn.discordapp.com/badge-icons/${b.icon}.png" alt="${b.description}" title="${b.description}">`).join('');
+  }
+
   syncDiscord();
   setInterval(syncDiscord, 5000); // Check for updates every 5 seconds
 
