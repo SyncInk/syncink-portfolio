@@ -262,8 +262,19 @@
         
         <div class="form-group">
           <label>Discord ID <span class="req">*</span></label>
-          <input type="text" id="discord_id" class="form-control" placeholder="e.g. 1136319484459266100" autocomplete="off">
-          <div class="error-msg" id="err-discord_id">Must be a valid 17-20 digit Discord ID.</div>
+          <input type="text" id="discord_id" class="form-control" placeholder="18-20 digit ID">
+          <div class="error-msg" id="err-discord_id">Please enter a valid 17-20 digit Discord ID.</div>
+          <div id="discord-profile" style="display: none; align-items: center; gap: 12px; margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid var(--border);">
+             <img id="dp-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%;">
+             <div style="flex: 1;">
+               <div id="dp-name" style="font-weight: 700; color: var(--text);"></div>
+               <div id="dp-tag" style="font-size: 0.8rem; color: var(--muted);"></div>
+             </div>
+             <div style="color: #10b981; display: flex; align-items: center; gap: 4px; font-weight: 600; font-size: 0.85rem;">
+               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+               Verified
+             </div>
+          </div>
         </div>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
@@ -396,6 +407,34 @@
     function showError(id) {
       document.getElementById('err-' + id).style.display = 'block';
     }
+
+    // Discord ID Live Verification
+    const didInput = document.getElementById('discord_id');
+    const dProfile = document.getElementById('discord-profile');
+    const dAvatar = document.getElementById('dp-avatar');
+    const dName = document.getElementById('dp-name');
+    const dTag = document.getElementById('dp-tag');
+    let dTimeout;
+
+    didInput.addEventListener('input', () => {
+      clearTimeout(dTimeout);
+      dProfile.style.display = 'none';
+      const val = didInput.value.trim();
+      if (/^\d{17,20}$/.test(val)) {
+        dTimeout = setTimeout(async () => {
+          try {
+            const res = await fetch(`https://japi.rest/discord/v1/user/${val}`);
+            const json = await res.json();
+            if (json.data && !json.data.code && !json.error) {
+               dName.textContent = json.data.global_name || json.data.username;
+               dTag.textContent = '@' + json.data.username;
+               dAvatar.src = json.data.avatarURL || 'https://cdn.discordapp.com/embed/avatars/0.png';
+               dProfile.style.display = 'flex';
+            }
+          } catch(e) {}
+        }, 500);
+      }
+    });
 
     document.getElementById('apply-form').addEventListener('submit', async (e) => {
       e.preventDefault();

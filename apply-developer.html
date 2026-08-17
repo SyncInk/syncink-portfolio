@@ -149,6 +149,49 @@
       color: var(--text);
     }
 
+    .file-upload-zone {
+      border: 2px dashed rgba(88, 101, 242, 0.4);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--muted);
+      position: relative;
+    }
+    :root[data-theme="light"] .file-upload-zone {
+      background: #f8fafc;
+      border-color: rgba(88, 101, 242, 0.3);
+    }
+    .file-upload-zone:hover, .file-upload-zone.dragover {
+      border-color: #5865F2;
+      background: rgba(88, 101, 242, 0.05);
+      color: var(--text);
+    }
+    .file-upload-zone input[type="file"] {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .file-upload-zone svg {
+      width: 40px; height: 40px;
+      margin-bottom: 0.8rem;
+      color: #5865F2;
+    }
+    .file-info {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: #5865F2;
+    }
+    .file-error {
+      color: #ef4444;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
     textarea.form-control {
       min-height: 120px;
       resize: vertical;
@@ -264,8 +307,19 @@
         
         <div class="form-group">
           <label>Discord ID <span class="req">*</span></label>
-          <input type="text" id="discord_id" class="form-control" placeholder="e.g. 1136319484459266100" autocomplete="off">
-          <div class="error-msg" id="err-discord_id">Must be a valid 17-20 digit Discord ID.</div>
+          <input type="text" id="discord_id" class="form-control" placeholder="18-20 digit ID">
+          <div class="error-msg" id="err-discord_id">Please enter a valid 17-20 digit Discord ID.</div>
+          <div id="discord-profile" style="display: none; align-items: center; gap: 12px; margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.15); border-radius: 8px; border: 1px solid var(--border);">
+             <img id="dp-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%;">
+             <div style="flex: 1;">
+               <div id="dp-name" style="font-weight: 700; color: var(--text);"></div>
+               <div id="dp-tag" style="font-size: 0.8rem; color: var(--muted);"></div>
+             </div>
+             <div style="color: #10b981; display: flex; align-items: center; gap: 4px; font-weight: 600; font-size: 0.85rem;">
+               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+               Verified
+             </div>
+          </div>
         </div>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
@@ -288,6 +342,22 @@
           <div class="error-msg" id="err-timezone">Please enter your region (max 15 chars).</div>
         </div>
 
+        <div class="form-group">
+          <label for="dev_attachment">Portfolio Attachments (Optional)</label>
+          <div class="file-upload-zone" id="drop-zone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <div>Drag & Drop files here or click to browse</div>
+            <div style="font-size: 0.8rem; margin-top: 0.3rem;">Images, PDF, ZIP, RAR (Max 25MB)</div>
+            <input type="file" id="dev_attachment" accept="image/*,.pdf,.zip,.rar" title=" ">
+            <div class="file-info" id="file-info"></div>
+          </div>
+          <div class="file-error" id="file-error">File exceeds the 25MB size limit.</div>
+        </div>
+        
         <div class="form-group">
           <label>GitHub or Portfolio URL <span class="req">*</span></label>
           <input type="text" id="dev_portfolio" class="form-control" placeholder="https://github.com/yourname">
@@ -382,6 +452,78 @@
 
     function showError(id) {
       document.getElementById('err-' + id).style.display = 'block';
+    }
+
+    // Discord ID Live Verification
+    const didInput = document.getElementById('discord_id');
+    const dProfile = document.getElementById('discord-profile');
+    const dAvatar = document.getElementById('dp-avatar');
+    const dName = document.getElementById('dp-name');
+    const dTag = document.getElementById('dp-tag');
+    let dTimeout;
+
+    didInput.addEventListener('input', () => {
+      clearTimeout(dTimeout);
+      dProfile.style.display = 'none';
+      const val = didInput.value.trim();
+      if (/^\d{17,20}$/.test(val)) {
+        dTimeout = setTimeout(async () => {
+          try {
+            const res = await fetch(`https://japi.rest/discord/v1/user/${val}`);
+            const json = await res.json();
+            if (json.data && !json.data.code && !json.error) {
+               dName.textContent = json.data.global_name || json.data.username;
+               dTag.textContent = '@' + json.data.username;
+               dAvatar.src = json.data.avatarURL || 'https://cdn.discordapp.com/embed/avatars/0.png';
+               dProfile.style.display = 'flex';
+            }
+          } catch(e) {}
+        }, 500);
+      }
+    });
+
+    // File Upload Logic
+    const fileInput = document.getElementById('dev_attachment');
+    const dropZone = document.getElementById('drop-zone');
+    const fileInfo = document.getElementById('file-info');
+    const fileError = document.getElementById('file-error');
+    
+    fileInput.addEventListener('change', handleFile);
+    
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        handleFile();
+      }
+    });
+
+    function handleFile() {
+      fileError.style.display = 'none';
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileSizeMB = file.size / (1024 * 1024);
+        
+        if (fileSizeMB > 25) {
+          fileError.style.display = 'block';
+          fileInput.value = ''; // Reset
+          fileInfo.textContent = '';
+        } else {
+          fileInfo.textContent = file.name;
+        }
+      } else {
+        fileInfo.textContent = '';
+      }
     }
 
     document.getElementById('apply-form').addEventListener('submit', async (e) => {
