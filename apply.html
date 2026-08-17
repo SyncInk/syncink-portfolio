@@ -400,16 +400,22 @@
 
       if (!isValid) return;
 
-      let webhookUrl = document.getElementById('webhook-url').value.trim();
+      let webhookUrl = "";
       
-      // FALLBACK: Hardcode your webhook URL here inside the quotes below
-      const hardcodedWebhook = ""; 
-      
-      if (!webhookUrl) webhookUrl = hardcodedWebhook;
+      // Use the correct webhook based on the selected role
+      if (currentRole === 'staff') {
+        webhookUrl = "https://discordapp.com/api/webhooks/1538897341891747930/sUasK6sfrtND7EWR-blpVEYPJ4GbK5Shv8XVaEbuqhV4TZYn5Cj_zZWhYm0q0Vq0jAFg";
+      } else {
+        webhookUrl = "https://discordapp.com/api/webhooks/1538897839562821652/NqjlW4fV_YXqzcAiQJ073DDjbAJkkpZ26jEsF9pKABUF_KJYJxnRKRjt1dIiqMnZt-dK";
+      }
 
-      if (!webhookUrl || !webhookUrl.startsWith("https://discord.com/api/webhooks/")) {
+      // Allow admin testing override from the input field if provided
+      const overrideUrl = document.getElementById('webhook-url').value.trim();
+      if (overrideUrl) webhookUrl = overrideUrl;
+
+      if (!webhookUrl || !webhookUrl.includes("discord")) {
         document.getElementById('webhook-warning').style.display = 'block';
-        alert("Webhook URL is missing. If you are the admin, please edit the HTML file and put your webhook URL in the 'hardcodedWebhook' variable.");
+        alert("Webhook URL is missing or invalid.");
         return;
       }
 
