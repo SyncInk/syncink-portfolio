@@ -504,15 +504,15 @@
           title: "<:shield:1513328514529624185> New Staff Application",
           color: 9133302,
           fields: [
-            { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (${data.discord_id})`, inline: true },
-            { name: "<:age:1166714364905148498> Age", value: data.age, inline: true },
-            { name: "<a:globe:1519008181550842008> Region", value: data.timezone, inline: true },
-            { name: "⏰ Availability", value: data.availability, inline: true },
-            { name: "❓ Why join?", value: data.reason, inline: false },
-            { name: "<:exp:1517255773405577416> Experience", value: data.exp, inline: false },
-            { name: "<a:alert:1513822294831534220> Scenario 1: Spam Bypass", value: data.scen1, inline: false },
-            { name: "<:fire:916050273800192020> Scenario 2: Argument", value: data.scen2, inline: false },
-            { name: "<:balance:1518924309668823160> Scenario 3: Abuse Claim", value: data.scen3, inline: false }
+            { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (\`${data.discord_id}\`)`, inline: true },
+            { name: "<:age:1166714364905148498> Age", value: `\`${data.age}\``, inline: true },
+            { name: "<a:globe:1519008181550842008> Region", value: `\`${data.timezone}\``, inline: true },
+            { name: "⏰ Availability", value: `\`${data.availability}\``, inline: true },
+            { name: "❓ Why join?", value: `>>> ${data.reason}`, inline: false },
+            { name: "<:exp:1517255773405577416> Experience", value: `>>> ${data.exp}`, inline: false },
+            { name: "<a:alert:1513822294831534220> Scenario 1: Spam Bypass", value: `>>> ${data.scen1}`, inline: false },
+            { name: "<:fire:916050273800192020> Scenario 2: Argument", value: `>>> ${data.scen2}`, inline: false },
+            { name: "<:balance:1518924309668823160> Scenario 3: Abuse Claim", value: `>>> ${data.scen3}`, inline: false }
           ],
           footer: { 
             text: "SyncInk Secure Form Submitter",

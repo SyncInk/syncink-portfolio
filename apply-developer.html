@@ -585,13 +585,13 @@
           title: "<:dev:1519379532409344142> New Developer Application",
           color: 5793266, // Emerald
           fields: [
-            { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (${data.discord_id})`, inline: true },
-            { name: "<:age:1166714364905148498> Age", value: data.age, inline: true },
-            { name: "<a:globe:1519008181550842008> Region", value: data.timezone, inline: true },
-            { name: "<:tech:1513328514529624185> Languages/Tech", value: data.langs, inline: false },
-            { name: "<:link:904792338512105523> Portfolio/GitHub", value: data.portfolio, inline: false },
-            { name: "<:bot:1538932141273120828> Bot Experience", value: data.bot_exp, inline: false },
-            { name: "<:brain:1272962807431823380> Complex Feature Built", value: data.complex, inline: false }
+            { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (\`${data.discord_id}\`)`, inline: true },
+            { name: "<:age:1166714364905148498> Age", value: `\`${data.age}\``, inline: true },
+            { name: "<a:globe:1519008181550842008> Region", value: `\`${data.timezone}\``, inline: true },
+            { name: "<:tech:1513328514529624185> Languages/Tech", value: `>>> ${data.langs}`, inline: false },
+            { name: "<:link:904792338512105523> Portfolio/GitHub", value: `>>> ${data.portfolio}`, inline: false },
+            { name: "<:bot:1538932141273120828> Bot Experience", value: `>>> ${data.bot_exp}`, inline: false },
+            { name: "<:brain:1272962807431823380> Complex Feature Built", value: `>>> ${data.complex}`, inline: false }
           ],
           footer: { 
             text: "SyncInk Secure Form Submitter",
