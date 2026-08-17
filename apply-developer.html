@@ -264,8 +264,9 @@
 
         <div class="form-group">
           <label>Where are you from? <span class="req">*</span></label>
-          <input type="text" id="timezone" class="form-control" placeholder="Ex. England, America, Egypt" maxlength="100">
-          <div class="error-msg" id="err-timezone">Please enter your region.</div>
+          <input type="text" id="timezone" class="form-control" placeholder="Ex. England, America, Egypt" maxlength="15">
+          <div class="char-count" id="count-timezone">0 / 15 max</div>
+          <div class="error-msg" id="err-timezone">Please enter your region (max 15 chars).</div>
         </div>
 
         <div class="form-group">
@@ -338,19 +339,24 @@
     loop();
 
     // Character Counters
-    const textareas = ['dev_bot_exp', 'dev_complex'];
+    const textareas = ['timezone', 'dev_bot_exp', 'dev_complex'];
     textareas.forEach(id => {
       const el = document.getElementById(id);
       const countEl = document.getElementById('count-' + id);
       el.addEventListener('input', () => {
         const len = el.value.trim().length;
-        countEl.textContent = `${len} / 1024 max (Min 15)`;
-        if(len >= 15) {
-          countEl.className = 'char-count valid';
-        } else if(len > 0) {
-          countEl.className = 'char-count invalid';
+        if (id === 'timezone') {
+          countEl.textContent = `${len} / 15 max`;
+          countEl.className = len > 0 ? 'char-count valid' : 'char-count';
         } else {
-          countEl.className = 'char-count';
+          countEl.textContent = `${len} / 1024 max (Min 15)`;
+          if(len >= 15) {
+            countEl.className = 'char-count valid';
+          } else if(len > 0) {
+            countEl.className = 'char-count invalid';
+          } else {
+            countEl.className = 'char-count';
+          }
         }
       });
     });
