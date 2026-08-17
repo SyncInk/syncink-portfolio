@@ -252,7 +252,7 @@
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <div class="form-group" style="flex: 1; min-width: 150px;">
             <label>Age <span class="req">*</span></label>
-            <input type="number" id="age" class="form-control" placeholder="Minimum 13" min="1" max="100">
+            <input type="number" id="age" class="form-control" placeholder="Minimum 13" min="13" max="100">
             <div class="error-msg" id="err-age">You must be at least 13.</div>
           </div>
           <div class="form-group" style="flex: 2; min-width: 200px;">
@@ -271,15 +271,15 @@
         <div class="form-group">
           <label>Have you ever made a Discord Bot before? What libraries did you use? <span class="req">*</span></label>
           <textarea id="dev_bot_exp" class="form-control" placeholder="Tell us about your bot development experience..." maxlength="1024"></textarea>
-          <div class="char-count" id="count-dev_bot_exp">0 / 1024 max (Min 50)</div>
-          <div class="error-msg" id="err-dev_bot_exp">Please write at least 50 characters.</div>
+          <div class="char-count" id="count-dev_bot_exp">0 / 1024 max (Min 15)</div>
+          <div class="error-msg" id="err-dev_bot_exp">Please write at least 15 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Describe a complex feature you've implemented in a project <span class="req">*</span></label>
           <textarea id="dev_complex" class="form-control" placeholder="Explain the feature and how you built it..." maxlength="1024"></textarea>
-          <div class="char-count" id="count-dev_complex">0 / 1024 max (Min 50)</div>
-          <div class="error-msg" id="err-dev_complex">Please write at least 50 characters.</div>
+          <div class="char-count" id="count-dev_complex">0 / 1024 max (Min 15)</div>
+          <div class="error-msg" id="err-dev_complex">Please write at least 15 characters.</div>
         </div>
         
         <div class="form-group">
@@ -338,8 +338,8 @@
       const countEl = document.getElementById('count-' + id);
       el.addEventListener('input', () => {
         const len = el.value.trim().length;
-        countEl.textContent = `${len} / 1024 max (Min 50)`;
-        if(len >= 50) {
+        countEl.textContent = `${len} / 1024 max (Min 15)`;
+        if(len >= 15) {
           countEl.className = 'char-count valid';
         } else if(len > 0) {
           countEl.className = 'char-count invalid';
@@ -372,9 +372,9 @@
       if (!/^\d{17,20}$/.test(data.discord_id)) { isValid = false; showError('discord_id'); }
       if (!data.age || parseInt(data.age) < 13) { isValid = false; showError('age'); }
       if (data.langs.length < 2) { isValid = false; showError('dev_langs'); }
-      if (data.portfolio.length < 5 || !data.portfolio.includes('.')) { isValid = false; showError('dev_portfolio'); }
-      if (data.bot_exp.length < 50) { isValid = false; showError('dev_bot_exp'); }
-      if (data.complex.length < 50) { isValid = false; showError('dev_complex'); }
+      if (data.portfolio.length < 5) { isValid = false; showError('dev_portfolio'); }
+      if (data.bot_exp.length < 15) { isValid = false; showError('dev_bot_exp'); }
+      if (data.complex.length < 15) { isValid = false; showError('dev_complex'); }
 
       if (!isValid) return;
 

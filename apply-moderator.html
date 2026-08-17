@@ -254,62 +254,61 @@
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <div class="form-group" style="flex: 1; min-width: 150px;">
             <label>Age <span class="req">*</span></label>
-            <input type="number" id="age" class="form-control" placeholder="Minimum 13" min="1" max="100">
+            <input type="number" id="age" class="form-control" placeholder="Minimum 13" min="13" max="100">
             <div class="error-msg" id="err-age">You must be at least 13.</div>
           </div>
           <div class="form-group" style="flex: 2; min-width: 200px;">
-            <label>Timezone & Availability <span class="req">*</span></label>
-            <select id="timezone" class="form-control" style="appearance: auto; padding-right: 1.5rem; color-scheme: inherit;">
-              <option value="" disabled selected>Select your availability</option>
-              <option value="EST / 1-3 hours">EST / 1-3 hours per day</option>
-              <option value="EST / 4+ hours">EST / 4+ hours per day</option>
-              <option value="CST / 1-3 hours">CST / 1-3 hours per day</option>
-              <option value="CST / 4+ hours">CST / 4+ hours per day</option>
-              <option value="PST / 1-3 hours">PST / 1-3 hours per day</option>
-              <option value="PST / 4+ hours">PST / 4+ hours per day</option>
-              <option value="GMT (UK/EU) / 1-3 hours">GMT (UK/EU) / 1-3 hours per day</option>
-              <option value="GMT (UK/EU) / 4+ hours">GMT (UK/EU) / 4+ hours per day</option>
-              <option value="IST (Asia) / 1-3 hours">IST (Asia) / 1-3 hours per day</option>
-              <option value="IST (Asia) / 4+ hours">IST (Asia) / 4+ hours per day</option>
-              <option value="Other / Flexible">Other Timezone / Flexible</option>
-            </select>
-            <div class="error-msg" id="err-timezone">Please select your availability.</div>
+            <label>Where are you from? <span class="req">*</span></label>
+            <input type="text" id="timezone" class="form-control" placeholder="Ex. England, America, Egypt" maxlength="100">
+            <div class="error-msg" id="err-timezone">Please enter your region.</div>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label>How many hours per week can you dedicate? <span class="req">*</span></label>
+          <select id="availability" class="form-control" style="appearance: auto; padding-right: 1.5rem;">
+            <option value="" disabled selected>Select an option</option>
+            <option value="1-5 hours">1-5 hours</option>
+            <option value="5-10 hours">5-10 hours</option>
+            <option value="10-20 hours">10-20 hours</option>
+            <option value="20+ hours">20+ hours</option>
+          </select>
+          <div class="error-msg" id="err-availability">Please select an option.</div>
         </div>
 
         <div class="form-group">
           <label>Why do you want to join the Staff team? <span class="req">*</span></label>
           <textarea id="staff_reason" class="form-control" placeholder="Explain your motivation..." maxlength="1024"></textarea>
-          <div class="char-count" id="count-staff_reason">0 / 1024 max (Min 50)</div>
-          <div class="error-msg" id="err-staff_reason">Please write at least 50 characters.</div>
+          <div class="char-count" id="count-staff_reason">0 / 1024 max (Min 15)</div>
+          <div class="error-msg" id="err-staff_reason">Please write at least 15 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Past Moderation Experience <span class="req">*</span></label>
           <textarea id="staff_exp" class="form-control" placeholder="List your previous moderation experience..." maxlength="1024"></textarea>
-          <div class="char-count" id="count-staff_exp">0 / 1024 max (Min 50)</div>
-          <div class="error-msg" id="err-staff_exp">Please write at least 50 characters.</div>
+          <div class="char-count" id="count-staff_exp">0 / 1024 max (Min 15)</div>
+          <div class="error-msg" id="err-staff_exp">Please write at least 15 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Scenario 1: A user is spamming the chat and bypassing filters. What do you do? <span class="req">*</span></label>
           <textarea id="staff_scen1" class="form-control" placeholder="Explain your actions step by step..." maxlength="1024"></textarea>
-          <div class="char-count" id="count-staff_scen1">0 / 1024 max (Min 50)</div>
-          <div class="error-msg" id="err-staff_scen1">Please write at least 50 characters.</div>
+          <div class="char-count" id="count-staff_scen1">0 / 1024 max (Min 15)</div>
+          <div class="error-msg" id="err-staff_scen1">Please write at least 15 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Scenario 2: Two active members are having a heated argument that is escalating into insults. How do you de-escalate it? <span class="req">*</span></label>
           <textarea id="staff_scen2" class="form-control" placeholder="Explain how you handle conflicts..." maxlength="1024"></textarea>
-          <div class="char-count" id="count-staff_scen2">0 / 1024 max (Min 50)</div>
-          <div class="error-msg" id="err-staff_scen2">Please write at least 50 characters.</div>
+          <div class="char-count" id="count-staff_scen2">0 / 1024 max (Min 15)</div>
+          <div class="error-msg" id="err-staff_scen2">Please write at least 15 characters.</div>
         </div>
 
         <div class="form-group">
           <label>Scenario 3: A user accuses another staff member of abuse of power. How do you handle the situation? <span class="req">*</span></label>
           <textarea id="staff_scen3" class="form-control" placeholder="Explain your investigation process..." maxlength="1024"></textarea>
-          <div class="char-count" id="count-staff_scen3">0 / 1024 max (Min 50)</div>
-          <div class="error-msg" id="err-staff_scen3">Please write at least 50 characters.</div>
+          <div class="char-count" id="count-staff_scen3">0 / 1024 max (Min 15)</div>
+          <div class="error-msg" id="err-staff_scen3">Please write at least 15 characters.</div>
         </div>
 
         <button type="submit" class="submit-btn" id="submit-btn">
@@ -362,8 +361,8 @@
       const countEl = document.getElementById('count-' + id);
       el.addEventListener('input', () => {
         const len = el.value.trim().length;
-        countEl.textContent = `${len} / 1024 max (Min 50)`;
-        if(len >= 50) {
+        countEl.textContent = `${len} / 1024 max (Min 15)`;
+        if(len >= 15) {
           countEl.className = 'char-count valid';
         } else if(len > 0) {
           countEl.className = 'char-count invalid';
@@ -388,6 +387,7 @@
         discord_id: document.getElementById('discord_id').value.trim(),
         age: document.getElementById('age').value,
         timezone: document.getElementById('timezone').value.trim(),
+        availability: document.getElementById('availability').value,
         reason: document.getElementById('staff_reason').value.trim(),
         exp: document.getElementById('staff_exp').value.trim(),
         scen1: document.getElementById('staff_scen1').value.trim(),
@@ -398,11 +398,12 @@
       if (!/^\d{17,20}$/.test(data.discord_id)) { isValid = false; showError('discord_id'); }
       if (!data.age || parseInt(data.age) < 13) { isValid = false; showError('age'); }
       if (data.timezone.length < 2) { isValid = false; showError('timezone'); }
-      if (data.reason.length < 50) { isValid = false; showError('staff_reason'); }
-      if (data.exp.length < 50) { isValid = false; showError('staff_exp'); }
-      if (data.scen1.length < 50) { isValid = false; showError('staff_scen1'); }
-      if (data.scen2.length < 50) { isValid = false; showError('staff_scen2'); }
-      if (data.scen3.length < 50) { isValid = false; showError('staff_scen3'); }
+      if (!data.availability) { isValid = false; showError('availability'); }
+      if (data.reason.length < 15) { isValid = false; showError('staff_reason'); }
+      if (data.exp.length < 15) { isValid = false; showError('staff_exp'); }
+      if (data.scen1.length < 15) { isValid = false; showError('staff_scen1'); }
+      if (data.scen2.length < 15) { isValid = false; showError('staff_scen2'); }
+      if (data.scen3.length < 15) { isValid = false; showError('staff_scen3'); }
 
       if (!isValid) return;
 
@@ -421,7 +422,8 @@
           fields: [
             { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (${data.discord_id})`, inline: true },
             { name: "<:age:1166714364905148498> Age", value: data.age, inline: true },
-            { name: "⏰ Timezone/Avail", value: data.timezone, inline: true },
+            { name: "🌎 Region", value: data.timezone, inline: true },
+            { name: "⏰ Availability", value: data.availability, inline: true },
             { name: "❓ Why join?", value: data.reason, inline: false },
             { name: "<:exp:1517255773405577416> Experience", value: data.exp, inline: false },
             { name: "<a:alert:1513822294831534220> Scenario 1: Spam Bypass", value: data.scen1, inline: false },
