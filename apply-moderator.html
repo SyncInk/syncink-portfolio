@@ -64,30 +64,43 @@
       margin-bottom: 3rem;
     }
     
+      position: relative;
+    }
+    
+    .app-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+    }
+
     .app-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 800;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      color: var(--text);
     }
     
     .app-subtitle {
       color: var(--muted);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       max-width: 600px;
       margin: 0 auto;
     }
 
     .form-box {
       background: var(--card);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border);
+      border-top: 4px solid #8b5cf6;
       border-radius: 16px;
       padding: 2.5rem;
-      box-shadow: var(--card-shadow);
-      border-top: 4px solid #f59e0b;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    :root[data-theme="light"] .form-box {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
     .form-group {
@@ -126,8 +139,8 @@
 
     .form-control:focus {
       outline: none;
-      border-color: #f59e0b;
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
     }
 
     select.form-control {
@@ -163,7 +176,7 @@
       color: #ef4444;
     }
     .char-count.valid {
-      color: #10b981;
+      color: #8b5cf6;
     }
 
     .error-msg {
@@ -175,7 +188,7 @@
 
     .submit-btn {
       width: 100%;
-      background: #f59e0b;
+      background: #8b5cf6;
       color: #fff;
       border: none;
       padding: 1rem;
@@ -192,7 +205,7 @@
     }
 
     .submit-btn:hover {
-      background: #d97706;
+      background: #7c3aed;
       transform: translateY(-2px);
     }
 
@@ -209,7 +222,7 @@
       padding: 3rem 0;
     }
     #success-screen svg {
-      color: #f59e0b;
+      color: #8b5cf6;
       width: 64px;
       height: 64px;
       margin-bottom: 1.5rem;
@@ -424,7 +437,7 @@
         avatar_url: "https://syncink.github.io/syncink-portfolio/SyncInk%20Server%20Logo.png",
         embeds: [{
           title: "<:shield:1513328514529624185> New Staff Application",
-          color: 16104960, // Orange
+          color: 9133302,
           fields: [
             { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (${data.discord_id})`, inline: true },
             { name: "<:age:1166714364905148498> Age", value: data.age, inline: true },
