@@ -126,7 +126,7 @@
       padding: 0.8rem 1rem;
       border-radius: 8px;
       font-size: 1rem;
-      font-family: "Twemoji Country Flags", "Outfit", sans-serif;
+      font-family: "Outfit", "Twemoji Country Flags", sans-serif;
       transition: all 0.2s;
     }
     
@@ -604,7 +604,7 @@
           let finalName = bestMatch.country;
           if(finalName === "America" || finalName === "USA") finalName = "United States";
           if(finalName === "UK" || finalName === "England") finalName = "United Kingdom";
-          tzInput.value = `${bestMatch.flag} ${finalName}`;
+          tzInput.value = `${bestMatch.flag} | ${finalName}`;
           // update counter visually
           const countEl = document.getElementById('count-timezone');
           if(countEl) {
