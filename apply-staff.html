@@ -140,6 +140,38 @@
       transition: all 0.2s;
     }
 
+    .timezone-wrapper {
+      position: relative;
+    }
+    .flag-prefix {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-family: "Twemoji Country Flags", "Outfit", sans-serif;
+    }
+    .flag-prefix::after {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 18px;
+      background: var(--muted);
+      opacity: 0.3;
+    }
+    .flag-prefix.active {
+      opacity: 1;
+    }
+    .timezone-wrapper.has-flag .form-control {
+      padding-left: 3.8rem;
+    }
+
     :root[data-theme="light"] .form-control {
       background: #f8fafc;
       border-color: #cbd5e1;
@@ -308,7 +340,10 @@
           </div>
           <div class="form-group" style="flex: 2; min-width: 200px;">
             <label>Where are you from? <span class="req">*</span></label>
-            <input type="text" id="timezone" class="form-control" placeholder="Ex. England, America, Egypt" maxlength="30">
+            <div class="timezone-wrapper" id="tz-wrapper">
+              <span class="flag-prefix" id="flag-prefix"></span>
+              <input type="text" id="timezone" class="form-control" placeholder="Ex. England, America, Egypt" maxlength="30">
+            </div>
             <div class="char-count" id="count-timezone">0 / 30 max</div>
             <div class="error-msg" id="err-timezone">Please enter your region (max 30 chars).</div>
           </div>
@@ -492,8 +527,17 @@
     if (tzInput) {
       tzInput.addEventListener('blur', () => {
         let val = tzInput.value.trim();
-        if (!val) return;
-        val = val.replace(/^[\uD83C-\uDBFF\uDC00-\uDFFF\s]+/g, '').trim(); 
+        const flagEl = document.getElementById('flag-prefix');
+        const wrapper = document.getElementById('tz-wrapper');
+
+        if (!val) {
+           if(flagEl) flagEl.classList.remove('active');
+           if(wrapper) wrapper.classList.remove('has-flag');
+           return;
+        }
+
+        // strip out emojis and pipes if they were accidentally typed or already present
+        val = val.replace(/^[\uD83C-\uDBFF\uDC00-\uDFFF\s\|]+/g, '').trim(); 
         if(!val) return;
 
         let bestMatch = null;
@@ -519,7 +563,14 @@
           let finalName = bestMatch.country;
           if(finalName === "America" || finalName === "USA") finalName = "United States";
           if(finalName === "UK" || finalName === "England") finalName = "United Kingdom";
-          tzInput.value = `${bestMatch.flag} | ${finalName}`;
+          tzInput.value = finalName;
+          
+          if (flagEl && wrapper) {
+            flagEl.innerHTML = bestMatch.flag;
+            flagEl.classList.add('active');
+            wrapper.classList.add('has-flag');
+          }
+
           // update counter visually
           const countEl = document.getElementById('count-timezone');
           if(countEl) {
@@ -527,6 +578,9 @@
              countEl.textContent = `${len} / 30 max`;
              countEl.className = len > 0 ? 'char-count valid' : 'char-count';
           }
+        } else {
+           if(flagEl) flagEl.classList.remove('active');
+           if(wrapper) wrapper.classList.remove('has-flag');
         }
       });
     }
@@ -568,6 +622,10 @@
       btn.disabled = true;
       btn.innerHTML = 'Submitting...';
 
+      const flagEl = document.getElementById('flag-prefix');
+      const tzFlag = flagEl && flagEl.classList.contains('active') ? flagEl.textContent : '';
+      const formattedTimezone = tzFlag ? `${tzFlag} | ${data.timezone}` : data.timezone;
+
       const payload = {
         content: "<@&1520854378192572546>",
         username: "SyncInk Staff Applications",
@@ -578,7 +636,7 @@
           fields: [
             { name: "<:user:846569530922762242> Discord ID", value: `<@${data.discord_id}> (\`${data.discord_id}\`)`, inline: true },
             { name: "<:age:1166714364905148498> Age", value: `\`${data.age}\``, inline: true },
-            { name: "<a:globe:1519008181550842008> Region", value: `\`${data.timezone}\``, inline: true },
+            { name: "<a:globe:1519008181550842008> Region", value: `\`${formattedTimezone}\``, inline: true },
             { name: "⏰ Availability", value: `\`${data.availability}\``, inline: true },
             { name: "❓ Why join?", value: `>>> ${data.reason}`, inline: false },
             { name: "<:exp:1517255773405577416> Experience", value: `>>> ${data.exp}`, inline: false },
