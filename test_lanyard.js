@@ -1,0 +1,1 @@
+const ws = new WebSocket("wss://api.lanyard.rest/socket"); ws.onmessage = (e) => console.log(e.data); ws.onopen = () => ws.send(JSON.stringify({op: 2, d: {subscribe_to_id: "930306512864280607"}})); setTimeout(()=>process.exit(0), 3000);

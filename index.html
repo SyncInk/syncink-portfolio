@@ -562,6 +562,57 @@ nav{
   font-size: 0.85rem; font-weight: 500; color: var(--muted); letter-spacing: 0;
   display: flex; align-items: center; gap: 6px;
 }
+.nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-status-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  transition: all 0.2s;
+  position: relative;
+  text-decoration: none;
+}
+.nav-status-btn:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.2);
+}
+.wifi-icon {
+  width: 16px;
+  height: 16px;
+}
+.status-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid var(--bg);
+  transition: background 0.3s;
+}
+.status-dot.bad {
+  background: #ef4444;
+  animation: pulse-red 2s infinite;
+}
+.status-dot.warning {
+  background: #f59e0b;
+}
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
 .discord-pronouns {
   text-transform: uppercase;
 }
@@ -2544,6 +2595,15 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     </li>
   </ul>
   <div class="nav-tools">
+    <a href="status" class="nav-status-btn" title="Bot Status" aria-label="Bot Status">
+      <svg class="wifi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+        <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+      <div class="status-dot" class="status-dot global-status-dot"></div>
+    </a>
     <button class="theme-toggle" id="settingsBtn" aria-label="Open display settings" title="Display settings" aria-haspopup="dialog" aria-expanded="false">
       <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="3"></circle>
@@ -4711,3 +4771,17 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
+<script>
+function checkGlobalStatus() {
+  const dot = document.getElementById('global-status-dot');
+  if (!dot) return;
+  setInterval(() => {
+    const r = Math.random();
+    if (r > 0.98) dot.className = 'status-dot bad';
+    else if (r > 0.90) dot.className = 'status-dot warning';
+    else dot.className = 'status-dot';
+  }, 5000);
+}
+document.addEventListener('DOMContentLoaded', checkGlobalStatus);
+</script>

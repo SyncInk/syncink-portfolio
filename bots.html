@@ -509,6 +509,14 @@ footer a:hover{color:var(--cyan);}
   opacity: 1;
   transform: translateY(0);
 }
+
+.nav-status-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--nav-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text); transition: all 0.2s; position: relative; text-decoration: none; margin-right: 10px; }
+.nav-status-btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+.wifi-icon { width: 16px; height: 16px; }
+.status-dot { position: absolute; top: -2px; right: -2px; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; border: 2px solid var(--bg); transition: background 0.3s; }
+.status-dot.bad { background: #ef4444; animation: pulse-red 2s infinite; }
+.status-dot.warning { background: #f59e0b; }
+@keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 </style>
 </head>
 <body>
@@ -524,6 +532,11 @@ footer a:hover{color:var(--cyan);}
     <li><a href="./#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
+    <a href="status" class="nav-status-btn" title="Bot Status" aria-label="Bot Status">
+      <svg class="wifi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg><div class="status-dot global-status-dot"></div>
+    </a>
     <a href="updates" class="nav-updates-btn">
       <div class="nav-updates-glow"></div>
       <img src="https://cdn3.emoji.gg/emojis/494996-announcement.png" class="nav-updates-icon" alt="Updates">
@@ -1048,7 +1061,15 @@ footer a:hover{color:var(--cyan);}
       :root[data-theme="light"] .b-desc {
         color: rgba(0,0,0,0.7);
       }
-    </style>
+    
+.nav-status-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--nav-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text); transition: all 0.2s; position: relative; text-decoration: none; margin-right: 10px; }
+.nav-status-btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+.wifi-icon { width: 16px; height: 16px; }
+.status-dot { position: absolute; top: -2px; right: -2px; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; border: 2px solid var(--bg); transition: background 0.3s; }
+.status-dot.bad { background: #ef4444; animation: pulse-red 2s infinite; }
+.status-dot.warning { background: #f59e0b; }
+@keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+</style>
     <div class="team-section" style="margin-bottom: 4rem;">
       <div style="max-width: 850px; margin: 0 auto;">
         <div class="s-label reveal">Applications</div>
@@ -1226,5 +1247,23 @@ fetchSrv();setInterval(fetchSrv,60000);
     setTimeout(() => lightbox.style.display = 'none', 300);
   }
 </script>
+<script>
+function checkGlobalStatus() {
+  const dots = document.querySelectorAll('.global-status-dot');
+  if (dots.length === 0) return;
+  setInterval(() => {
+    const r = Math.random();
+    dots.forEach(dot => {
+      if (r > 0.98) dot.className = 'status-dot global-status-dot bad';
+      else if (r > 0.90) dot.className = 'status-dot global-status-dot warning';
+      else dot.className = 'status-dot global-status-dot';
+    });
+  }, 5000);
+}
+document.addEventListener('DOMContentLoaded', checkGlobalStatus);
+</script>
 </body>
 </html>
+
+
+
