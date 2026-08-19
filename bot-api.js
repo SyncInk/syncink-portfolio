@@ -17,6 +17,7 @@ app.use(cors()); // Allows your github pages site to fetch this data!
 // For example, when your bot starts, set \otStats.main.ping = client.ws.ping\
 const botStats = {
     main: { status: "ONLINE", ping: 42 },
+    security: { status: "ONLINE", ping: 25 },
     radio: { status: "ONLINE", ping: 65 },
     ticket: { status: "ONLINE", ping: 32 },
     voice: { status: "ONLINE", ping: 48 }
