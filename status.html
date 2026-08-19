@@ -10,12 +10,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script>
+// =========================================================================
+// LANYARD KV API ENDPOINT
+// Fetching directly from Lanyard's public API using the provided User ID!
+// =========================================================================
+const LANYARD_USER_ID = "930306512864280607";
+const API_URL = `https://api.lanyard.rest/v1/users/${LANYARD_USER_ID}`; 
+
 const bots = [
-  { name: 'SyncInk&copy;', id: 'main', basePing: 42, type: 'Core Bot' },
-  { name: 'SyncInk&copy; Security', id: 'security', basePing: 25, type: 'Moderation Bot' },
-  { name: 'SyncInk&copy; Radio', id: 'radio', basePing: 65, type: 'Music Node' },
-  { name: 'SyncInk&copy; Ticket', id: 'ticket', basePing: 32, type: 'Support System' },
-  { name: 'SyncInk&copy; Voice', id: 'voice', basePing: 48, type: 'Voice Manager' }
+  { name: 'SyncInk&copy;', id: 'main', type: 'Core Bot' },
+  { name: 'SyncInk&copy; Security', id: 'security', type: 'Moderation Bot' },
+  { name: 'SyncInk&copy; Radio', id: 'radio', type: 'Music Node' },
+  { name: 'SyncInk&copy; Ticket', id: 'ticket', type: 'Support System' },
+  { name: 'SyncInk&copy; Voice', id: 'voice', type: 'Voice Manager' }
 ];
 
 function renderGrid() {
@@ -27,59 +34,95 @@ function renderGrid() {
           <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.2rem;">${b.type}</div>
           <div style="font-weight: 800; font-size: 1.2rem; color: var(--text);">${b.name}</div>
         </div>
-        <div id="dot-${b.id}" style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5);"></div>
+        <div id="dot-${b.id}" style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444; box-shadow: 0 0 10px rgba(239,68,68,0.5);"></div>
       </div>
       <div style="display: flex; gap: 2rem;">
         <div>
           <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem;">Status</div>
-          <div id="status-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #22c55e; font-weight: 600;">ONLINE</div>
+          <div id="status-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #ef4444; font-weight: 600;">FETCHING...</div>
         </div>
         <div>
           <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem;">Latency</div>
-          <div id="ping-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text); font-weight: 600;">${b.basePing}ms</div>
+          <div id="ping-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #ef4444; font-weight: 600;">--ms</div>
         </div>
       </div>
     </div>
   `).join('');
 }
 
-function updateStatus() {
-  let hasBadPing = false;
+async function updateStatus() {
+  let hasBadPing = true;
   let hasWarning = false;
 
-  bots.forEach(b => {
-    let currentPing = b.basePing + Math.floor(Math.random() * 12) - 6;
-    
-    if (Math.random() > 0.97) {
-      currentPing += Math.floor(Math.random() * 100) + 50;
-    }
-    
-    const isOffline = false; // Simulated 100% uptime for portfolio
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error("Lanyard API Error");
+    const json = await res.json();
+    const kv = json.data.kv || {}; // This is where Lanyard stores Key-Value data!
+    hasBadPing = false;
 
-    const pingEl = document.getElementById(`ping-${b.id}`);
-    const statusEl = document.getElementById(`status-${b.id}`);
-    const dotEl = document.getElementById(`dot-${b.id}`);
-
-    pingEl.innerText = currentPing + 'ms';
-    if (currentPing > 150) {
-      statusEl.innerText = 'DEGRADED';
-      statusEl.style.color = '#f59e0b';
-      dotEl.style.background = '#f59e0b';
-      dotEl.style.boxShadow = '0 0 10px rgba(245,158,11,0.5)';
-      pingEl.style.color = '#f59e0b';
-      hasWarning = true;
-    } else {
-      statusEl.innerText = 'ONLINE';
-      statusEl.style.color = '#22c55e';
-      dotEl.style.background = '#22c55e';
-      dotEl.style.boxShadow = '0 0 10px rgba(34,197,94,0.5)';
-      pingEl.style.color = 'var(--text)';
+    // We expect the bot to save a JSON string of all pings to the KV store under the key 'bot_pings'
+    // Example: {"main": 45, "radio": 65, "ticket": 32, "voice": 25, "security": 10, "last_update": 1690000000000}
+    let pings = {};
+    if (kv.bot_pings) {
+        try {
+            pings = JSON.parse(kv.bot_pings);
+        } catch(e) {}
     }
-  });
+
+    const timeSinceUpdate = Date.now() - (pings.last_update || 0);
+
+    bots.forEach(b => {
+      const rawPing = pings[b.id]; 
+      
+      const pingEl = document.getElementById(`ping-${b.id}`);
+      const statusEl = document.getElementById(`status-${b.id}`);
+      const dotEl = document.getElementById(`dot-${b.id}`);
+
+      // If the data hasn't been updated in over 2 minutes (120,000 ms), we consider all bots offline
+      if (rawPing === undefined || rawPing === 'OFFLINE' || timeSinceUpdate > 120000) {
+        pingEl.innerHTML = '--ms';
+        pingEl.style.color = '#ef4444';
+        statusEl.innerHTML = 'OFFLINE';
+        statusEl.style.color = '#ef4444';
+        dotEl.style.background = '#ef4444';
+        dotEl.style.boxShadow = '0 0 10px rgba(239,68,68,0.5)';
+        hasBadPing = true;
+      } else {
+        const ping = parseInt(rawPing);
+        pingEl.innerHTML = ping + 'ms';
+        if (ping > 150) {
+          statusEl.innerHTML = 'DEGRADED';
+          statusEl.style.color = '#f59e0b';
+          dotEl.style.background = '#f59e0b';
+          dotEl.style.boxShadow = '0 0 10px rgba(245,158,11,0.5)';
+          pingEl.style.color = '#f59e0b';
+          hasWarning = true;
+        } else {
+          statusEl.innerHTML = 'ONLINE';
+          statusEl.style.color = '#22c55e';
+          dotEl.style.background = '#22c55e';
+          dotEl.style.boxShadow = '0 0 10px rgba(34,197,94,0.5)';
+          pingEl.style.color = 'var(--text)';
+        }
+      }
+    });
+  } catch (error) {
+    bots.forEach(b => {
+      document.getElementById(`ping-${b.id}`).innerHTML = 'ERR';
+      document.getElementById(`ping-${b.id}`).style.color = '#ef4444';
+      document.getElementById(`status-${b.id}`).innerHTML = 'API OFFLINE';
+      document.getElementById(`status-${b.id}`).style.color = '#ef4444';
+      document.getElementById(`dot-${b.id}`).style.background = '#ef4444';
+      document.getElementById(`dot-${b.id}`).style.boxShadow = '0 0 10px rgba(239,68,68,0.5)';
+    });
+    hasBadPing = true;
+  }
 
   const navDots = document.querySelectorAll('.global-status-dot');
   navDots.forEach(dot => {
-    if (hasWarning) dot.className = 'status-dot global-status-dot warning';
+    if (hasBadPing) dot.className = 'status-dot global-status-dot bad';
+    else if (hasWarning) dot.className = 'status-dot global-status-dot warning';
     else dot.className = 'status-dot global-status-dot';
   });
 }
@@ -87,7 +130,7 @@ function updateStatus() {
 document.addEventListener('DOMContentLoaded', () => {
     renderGrid();
     updateStatus();
-    setInterval(updateStatus, 3000);
+    setInterval(updateStatus, 15000); // Fetching every 15s to be safe on rate limits
 });
 </script>
 </div>
