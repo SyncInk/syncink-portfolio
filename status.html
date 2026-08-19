@@ -555,6 +555,8 @@ footer a:hover{color:var(--cyan);}
 
 <div class="page">
 <div class="hero"><div class="kicker">Systems</div><h1>Bot Status</h1><p>Real-time connection metrics for the SyncInk bot network.</p></div><div class="container" style="max-width: 900px; padding: 0 2rem 100px;"><div id="statusGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"></div></div><script>
+<div class="hero"><div class="kicker">Systems</div><h1>Bot Status</h1><p>Real-time connection metrics for the SyncInk bot network.</p></div><div class="container" style="max-width: 900px; padding: 0 2rem 100px;"><div id="statusGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"></div></div>
+<script>
 const bots = [
   { name: 'SyncInk© Main', id: 'main', basePing: 45, type: 'Core Bot' },
   { name: 'SyncInk© Radio', id: 'radio', basePing: 65, type: 'Music Node' },
@@ -565,22 +567,22 @@ const bots = [
 function renderGrid() {
   const grid = document.getElementById('statusGrid');
   grid.innerHTML = bots.map(b => 
-    <div id="card-" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden;">
+    <div id="card-\" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
         <div>
-          <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.2rem;"></div>
-          <div style="font-weight: 800; font-size: 1.2rem; color: var(--text);"></div>
+          <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.2rem;">\</div>
+          <div style="font-weight: 800; font-size: 1.2rem; color: var(--text);">\</div>
         </div>
-        <div id="dot-" style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5);"></div>
+        <div id="dot-\" style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5);"></div>
       </div>
       <div style="display: flex; gap: 2rem;">
         <div>
           <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem;">Status</div>
-          <div id="status-" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #22c55e; font-weight: 600;">ONLINE</div>
+          <div id="status-\" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #22c55e; font-weight: 600;">ONLINE</div>
         </div>
         <div>
           <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem;">Latency</div>
-          <div id="ping-" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text); font-weight: 600;">ms</div>
+          <div id="ping-\" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text); font-weight: 600;">\ms</div>
         </div>
       </div>
     </div>
@@ -592,20 +594,17 @@ function updateStatus() {
   let hasWarning = false;
 
   bots.forEach(b => {
-    // Simulate real-time ping fluctuations
     let currentPing = b.basePing + Math.floor(Math.random() * 20) - 10;
     
-    // 5% chance of spike
     if (Math.random() > 0.95) {
       currentPing += Math.floor(Math.random() * 200) + 100;
     }
     
-    // Extremely rare offline chance
     const isOffline = Math.random() > 0.995;
 
-    const pingEl = document.getElementById(ping-);
-    const statusEl = document.getElementById(status-);
-    const dotEl = document.getElementById(dot-);
+    const pingEl = document.getElementById(\ping-\\);
+    const statusEl = document.getElementById(\status-\\);
+    const dotEl = document.getElementById(\dot-\\);
 
     if (isOffline) {
       pingEl.innerText = '--ms';
@@ -634,17 +633,19 @@ function updateStatus() {
     }
   });
 
-  // Update global nav dot
-  const navDots = document.querySelectorAll('.status-dot');
+  const navDots = document.querySelectorAll('.global-status-dot');
   navDots.forEach(dot => {
-    if (hasBadPing) dot.className = 'status-dot bad';
-    else if (hasWarning) dot.className = 'status-dot warning';
-    else dot.className = 'status-dot';
+    if (hasBadPing) dot.className = 'status-dot global-status-dot bad';
+    else if (hasWarning) dot.className = 'status-dot global-status-dot warning';
+    else dot.className = 'status-dot global-status-dot';
   });
 }
 
-renderGrid();
-setInterval(updateStatus, 3000);
-</script></body></html>
-
-
+document.addEventListener('DOMContentLoaded', () => {
+    renderGrid();
+    updateStatus();
+    setInterval(updateStatus, 3000);
+});
+</script>
+</body>
+</html>
