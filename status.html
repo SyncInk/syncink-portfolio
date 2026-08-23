@@ -557,26 +557,41 @@ footer a:hover{color:var(--cyan);}
   <!-- HERO -->
   <div class="hero"><div class="kicker">Systems</div><h1>Bot Status</h1><p>Real-time connection metrics for the SyncInk bot network.</p></div>
 <div class="container" style="max-width: 900px; padding: 0 2rem 100px;">
-  <div id="statusGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"></div>
+  
+  <div style="font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+    <div style="width: 8px; height: 8px; background: var(--blue); border-radius: 50%;"></div>
+    Public Bots
+  </div>
+  <div id="publicGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;"></div>
+
+  <div style="font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+    <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%;"></div>
+    Private Infrastructure (Not Invitable)
+  </div>
+  <div id="privateGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"></div>
+
 </div>
 
 <script>
 // =========================================================================
 // SIMULATED REAL-TIME MODE
-// Showing exact status requested: Ticket, Voice, Security = ONLINE. Main, Radio = OFFLINE.
+// Online bots shown first. Security bot moved to Private category.
 // =========================================================================
 
 const bots = [
-  { name: 'SyncInk&copy;', id: 'main', basePing: 42, type: 'Core Bot', isOnline: false },
-  { name: 'SyncInk&copy; Security', id: 'security', basePing: 25, type: 'Moderation Bot', isOnline: true },
-  { name: 'SyncInk&copy; Radio', id: 'radio', basePing: 65, type: 'Music Node', isOnline: false },
-  { name: 'SyncInk&copy; Ticket', id: 'ticket', basePing: 32, type: 'Support System', isOnline: true },
-  { name: 'SyncInk&copy; Voice', id: 'voice', basePing: 48, type: 'Voice Manager', isOnline: true }
+  // ONLINE PUBLIC BOTS FIRST
+  { name: 'SyncInk&copy; Ticket', id: 'ticket', basePing: 32, type: 'Support System', isOnline: true, isPrivate: false },
+  { name: 'SyncInk&copy; Voice', id: 'voice', basePing: 48, type: 'Voice Manager', isOnline: true, isPrivate: false },
+  // OFFLINE PUBLIC BOTS
+  { name: 'SyncInk&copy;', id: 'main', basePing: 42, type: 'Core Bot', isOnline: false, isPrivate: false },
+  { name: 'SyncInk&copy; Radio', id: 'radio', basePing: 65, type: 'Music Node', isOnline: false, isPrivate: false },
+  
+  // PRIVATE BOTS
+  { name: 'SyncInk&copy; Security', id: 'security', basePing: 25, type: 'Internal Anti-Nuke', isOnline: true, isPrivate: true }
 ];
 
-function renderGrid() {
-  const grid = document.getElementById('statusGrid');
-  grid.innerHTML = bots.map(b => `
+function generateCard(b) {
+  return `
     <div id="card-${b.id}" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
         <div>
@@ -596,7 +611,18 @@ function renderGrid() {
         </div>
       </div>
     </div>
-  `).join('');
+  `;
+}
+
+function renderGrid() {
+  const publicGrid = document.getElementById('publicGrid');
+  const privateGrid = document.getElementById('privateGrid');
+  
+  const publicBots = bots.filter(b => !b.isPrivate);
+  const privateBots = bots.filter(b => b.isPrivate);
+
+  publicGrid.innerHTML = publicBots.map(generateCard).join('');
+  privateGrid.innerHTML = privateBots.map(generateCard).join('');
 }
 
 function updateStatus() {
