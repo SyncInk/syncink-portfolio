@@ -49,9 +49,9 @@
   --surface3: #E2E8F0;
   --border: #E2E8F0;
   --border-subtle: #EDF2F7;
-  --border-hover: rgba(88,101,242,0.4);
+  --border-hover: rgba(79,70,229,0.4);
   --text: #0F172A;
-  --text-secondary: #475569;
+  --text-secondary: #334155;
   --muted: #64748B;
   --blue: #4F46E5;
   --blue-subtle: rgba(79,70,229,0.08);
@@ -89,7 +89,6 @@ body{
   padding-bottom: 80px;
 }
 
-/* Sections scroll margin for fixed nav offset */
 #overview, #public-nodes, #private-nodes, #incidents {
   scroll-margin-top: 85px;
 }
@@ -164,7 +163,7 @@ nav{
   color: var(--text-secondary);
   text-decoration: none;
   transition: all 0.2s ease;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 6px;
 }
 .nav-links a:hover{
@@ -306,6 +305,9 @@ nav{
   border-color: rgba(16,185,129,0.3);
   background: linear-gradient(135deg, var(--card), rgba(16,185,129,0.06));
 }
+:root[data-theme="light"] .global-banner{
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
 
 .banner-text-main{
   font-weight: 800;
@@ -382,6 +384,10 @@ nav{
   border-color: var(--border-hover);
   transform: translateY(-1px);
 }
+:root[data-theme="light"] .metric-card{
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
 .metric-label{
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.68rem;
@@ -484,8 +490,11 @@ nav{
 .bot-card:hover{
   border-color: var(--border-hover);
   background: var(--card-hover);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
   transform: translateY(-2px);
+}
+:root[data-theme="light"] .bot-card{
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
 }
 
 /* Card Header */
@@ -697,6 +706,9 @@ nav{
   font-size: 0.6rem;
   color: rgba(148,163,184,0.4);
 }
+:root[data-theme="light"] .graph-axis-y{
+  color: rgba(71,85,105,0.6);
+}
 
 .graph-axis-x{
   display: flex;
@@ -864,7 +876,7 @@ nav{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.2rem 1.4rem;
+  padding: 1.3rem 1.6rem;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -872,27 +884,33 @@ nav{
   flex-wrap: wrap;
   gap: 1rem;
 }
+:root[data-theme="light"] .report-cta-box{
+  background: #FFFFFF;
+  border-color: #E2E8F0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+}
+
 .report-cta-text h3{
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--text);
   margin-bottom: 0.2rem;
 }
 .report-cta-text p{
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   color: var(--text-secondary);
 }
 
 .btn-report-action{
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.25rem;
+  gap: 0.55rem;
+  padding: 0.65rem 1.35rem;
   border-radius: 10px;
   background: linear-gradient(135deg, #EF4444, #DC2626);
   border: none;
   color: #FFFFFF;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -910,13 +928,16 @@ nav{
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(3, 5, 10, 0.8);
+  background: rgba(3, 5, 10, 0.85);
   backdrop-filter: blur(16px);
   display: none;
   place-items: center;
   padding: 1.5rem;
   opacity: 0;
   transition: opacity 0.25s ease;
+}
+:root[data-theme="light"] .modal-overlay{
+  background: rgba(15, 23, 42, 0.6);
 }
 .modal-overlay.active{
   display: grid;
@@ -936,6 +957,10 @@ nav{
   position: relative;
   transform: translateY(12px) scale(0.98);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root[data-theme="light"] .modal-card{
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  border-color: #E2E8F0;
 }
 .modal-overlay.active .modal-card{
   transform: translateY(0) scale(1);
@@ -963,15 +988,15 @@ nav{
 
 .modal-header-tag{
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--red);
   margin-bottom: 0.4rem;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 .modal-title{
   font-size: 1.45rem;
@@ -1018,13 +1043,20 @@ nav{
   font-size: 0.92rem;
   transition: all 0.2s ease;
 }
+:root[data-theme="light"] .form-input,
+:root[data-theme="light"] .form-select,
+:root[data-theme="light"] .form-textarea {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F172A;
+}
 .form-input:focus, .form-select:focus, .form-textarea:focus{
   outline: none;
   border-color: var(--blue);
   box-shadow: 0 0 0 3px var(--blue-subtle);
 }
 
-/* Severity Pill Selector */
+/* Professional Severity Selector without emojis */
 .severity-grid{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1048,12 +1080,16 @@ nav{
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0.65rem 0.5rem;
+  padding: 0.75rem 0.5rem;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--surface2);
   cursor: pointer;
   transition: all 0.2s ease;
+}
+:root[data-theme="light"] .severity-label{
+  background: #F8FAFC;
+  border-color: #E2E8F0;
 }
 .severity-label:hover{
   border-color: var(--border-hover);
@@ -1063,15 +1099,93 @@ nav{
   background: var(--blue-subtle);
   box-shadow: 0 0 0 2px var(--blue);
 }
+
+.sev-header-row{
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+.sev-indicator{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.sev-indicator.low{ background: var(--green); }
+.sev-indicator.medium{ background: var(--amber); }
+.sev-indicator.high{ background: #F97316; }
+.sev-indicator.critical{ background: var(--red); }
+
 .sev-name{
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 800;
   color: var(--text);
 }
 .sev-desc{
   font-size: 0.65rem;
   color: var(--muted);
-  margin-top: 0.15rem;
+}
+
+/* Discord User ID Live Verification Box */
+.discord-account-preview{
+  display: none;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-top: 0.6rem;
+  transition: all 0.2s ease;
+}
+.discord-account-preview.active{
+  display: flex;
+}
+.preview-avatar{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border);
+  background: #111827;
+}
+.preview-info{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.preview-name-row{
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.preview-global-name{
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.preview-handle{
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.preview-id-badge{
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.preview-verified-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  background: var(--green-subtle);
+  color: var(--green);
+  border: 1px solid rgba(16,185,129,0.25);
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .modal-actions{
@@ -1098,6 +1212,11 @@ nav{
 .btn-secondary:hover{
   color: var(--text);
   border-color: var(--border-hover);
+}
+:root[data-theme="light"] .btn-secondary{
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+  color: #334155;
 }
 
 .btn-submit-incident{
@@ -1219,6 +1338,12 @@ footer{
   transform: translate(-50%, -120%);
   transition: opacity 0.15s ease, transform 0.15s ease;
   white-space: nowrap;
+}
+:root[data-theme="light"] #chart-tooltip{
+  background: rgba(255,255,255,0.98);
+  color: #0F172A;
+  border-color: #CBD5E1;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 #chart-tooltip.show{
   opacity: 1;
@@ -1428,7 +1553,7 @@ footer{
           <p>Submit a bug or disruption report directly to our development team.</p>
         </div>
         <button class="btn-report-action" id="openReportModalBtn">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           Report Incident
         </button>
       </div>
@@ -1464,7 +1589,7 @@ footer{
     <!-- FORM VIEW -->
     <div id="incidentFormView">
       <div class="modal-header-tag">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         Report an Issue / Bug
       </div>
       <h2 class="modal-title">Report an Incident</h2>
@@ -1476,24 +1601,39 @@ footer{
           <label class="form-label" for="inc_service">Affected Service / Node <span>*</span></label>
           <select class="form-select" id="inc_service" required>
             <option value="" disabled selected>Select the affected bot or service...</option>
-            <option value="SyncInk® Ticket (Support System)">SyncInk® Ticket (Support System)</option>
-            <option value="SyncInk® Voice (Voice Manager)">SyncInk® Voice (Voice Manager)</option>
-            <option value="SyncInk® Core (Economy & Moderation)">SyncInk® Core (Economy & Moderation)</option>
-            <option value="SyncInk® Radio (Music Node)">SyncInk® Radio (Music Node)</option>
-            <option value="SyncInk® Security (Internal Shield)">SyncInk® Security (Internal Shield)</option>
-            <option value="Dashboard / Web Gateway">Dashboard / Web Gateway</option>
-            <option value="Multiple Services / Network Outage">Multiple Services / Network Outage</option>
+            <optgroup label="Operational Services">
+              <option value="SyncInk® Ticket (Support System)">SyncInk® Ticket (Support System)</option>
+              <option value="SyncInk® Voice (Voice Manager)">SyncInk® Voice (Voice Manager)</option>
+              <option value="SyncInk® Security (Internal Shield)">SyncInk® Security (Internal Shield)</option>
+              <option value="Dashboard / Web Gateway">Dashboard / Web Gateway</option>
+              <option value="Multiple Services / Network Outage">Multiple Services / Network Outage</option>
+            </optgroup>
+            <optgroup label="Offline / Maintenance (Currently Disabled)">
+              <option value="SyncInk® Core (Economy & Moderation)" disabled>SyncInk® Core — [Under Maintenance]</option>
+              <option value="SyncInk® Radio (Music Node)" disabled>SyncInk® Radio — [Under Maintenance]</option>
+            </optgroup>
           </select>
         </div>
 
-        <!-- 2. SEVERITY LEVEL -->
+        <!-- 2. FAILURE TYPE (Dynamically updated based on service) -->
+        <div class="form-group">
+          <label class="form-label" for="inc_type">Failure Type / Category <span>*</span></label>
+          <select class="form-select" id="inc_type" required>
+            <option value="" disabled selected>Select a service above first...</option>
+          </select>
+        </div>
+
+        <!-- 3. SEVERITY LEVEL (Professional, No emojis) -->
         <div class="form-group">
           <label class="form-label">Severity Level <span>*</span></label>
           <div class="severity-grid">
             <label class="severity-option">
               <input type="radio" name="severity" value="Low" checked />
               <div class="severity-label">
-                <span class="sev-name" style="color: var(--green);">🟢 Low</span>
+                <div class="sev-header-row">
+                  <span class="sev-indicator low"></span>
+                  <span class="sev-name">Low</span>
+                </div>
                 <span class="sev-desc">Minor glitch / UI</span>
               </div>
             </label>
@@ -1501,7 +1641,10 @@ footer{
             <label class="severity-option">
               <input type="radio" name="severity" value="Medium" />
               <div class="severity-label">
-                <span class="sev-name" style="color: var(--amber);">🟡 Medium</span>
+                <div class="sev-header-row">
+                  <span class="sev-indicator medium"></span>
+                  <span class="sev-name">Medium</span>
+                </div>
                 <span class="sev-desc">Partial degradation</span>
               </div>
             </label>
@@ -1509,41 +1652,49 @@ footer{
             <label class="severity-option">
               <input type="radio" name="severity" value="High" />
               <div class="severity-label">
-                <span class="sev-name" style="color: #F97316;">🟠 High</span>
-                <span class="sev-desc">Bot offline / down</span>
+                <div class="sev-header-row">
+                  <span class="sev-indicator high"></span>
+                  <span class="sev-name">High</span>
+                </div>
+                <span class="sev-desc">Bot down / crash</span>
               </div>
             </label>
 
             <label class="severity-option">
               <input type="radio" name="severity" value="Critical" />
               <div class="severity-label">
-                <span class="sev-name" style="color: var(--red);">🔴 Critical</span>
+                <div class="sev-header-row">
+                  <span class="sev-indicator critical"></span>
+                  <span class="sev-name">Critical</span>
+                </div>
                 <span class="sev-desc">Security / Outage</span>
               </div>
             </label>
           </div>
         </div>
 
-        <!-- 3. FAILURE TYPE -->
+        <!-- 4. REPORTER DETAILS WITH LIVE DISCORD ACCOUNT PREVIEW -->
         <div class="form-group">
-          <label class="form-label" for="inc_type">Failure Type / Category <span>*</span></label>
-          <select class="form-select" id="inc_type" required>
-            <option value="" disabled selected>Select issue category...</option>
-            <option value="Command Timeout / Gateway Lag">Command Timeout / Gateway Lag</option>
-            <option value="Audio Streaming / Voice Connection Stutter">Audio Streaming / Voice Connection Stutter</option>
-            <option value="Permission Error / Role Hierarchy">Permission Error / Role Hierarchy</option>
-            <option value="Database / Economy Balance Desync">Database / Economy Balance Desync</option>
-            <option value="Bot Crash / Hard Offline">Bot Crash / Hard Offline</option>
-            <option value="Security / Anti-Nuke Loop">Security / Anti-Nuke Loop</option>
-            <option value="Other Technical Glitch">Other Technical Glitch</option>
-          </select>
-        </div>
+          <label class="form-label" for="inc_reporter">Your Discord User ID or Username <span>*</span></label>
+          <input type="text" class="form-input" id="inc_reporter" placeholder="e.g. 930306512864280607 or sync_ink_001" required autocomplete="off" />
+          
+          <!-- Live Verified Discord Account Preview Box -->
+          <div class="discord-account-preview" id="discordAccountBox">
+            <img src="" alt="Discord Avatar" class="preview-avatar" id="previewAvatar" />
+            <div class="preview-info">
+              <div class="preview-name-row">
+                <span class="preview-global-name" id="previewGlobalName">User</span>
+                <span class="preview-handle" id="previewHandle">@user</span>
+              </div>
+              <span class="preview-id-badge" id="previewIdBadge">ID: --</span>
+            </div>
+            <span class="preview-verified-pill" id="previewVerifiedTag">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              Verified
+            </span>
+          </div>
 
-        <!-- 4. REPORTER DETAILS -->
-        <div class="form-group">
-          <label class="form-label" for="inc_reporter">Your Discord Tag or User ID <span>*</span></label>
-          <input type="text" class="form-input" id="inc_reporter" placeholder="e.g. sync_ink or 930306512864280607" required />
-          <div class="form-hint">So our developers can follow up with you on Discord if needed.</div>
+          <div class="form-hint">Enter your Discord ID to verify your account and allow developers to follow up.</div>
         </div>
 
         <!-- 5. SERVER / GUILD -->
@@ -1662,6 +1813,47 @@ const BOT_REGISTRY = [
     description: 'Anti-nuke, permission locks & quarantine lockdown node'
   }
 ];
+
+// Service Failure Map for dynamic option generation
+const SERVICE_FAILURE_MAP = {
+  'SyncInk® Ticket (Support System)': [
+    'Ticket Thread Creation Failed',
+    'Transcript Auto-Export Timeout / Error',
+    'Auto-Claim & Mention-Claim Failure',
+    'Interactive Modal / Button Error',
+    'Staff Permission Hierarchy Override Bug',
+    'Other Ticket System Glitch'
+  ],
+  'SyncInk® Voice (Voice Manager)': [
+    'Dynamic Voice Channel Creation Failed',
+    'Voice Bitrate Stutter / Connection Drops',
+    'User Limit / Custom Naming Pattern Error',
+    'Temporary Channel Not Deleting on Exit',
+    'Voice Activity Telemetry Error',
+    'Other Voice Management Issue'
+  ],
+  'SyncInk® Security (Internal Shield)': [
+    'Anti-Nuke Trigger False Positive',
+    'Server Lockdown / Quarantine Mode Failure',
+    'Role & Channel Permission Lock Bypass',
+    'Audit Log Webhook Alert Lag',
+    'Security Policy Enforcement Bug',
+    'Other Security Shield Glitch'
+  ],
+  'Dashboard / Web Gateway': [
+    'Dashboard Discord OAuth Login Failed',
+    'Bot Settings Saving / Sync Timeout',
+    'Transcript Web Viewer 404 / 500 Error',
+    'SSL / Web Certificate Connection Error',
+    'Other Web Platform Issue'
+  ],
+  'Multiple Services / Network Outage': [
+    'Multiple Bots Unresponsive Simultaneously',
+    'API Gateway Latency Spike (>500ms)',
+    'Global Discord Gateway Disconnect',
+    'Other Network-Wide Incident'
+  ]
+};
 
 // Deterministic Time-Series Generator (Synchronized globally by timestamp)
 function getDeterministicPing(bot, timestampMs) {
@@ -1840,7 +2032,7 @@ function renderAllCards() {
 // Global dataset cache for hover tooltips
 const CHART_DATA_CACHE = {};
 
-// High-DPI Smooth Graph Drawing
+// High-DPI Smooth Graph Drawing with Light Mode support
 function drawChart(bot, nowMs) {
   const canvas = document.getElementById(`chart-${bot.id}`);
   if (!canvas) return;
@@ -1858,8 +2050,10 @@ function drawChart(bot, nowMs) {
   
   ctx.clearRect(0, 0, w, h);
   
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
   // Background grid lines (100ms, 50ms, 0ms)
-  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.04)';
   ctx.lineWidth = 1 * dpr;
   
   // 50ms midpoint line
@@ -1873,13 +2067,13 @@ function drawChart(bot, nowMs) {
     ctx.beginPath();
     ctx.moveTo(0, h - (6 * dpr));
     ctx.lineTo(w, h - (6 * dpr));
-    ctx.strokeStyle = 'rgba(245,158,11,0.6)';
+    ctx.strokeStyle = isLight ? '#D97706' : 'rgba(245,158,11,0.6)';
     ctx.lineWidth = 2.5 * dpr;
     ctx.stroke();
     
     // Gradient fill for offline
     const grad = ctx.createLinearGradient(0, 0, 0, h);
-    grad.addColorStop(0, 'rgba(245,158,11,0.06)');
+    grad.addColorStop(0, isLight ? 'rgba(217,119,6,0.1)' : 'rgba(245,158,11,0.06)');
     grad.addColorStop(1, 'rgba(245,158,11,0)');
     ctx.lineTo(w, h);
     ctx.lineTo(0, h);
@@ -1915,7 +2109,7 @@ function drawChart(bot, nowMs) {
   const medianY = h - padBottom - (median / maxScale) * drawH;
   ctx.save();
   ctx.setLineDash([4 * dpr, 4 * dpr]);
-  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.08)';
   ctx.lineWidth = 1 * dpr;
   ctx.beginPath();
   ctx.moveTo(0, medianY);
@@ -1925,15 +2119,15 @@ function drawChart(bot, nowMs) {
 
   // Color selection based on latest ping
   const latestPing = pings[pings.length - 1];
-  let strokeColor = '#10B981'; // Green
-  let fillTopColor = 'rgba(16,185,129,0.22)';
+  let strokeColor = isLight ? '#059669' : '#10B981'; // Green
+  let fillTopColor = isLight ? 'rgba(5,150,105,0.18)' : 'rgba(16,185,129,0.22)';
   if (latestPing > 55) {
-    strokeColor = '#00D4FF'; // Cyan for elevated
-    fillTopColor = 'rgba(0,212,255,0.22)';
+    strokeColor = isLight ? '#0284C7' : '#00D4FF'; // Cyan
+    fillTopColor = isLight ? 'rgba(2,132,199,0.18)' : 'rgba(0,212,255,0.22)';
   }
   if (latestPing > 80) {
-    strokeColor = '#F59E0B'; // Amber
-    fillTopColor = 'rgba(245,158,11,0.22)';
+    strokeColor = isLight ? '#D97706' : '#F59E0B'; // Amber
+    fillTopColor = isLight ? 'rgba(217,119,6,0.18)' : 'rgba(245,158,11,0.22)';
   }
 
   // Smooth Area Gradient
@@ -1976,7 +2170,7 @@ function drawChart(bot, nowMs) {
   const lastP = points[points.length - 1];
   ctx.beginPath();
   ctx.arc(lastP.x, lastP.y, 4.5 * dpr, 0, Math.PI * 2);
-  ctx.fillStyle = '#0B0F19';
+  ctx.fillStyle = isLight ? '#FFFFFF' : '#0B0F19';
   ctx.fill();
   ctx.strokeStyle = strokeColor;
   ctx.lineWidth = 2.2 * dpr;
@@ -1999,8 +2193,8 @@ function updateTelemetry() {
       const history = getHistoricalPings(bot, now);
       const avg = Math.round(history.reduce((a, b) => a + b.ping, 0) / history.length * 10) / 10;
       
-      if (curPingEl) curPingEl.textContent = ping + 'ms';
-      if (avgPingEl) avgPingEl.textContent = avg + 'ms';
+      if (curPingEl) { curPingEl.textContent = ping + 'ms'; curPingEl.style.color = 'var(--text)'; }
+      if (avgPingEl) { avgPingEl.textContent = avg + 'ms'; avgPingEl.style.fontSize = '1.15rem'; avgPingEl.style.color = 'var(--text)'; }
       if (heartbeatEl) {
         const secAgo = Math.floor((now % 10000) / 1000) + 1;
         heartbeatEl.textContent = `Heartbeat ${secAgo}s ago`;
@@ -2115,7 +2309,6 @@ function initNavScrollSpy() {
 
     sections.forEach(sec => observer.observe(sec));
   } else {
-    // Fallback scroll listener
     window.addEventListener('scroll', () => {
       const scrollPos = window.scrollY + 100;
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -2202,7 +2395,7 @@ function initBgParticles() {
     ctx.clearRect(0, 0, w, h);
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     ctx.fillStyle = isLight ? 'rgba(79,70,229,0.15)' : 'rgba(88,101,242,0.2)';
-    ctx.strokeStyle = isLight ? 'rgba(79,70,229,0.04)' : 'rgba(88,101,242,0.06)';
+    ctx.strokeStyle = isLight ? 'rgba(79,70,229,0.06)' : 'rgba(88,101,242,0.06)';
     ctx.lineWidth = 1;
     
     for (let i = 0; i < particles.length; i++) {
@@ -2281,7 +2474,7 @@ function initThemeToggle() {
   });
 }
 
-// Incident Reporting Modal & Webhook Integration
+// Incident Reporting Modal, Dynamic Service Failure Options & Live Discord Verification
 function initIncidentModal() {
   const modal = document.getElementById('incidentModal');
   const form = document.getElementById('incidentForm');
@@ -2293,13 +2486,131 @@ function initIncidentModal() {
   const submitBtn = document.getElementById('submitIncidentBtn');
 
   const openBtn = document.getElementById('openReportModalBtn');
+  const serviceSelect = document.getElementById('inc_service');
+  const failureSelect = document.getElementById('inc_type');
+  const reporterInput = document.getElementById('inc_reporter');
+
+  // Discord Preview Elements
+  const accountBox = document.getElementById('discordAccountBox');
+  const previewAvatar = document.getElementById('previewAvatar');
+  const previewGlobalName = document.getElementById('previewGlobalName');
+  const previewHandle = document.getElementById('previewHandle');
+  const previewIdBadge = document.getElementById('previewIdBadge');
+  const previewVerifiedTag = document.getElementById('previewVerifiedTag');
 
   const WEBHOOK_URL = 'https://discord.com/api/webhooks/1541796985730895913/dDiYjoPDHzL-mveN8af532g7fpByq1Ix3prJIVV2wV-Gp9jSEYTpjxD3GpgfskUJObuj';
+
+  // Dynamic Failure Types population based on Service selection
+  function updateFailureTypes(serviceName) {
+    failureSelect.innerHTML = '';
+    const options = SERVICE_FAILURE_MAP[serviceName] || [
+      'Command Gateway Timeout / Lag',
+      'Feature Broken / Not Responding',
+      'Permission Hierarchy Error',
+      'Crash / Unexpected Offline',
+      'Other Technical Glitch'
+    ];
+
+    const defaultOpt = document.createElement('option');
+    defaultOpt.value = '';
+    defaultOpt.textContent = 'Select failure type...';
+    defaultOpt.disabled = true;
+    defaultOpt.selected = true;
+    failureSelect.appendChild(defaultOpt);
+
+    options.forEach(opt => {
+      const el = document.createElement('option');
+      el.value = opt;
+      el.textContent = opt;
+      failureSelect.appendChild(el);
+    });
+  }
+
+  if (serviceSelect) {
+    serviceSelect.addEventListener('change', (e) => {
+      updateFailureTypes(e.target.value);
+    });
+  }
+
+  // Live Discord Account Verification & Lookup
+  let lookupTimeout = null;
+  function verifyDiscordInput(val) {
+    val = val.trim();
+    if (!val) {
+      accountBox.classList.remove('active');
+      return;
+    }
+
+    const isNumericId = /^\d{17,20}$/.test(val);
+
+    if (isNumericId) {
+      // Query Lanyard for rich user presence / avatar
+      fetch(`https://api.lanyard.rest/v1/users/${val}`)
+        .then(r => r.json())
+        .then(res => {
+          if (res.success && res.data && res.data.discord_user) {
+            const u = res.data.discord_user;
+            const avatarUrl = u.avatar 
+              ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=64`
+              : `https://cdn.discordapp.com/embed/avatars/${(BigInt(u.id) >> 22n) % 6n}.png`;
+            
+            previewAvatar.src = avatarUrl;
+            previewGlobalName.textContent = u.global_name || u.username;
+            previewHandle.textContent = `@${u.username}`;
+            previewIdBadge.textContent = `ID: ${u.id}`;
+            previewVerifiedTag.innerHTML = `
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              Verified Account
+            `;
+            previewVerifiedTag.style.display = 'inline-flex';
+            accountBox.classList.add('active');
+          } else {
+            // Valid snowflake ID format fallback
+            previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${(BigInt(val) >> 22n) % 6n}.png`;
+            previewGlobalName.textContent = `Discord User`;
+            previewHandle.textContent = `Snowflake ID`;
+            previewIdBadge.textContent = `ID: ${val}`;
+            previewVerifiedTag.innerHTML = `✓ Valid ID Format`;
+            previewVerifiedTag.style.display = 'inline-flex';
+            accountBox.classList.add('active');
+          }
+        })
+        .catch(() => {
+          previewAvatar.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+          previewGlobalName.textContent = `Discord ID`;
+          previewHandle.textContent = `@${val}`;
+          previewIdBadge.textContent = `ID: ${val}`;
+          previewVerifiedTag.style.display = 'none';
+          accountBox.classList.add('active');
+        });
+    } else if (val.length >= 2) {
+      // Username preview
+      previewAvatar.src = 'https://cdn.discordapp.com/embed/avatars/1.png';
+      previewGlobalName.textContent = val;
+      previewHandle.textContent = val.startsWith('@') ? val : `@${val}`;
+      previewIdBadge.textContent = `Username tag`;
+      previewVerifiedTag.style.display = 'none';
+      accountBox.classList.add('active');
+    } else {
+      accountBox.classList.remove('active');
+    }
+  }
+
+  if (reporterInput) {
+    reporterInput.addEventListener('input', (e) => {
+      clearTimeout(lookupTimeout);
+      lookupTimeout = setTimeout(() => {
+        verifyDiscordInput(e.target.value);
+      }, 350);
+    });
+  }
 
   function openModal() {
     formView.style.display = 'block';
     successView.style.display = 'none';
     form.reset();
+    accountBox.classList.remove('active');
+    failureSelect.innerHTML = '<option value="" disabled selected>Select a service above first...</option>';
     submitBtn.disabled = false;
     submitBtn.innerHTML = `
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
