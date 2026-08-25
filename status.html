@@ -97,7 +97,7 @@ body{
   scroll-margin-top: 85px;
 }
 
-/* ===== NAV BAR ===== */
+/* ===== NAV BAR (DESKTOP) ===== */
 nav{
   position: fixed;
   top: 0;left: 0;right: 0;
@@ -246,6 +246,11 @@ nav{
   width: 16px;
   height: 16px;
   fill: currentColor;
+}
+
+/* ===== SUB-NAV BAR (MOBILE ONLY) ===== */
+.sub-nav-wrapper{
+  display: none;
 }
 
 /* ===== CONTAINER ===== */
@@ -1442,9 +1447,83 @@ footer{
     display: none;
   }
 
+  /* Sub-Nav Bar Mobile: Smooth & Non-intrusive Sticky Strip */
+  .sub-nav-wrapper {
+    display: block;
+    position: sticky;
+    top: 58px;
+    z-index: 90;
+    background: rgba(5, 7, 13, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.45rem 0.85rem;
+  }
+  :root[data-theme="light"] .sub-nav-wrapper {
+    background: rgba(248, 250, 252, 0.92);
+    border-color: #E2E8F0;
+  }
+
+  .sub-nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sub-nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sub-nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.32rem 0.75rem;
+    border-radius: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+  :root[data-theme="light"] .sub-nav-pill {
+    background: #F1F5F9;
+    border-color: #CBD5E1;
+    color: #334155;
+  }
+
+  .sub-nav-pill:hover {
+    color: var(--text);
+  }
+
+  .sub-nav-pill.active {
+    color: var(--blue);
+    background: var(--blue-subtle);
+    border-color: rgba(88, 101, 242, 0.45);
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.15);
+  }
+  :root[data-theme="light"] .sub-nav-pill.active {
+    color: #4F46E5;
+    background: rgba(79, 70, 229, 0.1);
+    border-color: rgba(79, 70, 229, 0.35);
+  }
+
+  /* Section scroll margins when sticky top nav + sub-nav are active */
+  #overview, #public-nodes, #private-nodes, #incidents {
+    scroll-margin-top: 115px;
+  }
+
   /* Header Hero Mobile */
   .status-header {
-    padding: 80px 0 20px;
+    padding: 85px 0 20px;
     flex-direction: column;
     align-items: stretch;
     gap: 1.2rem;
@@ -1730,6 +1809,17 @@ footer{
     </button>
   </div>
 </nav>
+
+<!-- OPTIMIZED MOBILE SUB-NAV STRIP (Sticky on mobile only, 0 impact on PC) -->
+<div class="sub-nav-wrapper" id="subNavBar">
+  <div class="sub-nav-inner">
+    <a href="#overview" class="sub-nav-pill active" data-target="overview">Overview</a>
+    <a href="#public-nodes" class="sub-nav-pill" data-target="public-nodes">Services</a>
+    <a href="#private-nodes" class="sub-nav-pill" data-target="private-nodes">Security</a>
+    <a href="#incidents" class="sub-nav-pill" data-target="incidents">Incidents</a>
+    <a href="bots.html" class="sub-nav-pill">All Bots ↗</a>
+  </div>
+</div>
 
 <div class="page">
   <div class="container">
@@ -2619,27 +2709,45 @@ function initTooltips() {
   });
 }
 
-// Navigation ScrollSpy & Active Link Highlighting (Zero forced scrolling)
+// Navigation ScrollSpy & Active Link Highlighting (Zero forced window scrolling)
 function initNavScrollSpy() {
-  const navLinks = document.querySelectorAll('.nav-links a.nav-item[data-target]');
+  const desktopLinks = document.querySelectorAll('.nav-links a.nav-item[data-target]');
+  const subNavPills = document.querySelectorAll('.sub-nav-pill[data-target]');
   const sections = ['overview', 'public-nodes', 'private-nodes', 'incidents'].map(id => document.getElementById(id)).filter(Boolean);
+  const subNavInner = document.querySelector('.sub-nav-inner');
 
   function setActiveLink(targetId) {
-    navLinks.forEach(link => {
+    desktopLinks.forEach(link => {
       if (link.getAttribute('data-target') === targetId) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
       }
     });
+
+    subNavPills.forEach(pill => {
+      if (pill.getAttribute('data-target') === targetId) {
+        pill.classList.add('active');
+        // Safely adjust horizontal scroll on the sub-nav pill strip ONLY (never moves window/viewport)
+        if (subNavInner) {
+          const pillLeft = pill.offsetLeft;
+          const pillWidth = pill.offsetWidth;
+          const innerWidth = subNavInner.clientWidth;
+          const targetScroll = pillLeft - (innerWidth / 2) + (pillWidth / 2);
+          subNavInner.scrollTo({ left: targetScroll, behavior: 'smooth' });
+        }
+      } else {
+        pill.classList.remove('active');
+      }
+    });
   }
 
   // Click handlers
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      const target = link.getAttribute('data-target');
-      if (target) {
-        setActiveLink(target);
+  [...desktopLinks, ...subNavPills].forEach(item => {
+    item.addEventListener('click', () => {
+      const targetId = item.getAttribute('data-target');
+      if (targetId) {
+        setActiveLink(targetId);
       }
     });
   });
@@ -2660,7 +2768,7 @@ function initNavScrollSpy() {
     sections.forEach(sec => observer.observe(sec));
   } else {
     window.addEventListener('scroll', () => {
-      const scrollPos = window.scrollY + 100;
+      const scrollPos = window.scrollY + 120;
       for (let i = sections.length - 1; i >= 0; i--) {
         const sec = sections[i];
         if (sec.offsetTop <= scrollPos) {
