@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="SyncInk Official Status — Real-time infrastructure, latency, and uptime monitoring for SyncInk Discord bots."/>
 <title>SyncInk | System Status & Latency</title>
 <link rel="icon" type="image/svg+xml" href="si-favicon.svg"/>
@@ -97,7 +97,7 @@ body{
   scroll-margin-top: 85px;
 }
 
-/* ===== NAV BAR (DESKTOP DEFAULT) ===== */
+/* ===== NAV BAR ===== */
 nav{
   position: fixed;
   top: 0;left: 0;right: 0;
@@ -246,11 +246,6 @@ nav{
   width: 16px;
   height: 16px;
   fill: currentColor;
-}
-
-/* Mobile Sub-Navigation Pill Strip (Visible on mobile only) */
-.mobile-nav-strip{
-  display: none;
 }
 
 /* ===== CONTAINER ===== */
@@ -702,7 +697,6 @@ nav{
   position: relative;
   overflow: hidden;
   cursor: crosshair;
-  touch-action: none;
 }
 .graph-canvas-box canvas{
   width: 100%;
@@ -766,7 +760,6 @@ nav{
   background: var(--surface2);
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
-  touch-action: pan-y;
 }
 .u-bar{
   flex: 1;
@@ -1415,7 +1408,7 @@ footer{
 }
 
 /* =========================================================================
-   MOBILE RESPONSIVE RULES (ONLY APPLIES ON SMALL / TOUCH SCREENS)
+   MOBILE RESPONSIVE RULES (ONLY APPLIES ON <= 768px SCREENS)
    Preserves 100% of PC / Desktop view unchanged.
    ========================================================================= */
 @media (max-width: 768px) {
@@ -1425,11 +1418,11 @@ footer{
 
   /* Nav Bar Mobile Optimization */
   nav {
-    padding: 0 1rem;
+    padding: 0 0.85rem;
     height: 58px;
   }
   .nav-links {
-    display: none; /* Replaced by thumb-friendly scrollable mobile-nav-strip */
+    display: none;
   }
   .nav-right {
     gap: 0.45rem;
@@ -1446,47 +1439,12 @@ footer{
     font-size: 1.05rem;
   }
   .nav-status-badge {
-    display: none; /* Hide badge on mobile header to give room */
-  }
-
-  /* Mobile Sub-Navigation Pill Strip */
-  .mobile-nav-strip {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    overflow-x: auto;
-    padding: 0.5rem 0.2rem;
-    margin: 0.2rem 0 1.4rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .mobile-nav-strip::-webkit-scrollbar {
     display: none;
-  }
-  .mobile-nav-item {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 0.38rem 0.85rem;
-    border-radius: 20px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: all 0.2s ease;
-  }
-  .mobile-nav-item.active {
-    color: var(--blue);
-    background: var(--blue-subtle);
-    border-color: rgba(88,101,242,0.4);
-    font-weight: 800;
   }
 
   /* Header Hero Mobile */
   .status-header {
-    padding: 78px 0 18px;
+    padding: 80px 0 20px;
     flex-direction: column;
     align-items: stretch;
     gap: 1.2rem;
@@ -1805,15 +1763,6 @@ footer{
         </div>
       </div>
     </header>
-
-    <!-- MOBILE HORIZONTAL NAVIGATION STRIP -->
-    <div class="mobile-nav-strip" id="mobileNavStrip">
-      <a href="#overview" class="mobile-nav-item active" data-target="overview">Overview</a>
-      <a href="#public-nodes" class="mobile-nav-item" data-target="public-nodes">Services</a>
-      <a href="#private-nodes" class="mobile-nav-item" data-target="private-nodes">Security</a>
-      <a href="#incidents" class="mobile-nav-item" data-target="incidents">Incidents</a>
-      <a href="bots.html" class="mobile-nav-item">All Bots</a>
-    </div>
 
     <!-- SYSTEM OVERVIEW COMPACT METRICS ROW -->
     <div class="overview-grid">
@@ -2281,7 +2230,7 @@ function getDeterministicPing(bot, timestampMs) {
 // Generate the last 30 historical data points for the 60-minute graph
 function getHistoricalPings(bot, nowMs) {
   const points = [];
-  const count = 30; // 30 points across 60 mins (every 2 mins)
+  const count = 30;
   const stepMs = 2 * 60 * 1000;
   
   for (let i = count - 1; i >= 0; i--) {
@@ -2426,7 +2375,7 @@ function renderAllCards() {
   privateGrid.innerHTML = privateBots.map(createBotCard).join('');
 }
 
-// Global dataset cache for hover/touch tooltips
+// Global dataset cache for hover tooltips
 const CHART_DATA_CACHE = {};
 
 // High-DPI Smooth Graph Drawing with Light Mode support
@@ -2618,7 +2567,7 @@ function updateTelemetry() {
   if (lastUpdateEl) lastUpdateEl.textContent = `Updated at ${timeStr}`;
 }
 
-// Interactive Hover & Touch Tooltips for Graphs and Uptime Bars
+// Interactive Hover Tooltips for Graphs and Uptime Bars
 function initTooltips() {
   const tooltip = document.getElementById('chart-tooltip');
 
@@ -2641,7 +2590,7 @@ function initTooltips() {
     }
   }
 
-  // Chart Canvas Mouse & Touch Events
+  // Chart Canvas Mouse Events
   document.querySelectorAll('.graph-canvas-box').forEach(box => {
     box.addEventListener('mousemove', (e) => {
       handleChartHover(box, e.clientX, e.clientY);
@@ -2650,73 +2599,35 @@ function initTooltips() {
     box.addEventListener('mouseleave', () => {
       tooltip.classList.remove('show');
     });
-
-    // Touch support for mobile devices
-    box.addEventListener('touchstart', (e) => {
-      if (e.touches.length > 0) {
-        handleChartHover(box, e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    box.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        handleChartHover(box, e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    box.addEventListener('touchend', () => {
-      setTimeout(() => tooltip.classList.remove('show'), 1500);
-    });
   });
 
-  // 90-Day Uptime Bars Hover & Touch Events
+  // 90-Day Uptime Bars Hover Events
   document.querySelectorAll('.u-bar').forEach(bar => {
-    function showBarTooltip(e, clientX, clientY) {
+    bar.addEventListener('mouseenter', (e) => {
       const text = bar.getAttribute('data-tooltip');
       if (text) {
         tooltip.innerHTML = text;
-        tooltip.style.left = clientX + 'px';
-        tooltip.style.top = (clientY - 12) + 'px';
+        tooltip.style.left = e.clientX + 'px';
+        tooltip.style.top = (e.clientY - 12) + 'px';
         tooltip.classList.add('show');
       }
-    }
-
-    bar.addEventListener('mouseenter', (e) => {
-      showBarTooltip(e, e.clientX, e.clientY);
     });
 
     bar.addEventListener('mouseleave', () => {
       tooltip.classList.remove('show');
     });
-
-    bar.addEventListener('touchstart', (e) => {
-      if (e.touches.length > 0) {
-        showBarTooltip(e, e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
   });
 }
 
-// Navigation ScrollSpy & Active Link Highlighting (Handles Desktop Nav & Mobile Strip)
+// Navigation ScrollSpy & Active Link Highlighting (Zero forced scrolling)
 function initNavScrollSpy() {
-  const desktopLinks = document.querySelectorAll('.nav-links a.nav-item[data-target]');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-strip a.mobile-nav-item[data-target]');
+  const navLinks = document.querySelectorAll('.nav-links a.nav-item[data-target]');
   const sections = ['overview', 'public-nodes', 'private-nodes', 'incidents'].map(id => document.getElementById(id)).filter(Boolean);
 
   function setActiveLink(targetId) {
-    desktopLinks.forEach(link => {
+    navLinks.forEach(link => {
       if (link.getAttribute('data-target') === targetId) {
         link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
-
-    mobileLinks.forEach(link => {
-      if (link.getAttribute('data-target') === targetId) {
-        link.classList.add('active');
-        // Scroll active item smoothly into view within the horizontal strip
-        link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else {
         link.classList.remove('active');
       }
@@ -2724,7 +2635,7 @@ function initNavScrollSpy() {
   }
 
   // Click handlers
-  [...desktopLinks, ...mobileLinks].forEach(link => {
+  navLinks.forEach(link => {
     link.addEventListener('click', () => {
       const target = link.getAttribute('data-target');
       if (target) {
@@ -2742,7 +2653,7 @@ function initNavScrollSpy() {
         }
       });
     }, {
-      rootMargin: '-15% 0px -60% 0px',
+      rootMargin: '-20% 0px -60% 0px',
       threshold: 0
     });
 
