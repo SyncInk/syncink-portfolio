@@ -89,6 +89,11 @@ body{
   padding-bottom: 80px;
 }
 
+/* Sections scroll margin for fixed nav offset */
+#overview, #public-nodes, #private-nodes, #incidents {
+  scroll-margin-top: 85px;
+}
+
 /* ===== NAV BAR ===== */
 nav{
   position: fixed;
@@ -158,41 +163,23 @@ nav{
   font-weight: 600;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: all 0.2s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
 }
-.nav-links a:hover, .nav-links a.active{
+.nav-links a:hover{
   color: var(--text);
 }
 .nav-links a.active{
   color: var(--blue);
+  background: var(--blue-subtle);
+  font-weight: 700;
 }
 
 .nav-right{
   display: flex;
   align-items: center;
   gap: 0.75rem;
-}
-
-.btn-report-nav{
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 8px;
-  background: var(--red-subtle);
-  border: 1px solid rgba(239,68,68,0.3);
-  color: #FCA5A5;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.btn-report-nav:hover{
-  background: rgba(239,68,68,0.2);
-  color: #FFFFFF;
-  border-color: rgba(239,68,68,0.6);
-  transform: translateY(-1px);
 }
 
 .live-indicator-pill{
@@ -302,7 +289,7 @@ nav{
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .global-banner{
@@ -329,32 +316,6 @@ nav{
   font-size: 0.75rem;
   color: var(--muted);
   font-family: 'JetBrains Mono', monospace;
-}
-
-.header-actions-row{
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.btn-report-hero{
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 8px;
-  background: var(--red-subtle);
-  border: 1px solid rgba(239,68,68,0.3);
-  color: #FCA5A5;
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.btn-report-hero:hover{
-  background: rgba(239,68,68,0.25);
-  color: #FFFFFF;
-  border-color: rgba(239,68,68,0.6);
 }
 
 .refresh-control{
@@ -817,23 +778,18 @@ nav{
 .incidents-section{
   margin-bottom: 4rem;
 }
+
 .incident-card{
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 1.4rem;
   margin-bottom: 1rem;
+  transition: all 0.2s ease;
 }
 .incident-card.operational{
   border-color: rgba(16,185,129,0.25);
   background: linear-gradient(135deg, var(--card) 0%, rgba(16,185,129,0.03) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.incident-card-inner-left{
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -852,6 +808,10 @@ nav{
 .incident-card.maintenance{
   border-color: rgba(245,158,11,0.3);
 }
+.incident-card.user-reported{
+  border-color: rgba(88,101,242,0.35);
+  background: linear-gradient(135deg, var(--card) 0%, rgba(88,101,242,0.04) 100%);
+}
 
 .inc-header{
   display: flex;
@@ -865,6 +825,9 @@ nav{
   font-size: 1rem;
   font-weight: 800;
   color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .inc-badge{
   font-family: 'JetBrains Mono', monospace;
@@ -879,6 +842,11 @@ nav{
   color: var(--amber);
   border: 1px solid rgba(245,158,11,0.3);
 }
+.inc-badge.badge-review{
+  background: var(--blue-subtle);
+  color: var(--blue);
+  border: 1px solid rgba(88,101,242,0.3);
+}
 .inc-meta{
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
@@ -889,6 +857,52 @@ nav{
   font-size: 0.88rem;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+/* Dedicated Report Incident CTA Box inside Incidents Section */
+.report-cta-box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.4rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-top: 1.4rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.report-cta-text h3{
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+.report-cta-text p{
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.btn-report-action{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  border: none;
+  color: #FFFFFF;
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(239,68,68,0.3);
+  text-decoration: none;
+}
+.btn-report-action:hover{
+  background: linear-gradient(135deg, #F87171, #EF4444);
+  box-shadow: 0 6px 20px rgba(239,68,68,0.45);
+  transform: translateY(-1px);
 }
 
 /* ===== MODAL DIALOG ===== */
@@ -1138,7 +1152,7 @@ nav{
 .success-desc{
   font-size: 0.92rem;
   color: var(--text-secondary);
-  max-width: 420px;
+  max-width: 440px;
   margin: 0 auto 1.8rem;
   line-height: 1.6;
 }
@@ -1228,20 +1242,15 @@ footer{
     <span class="nav-status-badge">Status</span>
   </div>
 
-  <ul class="nav-links">
-    <li><a href="#overview" class="active">Overview</a></li>
-    <li><a href="#public-nodes">Services</a></li>
-    <li><a href="#private-nodes">Security</a></li>
-    <li><a href="#incidents">Incidents</a></li>
-    <li><a href="bots.html">All Bots</a></li>
+  <ul class="nav-links" id="navLinksList">
+    <li><a href="#overview" class="nav-item active" data-target="overview">Overview</a></li>
+    <li><a href="#public-nodes" class="nav-item" data-target="public-nodes">Services</a></li>
+    <li><a href="#private-nodes" class="nav-item" data-target="private-nodes">Security</a></li>
+    <li><a href="#incidents" class="nav-item" data-target="incidents">Incidents</a></li>
+    <li><a href="bots.html" class="nav-item">All Bots</a></li>
   </ul>
 
   <div class="nav-right">
-    <button class="btn-report-nav" id="openReportModalNav">
-      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      Report Incident
-    </button>
-
     <div class="live-indicator-pill">
       <span class="pulse-dot dot-green" id="globalNavDot"></span>
       <span id="globalNavText">Operational</span>
@@ -1282,19 +1291,12 @@ footer{
           </div>
         </div>
 
-        <div class="header-actions-row">
-          <button class="btn-report-hero" id="openReportModalHero">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            Report Incident
+        <div class="refresh-control">
+          <span id="lastUpdateTimer">Updated just now</span>
+          <span>·</span>
+          <button class="btn-refresh" id="manualRefreshBtn" title="Refresh metrics">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
           </button>
-
-          <div class="refresh-control">
-            <span id="lastUpdateTimer">Updated just now</span>
-            <span>·</span>
-            <button class="btn-refresh" id="manualRefreshBtn" title="Refresh metrics">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-            </button>
-          </div>
         </div>
       </div>
     </header>
@@ -1347,10 +1349,10 @@ footer{
       <div class="metric-card">
         <div class="metric-label">
           <span>Incidents</span>
-          <span class="badge-warn">LOG</span>
+          <span class="badge-warn" id="incidentsOverviewBadge">LOG</span>
         </div>
-        <div class="metric-val">0 Active</div>
-        <div class="metric-sub">1 Scheduled upgrade</div>
+        <div class="metric-val" id="incidentsOverviewVal">0 Active</div>
+        <div class="metric-sub" id="incidentsOverviewSub">1 Scheduled upgrade</div>
       </div>
     </div>
 
@@ -1387,35 +1389,48 @@ footer{
           <div class="section-dot" style="background: var(--green);"></div>
           <h2 class="section-title">Incidents & Maintenance Log</h2>
         </div>
-        <button class="btn-report-hero" id="openReportModalIncidents" style="padding: 0.25rem 0.7rem; font-size: 0.74rem;">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-          Report Outage
-        </button>
+        <span class="section-badge">Past 90 Days</span>
       </div>
 
-      <!-- Current Status Card -->
-      <div class="incident-card operational">
-        <div class="incident-card-inner-left">
+      <!-- INCIDENTS LIST CONTAINER -->
+      <div id="incidentsContainer">
+        <!-- User Reported Incidents render dynamically here -->
+        <div id="userReportedIncidentsList"></div>
+
+        <!-- Default Operational Verification Card -->
+        <div class="incident-card operational" id="defaultOperationalCard">
           <div class="incident-icon-box">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
           </div>
           <div>
-            <div class="inc-title">No active incidents reported today</div>
-            <div class="inc-desc">All operational clusters (Ticket, Voice, Security) are running with sub-45ms latency and zero packet loss.</div>
+            <div class="inc-title">No major outages reported today</div>
+            <div class="inc-desc">All operational bot clusters (Ticket, Voice, Security) are running with sub-45ms latency and zero packet loss.</div>
+          </div>
+        </div>
+
+        <!-- Scheduled Maintenance Card -->
+        <div class="incident-card maintenance">
+          <div class="inc-header">
+            <div class="inc-title">Scheduled Maintenance — Cluster Sharding & Lavalink v4 Migration</div>
+            <span class="inc-badge badge-progress">In Progress</span>
+          </div>
+          <div class="inc-meta">Aug 20, 2026 – Ongoing · Impact: SyncInk Main & SyncInk Radio</div>
+          <div class="inc-desc">
+            We are currently upgrading the underlying Node.js runtime and sharding infrastructure for SyncInk Main & Radio to enhance audio streaming throughput and prevent Discord gateway rate-limits. Services will automatically rejoin the cluster once shard synchronization completes.
           </div>
         </div>
       </div>
 
-      <!-- Scheduled Maintenance Card -->
-      <div class="incident-card maintenance">
-        <div class="inc-header">
-          <div class="inc-title">Scheduled Maintenance — Cluster Sharding & Lavalink v4 Migration</div>
-          <span class="inc-badge badge-progress">In Progress</span>
+      <!-- DEDICATED REPORT INCIDENT ACTION CARD (Placed at bottom of Incidents section) -->
+      <div class="report-cta-box">
+        <div class="report-cta-text">
+          <h3>Experiencing an issue with a SyncInk bot?</h3>
+          <p>Submit a bug or disruption report directly to our development team.</p>
         </div>
-        <div class="inc-meta">Aug 20, 2026 – Ongoing · Impact: SyncInk Main & SyncInk Radio</div>
-        <div class="inc-desc">
-          We are currently upgrading the underlying Node.js runtime and sharding infrastructure for SyncInk Main & Radio to enhance audio streaming throughput and prevent Discord gateway rate-limits. Services will automatically rejoin the cluster once shard synchronization completes.
-        </div>
+        <button class="btn-report-action" id="openReportModalBtn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Report Incident
+        </button>
       </div>
     </div>
 
@@ -1450,10 +1465,10 @@ footer{
     <div id="incidentFormView">
       <div class="modal-header-tag">
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        Incident Telemetry Dispatch
+        Report an Issue / Bug
       </div>
       <h2 class="modal-title">Report an Incident</h2>
-      <p class="modal-sub">Submit an infrastructure or service disruption report directly to on-call bot engineers.</p>
+      <p class="modal-sub">Submit a bug or service disruption report directly to SyncInk developers.</p>
 
       <form id="incidentForm">
         <!-- 1. AFFECTED SERVICE -->
@@ -1528,7 +1543,7 @@ footer{
         <div class="form-group">
           <label class="form-label" for="inc_reporter">Your Discord Tag or User ID <span>*</span></label>
           <input type="text" class="form-input" id="inc_reporter" placeholder="e.g. sync_ink or 930306512864280607" required />
-          <div class="form-hint">So our staff can follow up with you on Discord if needed.</div>
+          <div class="form-hint">So our developers can follow up with you on Discord if needed.</div>
         </div>
 
         <!-- 5. SERVER / GUILD -->
@@ -1547,7 +1562,7 @@ footer{
           <button type="button" class="btn-secondary" id="cancelIncidentBtn">Cancel</button>
           <button type="submit" class="btn-submit-incident" id="submitIncidentBtn">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Dispatch Incident
+            Submit Incident Report
           </button>
         </div>
       </form>
@@ -1560,7 +1575,7 @@ footer{
       </div>
       <h3 class="success-title">Incident Dispatched</h3>
       <p class="success-desc">
-        Your incident report has been securely transmitted to the SyncInk Discord telemetry channel. Our infrastructure engineers have been notified.
+        Your incident report has been submitted. Our developers have been notified and will look into it.
       </p>
       <button type="button" class="btn-secondary" id="closeSuccessBtn">Close</button>
     </div>
@@ -2060,6 +2075,107 @@ function initTooltips() {
   });
 }
 
+// Navigation ScrollSpy & Active Link Highlighting
+function initNavScrollSpy() {
+  const navLinks = document.querySelectorAll('.nav-links a.nav-item[data-target]');
+  const sections = ['overview', 'public-nodes', 'private-nodes', 'incidents'].map(id => document.getElementById(id)).filter(Boolean);
+
+  function setActiveLink(targetId) {
+    navLinks.forEach(link => {
+      if (link.getAttribute('data-target') === targetId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  // Click handler for instant active state update
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = link.getAttribute('data-target');
+      if (target) {
+        setActiveLink(target);
+      }
+    });
+  });
+
+  // IntersectionObserver for active scroll tracking
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
+        }
+      });
+    }, {
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    });
+
+    sections.forEach(sec => observer.observe(sec));
+  } else {
+    // Fallback scroll listener
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 100;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sec = sections[i];
+        if (sec.offsetTop <= scrollPos) {
+          setActiveLink(sec.id);
+          break;
+        }
+      }
+    });
+  }
+}
+
+// Render User-Reported Incidents from LocalStorage
+function renderUserIncidents() {
+  const container = document.getElementById('userReportedIncidentsList');
+  const badgeVal = document.getElementById('incidentsOverviewVal');
+  const badgeSub = document.getElementById('incidentsOverviewSub');
+  const badgePill = document.getElementById('incidentsOverviewBadge');
+  if (!container) return;
+
+  let stored = [];
+  try {
+    stored = JSON.parse(localStorage.getItem('syncink_reported_incidents') || '[]');
+  } catch(e) {
+    stored = [];
+  }
+
+  if (stored.length === 0) {
+    container.innerHTML = '';
+    if (badgeVal) badgeVal.textContent = '0 Active';
+    if (badgeSub) badgeSub.textContent = '1 Scheduled upgrade';
+    if (badgePill) { badgePill.textContent = 'LOG'; badgePill.className = 'badge-warn'; }
+    return;
+  }
+
+  // Update Overview Metric Card
+  if (badgeVal) badgeVal.textContent = `${stored.length} Reported`;
+  if (badgeSub) badgeSub.textContent = 'Under Developer Review';
+  if (badgePill) { badgePill.textContent = 'REVIEW'; badgePill.className = 'badge-neutral'; }
+
+  // Render cards
+  container.innerHTML = stored.map(inc => `
+    <div class="incident-card user-reported">
+      <div class="inc-header">
+        <div class="inc-title">
+          <span>⚠️ Incident Report: ${inc.service}</span>
+        </div>
+        <span class="inc-badge badge-review">Under Developer Review</span>
+      </div>
+      <div class="inc-meta">
+        Reported by <strong>${inc.reporter}</strong> · ${inc.timestamp} · Severity: <strong style="color: #F97316;">${inc.severity}</strong> · Failure: ${inc.failureType}
+      </div>
+      <div class="inc-desc">
+        "${inc.desc}"
+      </div>
+    </div>
+  `).join('');
+}
+
 // Background Canvas Particle Animation
 function initBgParticles() {
   const canvas = document.getElementById('bgCanvas');
@@ -2131,6 +2247,7 @@ function initRefreshButton() {
   btn.addEventListener('click', () => {
     btn.classList.add('spinning');
     updateTelemetry();
+    renderUserIncidents();
     setTimeout(() => btn.classList.remove('spinning'), 500);
   });
 }
@@ -2175,9 +2292,7 @@ function initIncidentModal() {
   const closeSuccessBtn = document.getElementById('closeSuccessBtn');
   const submitBtn = document.getElementById('submitIncidentBtn');
 
-  const openNavBtn = document.getElementById('openReportModalNav');
-  const openHeroBtn = document.getElementById('openReportModalHero');
-  const openIncBtn = document.getElementById('openReportModalIncidents');
+  const openBtn = document.getElementById('openReportModalBtn');
 
   const WEBHOOK_URL = 'https://discord.com/api/webhooks/1541796985730895913/dDiYjoPDHzL-mveN8af532g7fpByq1Ix3prJIVV2wV-Gp9jSEYTpjxD3GpgfskUJObuj';
 
@@ -2188,7 +2303,7 @@ function initIncidentModal() {
     submitBtn.disabled = false;
     submitBtn.innerHTML = `
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      Dispatch Incident
+      Submit Incident Report
     `;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -2199,9 +2314,7 @@ function initIncidentModal() {
     document.body.style.overflow = '';
   }
 
-  if (openNavBtn) openNavBtn.addEventListener('click', openModal);
-  if (openHeroBtn) openHeroBtn.addEventListener('click', openModal);
-  if (openIncBtn) openIncBtn.addEventListener('click', openModal);
+  if (openBtn) openBtn.addEventListener('click', openModal);
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
@@ -2237,7 +2350,7 @@ function initIncidentModal() {
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" class="spinning"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      Transmitting...
+      Submitting...
     `;
 
     // Severity Colors
@@ -2255,13 +2368,13 @@ function initIncidentModal() {
     const reporterFormatted = isId ? `<@${reporter}> (\`${reporter}\`)` : `\`${reporter}\``;
 
     const payload = {
-      username: "SyncInk Status Dispatcher",
+      username: "SyncInk Status Bot",
       avatar_url: "https://syncink.github.io/syncink-portfolio/SyncInk%20Server%20Logo.png",
-      content: severity === 'Critical' || severity === 'High' ? "🚨 **[INCIDENT ALERT] High priority infrastructure report submitted!**" : undefined,
+      content: severity === 'Critical' || severity === 'High' ? "🚨 **[INCIDENT REPORT] High priority issue submitted!**" : undefined,
       embeds: [
         {
-          title: `🚨 Infrastructure Incident: ${service}`,
-          description: `An incident report was submitted via the **SyncInk Status Dashboard**.`,
+          title: `🚨 Incident Report: ${service}`,
+          description: `An incident report was submitted via the **SyncInk Status Page**.`,
           color: embedColor,
           fields: [
             { name: "⚠️ Severity Level", value: `\`${severity.toUpperCase()}\``, inline: true },
@@ -2270,10 +2383,10 @@ function initIncidentModal() {
             { name: "⚙️ Affected Service", value: `\`${service}\``, inline: true },
             { name: "🏰 Server / Guild", value: `\`${guild}\``, inline: true },
             { name: "⏰ Timestamp", value: `<t:${Math.floor(Date.now() / 1000)}:F>`, inline: true },
-            { name: "📝 Incident Description & Reproduction", value: `>>> ${desc}`, inline: false }
+            { name: "📝 Description & Reproduction Steps", value: `>>> ${desc}`, inline: false }
           ],
           footer: {
-            text: "SyncInk Live Incident Dispatcher · Automated Operations",
+            text: "SyncInk Incident Report · Developer Team",
             icon_url: "https://syncink.github.io/syncink-portfolio/syncink-s-logo.jpg"
           },
           timestamp: new Date().toISOString()
@@ -2289,6 +2402,23 @@ function initIncidentModal() {
       });
 
       if (res.ok || res.status === 204) {
+        // Save to LocalStorage so it appears immediately on the Incidents section!
+        let stored = [];
+        try { stored = JSON.parse(localStorage.getItem('syncink_reported_incidents') || '[]'); } catch(e) { stored = []; }
+        
+        stored.unshift({
+          service: service,
+          severity: severity,
+          failureType: failureType,
+          reporter: reporter,
+          guild: guild,
+          desc: desc,
+          timestamp: new Date().toLocaleTimeString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+        });
+
+        localStorage.setItem('syncink_reported_incidents', JSON.stringify(stored));
+        renderUserIncidents();
+
         formView.style.display = 'none';
         successView.style.display = 'block';
       } else {
@@ -2296,11 +2426,11 @@ function initIncidentModal() {
       }
     } catch (err) {
       console.error("Webhook error:", err);
-      alert("Failed to transmit incident to webhook. Please check your connection or try again.");
+      alert("Failed to send incident report. Please check your connection or try again.");
       submitBtn.disabled = false;
       submitBtn.innerHTML = `
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        Dispatch Incident
+        Submit Incident Report
       `;
     }
   });
@@ -2311,6 +2441,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAllCards();
   updateTelemetry();
   initTooltips();
+  initNavScrollSpy();
+  renderUserIncidents();
   initBgParticles();
   initRefreshButton();
   initThemeToggle();
