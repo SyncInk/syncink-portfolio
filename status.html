@@ -1717,28 +1717,36 @@ footer{
           </div>
         </div>
 
-        <!-- 4. REPORTER DETAILS WITH LIVE DISCORD ACCOUNT PREVIEW (Supports both User ID and Username) -->
+        <!-- 4. REPORTER DETAILS: DISCORD USER ID ONLY -->
         <div class="form-group">
-          <label class="form-label" for="inc_reporter">Your Discord User ID or Username <span>*</span></label>
-          <input type="text" class="form-input" id="inc_reporter" placeholder="e.g. 930306512864280607 or sync_ink_001" required autocomplete="off" />
+          <label class="form-label" for="inc_reporter">Your Discord User ID <span>*</span></label>
+          <input 
+            type="text" 
+            class="form-input" 
+            id="inc_reporter" 
+            placeholder="e.g. 930306512864280607" 
+            maxlength="20"
+            required 
+            autocomplete="off" 
+          />
           
-          <!-- Live Verified Discord Account Preview Box -->
+          <!-- Live Verified Discord ID Preview Box (Official Discord Snowflake Validation) -->
           <div class="discord-account-preview" id="discordAccountBox">
             <img src="" alt="Discord Avatar" class="preview-avatar" id="previewAvatar" />
             <div class="preview-info">
               <div class="preview-name-row">
-                <span class="preview-global-name" id="previewGlobalName">User</span>
-                <span class="preview-handle" id="previewHandle">@user</span>
+                <span class="preview-global-name" id="previewGlobalName">Discord Account</span>
+                <span class="preview-handle" id="previewHandle">Snowflake Validated</span>
               </div>
               <span class="preview-id-badge" id="previewIdBadge">ID: --</span>
             </div>
             <span class="preview-verified-pill" id="previewVerifiedTag">
               <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              Verified Account
+              Valid Discord ID
             </span>
           </div>
 
-          <div class="form-hint">Enter your Discord Username or ID to verify your account so developers can follow up.</div>
+          <div class="form-hint">Enter your 17–20 digit numeric Discord User ID (Right-click your profile in Discord → Copy User ID).</div>
         </div>
 
         <!-- 5. SERVER / GUILD -->
@@ -2518,7 +2526,7 @@ function initThemeToggle() {
   });
 }
 
-// Incident Reporting Modal, Dynamic Service Failure Options & Live Discord Verification
+// Incident Reporting Modal, Dynamic Service Failure Options & Instant Client-side Snowflake Validation
 function initIncidentModal() {
   const modal = document.getElementById('incidentModal');
   const form = document.getElementById('incidentForm');
@@ -2543,23 +2551,6 @@ function initIncidentModal() {
   const previewVerifiedTag = document.getElementById('previewVerifiedTag');
 
   const WEBHOOK_URL = 'https://discord.com/api/webhooks/1541796985730895913/dDiYjoPDHzL-mveN8af532g7fpByq1Ix3prJIVV2wV-Gp9jSEYTpjxD3GpgfskUJObuj';
-
-  const KNOWN_USERS = {
-    'sync_ink_001': '930306512864280607',
-    'sync_ink': '930306512864280607',
-    'syncink': '930306512864280607',
-    'syncink_001': '930306512864280607',
-    'deeptarag': '930306512864280607'
-  };
-
-  function computeHash(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(i);
-      hash |= 0;
-    }
-    return Math.abs(hash);
-  }
 
   // Dynamic Failure Types population based on Service selection
   function updateFailureTypes(serviceName) {
@@ -2593,92 +2584,41 @@ function initIncidentModal() {
     });
   }
 
-  // Live Discord Account Verification & Lookup (Handles BOTH Usernames and Numeric IDs)
-  let lookupTimeout = null;
-  function verifyDiscordInput(rawVal) {
-    let val = rawVal.trim();
+  // Instant Client-side Discord Snowflake ID Validation (Zero External API Dependency)
+  function verifyDiscordUserId(rawVal) {
+    const val = rawVal.trim();
     if (!val) {
       accountBox.classList.remove('active');
       return;
     }
 
-    const cleanHandle = val.replace(/^@/, '');
     const isNumericId = /^\d{17,20}$/.test(val);
-    const resolvedId = isNumericId ? val : KNOWN_USERS[cleanHandle.toLowerCase()];
 
-    if (resolvedId) {
-      // Query Lanyard for rich user profile & custom avatar
-      fetch(`https://api.lanyard.rest/v1/users/${resolvedId}`)
-        .then(r => r.json())
-        .then(res => {
-          if (res.success && res.data && res.data.discord_user) {
-            const u = res.data.discord_user;
-            const avatarUrl = u.avatar 
-              ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=64`
-              : `https://cdn.discordapp.com/embed/avatars/${(BigInt(u.id) >> 22n) % 6n}.png`;
-            
-            previewAvatar.src = avatarUrl;
-            previewGlobalName.textContent = u.global_name || u.username;
-            previewHandle.textContent = `@${u.username}`;
-            previewIdBadge.textContent = `ID: ${u.id}`;
-            previewVerifiedTag.innerHTML = `
-              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              Verified Account
-            `;
-            previewVerifiedTag.style.display = 'inline-flex';
-            accountBox.classList.add('active');
-          } else {
-            // Valid snowflake ID format fallback
-            const avatarIndex = (BigInt(resolvedId) >> 22n) % 6n;
-            previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
-            previewGlobalName.textContent = cleanHandle.startsWith('9303') ? 'SyncInk Staff' : cleanHandle;
-            previewHandle.textContent = isNumericId ? `Snowflake ID` : `@${cleanHandle}`;
-            previewIdBadge.textContent = `ID: ${resolvedId}`;
-            previewVerifiedTag.innerHTML = `
-              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              Verified ID
-            `;
-            previewVerifiedTag.style.display = 'inline-flex';
-            accountBox.classList.add('active');
-          }
-        })
-        .catch(() => {
-          const avatarIndex = computeHash(cleanHandle) % 6;
-          previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
-          previewGlobalName.textContent = cleanHandle;
-          previewHandle.textContent = `@${cleanHandle}`;
-          previewIdBadge.textContent = isNumericId ? `ID: ${val}` : `Username Handle`;
-          previewVerifiedTag.innerHTML = `
-            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-            Verified Handle
-          `;
-          previewVerifiedTag.style.display = 'inline-flex';
-          accountBox.classList.add('active');
-        });
-    } else if (cleanHandle.length >= 2) {
-      // General Discord username input
-      const avatarIndex = computeHash(cleanHandle) % 6;
-      previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
-      previewGlobalName.textContent = cleanHandle;
-      previewHandle.textContent = `@${cleanHandle}`;
-      previewIdBadge.textContent = `Discord Username Tag`;
-      previewVerifiedTag.innerHTML = `
-        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-        Verified Username
-      `;
-      previewVerifiedTag.style.display = 'inline-flex';
-      accountBox.classList.add('active');
+    if (isNumericId) {
+      try {
+        // Calculate official Discord default avatar index based on user ID: (ID >> 22) % 6
+        const avatarIdx = Number((BigInt(val) >> 22n) % 6n);
+        previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIdx}.png`;
+        previewGlobalName.textContent = `Discord Account`;
+        previewHandle.textContent = `Snowflake Validated`;
+        previewIdBadge.textContent = `ID: ${val}`;
+        previewVerifiedTag.innerHTML = `
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          Valid Discord ID
+        </span>`;
+        accountBox.classList.add('active');
+      } catch(e) {
+        accountBox.classList.remove('active');
+      }
     } else {
+      // Hide preview if not a full 17-20 digit snowflake ID
       accountBox.classList.remove('active');
     }
   }
 
   if (reporterInput) {
     reporterInput.addEventListener('input', (e) => {
-      clearTimeout(lookupTimeout);
-      lookupTimeout = setTimeout(() => {
-        verifyDiscordInput(e.target.value);
-      }, 350);
+      verifyDiscordUserId(e.target.value);
     });
   }
 
@@ -2735,6 +2675,12 @@ function initIncidentModal() {
       return;
     }
 
+    if (!/^\d{17,20}$/.test(reporter)) {
+      alert('Please enter a valid 17-20 digit numeric Discord User ID (e.g. 930306512864280607).');
+      document.getElementById('inc_reporter').focus();
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" class="spinning"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -2751,10 +2697,8 @@ function initIncidentModal() {
 
     const embedColor = colorMap[severity] || 16096779;
 
-    // Discord ID mention format if numeric or known
-    const cleanRep = reporter.replace(/^@/, '');
-    const resolvedId = /^\d{17,20}$/.test(cleanRep) ? cleanRep : KNOWN_USERS[cleanRep.toLowerCase()];
-    const reporterFormatted = resolvedId ? `<@${resolvedId}> (\`${reporter}\`)` : `\`${reporter}\``;
+    // Discord ID mention format (Discord renders user's avatar & profile automatically in embed)
+    const reporterFormatted = `<@${reporter}> (\`${reporter}\`)`;
 
     const payload = {
       username: "SyncInk Status Bot",
@@ -2791,7 +2735,7 @@ function initIncidentModal() {
       });
 
       if (res.ok || res.status === 204) {
-        // Save to LocalStorage so it appears immediately on the Incidents section!
+        // Save to LocalStorage so it appears immediately on the Incidents section
         let stored = [];
         try { stored = JSON.parse(localStorage.getItem('syncink_reported_incidents') || '[]'); } catch(e) { stored = []; }
         
