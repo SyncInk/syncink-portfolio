@@ -97,7 +97,7 @@ body{
   scroll-margin-top: 85px;
 }
 
-/* ===== NAV BAR (DESKTOP) ===== */
+/* ===== NAV BAR ===== */
 nav{
   position: fixed;
   top: 0;left: 0;right: 0;
@@ -141,7 +141,6 @@ nav{
   font-weight: 900;
   color: #fff;
   box-shadow: 0 2px 8px rgba(88,101,242,0.3);
-  flex-shrink: 0;
 }
 .nav-status-badge{
   font-family: 'JetBrains Mono', monospace;
@@ -154,7 +153,6 @@ nav{
   background: var(--blue-subtle);
   color: var(--blue);
   border: 1px solid rgba(88,101,242,0.25);
-  white-space: nowrap;
 }
 
 .nav-links{
@@ -171,7 +169,6 @@ nav{
   transition: all 0.2s ease;
   padding: 0.25rem 0.6rem;
   border-radius: 6px;
-  white-space: nowrap;
 }
 .nav-links a:hover{
   color: var(--text);
@@ -199,7 +196,6 @@ nav{
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-secondary);
-  white-space: nowrap;
 }
 
 .btn-nav-action{
@@ -216,7 +212,6 @@ nav{
   text-decoration: none;
   transition: all 0.2s ease;
   cursor: pointer;
-  white-space: nowrap;
 }
 .btn-nav-action:hover{
   color: var(--text);
@@ -235,7 +230,6 @@ nav{
   display: grid;
   place-items: center;
   transition: all 0.2s ease;
-  flex-shrink: 0;
 }
 .theme-toggle:hover{
   color: var(--text);
@@ -586,7 +580,6 @@ nav{
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.03em;
   border: 1px solid transparent;
-  flex-shrink: 0;
 }
 .status-pill.operational{
   background: var(--green-subtle);
@@ -610,7 +603,6 @@ nav{
   height: 8px;
   border-radius: 50%;
   display: inline-block;
-  flex-shrink: 0;
 }
 .pulse-dot.dot-green{
   background: var(--green);
@@ -1205,13 +1197,11 @@ nav{
   object-fit: cover;
   border: 1.5px solid var(--border);
   background: #111827;
-  flex-shrink: 0;
 }
 .preview-info{
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 0;
 }
 .preview-name-row{
   display: flex;
@@ -1232,7 +1222,6 @@ nav{
   font-size: 0.68rem;
   color: var(--muted);
   font-family: 'JetBrains Mono', monospace;
-  word-break: break-all;
 }
 .preview-verified-pill{
   display: inline-flex;
@@ -1246,8 +1235,6 @@ nav{
   color: var(--green);
   border: 1px solid rgba(16,185,129,0.25);
   font-family: 'JetBrains Mono', monospace;
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .modal-actions{
@@ -1413,20 +1400,23 @@ footer{
 }
 
 /* =========================================================================
-   MOBILE RESPONSIVE RULES (ONLY APPLIES ON <= 768px SCREENS)
-   Preserves 100% of PC / Desktop view unchanged.
+   MOBILE ONLY OVERRIDES (STRICTLY SCOPED TO <= 768px SCREENS)
+   Desktop / PC (> 768px) remains 100% untouched and identical to original.
    ========================================================================= */
 @media (max-width: 768px) {
   .container {
     padding: 0 1rem;
   }
 
-  /* Nav Bar Mobile Optimization */
+  /* Top Nav on Mobile */
   nav {
-    padding: 0 0.85rem;
+    padding: 0 1rem;
     height: 58px;
   }
   .nav-links {
+    display: none;
+  }
+  .nav-status-badge {
     display: none;
   }
   .nav-right {
@@ -1443,11 +1433,8 @@ footer{
   .nav-brand span {
     font-size: 1.05rem;
   }
-  .nav-status-badge {
-    display: none;
-  }
 
-  /* Sub-Nav Bar Mobile: Smooth & Non-intrusive Sticky Strip */
+  /* Sub-Nav Bar (Sticky on Mobile) */
   .sub-nav-wrapper {
     display: block;
     position: sticky;
@@ -1744,28 +1731,6 @@ footer{
     gap: 1rem;
   }
 }
-
-/* Extra Small Phones (<= 380px) */
-@media (max-width: 380px) {
-  .btn-nav-action .nav-btn-label {
-    display: none;
-  }
-  .live-indicator-pill span:not(.pulse-dot) {
-    display: none;
-  }
-  .live-indicator-pill {
-    padding: 0.35rem 0.45rem;
-  }
-  .overview-grid {
-    gap: 0.5rem;
-  }
-  .metric-card {
-    padding: 0.75rem 0.75rem;
-  }
-  .metric-val {
-    font-size: 1.15rem;
-  }
-}
 </style>
 </head>
 
@@ -1800,7 +1765,7 @@ footer{
 
     <a href="./" class="btn-nav-action">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
-      <span class="nav-btn-label">Portfolio</span>
+      Portfolio
     </a>
 
     <button class="theme-toggle" id="tt" aria-label="Toggle theme">
