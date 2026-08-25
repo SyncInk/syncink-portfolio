@@ -574,7 +574,7 @@ footer a:hover{color:var(--cyan);}
 
 <script>
 // =========================================================================
-// SIMULATED REAL-TIME MODE WITH CANVAS GRAPHS
+// SIMULATED REAL-TIME MODE WITH PREMIUM SMOOTH GRAPHS
 // =========================================================================
 
 const bots = [
@@ -590,39 +590,40 @@ const bots = [
 
 function generateCard(b) {
   return `
-    <div id="card-${b.id}" style="background: rgba(17,24,39,0.55); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
+    <div id="card-${b.id}" style="background: rgba(17,24,39,0.7); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 40px rgba(0,0,0,0.5);">
       
       <!-- HEADER -->
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem;">
         <div>
           <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.2rem;">${b.type}</div>
           <div style="font-weight: 800; font-size: 1.2rem; color: var(--text);">${b.name}</div>
         </div>
-        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.3); padding: 0.3rem 0.8rem; border-radius: 20px;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; background: rgba(0,0,0,0.5); padding: 0.4rem 0.9rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
           <div id="dot-${b.id}" style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5);"></div>
           <span id="status-${b.id}" style="font-size: 0.8rem; font-weight: 700; color: #22c55e;">Connected</span>
         </div>
       </div>
       
       <!-- GRAPH SECTION -->
-      <div style="margin-bottom: 1rem;">
-        <div style="font-size: 0.7rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Ping History</div>
-        <div style="height: 60px; background: rgba(0,0,0,0.2); border-radius: 8px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);">
-          <canvas id="graph-${b.id}" width="300" height="60" style="width: 100%; height: 100%; display: block;"></canvas>
-          <div style="position: absolute; right: 8px; top: 4px; font-size: 0.6rem; color: var(--muted); font-family: 'JetBrains Mono', monospace;">500</div>
-          <div style="position: absolute; right: 8px; bottom: 4px; font-size: 0.6rem; color: var(--muted); font-family: 'JetBrains Mono', monospace;">0</div>
+      <div style="margin-bottom: 1.2rem;">
+        <div style="font-size: 0.7rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.8rem;">Ping History</div>
+        <div style="height: 70px; background: rgba(0,0,0,0.4); border-radius: 10px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.03);">
+          <canvas id="graph-${b.id}" style="width: 100%; height: 100%; display: block;"></canvas>
+          <div style="position: absolute; right: 10px; top: 6px; font-size: 0.6rem; color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace;">500</div>
+          <div style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace;">250</div>
+          <div style="position: absolute; right: 10px; bottom: 6px; font-size: 0.6rem; color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace;">0</div>
         </div>
       </div>
 
       <!-- FOOTER STATS -->
-      <div style="display: flex; gap: 2rem;">
+      <div style="display: flex; gap: 2.5rem;">
         <div>
-          <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem;">Last Ping</div>
-          <div id="ping-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--text); font-weight: 700;">${b.basePing}ms</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Last Ping</div>
+          <div id="ping-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--text); font-weight: 700;">${b.basePing}ms</div>
         </div>
         <div>
-          <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem;">Average</div>
-          <div id="avg-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--text); font-weight: 700;">${b.basePing}ms</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">Average</div>
+          <div id="avg-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--text); font-weight: 700;">${b.basePing}ms</div>
         </div>
       </div>
       
@@ -644,81 +645,118 @@ function renderGrid() {
 function drawGraph(b) {
   const canvas = document.getElementById(`graph-${b.id}`);
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const width = canvas.width;
-  const height = canvas.height;
   
-  ctx.clearRect(0, 0, width, height);
+  // Set crisp high-DPI rendering
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * 2;
+  canvas.height = rect.height * 2;
+  
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+  
+  ctx.clearRect(0, 0, w, h);
+  
+  // Background grid lines matching labels
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, h/2); ctx.lineTo(w, h/2);
+  ctx.stroke();
   
   if (!b.isOnline || b.history.length === 0) {
-    ctx.fillStyle = 'rgba(239, 68, 68, 0.1)';
-    ctx.fillRect(0, 0, width, height);
     ctx.beginPath();
-    ctx.moveTo(0, height - 10);
-    ctx.lineTo(width, height - 10);
+    ctx.moveTo(0, h - 4);
+    ctx.lineTo(w, h - 4);
     ctx.strokeStyle = '#ef4444';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 4;
     ctx.stroke();
     return;
   }
   
   const maxPoints = 20;
-  const maxPing = 500; // Fixed scale to match the 0-500 labels
-  const step = width / (maxPoints - 1);
+  const maxPing = 500;
+  const step = w / (maxPoints - 1);
   
   const latestPing = b.history[b.history.length - 1];
   let color = '#22c55e'; // Green
-  let fillTop = 'rgba(34, 197, 94, 0.4)';
+  let fillTop = 'rgba(34, 197, 94, 0.3)';
   if (latestPing > 150) {
      color = '#f59e0b'; // Orange
-     fillTop = 'rgba(245, 158, 11, 0.4)';
+     fillTop = 'rgba(245, 158, 11, 0.3)';
   }
   if (latestPing > 300) {
      color = '#ef4444'; // Red
-     fillTop = 'rgba(239, 68, 68, 0.4)';
+     fillTop = 'rgba(239, 68, 68, 0.3)';
   }
   
-  let gradient = ctx.createLinearGradient(0, 0, 0, height);
+  let gradient = ctx.createLinearGradient(0, 0, 0, h);
   gradient.addColorStop(0, fillTop);
   gradient.addColorStop(1, 'rgba(0,0,0,0)');
   
   const points = [];
   const offset = maxPoints - b.history.length;
+  const paddingBottom = 12; // Prevent touching bottom
+  const paddingTop = 12; // Prevent touching top
+  const drawH = h - paddingBottom - paddingTop;
   
   for (let i = 0; i < b.history.length; i++) {
     const x = (i + offset) * step;
-    let y = height - (b.history[i] / maxPing) * height;
-    if (y < 5) y = 5; // Clamp top
-    if (y > height - 2) y = height - 2; // Clamp bottom
+    let y = h - paddingBottom - (Math.min(b.history[i], maxPing) / maxPing) * drawH;
     points.push({x, y});
   }
   
-  // Fill Area
+  // Create smooth spline
   ctx.beginPath();
-  ctx.moveTo(points[0].x, height);
-  points.forEach(p => ctx.lineTo(p.x, p.y));
-  ctx.lineTo(points[points.length - 1].x, height);
+  ctx.moveTo(points[0].x, points[0].y);
+  
+  for (let i = 0; i < points.length - 1; i++) {
+    const xc = (points[i].x + points[i + 1].x) / 2;
+    const yc = (points[i].y + points[i + 1].y) / 2;
+    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+  }
+  ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+  
+  // Fill the area
+  ctx.lineTo(w, h);
+  ctx.lineTo(0, h);
   ctx.fillStyle = gradient;
   ctx.fill();
   
-  // Draw Line
+  // Stroke the smooth line
   ctx.beginPath();
-  points.forEach((p, i) => {
-    if (i === 0) ctx.moveTo(p.x, p.y);
-    else ctx.lineTo(p.x, p.y);
-  });
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 0; i < points.length - 1; i++) {
+    const xc = (points[i].x + points[i + 1].x) / 2;
+    const yc = (points[i].y + points[i + 1].y) / 2;
+    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+  }
+  ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+  
   ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 4;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
   ctx.stroke();
   
-  // Draw Dot at current ping
+  // Draw premium glowing dot
   const lastP = points[points.length - 1];
+  
+  // Outer Glow
   ctx.beginPath();
-  ctx.arc(lastP.x, lastP.y, 4, 0, Math.PI * 2);
+  ctx.arc(lastP.x, lastP.y, 14, 0, Math.PI * 2);
+  ctx.fillStyle = color.replace(')', ', 0.2)').replace('rgb', 'rgba'); // Hacky fallback if hex, just use gradient
+  ctx.fill();
+
+  // Core Dot
+  ctx.beginPath();
+  ctx.arc(lastP.x, lastP.y, 6, 0, Math.PI * 2);
   ctx.fillStyle = color;
   ctx.fill();
-  ctx.strokeStyle = 'rgba(255,255,255,0.8)';
-  ctx.lineWidth = 1.5;
+  
+  // Inner white stroke
+  ctx.strokeStyle = '#111827';
+  ctx.lineWidth = 3;
   ctx.stroke();
 }
 
@@ -744,10 +782,10 @@ function updateStatus() {
       return;
     }
 
-    let currentPing = b.basePing + Math.floor(Math.random() * 14) - 7;
+    let currentPing = b.basePing + Math.floor(Math.random() * 12) - 6;
     
     // Rare lag spike
-    if (Math.random() > 0.95) {
+    if (Math.random() > 0.96) {
       currentPing += Math.floor(Math.random() * 80) + 40;
     }
     
@@ -791,19 +829,24 @@ function updateStatus() {
 document.addEventListener('DOMContentLoaded', () => {
     renderGrid();
     
-    // Pre-fill history to make it look active immediately
+    // Pre-fill history for smooth immediate entry
     bots.forEach(b => {
        if (b.isOnline) {
           for(let i=0; i<20; i++) {
-             let ping = b.basePing + Math.floor(Math.random() * 14) - 7;
-             if (Math.random() > 0.95) ping += 60;
+             let ping = b.basePing + Math.floor(Math.random() * 12) - 6;
+             if (Math.random() > 0.96) ping += 60;
              b.history.push(ping);
           }
        }
     });
     
     updateStatus();
-    setInterval(updateStatus, 2500); // slightly faster updates look better on graphs
+    setInterval(updateStatus, 2500); 
+    
+    // Redraw graphs if window resizes
+    window.addEventListener('resize', () => {
+       bots.forEach(b => drawGraph(b));
+    });
 });
 </script>
 </div>
