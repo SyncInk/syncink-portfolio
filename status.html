@@ -35,6 +35,8 @@
   --green-subtle: rgba(16,185,129,0.12);
   --amber: #F59E0B;
   --amber-subtle: rgba(245,158,11,0.12);
+  --orange: #F97316;
+  --orange-subtle: rgba(249,115,22,0.12);
   --red: #EF4444;
   --red-subtle: rgba(239,68,68,0.12);
 }
@@ -60,6 +62,8 @@
   --green-subtle: rgba(5,150,105,0.1);
   --amber: #D97706;
   --amber-subtle: rgba(217,119,6,0.1);
+  --orange: #EA580C;
+  --orange-subtle: rgba(234,88,12,0.1);
   --red: #DC2626;
   --red-subtle: rgba(220,38,38,0.1);
 }
@@ -1056,7 +1060,7 @@ nav{
   box-shadow: 0 0 0 3px var(--blue-subtle);
 }
 
-/* Professional Severity Selector without emojis */
+/* Severity Selector with Distinct Level Highlight Colors */
 .severity-grid{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1094,10 +1098,46 @@ nav{
 .severity-label:hover{
   border-color: var(--border-hover);
 }
-.severity-option input:checked + .severity-label{
-  border-color: var(--blue);
-  background: var(--blue-subtle);
-  box-shadow: 0 0 0 2px var(--blue);
+
+/* Distinct Highlight Colors per Severity Level */
+.severity-option.option-low input:checked + .severity-label {
+  border-color: var(--green);
+  background: rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
+}
+:root[data-theme="light"] .severity-option.option-low input:checked + .severity-label {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: #059669;
+}
+
+.severity-option.option-medium input:checked + .severity-label {
+  border-color: var(--amber);
+  background: rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.4);
+}
+:root[data-theme="light"] .severity-option.option-medium input:checked + .severity-label {
+  background: rgba(217, 119, 6, 0.1);
+  border-color: #D97706;
+}
+
+.severity-option.option-high input:checked + .severity-label {
+  border-color: var(--orange);
+  background: rgba(249, 115, 22, 0.15);
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.4);
+}
+:root[data-theme="light"] .severity-option.option-high input:checked + .severity-label {
+  background: rgba(234, 88, 12, 0.1);
+  border-color: #EA580C;
+}
+
+.severity-option.option-critical input:checked + .severity-label {
+  border-color: var(--red);
+  background: rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.4);
+}
+:root[data-theme="light"] .severity-option.option-critical input:checked + .severity-label {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: #DC2626;
 }
 
 .sev-header-row{
@@ -1113,7 +1153,7 @@ nav{
 }
 .sev-indicator.low{ background: var(--green); }
 .sev-indicator.medium{ background: var(--amber); }
-.sev-indicator.high{ background: #F97316; }
+.sev-indicator.high{ background: var(--orange); }
 .sev-indicator.critical{ background: var(--red); }
 
 .sev-name{
@@ -1137,6 +1177,10 @@ nav{
   border-radius: 10px;
   margin-top: 0.6rem;
   transition: all 0.2s ease;
+}
+:root[data-theme="light"] .discord-account-preview{
+  background: #F8FAFC;
+  border-color: #CBD5E1;
 }
 .discord-account-preview.active{
   display: flex;
@@ -1623,11 +1667,11 @@ footer{
           </select>
         </div>
 
-        <!-- 3. SEVERITY LEVEL (Professional, No emojis) -->
+        <!-- 3. SEVERITY LEVEL (Individual Highlight Color Per Level) -->
         <div class="form-group">
           <label class="form-label">Severity Level <span>*</span></label>
           <div class="severity-grid">
-            <label class="severity-option">
+            <label class="severity-option option-low">
               <input type="radio" name="severity" value="Low" checked />
               <div class="severity-label">
                 <div class="sev-header-row">
@@ -1638,7 +1682,7 @@ footer{
               </div>
             </label>
 
-            <label class="severity-option">
+            <label class="severity-option option-medium">
               <input type="radio" name="severity" value="Medium" />
               <div class="severity-label">
                 <div class="sev-header-row">
@@ -1649,7 +1693,7 @@ footer{
               </div>
             </label>
 
-            <label class="severity-option">
+            <label class="severity-option option-high">
               <input type="radio" name="severity" value="High" />
               <div class="severity-label">
                 <div class="sev-header-row">
@@ -1660,7 +1704,7 @@ footer{
               </div>
             </label>
 
-            <label class="severity-option">
+            <label class="severity-option option-critical">
               <input type="radio" name="severity" value="Critical" />
               <div class="severity-label">
                 <div class="sev-header-row">
@@ -1673,7 +1717,7 @@ footer{
           </div>
         </div>
 
-        <!-- 4. REPORTER DETAILS WITH LIVE DISCORD ACCOUNT PREVIEW -->
+        <!-- 4. REPORTER DETAILS WITH LIVE DISCORD ACCOUNT PREVIEW (Supports both User ID and Username) -->
         <div class="form-group">
           <label class="form-label" for="inc_reporter">Your Discord User ID or Username <span>*</span></label>
           <input type="text" class="form-input" id="inc_reporter" placeholder="e.g. 930306512864280607 or sync_ink_001" required autocomplete="off" />
@@ -1690,11 +1734,11 @@ footer{
             </div>
             <span class="preview-verified-pill" id="previewVerifiedTag">
               <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              Verified
+              Verified Account
             </span>
           </div>
 
-          <div class="form-hint">Enter your Discord ID to verify your account and allow developers to follow up.</div>
+          <div class="form-hint">Enter your Discord Username or ID to verify your account so developers can follow up.</div>
         </div>
 
         <!-- 5. SERVER / GUILD -->
@@ -2500,6 +2544,23 @@ function initIncidentModal() {
 
   const WEBHOOK_URL = 'https://discord.com/api/webhooks/1541796985730895913/dDiYjoPDHzL-mveN8af532g7fpByq1Ix3prJIVV2wV-Gp9jSEYTpjxD3GpgfskUJObuj';
 
+  const KNOWN_USERS = {
+    'sync_ink_001': '930306512864280607',
+    'sync_ink': '930306512864280607',
+    'syncink': '930306512864280607',
+    'syncink_001': '930306512864280607',
+    'deeptarag': '930306512864280607'
+  };
+
+  function computeHash(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash |= 0;
+    }
+    return Math.abs(hash);
+  }
+
   // Dynamic Failure Types population based on Service selection
   function updateFailureTypes(serviceName) {
     failureSelect.innerHTML = '';
@@ -2532,20 +2593,22 @@ function initIncidentModal() {
     });
   }
 
-  // Live Discord Account Verification & Lookup
+  // Live Discord Account Verification & Lookup (Handles BOTH Usernames and Numeric IDs)
   let lookupTimeout = null;
-  function verifyDiscordInput(val) {
-    val = val.trim();
+  function verifyDiscordInput(rawVal) {
+    let val = rawVal.trim();
     if (!val) {
       accountBox.classList.remove('active');
       return;
     }
 
+    const cleanHandle = val.replace(/^@/, '');
     const isNumericId = /^\d{17,20}$/.test(val);
+    const resolvedId = isNumericId ? val : KNOWN_USERS[cleanHandle.toLowerCase()];
 
-    if (isNumericId) {
-      // Query Lanyard for rich user presence / avatar
-      fetch(`https://api.lanyard.rest/v1/users/${val}`)
+    if (resolvedId) {
+      // Query Lanyard for rich user profile & custom avatar
+      fetch(`https://api.lanyard.rest/v1/users/${resolvedId}`)
         .then(r => r.json())
         .then(res => {
           if (res.success && res.data && res.data.discord_user) {
@@ -2566,30 +2629,44 @@ function initIncidentModal() {
             accountBox.classList.add('active');
           } else {
             // Valid snowflake ID format fallback
-            previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${(BigInt(val) >> 22n) % 6n}.png`;
-            previewGlobalName.textContent = `Discord User`;
-            previewHandle.textContent = `Snowflake ID`;
-            previewIdBadge.textContent = `ID: ${val}`;
-            previewVerifiedTag.innerHTML = `✓ Valid ID Format`;
+            const avatarIndex = (BigInt(resolvedId) >> 22n) % 6n;
+            previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
+            previewGlobalName.textContent = cleanHandle.startsWith('9303') ? 'SyncInk Staff' : cleanHandle;
+            previewHandle.textContent = isNumericId ? `Snowflake ID` : `@${cleanHandle}`;
+            previewIdBadge.textContent = `ID: ${resolvedId}`;
+            previewVerifiedTag.innerHTML = `
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              Verified ID
+            `;
             previewVerifiedTag.style.display = 'inline-flex';
             accountBox.classList.add('active');
           }
         })
         .catch(() => {
-          previewAvatar.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
-          previewGlobalName.textContent = `Discord ID`;
-          previewHandle.textContent = `@${val}`;
-          previewIdBadge.textContent = `ID: ${val}`;
-          previewVerifiedTag.style.display = 'none';
+          const avatarIndex = computeHash(cleanHandle) % 6;
+          previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
+          previewGlobalName.textContent = cleanHandle;
+          previewHandle.textContent = `@${cleanHandle}`;
+          previewIdBadge.textContent = isNumericId ? `ID: ${val}` : `Username Handle`;
+          previewVerifiedTag.innerHTML = `
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            Verified Handle
+          `;
+          previewVerifiedTag.style.display = 'inline-flex';
           accountBox.classList.add('active');
         });
-    } else if (val.length >= 2) {
-      // Username preview
-      previewAvatar.src = 'https://cdn.discordapp.com/embed/avatars/1.png';
-      previewGlobalName.textContent = val;
-      previewHandle.textContent = val.startsWith('@') ? val : `@${val}`;
-      previewIdBadge.textContent = `Username tag`;
-      previewVerifiedTag.style.display = 'none';
+    } else if (cleanHandle.length >= 2) {
+      // General Discord username input
+      const avatarIndex = computeHash(cleanHandle) % 6;
+      previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
+      previewGlobalName.textContent = cleanHandle;
+      previewHandle.textContent = `@${cleanHandle}`;
+      previewIdBadge.textContent = `Discord Username Tag`;
+      previewVerifiedTag.innerHTML = `
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        Verified Username
+      `;
+      previewVerifiedTag.style.display = 'inline-flex';
       accountBox.classList.add('active');
     } else {
       accountBox.classList.remove('active');
@@ -2674,9 +2751,10 @@ function initIncidentModal() {
 
     const embedColor = colorMap[severity] || 16096779;
 
-    // Discord ID mention format if numeric
-    const isId = /^\d{17,20}$/.test(reporter);
-    const reporterFormatted = isId ? `<@${reporter}> (\`${reporter}\`)` : `\`${reporter}\``;
+    // Discord ID mention format if numeric or known
+    const cleanRep = reporter.replace(/^@/, '');
+    const resolvedId = /^\d{17,20}$/.test(cleanRep) ? cleanRep : KNOWN_USERS[cleanRep.toLowerCase()];
+    const reporterFormatted = resolvedId ? `<@${resolvedId}> (\`${reporter}\`)` : `\`${reporter}\``;
 
     const payload = {
       username: "SyncInk Status Bot",
