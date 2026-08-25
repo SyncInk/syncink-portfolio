@@ -562,54 +562,70 @@ footer a:hover{color:var(--cyan);}
     <div style="width: 8px; height: 8px; background: var(--blue); border-radius: 50%;"></div>
     Public Bots
   </div>
-  <div id="publicGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;"></div>
+  <div id="publicGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;"></div>
 
   <div style="font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
     <div style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%;"></div>
     Private Infrastructure (Not Invitable)
   </div>
-  <div id="privateGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"></div>
+  <div id="privateGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;"></div>
 
 </div>
 
 <script>
 // =========================================================================
-// SIMULATED REAL-TIME MODE
-// Online bots shown first. Security bot moved to Private category.
+// SIMULATED REAL-TIME MODE WITH CANVAS GRAPHS
 // =========================================================================
 
 const bots = [
   // ONLINE PUBLIC BOTS FIRST
-  { name: 'SyncInk&copy; Ticket', id: 'ticket', basePing: 32, type: 'Support System', isOnline: true, isPrivate: false },
-  { name: 'SyncInk&copy; Voice', id: 'voice', basePing: 48, type: 'Voice Manager', isOnline: true, isPrivate: false },
+  { name: 'SyncInk&copy; Ticket', id: 'ticket', basePing: 32, type: 'Support System', isOnline: true, isPrivate: false, history: [] },
+  { name: 'SyncInk&copy; Voice', id: 'voice', basePing: 48, type: 'Voice Manager', isOnline: true, isPrivate: false, history: [] },
   // OFFLINE PUBLIC BOTS
-  { name: 'SyncInk&copy;', id: 'main', basePing: 42, type: 'Core Bot', isOnline: false, isPrivate: false },
-  { name: 'SyncInk&copy; Radio', id: 'radio', basePing: 65, type: 'Music Node', isOnline: false, isPrivate: false },
-  
+  { name: 'SyncInk&copy;', id: 'main', basePing: 42, type: 'Core Bot', isOnline: false, isPrivate: false, history: [] },
+  { name: 'SyncInk&copy; Radio', id: 'radio', basePing: 65, type: 'Music Node', isOnline: false, isPrivate: false, history: [] },
   // PRIVATE BOTS
-  { name: 'SyncInk&copy; Security', id: 'security', basePing: 25, type: 'Internal Anti-Nuke', isOnline: true, isPrivate: true }
+  { name: 'SyncInk&copy; Security', id: 'security', basePing: 25, type: 'Internal Anti-Nuke', isOnline: true, isPrivate: true, history: [] }
 ];
 
 function generateCard(b) {
   return `
-    <div id="card-${b.id}" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden;">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+    <div id="card-${b.id}" style="background: rgba(17,24,39,0.55); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
+      
+      <!-- HEADER -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
         <div>
           <div style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.2rem;">${b.type}</div>
           <div style="font-weight: 800; font-size: 1.2rem; color: var(--text);">${b.name}</div>
         </div>
-        <div id="dot-${b.id}" style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5);"></div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.3); padding: 0.3rem 0.8rem; border-radius: 20px;">
+          <div id="dot-${b.id}" style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px rgba(34,197,94,0.5);"></div>
+          <span id="status-${b.id}" style="font-size: 0.8rem; font-weight: 700; color: #22c55e;">Connected</span>
+        </div>
       </div>
+      
+      <!-- GRAPH SECTION -->
+      <div style="margin-bottom: 1rem;">
+        <div style="font-size: 0.7rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Ping History</div>
+        <div style="height: 60px; background: rgba(0,0,0,0.2); border-radius: 8px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05);">
+          <canvas id="graph-${b.id}" width="300" height="60" style="width: 100%; height: 100%; display: block;"></canvas>
+          <div style="position: absolute; right: 8px; top: 4px; font-size: 0.6rem; color: var(--muted); font-family: 'JetBrains Mono', monospace;">500</div>
+          <div style="position: absolute; right: 8px; bottom: 4px; font-size: 0.6rem; color: var(--muted); font-family: 'JetBrains Mono', monospace;">0</div>
+        </div>
+      </div>
+
+      <!-- FOOTER STATS -->
       <div style="display: flex; gap: 2rem;">
         <div>
-          <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem;">Status</div>
-          <div id="status-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #22c55e; font-weight: 600;">ONLINE</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem;">Last Ping</div>
+          <div id="ping-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--text); font-weight: 700;">${b.basePing}ms</div>
         </div>
         <div>
-          <div style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem;">Latency</div>
-          <div id="ping-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text); font-weight: 600;">${b.basePing}ms</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem;">Average</div>
+          <div id="avg-${b.id}" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--text); font-weight: 700;">${b.basePing}ms</div>
         </div>
       </div>
+      
     </div>
   `;
 }
@@ -625,49 +641,143 @@ function renderGrid() {
   privateGrid.innerHTML = privateBots.map(generateCard).join('');
 }
 
+function drawGraph(b) {
+  const canvas = document.getElementById(`graph-${b.id}`);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width;
+  const height = canvas.height;
+  
+  ctx.clearRect(0, 0, width, height);
+  
+  if (!b.isOnline || b.history.length === 0) {
+    ctx.fillStyle = 'rgba(239, 68, 68, 0.1)';
+    ctx.fillRect(0, 0, width, height);
+    ctx.beginPath();
+    ctx.moveTo(0, height - 10);
+    ctx.lineTo(width, height - 10);
+    ctx.strokeStyle = '#ef4444';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    return;
+  }
+  
+  const maxPoints = 20;
+  const maxPing = 500; // Fixed scale to match the 0-500 labels
+  const step = width / (maxPoints - 1);
+  
+  const latestPing = b.history[b.history.length - 1];
+  let color = '#22c55e'; // Green
+  let fillTop = 'rgba(34, 197, 94, 0.4)';
+  if (latestPing > 150) {
+     color = '#f59e0b'; // Orange
+     fillTop = 'rgba(245, 158, 11, 0.4)';
+  }
+  if (latestPing > 300) {
+     color = '#ef4444'; // Red
+     fillTop = 'rgba(239, 68, 68, 0.4)';
+  }
+  
+  let gradient = ctx.createLinearGradient(0, 0, 0, height);
+  gradient.addColorStop(0, fillTop);
+  gradient.addColorStop(1, 'rgba(0,0,0,0)');
+  
+  const points = [];
+  const offset = maxPoints - b.history.length;
+  
+  for (let i = 0; i < b.history.length; i++) {
+    const x = (i + offset) * step;
+    let y = height - (b.history[i] / maxPing) * height;
+    if (y < 5) y = 5; // Clamp top
+    if (y > height - 2) y = height - 2; // Clamp bottom
+    points.push({x, y});
+  }
+  
+  // Fill Area
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, height);
+  points.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.lineTo(points[points.length - 1].x, height);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+  
+  // Draw Line
+  ctx.beginPath();
+  points.forEach((p, i) => {
+    if (i === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  });
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  
+  // Draw Dot at current ping
+  const lastP = points[points.length - 1];
+  ctx.beginPath();
+  ctx.arc(lastP.x, lastP.y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
 function updateStatus() {
   let hasBadPing = false;
   let hasWarning = false;
 
   bots.forEach(b => {
     const pingEl = document.getElementById(`ping-${b.id}`);
+    const avgEl = document.getElementById(`avg-${b.id}`);
     const statusEl = document.getElementById(`status-${b.id}`);
     const dotEl = document.getElementById(`dot-${b.id}`);
 
     if (!b.isOnline) {
       pingEl.innerText = '--ms';
-      pingEl.style.color = '#ef4444';
-      statusEl.innerText = 'OFFLINE';
+      avgEl.innerText = '--ms';
+      statusEl.innerText = 'Offline';
       statusEl.style.color = '#ef4444';
       dotEl.style.background = '#ef4444';
       dotEl.style.boxShadow = '0 0 10px rgba(239,68,68,0.5)';
       hasBadPing = true;
+      drawGraph(b);
       return;
     }
 
-    // Natural fluctuation logic for online bots
-    let currentPing = b.basePing + Math.floor(Math.random() * 12) - 6;
+    let currentPing = b.basePing + Math.floor(Math.random() * 14) - 7;
     
-    // Rare lag spike (3% chance)
-    if (Math.random() > 0.97) {
+    // Rare lag spike
+    if (Math.random() > 0.95) {
       currentPing += Math.floor(Math.random() * 80) + 40;
     }
+    
+    // Very rare huge spike
+    if (Math.random() > 0.99) {
+      currentPing += 250;
+    }
+
+    b.history.push(currentPing);
+    if (b.history.length > 20) b.history.shift();
+
+    const avgPing = Math.round(b.history.reduce((a,c) => a+c, 0) / b.history.length);
 
     pingEl.innerText = currentPing + 'ms';
+    avgEl.innerText = avgPing + 'ms';
+
     if (currentPing > 150) {
-      statusEl.innerText = 'DEGRADED';
+      statusEl.innerText = 'Degraded';
       statusEl.style.color = '#f59e0b';
       dotEl.style.background = '#f59e0b';
       dotEl.style.boxShadow = '0 0 10px rgba(245,158,11,0.5)';
-      pingEl.style.color = '#f59e0b';
       hasWarning = true;
     } else {
-      statusEl.innerText = 'ONLINE';
+      statusEl.innerText = 'Connected';
       statusEl.style.color = '#22c55e';
       dotEl.style.background = '#22c55e';
       dotEl.style.boxShadow = '0 0 10px rgba(34,197,94,0.5)';
-      pingEl.style.color = 'var(--text)';
     }
+
+    drawGraph(b);
   });
 
   const navDots = document.querySelectorAll('.global-status-dot');
@@ -680,8 +790,20 @@ function updateStatus() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderGrid();
+    
+    // Pre-fill history to make it look active immediately
+    bots.forEach(b => {
+       if (b.isOnline) {
+          for(let i=0; i<20; i++) {
+             let ping = b.basePing + Math.floor(Math.random() * 14) - 7;
+             if (Math.random() > 0.95) ping += 60;
+             b.history.push(ping);
+          }
+       }
+    });
+    
     updateStatus();
-    setInterval(updateStatus, 3000); 
+    setInterval(updateStatus, 2500); // slightly faster updates look better on graphs
 });
 </script>
 </div>
