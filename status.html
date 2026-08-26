@@ -2282,17 +2282,24 @@ function getDeterministicPing(bot, timestampMs) {
   return Math.max(14, Math.round(ping * 10) / 10);
 }
 
-// Generate the last 30 historical data points for the 60-minute graph
+// Generate the last 31 historical data points for the 60-minute graph anchored to absolute time
 function getHistoricalPings(bot, nowMs) {
   const points = [];
-  const count = 30;
+  const count = 31;
   const stepMs = 2 * 60 * 1000;
   
+  // Anchor to the nearest stepMs to prevent the entire graph from jittering
+  const anchoredNow = Math.floor(nowMs / stepMs) * stepMs;
+  
   for (let i = count - 1; i >= 0; i--) {
-    const t = nowMs - (i * stepMs);
+    const t = anchoredNow - (i * stepMs);
     const p = getDeterministicPing(bot, t);
     points.push({ time: t, ping: p });
   }
+  
+  // Add the live current ping as the absolute tip of the graph
+  points.push({ time: nowMs, ping: getDeterministicPing(bot, nowMs) });
+  
   return points;
 }
 
@@ -2491,10 +2498,14 @@ function drawChart(bot, nowMs) {
   const padTop = 10 * dpr;
   const padBottom = 10 * dpr;
   const drawH = h - padTop - padBottom;
-  const step = w / (history.length - 1);
   
-  const points = history.map((item, i) => {
-    const x = i * step;
+  // The graph spans exactly 60 minutes.
+  const timeWindow = 60 * 60 * 1000;
+  const minTime = nowMs - timeWindow;
+  
+  const points = history.map(item => {
+    // Exact proportional X mapping for smooth pan over time
+    const x = ((item.time - minTime) / timeWindow) * w;
     const clampedPing = Math.min(item.ping, maxScale);
     const y = h - padBottom - (clampedPing / maxScale) * drawH;
     return { x, y, ping: item.ping, time: item.time };
