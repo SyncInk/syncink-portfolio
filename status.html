@@ -2768,29 +2768,79 @@ function renderUserIncidents() {
     return;
   }
 
-  // Update Overview Metric Card
+  // Count active reviews
+  const activeReviews = stored.filter(i => !i.status || i.status === 'review').length;
+  
   if (badgeVal) badgeVal.textContent = `${stored.length} Reported`;
-  if (badgeSub) badgeSub.textContent = 'Under Developer Review';
-  if (badgePill) { badgePill.textContent = 'REVIEW'; badgePill.className = 'badge-neutral'; }
+  if (badgeSub) {
+    if (activeReviews > 0) {
+      badgeSub.textContent = `${activeReviews} Pending Review`;
+      if (badgePill) { badgePill.textContent = 'REVIEW'; badgePill.className = 'badge-neutral'; }
+    } else {
+      badgeSub.textContent = 'All Reports Handled';
+      if (badgePill) { badgePill.textContent = 'LOG'; badgePill.className = 'badge-up'; }
+    }
+  }
 
   // Render cards
-  container.innerHTML = stored.map(inc => `
-    <div class="incident-card user-reported">
-      <div class="inc-header">
-        <div class="inc-title">
-          <span>⚠️ Incident Report: ${inc.service}</span>
+  container.innerHTML = stored.map((inc, index) => {
+    const status = inc.status || 'review';
+    let badgeHtml = '';
+    let cardClass = 'user-reported';
+    let titlePrefix = '⚠️ Incident Report';
+    
+    if (status === 'review') {
+      badgeHtml = `<span class="inc-badge badge-review">Under Developer Review</span>`;
+    } else if (status === 'verified') {
+      badgeHtml = `<span class="inc-badge badge-progress" style="background: var(--red-subtle); color: var(--red); border-color: rgba(239,68,68,0.3);">Verified Outage</span>`;
+      cardClass = 'maintenance';
+      titlePrefix = '🚨 Verified Outage';
+    } else if (status === 'fake') {
+      badgeHtml = `<span class="inc-badge badge-review" style="background: var(--surface2); color: var(--muted); border-color: var(--border);">Rejected / Fake Report</span>`;
+      cardClass = '';
+      titlePrefix = '🔒 Closed Report';
+    }
+
+    return `
+      <div class="incident-card ${cardClass}" style="${status === 'fake' ? 'opacity: 0.7;' : ''}">
+        <div class="inc-header">
+          <div class="inc-title">
+            <span>${titlePrefix}: ${inc.service}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            ${badgeHtml}
+            ${status === 'review' ? `
+              <button onclick="moderateIncident(${index}, 'verified')" style="padding: 0.2rem 0.5rem; background: var(--red-subtle); color: var(--red); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; cursor: pointer; font-size: 0.65rem; font-weight: 700;">VERIFY</button>
+              <button onclick="moderateIncident(${index}, 'fake')" style="padding: 0.2rem 0.5rem; background: var(--surface2); color: var(--text-secondary); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.65rem; font-weight: 700;">MARK FAKE</button>
+            ` : `
+              <button onclick="moderateIncident(${index}, 'review')" style="padding: 0.2rem 0.5rem; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.65rem;">Reset</button>
+            `}
+          </div>
         </div>
-        <span class="inc-badge badge-review">Under Developer Review</span>
+        <div class="inc-meta">
+          Reported by <strong>${inc.reporter}</strong> · ${inc.timestamp} · Severity: <strong style="color: #F97316;">${inc.severity}</strong> · Failure: ${inc.failureType}
+        </div>
+        <div class="inc-desc">
+          "${inc.desc}"
+        </div>
       </div>
-      <div class="inc-meta">
-        Reported by <strong>${inc.reporter}</strong> · ${inc.timestamp} · Severity: <strong style="color: #F97316;">${inc.severity}</strong> · Failure: ${inc.failureType}
-      </div>
-      <div class="inc-desc">
-        "${inc.desc}"
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
+
+// Global moderation function exposed to window
+window.moderateIncident = function(index, newStatus) {
+  let stored = [];
+  try {
+    stored = JSON.parse(localStorage.getItem('syncink_reported_incidents') || '[]');
+  } catch(e) { return; }
+  
+  if (stored[index]) {
+    stored[index].status = newStatus;
+    localStorage.setItem('syncink_reported_incidents', JSON.stringify(stored));
+    renderUserIncidents();
+  }
+};
 
 // Background Canvas Particle Animation
 function initBgParticles() {
