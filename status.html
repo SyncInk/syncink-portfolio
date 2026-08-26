@@ -3011,8 +3011,8 @@ function initIncidentModal() {
     });
   }
 
-  // Instant Client-side Discord Snowflake ID Validation (Zero External API Dependency)
-  function verifyDiscordUserId(rawVal) {
+  // Fetch real Discord user details via dcdn API
+  async function verifyDiscordUserId(rawVal) {
     const val = rawVal.trim();
     if (!val) {
       accountBox.classList.remove('active');
@@ -3023,18 +3023,53 @@ function initIncidentModal() {
 
     if (isNumericId) {
       try {
+        // Show loading state first
         const avatarIdx = Number((BigInt(val) >> 22n) % 6n);
         previewAvatar.src = `https://cdn.discordapp.com/embed/avatars/${avatarIdx}.png`;
-        previewGlobalName.textContent = `Discord Account`;
-        previewHandle.textContent = `Snowflake Validated`;
+        previewGlobalName.textContent = `Searching...`;
+        previewHandle.textContent = `Fetching Profile`;
         previewIdBadge.textContent = `ID: ${val}`;
         previewVerifiedTag.innerHTML = `
-          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-          Valid Discord ID
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Checking
         `;
         accountBox.classList.add('active');
+
+        // Fetch user data from public dcdn API (no auth required)
+        const res = await fetch(\`https://dcdn.dstn.to/profile/\${val}\`);
+        if (!res.ok) throw new Error("User not found");
+        const data = await res.json();
+        
+        const user = data.user;
+        const username = user.username || "Unknown";
+        const globalName = user.global_name || username;
+        
+        let avatarUrl = \`https://cdn.discordapp.com/embed/avatars/\${avatarIdx}.png\`;
+        if (user.avatar) {
+          const isGif = user.avatar.startsWith('a_');
+          avatarUrl = \`https://cdn.discordapp.com/avatars/\${val}/\${user.avatar}.\${isGif ? 'gif' : 'png'}?size=256\`;
+        }
+        
+        previewAvatar.src = avatarUrl;
+        previewGlobalName.textContent = globalName;
+        previewHandle.textContent = \`@\${username}\`;
+        previewIdBadge.textContent = \`ID: \${val}\`;
+        previewVerifiedTag.innerHTML = \`
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          Verified User
+        \`;
       } catch(e) {
-        accountBox.classList.remove('active');
+        // Fallback to basic snowflake validation if API fails or user not found
+        const avatarIdx = Number((BigInt(val) >> 22n) % 6n);
+        previewAvatar.src = \`https://cdn.discordapp.com/embed/avatars/\${avatarIdx}.png\`;
+        previewGlobalName.textContent = \`Unknown Account\`;
+        previewHandle.textContent = \`User Not Found / API Error\`;
+        previewIdBadge.textContent = \`ID: \${val}\`;
+        previewVerifiedTag.innerHTML = \`
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Format Valid
+        \`;
+        accountBox.classList.add('active');
       }
     } else {
       accountBox.classList.remove('active');
