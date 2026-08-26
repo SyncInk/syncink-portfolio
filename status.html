@@ -2921,7 +2921,10 @@ function initIncidentModal() {
   const previewIdBadge = document.getElementById('previewIdBadge');
   const previewVerifiedTag = document.getElementById('previewVerifiedTag');
 
-  const WEBHOOK_URL = 'https://discord.com/api/webhooks/1541796985730895913/dDiYjoPDHzL-mveN8af532g7fpByq1Ix3prJIVV2wV-Gp9jSEYTpjxD3GpgfskUJObuj';
+  // SECURITY WARNING: Never expose Discord Webhooks directly in client-side code!
+  // Scrapers on GitHub will find it and spam your server.
+  // You MUST route this request through a secure backend API (e.g., Node.js, Cloudflare Worker, Vercel Function).
+  const WEBHOOK_URL = 'YOUR_BACKEND_API_ENDPOINT_HERE';
 
   // Dynamic Failure Types population based on Service selection
   function updateFailureTypes(serviceName) {
