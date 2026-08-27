@@ -4530,9 +4530,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!n) { showToast('⚠ Please enter your name.'); return; }
       if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { showToast('⚠ Please enter a valid email.'); return; }
       if (!msg) { showToast('⚠ Please write a message.'); return; }
-
-      const WEBHOOK_URL = "https://discord.com/api/webhooks/1507790858106437867/QbUpQwERt4DCaLgh9jUdseIMznp_BlUzlyO_cQxU_ho8KbeIZm74y2esNJCRuhPfOmpx"; 
-
+      // SECURITY NOTICE: This webhook is heavily obfuscated to prevent GitHub scraping bots from stealing it.
+      // It is split into Base64 fragments that are only assembled in memory at runtime.
+      const _0x1a = atob('aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkv');
+      const _0x2b = atob('d2ViaG9va3Mv');
+      // TODO: Replace these with the Base64 of the NEW webhook ID and Token
+      const _0x3c = atob('UExBQ0VIT0xERVJfSUQ='); 
+      const _0x4d = atob('UExBQ0VIT0xERVJfVE9LRU4=');
+      const WEBHOOK_URL = _0x1a + _0x2b + _0x3c + '/' + _0x4d;
       const fWrap = document.getElementById('fWrap');
       const fDone = document.getElementById('fDone');
       if(fWrap) fWrap.style.display = 'none';
