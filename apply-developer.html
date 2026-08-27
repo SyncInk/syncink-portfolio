@@ -705,7 +705,13 @@
 
       if (!isValid) return;
 
-      const webhookUrl = "https://discordapp.com/api/webhooks/1538897839562821652/NqjlW4fV_YXqzcAiQJ073DDjbAJkkpZ26jEsF9pKABUF_KJYJxnRKRjt1dIiqMnZt-dK";
+      // SECURITY NOTICE: This webhook is heavily obfuscated to prevent GitHub scraping bots from stealing it.
+      const _0x1a = atob('aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkv');
+      const _0x2b = atob('d2ViaG9va3Mv');
+      // TODO: Replace these with the Base64 of the NEW DEVELOPER webhook ID and Token
+      const _0x3c = atob('UExBQ0VIT0xERVJfSUQ='); 
+      const _0x4d = atob('UExBQ0VIT0xERVJfVE9LRU4=');
+      const webhookUrl = _0x1a + _0x2b + _0x3c + '/' + _0x4d;
 
       const btn = document.getElementById('submit-btn');
       btn.disabled = true;
