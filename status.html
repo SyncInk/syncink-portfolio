@@ -3174,20 +3174,20 @@ function initIncidentModal() {
     const payload = {
       username: "SyncInk Status Bot",
       avatar_url: "https://syncink.github.io/syncink-portfolio/SyncInk%20Server%20Logo.png",
-      content: severity === 'Critical' || severity === 'High' ? "🚨 **[INCIDENT REPORT] High priority issue submitted!**" : undefined,
+      content: severity === 'Critical' || severity === 'High' ? "<:alert:1520914681231839313> **[INCIDENT REPORT] High priority issue submitted!**" : undefined,
       embeds: [
         {
-          title: `🚨 Incident Report: ${service}`,
+          title: `<:alert:1520914681231839313> Incident Report: ${service}`,
           description: `An incident report was submitted via the **SyncInk Status Page**.`,
           color: embedColor,
           fields: [
-            { name: "⚠️ Severity Level", value: `\`${severity.toUpperCase()}\``, inline: true },
-            { name: "🏷️ Failure Category", value: `\`${failureType}\``, inline: true },
-            { name: "👤 Reporter", value: reporterFormatted, inline: true },
-            { name: "⚙️ Affected Service", value: `\`${service}\``, inline: true },
-            { name: "🏰 Server / Guild", value: `\`${guild}\``, inline: true },
+            { name: "<:warn:1251993776478617671> Severity Level", value: `\`${severity.toUpperCase()}\``, inline: true },
+            { name: "<:tag:1520914088568295564> Failure Category", value: `\`${failureType}\``, inline: true },
+            { name: "<:user:1416609298900975658> Reporter", value: reporterFormatted, inline: true },
+            { name: "<:gear:598875553457766424> Affected Service", value: `\`${service}\``, inline: true },
+            { name: "<:server:846569530922762242> Server / Guild", value: `\`${guild}\``, inline: true },
             { name: "⏰ Timestamp", value: `<t:${Math.floor(Date.now() / 1000)}:F>`, inline: true },
-            { name: "📝 Description & Reproduction Steps", value: `>>> ${desc}`, inline: false }
+            { name: "<:note:1517255773405577416> Description & Reproduction Steps", value: `>>> ${desc}`, inline: false }
           ],
           footer: {
             text: "SyncInk Incident Report · Developer Team",
