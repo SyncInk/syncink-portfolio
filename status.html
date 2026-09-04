@@ -2308,24 +2308,28 @@ function generateUptimeBars(bot) {
   const today = Math.floor(Date.now() / 86400000);
   let html = '';
   
+  const closedDateMs = new Date('2026-07-04T00:00:00Z').getTime();
+  
   for (let i = 89; i >= 0; i--) {
     const day = today - i;
+    const currentDayMs = day * 86400000;
+    const dateObj = new Date(currentDayMs);
+    const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
     let hash = (day * 9973 ^ bot.id.charCodeAt(0) * 541) & 0xFFFF;
     const rand = (hash % 1000) / 1000;
     
     let stateClass = '';
     let statusText = '100% Uptime · No Incidents';
     
-    if (!bot.isOnline && i < 5) {
-      stateClass = 'bar-degraded';
-      statusText = 'Scheduled Maintenance';
+    if (!bot.isOnline && currentDayMs >= closedDateMs) {
+      // Show red color for bots that have been offline/closed since July 4th
+      stateClass = 'bar-down';
+      statusText = 'Major Outage / Offline';
     } else if (rand > 0.985 && bot.id !== 'security') {
       stateClass = 'bar-degraded';
       statusText = '99.4% Uptime · Minor Shard Restart';
     }
-    
-    const dateObj = new Date((day * 86400000));
-    const dateStr = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     
     html += `<div class="u-bar ${stateClass}" data-tooltip="${dateStr}: ${statusText}"></div>`;
   }
