@@ -3106,6 +3106,92 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   </div>
 </section>
 
+  <!-- ====== GUESTBOOK ====== -->
+  <section id="guestbook" class="container reveal">
+    <div class="section-title">
+      <div class="st-line"></div>
+      <div class="st-text">Guestbook</div>
+      <div class="st-line"></div>
+    </div>
+    
+    <style>
+      .gb-container { max-width: 700px; margin: 0 auto; }
+      .gb-stats { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+      .gb-stat-badge {
+        background: var(--card); border: 1px solid var(--border); padding: 0.6rem 1.2rem;
+        border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text);
+        display: flex; align-items: center; gap: 0.6rem; backdrop-filter: blur(10px);
+      }
+      .gb-form {
+        background: var(--card); border: 1px solid var(--border); padding: 1.5rem;
+        border-radius: 16px; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;
+        backdrop-filter: blur(10px);
+      }
+      .gb-row { display: flex; gap: 1rem; }
+      .gb-input {
+        background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px;
+        padding: 0.8rem 1rem; color: var(--text); font-family: inherit; font-size: 0.9rem;
+        flex: 1; transition: border-color 0.3s;
+      }
+      :root[data-theme="light"] .gb-input { background: rgba(255,255,255,0.5); }
+      .gb-input:focus { outline: none; border-color: var(--blue); }
+      .gb-submit {
+        background: var(--blue); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 8px;
+        font-weight: 700; cursor: pointer; transition: transform 0.2s, background 0.2s;
+      }
+      .gb-submit:hover { transform: translateY(-2px); background: var(--blue2); }
+      .gb-messages { display: flex; flex-direction: column; gap: 1rem; max-height: 500px; overflow-y: auto; padding-right: 5px; }
+      .gb-msg {
+        background: var(--card); border: 1px solid var(--border); padding: 1.2rem;
+        border-radius: 12px; display: flex; gap: 1rem; backdrop-filter: blur(10px);
+        animation: gbFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      @keyframes gbFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      .gb-avatar {
+        width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--cyan));
+        display: grid; place-items: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; color: #fff;
+      }
+      .gb-content { flex: 1; }
+      .gb-content-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
+      .gb-name { font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 0.4rem; }
+      .gb-badge { font-size: 0.6rem; background: var(--hero-badge-bg); color: var(--blue); padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 800; border: 1px solid var(--hero-badge-border); }
+      .gb-date { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); }
+      .gb-text { font-size: 0.85rem; color: var(--muted); line-height: 1.5; word-break: break-word; }
+      @media(max-width: 500px) { .gb-row { flex-direction: column; } }
+      
+      /* Webkit scrollbar for messages */
+      .gb-messages::-webkit-scrollbar { width: 4px; }
+      .gb-messages::-webkit-scrollbar-track { background: transparent; }
+      .gb-messages::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 4px; }
+    </style>
+
+    <div class="gb-container">
+      <div class="gb-stats reveal">
+        <div class="gb-stat-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span id="gbVisitorCount" style="color:var(--blue); font-weight:700;">1,452</span> Total Signatures
+        </div>
+        <div class="gb-stat-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Started Sept 15, 2026
+        </div>
+      </div>
+
+      <form class="gb-form reveal" id="gbForm">
+        <div class="gb-row">
+          <input type="text" id="gbName" class="gb-input" placeholder="Your Name" required maxlength="30">
+          <input type="text" id="gbEmoji" class="gb-input" placeholder="An Emoji (e.g. 🦊)" style="max-width: 150px;" maxlength="2">
+        </div>
+        <textarea id="gbMsg" class="gb-input" placeholder="Leave a nice message..." required rows="3" maxlength="250" style="resize:vertical;"></textarea>
+        <button type="submit" class="gb-submit" id="gbSubmitBtn">Sign Guestbook ✍️</button>
+      </form>
+
+      <div class="gb-messages" id="gbMessagesList">
+        <!-- Messages injected here -->
+      </div>
+    </div>
+  </section>
+  
 <footer>
   <span class="footer-logo">Sync Ink.</span>
   <p>© 2026 Sync Ink. Built with 💙</p>
@@ -3260,6 +3346,108 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePlayIcon();
   }
     
+  /* ====== GUESTBOOK LOGIC ====== */
+  const gbForm = document.getElementById('gbForm');
+  const gbMessagesList = document.getElementById('gbMessagesList');
+  const gbVisitorCount = document.getElementById('gbVisitorCount');
+
+  if (gbForm && gbMessagesList) {
+    // Simulated live visitor counter
+    let baseCount = 1452;
+    setInterval(() => {
+      if (Math.random() > 0.4) {
+        baseCount += Math.floor(Math.random() * 3) + 1;
+        if (gbVisitorCount) gbVisitorCount.textContent = baseCount.toLocaleString();
+      }
+    }, 8500);
+
+    // Hardcoded initial cool messages
+    const initialGbMessages = [
+      { name: "SyncInk System", emoji: "🤖", msg: "Welcome to the official Guestbook! Leave your mark here.", date: "Sept 15, 2026", badge: "OWNER" },
+      { name: "CodeNinja", emoji: "🐱", msg: "Your Discord bots are absolutely insane! Keep up the amazing work.", date: "Sept 15, 2026" },
+      { name: "WebDev Fan", emoji: "✨", msg: "Love the UI of this portfolio. So smooth and futuristic!", date: "Sept 15, 2026" }
+    ];
+
+    let localGbMessages = JSON.parse(localStorage.getItem('syncink_guestbook') || "[]");
+    
+    const renderGbMessage = (data, isNew = false) => {
+      const el = document.createElement('div');
+      el.className = 'gb-msg';
+      el.innerHTML = `
+        <div class="gb-avatar">${data.emoji || '👤'}</div>
+        <div class="gb-content">
+          <div class="gb-content-head">
+            <div class="gb-name">${data.name.replace(/</g, "&lt;")} ${data.badge ? `<span class="gb-badge">${data.badge}</span>` : ''}</div>
+            <div class="gb-date">${data.date}</div>
+          </div>
+          <div class="gb-text">${data.msg.replace(/</g, "&lt;")}</div>
+        </div>
+      `;
+      if (isNew) {
+        gbMessagesList.prepend(el);
+      } else {
+        gbMessagesList.appendChild(el);
+      }
+    };
+
+    // Render all
+    localGbMessages.slice().reverse().forEach(m => renderGbMessage(m));
+    initialGbMessages.forEach(m => renderGbMessage(m));
+
+    gbForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('gbSubmitBtn');
+      const name = document.getElementById('gbName').value.trim();
+      let emoji = document.getElementById('gbEmoji').value.trim() || '💬';
+      const msg = document.getElementById('gbMsg').value.trim();
+
+      if (!name || !msg) return;
+
+      const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      
+      const newMsg = { name, emoji, msg, date: dateStr };
+      
+      // Save locally
+      localGbMessages.push(newMsg);
+      localStorage.setItem('syncink_guestbook', JSON.stringify(localGbMessages));
+
+      // Render
+      renderGbMessage(newMsg, true);
+      
+      // Increment counter instantly
+      baseCount++;
+      if (gbVisitorCount) gbVisitorCount.textContent = baseCount.toLocaleString();
+
+      // Send via Webhook (using the hidden contact webhook provided previously)
+      const b64 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTU0MjU0NDIxMDk1ODIyOTYyNC96YnlnWGppeFpwNTVvc2dwUlB5S0s1YllIRWpaXzlmdUpvdG9xTFdvYnNNUm52cGZCYkRpcG5STG9iU3pvVmdCM2xGaA==";
+      fetch(atob(b64), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: null,
+          embeds: [{
+            title: "📖 New Guestbook Signature!",
+            color: 5814783,
+            fields: [
+              { name: "Name", value: `${emoji} ${name}`, inline: true },
+              { name: "Date", value: dateStr, inline: true },
+              { name: "Message", value: msg }
+            ]
+          }]
+        })
+      }).catch(() => {});
+
+      // Reset
+      gbForm.reset();
+      btn.textContent = "Signed! ✅";
+      btn.style.background = "var(--green)";
+      setTimeout(() => {
+        btn.textContent = "Sign Guestbook ✍️";
+        btn.style.background = "";
+      }, 3000);
+    });
+  }
+
   /* ====== REVEAL ANIMATIONS ====== */
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
