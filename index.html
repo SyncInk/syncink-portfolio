@@ -3166,25 +3166,38 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     </style>
 
     <div class="gb-container">
-      <div class="gb-stats reveal">
-        <div class="gb-stat-badge">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-          <span id="gbVisitorCount" style="color:var(--blue); font-weight:700;">1,452</span> Total Signatures
-        </div>
+      <div class="gb-stats reveal" style="justify-content:center;">
         <div class="gb-stat-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           Started Sept 15, 2026
         </div>
       </div>
 
-      <form class="gb-form reveal" id="gbForm">
-        <div class="gb-row">
-          <input type="text" id="gbName" class="gb-input" placeholder="Your Name" required maxlength="30">
-          <input type="text" id="gbEmoji" class="gb-input" placeholder="An Emoji (e.g. 🦊)" style="max-width: 150px;" maxlength="2">
+      <div class="gb-form reveal" id="gbFormContainer">
+        <form id="gbVerifyForm" style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <input type="text" id="gbDiscordId" class="gb-input" placeholder="Enter Discord User ID" required pattern="\d{17,20}">
+          <button type="submit" class="gb-submit" id="gbVerifyBtn" style="white-space:nowrap; display:flex; align-items:center; gap:0.5rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            Verify User
+          </button>
+        </form>
+
+        <div id="gbPreview" style="display:none; align-items:center; gap: 1rem; padding: 1rem; background: rgba(88,101,242,0.1); border-radius: 8px; border: 1px solid var(--border); margin-top: 1rem;">
+          <img id="gbPreviewAvatar" style="width: 44px; height: 44px; border-radius: 50%; object-fit:cover;" src="" alt="Avatar">
+          <div>
+            <div id="gbPreviewName" style="font-weight:700; color:var(--text); display:flex; align-items:center; gap:0.4rem;"></div>
+            <div id="gbPreviewHandle" style="font-size:0.75rem; color:var(--muted); font-family:'JetBrains Mono', monospace;"></div>
+          </div>
         </div>
-        <textarea id="gbMsg" class="gb-input" placeholder="Leave a nice message..." required rows="3" maxlength="250" style="resize:vertical;"></textarea>
-        <button type="submit" class="gb-submit" id="gbSubmitBtn">Sign Guestbook ✍️</button>
-      </form>
+
+        <form id="gbSignForm" style="display:none; flex-direction:column; gap:1rem; margin-top:1rem;">
+          <textarea id="gbMsg" class="gb-input" placeholder="Leave a nice message..." required rows="3" maxlength="250" style="resize:vertical;"></textarea>
+          <button type="submit" class="gb-submit" id="gbSubmitBtn" style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            Sign Guestbook
+          </button>
+        </form>
+      </div>
 
       <div class="gb-messages" id="gbMessagesList">
         <!-- Messages injected here -->
@@ -3347,37 +3360,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
     
   /* ====== GUESTBOOK LOGIC ====== */
-  const gbForm = document.getElementById('gbForm');
+  const gbVerifyForm = document.getElementById('gbVerifyForm');
+  const gbDiscordIdInput = document.getElementById('gbDiscordId');
+  const gbVerifyBtn = document.getElementById('gbVerifyBtn');
+  const gbPreview = document.getElementById('gbPreview');
+  const gbPreviewAvatar = document.getElementById('gbPreviewAvatar');
+  const gbPreviewName = document.getElementById('gbPreviewName');
+  const gbPreviewHandle = document.getElementById('gbPreviewHandle');
+  const gbSignForm = document.getElementById('gbSignForm');
+  const gbMsgInput = document.getElementById('gbMsg');
   const gbMessagesList = document.getElementById('gbMessagesList');
-  const gbVisitorCount = document.getElementById('gbVisitorCount');
+  const gbFormContainer = document.getElementById('gbFormContainer');
 
-  if (gbForm && gbMessagesList) {
-    // Simulated live visitor counter
-    let baseCount = 1452;
-    setInterval(() => {
-      if (Math.random() > 0.4) {
-        baseCount += Math.floor(Math.random() * 3) + 1;
-        if (gbVisitorCount) gbVisitorCount.textContent = baseCount.toLocaleString();
-      }
-    }, 8500);
-
-    // Hardcoded initial cool messages
-    const initialGbMessages = [
-      { name: "SyncInk System", emoji: "🤖", msg: "Welcome to the official Guestbook! Leave your mark here.", date: "Sept 15, 2026", badge: "OWNER" },
-      { name: "CodeNinja", emoji: "🐱", msg: "Your Discord bots are absolutely insane! Keep up the amazing work.", date: "Sept 15, 2026" },
-      { name: "WebDev Fan", emoji: "✨", msg: "Love the UI of this portfolio. So smooth and futuristic!", date: "Sept 15, 2026" }
-    ];
-
-    let localGbMessages = JSON.parse(localStorage.getItem('syncink_guestbook') || "[]");
+  if (gbVerifyForm && gbMessagesList) {
+    let verifiedUser = null;
+    let localGbMessages = JSON.parse(localStorage.getItem('syncink_guestbook_v2') || "[]");
     
+    // Check if they already signed
+    const hasSigned = localStorage.getItem('syncink_guestbook_signed');
+    if (hasSigned) {
+      gbFormContainer.innerHTML = `
+        <div style="text-align:center; padding: 2rem; color: var(--green); font-weight: 700; background: rgba(87, 242, 135, 0.1); border-radius: 12px; border: 1px solid rgba(87, 242, 135, 0.3);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-bottom:0.5rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><br>
+          You have already signed the guestbook!
+        </div>
+      `;
+    }
+
     const renderGbMessage = (data, isNew = false) => {
       const el = document.createElement('div');
       el.className = 'gb-msg';
       el.innerHTML = `
-        <div class="gb-avatar">${data.emoji || '👤'}</div>
+        <img class="gb-avatar" src="${data.avatar}" alt="Avatar" style="object-fit:cover;">
         <div class="gb-content">
           <div class="gb-content-head">
-            <div class="gb-name">${data.name.replace(/</g, "&lt;")} ${data.badge ? `<span class="gb-badge">${data.badge}</span>` : ''}</div>
+            <div class="gb-name">${data.name.replace(/</g, "&lt;")}</div>
             <div class="gb-date">${data.date}</div>
           </div>
           <div class="gb-text">${data.msg.replace(/</g, "&lt;")}</div>
@@ -3390,62 +3407,103 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // Render all
+    // Render local messages (No hardcoded fake ones)
     localGbMessages.slice().reverse().forEach(m => renderGbMessage(m));
-    initialGbMessages.forEach(m => renderGbMessage(m));
 
-    gbForm.addEventListener('submit', (e) => {
+    gbVerifyForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = document.getElementById('gbSubmitBtn');
-      const name = document.getElementById('gbName').value.trim();
-      let emoji = document.getElementById('gbEmoji').value.trim() || '💬';
-      const msg = document.getElementById('gbMsg').value.trim();
+      const val = gbDiscordIdInput.value.trim();
+      if (!val) return;
 
-      if (!name || !msg) return;
+      gbVerifyBtn.disabled = true;
+      gbVerifyBtn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="animation: fmpSpin 1s linear infinite;"><circle cx="12" cy="12" r="10"/><path d="M12 2v4"/></svg> Checking...`;
 
-      const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      
-      const newMsg = { name, emoji, msg, date: dateStr };
-      
-      // Save locally
-      localGbMessages.push(newMsg);
-      localStorage.setItem('syncink_guestbook', JSON.stringify(localGbMessages));
-
-      // Render
-      renderGbMessage(newMsg, true);
-      
-      // Increment counter instantly
-      baseCount++;
-      if (gbVisitorCount) gbVisitorCount.textContent = baseCount.toLocaleString();
-
-      // Send via Webhook (using the hidden contact webhook provided previously)
-      const b64 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTU0MjU0NDIxMDk1ODIyOTYyNC96YnlnWGppeFpwNTVvc2dwUlB5S0s1YllIRWpaXzlmdUpvdG9xTFdvYnNNUm52cGZCYkRpcG5STG9iU3pvVmdCM2xGaA==";
-      fetch(atob(b64), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          content: null,
-          embeds: [{
-            title: "📖 New Guestbook Signature!",
-            color: 5814783,
-            fields: [
-              { name: "Name", value: `${emoji} ${name}`, inline: true },
-              { name: "Date", value: dateStr, inline: true },
-              { name: "Message", value: msg }
-            ]
-          }]
-        })
-      }).catch(() => {});
-
-      // Reset
-      gbForm.reset();
-      btn.textContent = "Signed! ✅";
-      btn.style.background = "var(--green)";
-      setTimeout(() => {
-        btn.textContent = "Sign Guestbook ✍️";
-        btn.style.background = "";
-      }, 3000);
+      try {
+        const res = await fetch(`https://dcdn.dstn.to/profile/${val}`);
+        if (!res.ok) throw new Error("User not found");
+        const data = await res.json();
+        
+        const user = data.user;
+        const username = user.username || "Unknown";
+        const globalName = user.global_name || username;
+        
+        const avatarIdx = Number((BigInt(val) >> 22n) % 6n);
+        let avatarUrl = `https://cdn.discordapp.com/embed/avatars/${avatarIdx}.png`;
+        if (user.avatar) {
+          const isGif = user.avatar.startsWith('a_');
+          avatarUrl = `https://cdn.discordapp.com/avatars/${val}/${user.avatar}.${isGif ? 'gif' : 'png'}?size=128`;
+        }
+        
+        verifiedUser = { id: val, name: globalName, handle: username, avatar: avatarUrl };
+        
+        gbPreviewAvatar.src = avatarUrl;
+        gbPreviewName.innerHTML = `${globalName} <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+        gbPreviewHandle.textContent = `@${username} • ${val}`;
+        
+        gbPreview.style.display = 'flex';
+        gbSignForm.style.display = 'flex';
+        gbVerifyForm.style.display = 'none';
+        
+      } catch(err) {
+        gbVerifyBtn.disabled = false;
+        gbVerifyBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> User Not Found`;
+        gbVerifyBtn.style.background = 'rgba(239, 68, 68, 0.8)';
+        setTimeout(() => {
+          gbVerifyBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Verify User`;
+          gbVerifyBtn.style.background = '';
+        }, 3000);
+      }
     });
+
+    if(gbSignForm) {
+      gbSignForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!verifiedUser) return;
+        const msg = gbMsgInput.value.trim();
+        if (!msg) return;
+
+        const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        
+        const newMsg = { name: verifiedUser.name, avatar: verifiedUser.avatar, msg, date: dateStr };
+        
+        // Save locally
+        localGbMessages.push(newMsg);
+        localStorage.setItem('syncink_guestbook_v2', JSON.stringify(localGbMessages));
+        localStorage.setItem('syncink_guestbook_signed', 'true');
+
+        // Render
+        renderGbMessage(newMsg, true);
+        
+        // Send via Webhook
+        const b64 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTU0MjU0NDIxMDk1ODIyOTYyNC96YnlnWGppeFpwNTVvc2dwUlB5S0s1YllIRWpaXzlmdUpvdG9xTFdvYnNNUm52cGZCYkRpcG5STG9iU3pvVmdCM2xGaA==";
+        fetch(atob(b64), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: "Guestbook",
+            content: null,
+            embeds: [{
+              title: "📖 New Guestbook Signature!",
+              color: 5814783,
+              thumbnail: { url: verifiedUser.avatar },
+              fields: [
+                { name: "User", value: `${verifiedUser.name} (@${verifiedUser.handle})\nID: ${verifiedUser.id}` },
+                { name: "Date", value: dateStr },
+                { name: "Message", value: msg }
+              ]
+            }]
+          })
+        }).catch(() => {});
+
+        // Replace form with success message
+        gbFormContainer.innerHTML = `
+          <div style="text-align:center; padding: 2rem; color: var(--green); font-weight: 700; background: rgba(87, 242, 135, 0.1); border-radius: 12px; border: 1px solid rgba(87, 242, 135, 0.3);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-bottom:0.5rem;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><br>
+            Successfully signed the guestbook!
+          </div>
+        `;
+      });
+    }
   }
 
   /* ====== REVEAL ANIMATIONS ====== */
