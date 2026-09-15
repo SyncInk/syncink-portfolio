@@ -3107,12 +3107,9 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
 </section>
 
   <!-- ====== GUESTBOOK ====== -->
-  <section id="guestbook" class="container reveal">
-    <div class="section-title">
-      <div class="st-line"></div>
-      <div class="st-text">Guestbook</div>
-      <div class="st-line"></div>
-    </div>
+  <section id="guestbook" class="container reveal" style="padding-top: 4rem;">
+    <div class="s-label reveal">Guestbook</div>
+    <h2 class="s-heading reveal">Leave your <em>mark</em></h2>
     
     <style>
       .gb-container { max-width: 700px; margin: 0 auto; }
@@ -3130,13 +3127,14 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       .gb-row { display: flex; gap: 1rem; }
       .gb-input {
         background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px;
-        padding: 0.8rem 1rem; color: var(--text); font-family: inherit; font-size: 0.9rem;
+        padding: 0.8rem 1rem; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 0.9rem;
         flex: 1; transition: border-color 0.3s;
       }
       :root[data-theme="light"] .gb-input { background: rgba(255,255,255,0.5); }
       .gb-input:focus { outline: none; border-color: var(--blue); }
       .gb-submit {
         background: var(--blue); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 8px;
+        font-family: 'Outfit', sans-serif; font-size: 0.95rem;
         font-weight: 700; cursor: pointer; transition: transform 0.2s, background 0.2s;
       }
       .gb-submit:hover { transform: translateY(-2px); background: var(--blue2); }
@@ -3153,10 +3151,10 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       }
       .gb-content { flex: 1; }
       .gb-content-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
-      .gb-name { font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 0.4rem; }
+      .gb-name { font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 0.4rem; font-family: 'Outfit', sans-serif; }
       .gb-badge { font-size: 0.6rem; background: var(--hero-badge-bg); color: var(--blue); padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 800; border: 1px solid var(--hero-badge-border); }
       .gb-date { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); }
-      .gb-text { font-size: 0.85rem; color: var(--muted); line-height: 1.5; word-break: break-word; }
+      .gb-text { font-size: 0.85rem; color: var(--muted); line-height: 1.5; word-break: break-word; font-family: 'Outfit', sans-serif; }
       @media(max-width: 500px) { .gb-row { flex-direction: column; } }
       
       /* Webkit scrollbar for messages */
