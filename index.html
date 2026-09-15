@@ -3112,59 +3112,53 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
     <h2 class="s-heading reveal">Leave your <em>mark</em></h2>
     
     <style>
-      .gb-container { max-width: 700px; margin: 0 auto; }
-      .gb-stats { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+      .gb-container { max-width: 600px; margin: 0 auto; }
+      .gb-stats { display: flex; justify-content: center; margin-bottom: 2rem; }
       .gb-stat-badge {
-        background: var(--card); border: 1px solid var(--border); padding: 0.6rem 1.2rem;
+        background: transparent; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem;
         border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text);
         display: flex; align-items: center; gap: 0.6rem; backdrop-filter: blur(10px);
       }
+      :root[data-theme="light"] .gb-stat-badge { border-color: rgba(0,0,0,0.1); }
       .gb-form {
-        background: var(--card); border: 1px solid var(--border); padding: 1.5rem;
-        border-radius: 16px; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;
-        backdrop-filter: blur(10px);
+        background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); padding: 1.5rem;
+        border-radius: 16px; margin-bottom: 3rem; display: flex; flex-direction: column;
+        backdrop-filter: blur(20px); box-shadow: 0 10px 40px rgba(0,0,0,0.2);
       }
-      .gb-row { display: flex; gap: 1rem; }
+      :root[data-theme="light"] .gb-form { background: rgba(255,255,255,0.6); border-color: rgba(0,0,0,0.1); }
+      .gb-row { display: flex; gap: 0.8rem; }
       .gb-input {
-        background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px;
-        padding: 0.8rem 1rem; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 0.9rem;
-        flex: 1; transition: border-color 0.3s;
+        background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+        padding: 0.8rem 1rem; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 0.95rem;
+        flex: 1; transition: border-color 0.3s; outline: none;
       }
-      :root[data-theme="light"] .gb-input { background: rgba(255,255,255,0.5); }
-      .gb-input:focus { outline: none; border-color: var(--blue); }
+      :root[data-theme="light"] .gb-input { background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.1); }
+      .gb-input:focus { border-color: var(--blue); }
       .gb-submit {
-        background: var(--blue); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 8px;
-        font-family: 'Outfit', sans-serif; font-size: 0.95rem;
-        font-weight: 700; cursor: pointer; transition: transform 0.2s, background 0.2s;
+        background: var(--blue); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 12px;
+        font-family: 'Outfit', sans-serif; font-size: 0.95rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;
+        font-weight: 700; cursor: pointer; transition: transform 0.2s, background 0.2s; white-space:nowrap;
       }
       .gb-submit:hover { transform: translateY(-2px); background: var(--blue2); }
-      .gb-messages { display: flex; flex-direction: column; gap: 1rem; max-height: 500px; overflow-y: auto; padding-right: 5px; }
-      .gb-msg {
-        background: var(--card); border: 1px solid var(--border); padding: 1.2rem;
-        border-radius: 12px; display: flex; gap: 1rem; backdrop-filter: blur(10px);
+      
+      .gb-messages { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+      .gb-sig {
+        background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 0.8rem 1rem;
+        border-radius: 12px; display: flex; align-items: center; gap: 0.8rem; transition: all 0.3s ease;
         animation: gbFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
+      :root[data-theme="light"] .gb-sig { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.05); }
+      .gb-sig:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
       @keyframes gbFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      .gb-avatar {
-        width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--cyan));
-        display: grid; place-items: center; font-weight: 900; font-size: 1.2rem; flex-shrink: 0; color: #fff;
-      }
-      .gb-content { flex: 1; }
-      .gb-content-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
-      .gb-name { font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 0.4rem; font-family: 'Outfit', sans-serif; }
-      .gb-badge { font-size: 0.6rem; background: var(--hero-badge-bg); color: var(--blue); padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 800; border: 1px solid var(--hero-badge-border); }
-      .gb-date { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); }
-      .gb-text { font-size: 0.85rem; color: var(--muted); line-height: 1.5; word-break: break-word; font-family: 'Outfit', sans-serif; }
+      .gb-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink:0; background:var(--blue); }
+      .gb-sig-info { display: flex; flex-direction: column; overflow: hidden; }
+      .gb-name { font-weight: 700; color: var(--text); font-family: 'Outfit', sans-serif; font-size:0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display:flex; align-items:center; gap:4px; }
+      .gb-date { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); }
       @media(max-width: 500px) { .gb-row { flex-direction: column; } }
-      
-      /* Webkit scrollbar for messages */
-      .gb-messages::-webkit-scrollbar { width: 4px; }
-      .gb-messages::-webkit-scrollbar-track { background: transparent; }
-      .gb-messages::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 4px; }
     </style>
 
     <div class="gb-container">
-      <div class="gb-stats reveal" style="justify-content:center;">
+      <div class="gb-stats reveal">
         <div class="gb-stat-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           Started Sept 15, 2026
@@ -3172,27 +3166,23 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
       </div>
 
       <div class="gb-form reveal" id="gbFormContainer">
-        <form id="gbVerifyForm" style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <form id="gbVerifyForm" class="gb-row">
           <input type="text" id="gbDiscordId" class="gb-input" placeholder="Enter Discord User ID" required pattern="\d{17,20}">
-          <button type="submit" class="gb-submit" id="gbVerifyBtn" style="white-space:nowrap; display:flex; align-items:center; gap:0.5rem;">
+          <button type="submit" class="gb-submit" id="gbVerifyBtn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             Verify User
           </button>
         </form>
 
-        <div id="gbPreview" style="display:none; align-items:center; gap: 1rem; padding: 1rem; background: rgba(88,101,242,0.1); border-radius: 8px; border: 1px solid var(--border); margin-top: 1rem;">
-          <img id="gbPreviewAvatar" style="width: 44px; height: 44px; border-radius: 50%; object-fit:cover;" src="" alt="Avatar">
-          <div>
-            <div id="gbPreviewName" style="font-weight:700; color:var(--text); display:flex; align-items:center; gap:0.4rem;"></div>
-            <div id="gbPreviewHandle" style="font-size:0.75rem; color:var(--muted); font-family:'JetBrains Mono', monospace;"></div>
+        <form id="gbSignForm" style="display:none; flex-direction:column; align-items:center; gap:1.2rem;">
+          <div style="display:flex; flex-direction:column; align-items:center; text-align:center;">
+            <img id="gbPreviewAvatar" style="width: 64px; height: 64px; border-radius: 50%; object-fit:cover; margin-bottom:0.8rem;" src="" alt="Avatar">
+            <div id="gbPreviewName" style="font-weight:700; color:var(--text); font-size:1.2rem; display:flex; align-items:center; gap:0.4rem; font-family:'Outfit', sans-serif;"></div>
+            <div id="gbPreviewHandle" style="font-size:0.8rem; color:var(--muted); font-family:'JetBrains Mono', monospace;"></div>
           </div>
-        </div>
-
-        <form id="gbSignForm" style="display:none; flex-direction:column; gap:1rem; margin-top:1rem;">
-          <textarea id="gbMsg" class="gb-input" placeholder="Leave a nice message..." required rows="3" maxlength="250" style="resize:vertical;"></textarea>
-          <button type="submit" class="gb-submit" id="gbSubmitBtn" style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-            Sign Guestbook
+          <button type="submit" id="gbSubmitBtn" class="gb-submit" style="width:100%; background:#fff; color:#000; padding:1rem; font-size:1.05rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            Record Signature
           </button>
         </form>
       </div>
@@ -3361,12 +3351,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const gbVerifyForm = document.getElementById('gbVerifyForm');
   const gbDiscordIdInput = document.getElementById('gbDiscordId');
   const gbVerifyBtn = document.getElementById('gbVerifyBtn');
-  const gbPreview = document.getElementById('gbPreview');
   const gbPreviewAvatar = document.getElementById('gbPreviewAvatar');
   const gbPreviewName = document.getElementById('gbPreviewName');
   const gbPreviewHandle = document.getElementById('gbPreviewHandle');
   const gbSignForm = document.getElementById('gbSignForm');
-  const gbMsgInput = document.getElementById('gbMsg');
   const gbMessagesList = document.getElementById('gbMessagesList');
   const gbFormContainer = document.getElementById('gbFormContainer');
 
@@ -3387,15 +3375,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const renderGbMessage = (data, isNew = false) => {
       const el = document.createElement('div');
-      el.className = 'gb-msg';
+      el.className = 'gb-sig';
       el.innerHTML = `
-        <img class="gb-avatar" src="${data.avatar}" alt="Avatar" style="object-fit:cover;">
-        <div class="gb-content">
-          <div class="gb-content-head">
-            <div class="gb-name">${data.name.replace(/</g, "&lt;")}</div>
-            <div class="gb-date">${data.date}</div>
-          </div>
-          <div class="gb-text">${data.msg.replace(/</g, "&lt;")}</div>
+        <img class="gb-avatar" src="${data.avatar}" alt="Avatar">
+        <div class="gb-sig-info">
+          <div class="gb-name">${data.name.replace(/</g, "&lt;")}</div>
+          <div class="gb-date">${data.date}</div>
         </div>
       `;
       if (isNew) {
@@ -3405,7 +3390,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // Render local messages (No hardcoded fake ones)
+    // Render local messages
     localGbMessages.slice().reverse().forEach(m => renderGbMessage(m));
 
     gbVerifyForm.addEventListener('submit', async (e) => {
@@ -3436,7 +3421,7 @@ document.addEventListener("DOMContentLoaded", () => {
           throw new Error("No data");
         }
       } catch(err) {
-        // Fallback: If API fails but format is correct, just use a default avatar and let them proceed
+        // Fallback
         const avatarIdx = Number((BigInt(val) >> 22n) % 6n);
         const avatarUrl = `https://cdn.discordapp.com/embed/avatars/${avatarIdx}.png`;
         const globalName = "Discord User";
@@ -3448,7 +3433,6 @@ document.addEventListener("DOMContentLoaded", () => {
         gbPreviewHandle.textContent = `ID: ${val} (Profile hidden)`;
       }
 
-      gbPreview.style.display = 'flex';
       gbSignForm.style.display = 'flex';
       gbVerifyForm.style.display = 'none';
     });
@@ -3457,12 +3441,10 @@ document.addEventListener("DOMContentLoaded", () => {
       gbSignForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (!verifiedUser) return;
-        const msg = gbMsgInput.value.trim();
-        if (!msg) return;
 
         const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         
-        const newMsg = { name: verifiedUser.name, avatar: verifiedUser.avatar, msg, date: dateStr };
+        const newMsg = { name: verifiedUser.name, avatar: verifiedUser.avatar, date: dateStr };
         
         // Save locally
         localGbMessages.push(newMsg);
@@ -3486,8 +3468,7 @@ document.addEventListener("DOMContentLoaded", () => {
               thumbnail: { url: verifiedUser.avatar },
               fields: [
                 { name: "User", value: `${verifiedUser.name} (@${verifiedUser.handle})\nID: ${verifiedUser.id}` },
-                { name: "Date", value: dateStr },
-                { name: "Message", value: msg }
+                { name: "Date", value: dateStr }
               ]
             }]
           })
