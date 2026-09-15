@@ -3419,40 +3419,40 @@ document.addEventListener("DOMContentLoaded", () => {
       gbVerifyBtn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="animation: fmpSpin 1s linear infinite;"><circle cx="12" cy="12" r="10"/><path d="M12 2v4"/></svg> Checking...`;
 
       try {
-        const res = await fetch(`https://dcdn.dstn.to/profile/${val}`);
-        if (!res.ok) throw new Error("User not found");
+        const res = await fetch(`https://japi.rest/discord/v1/user/${val}`);
+        if (!res.ok) throw new Error("API failed");
         const data = await res.json();
         
-        const user = data.user;
-        const username = user.username || "Unknown";
-        const globalName = user.global_name || username;
-        
-        const avatarIdx = Number((BigInt(val) >> 22n) % 6n);
-        let avatarUrl = `https://cdn.discordapp.com/embed/avatars/${avatarIdx}.png`;
-        if (user.avatar) {
-          const isGif = user.avatar.startsWith('a_');
-          avatarUrl = `https://cdn.discordapp.com/avatars/${val}/${user.avatar}.${isGif ? 'gif' : 'png'}?size=128`;
+        if (data.data && data.data.username) {
+          const user = data.data;
+          const username = user.username;
+          const globalName = user.global_name || username;
+          const avatarUrl = user.avatarURL || user.defaultAvatarURL;
+          
+          verifiedUser = { id: val, name: globalName, handle: username, avatar: avatarUrl };
+          
+          gbPreviewAvatar.src = avatarUrl;
+          gbPreviewName.innerHTML = `${globalName} <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+          gbPreviewHandle.textContent = `@${username} • ${val}`;
+        } else {
+          throw new Error("No data");
         }
+      } catch(err) {
+        // Fallback: If API fails but format is correct, just use a default avatar and let them proceed
+        const avatarIdx = Number((BigInt(val) >> 22n) % 6n);
+        const avatarUrl = `https://cdn.discordapp.com/embed/avatars/${avatarIdx}.png`;
+        const globalName = "Discord User";
         
-        verifiedUser = { id: val, name: globalName, handle: username, avatar: avatarUrl };
+        verifiedUser = { id: val, name: globalName, handle: "Private/Unknown", avatar: avatarUrl };
         
         gbPreviewAvatar.src = avatarUrl;
-        gbPreviewName.innerHTML = `${globalName} <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
-        gbPreviewHandle.textContent = `@${username} • ${val}`;
-        
-        gbPreview.style.display = 'flex';
-        gbSignForm.style.display = 'flex';
-        gbVerifyForm.style.display = 'none';
-        
-      } catch(err) {
-        gbVerifyBtn.disabled = false;
-        gbVerifyBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> User Not Found`;
-        gbVerifyBtn.style.background = 'rgba(239, 68, 68, 0.8)';
-        setTimeout(() => {
-          gbVerifyBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Verify User`;
-          gbVerifyBtn.style.background = '';
-        }, 3000);
+        gbPreviewName.innerHTML = `${globalName} <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--muted)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+        gbPreviewHandle.textContent = `ID: ${val} (Profile hidden)`;
       }
+
+      gbPreview.style.display = 'flex';
+      gbSignForm.style.display = 'flex';
+      gbVerifyForm.style.display = 'none';
     });
 
     if(gbSignForm) {

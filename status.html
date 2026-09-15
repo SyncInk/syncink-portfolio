@@ -3050,20 +3050,16 @@ function initIncidentModal() {
         `;
         accountBox.classList.add('active');
 
-        // Fetch user data from public dcdn API (no auth required)
-        const res = await fetch(`https://dcdn.dstn.to/profile/${val}`);
+        // Fetch user data from public API
+        const res = await fetch(`https://japi.rest/discord/v1/user/${val}`);
         if (!res.ok) throw new Error("User not found");
         const data = await res.json();
         
-        const user = data.user;
-        const username = user.username || "Unknown";
+        if (!data.data || !data.data.username) throw new Error("No data");
+        const user = data.data;
+        const username = user.username;
         const globalName = user.global_name || username;
-        
-        let avatarUrl = `https://cdn.discordapp.com/embed/avatars/${avatarIdx}.png`;
-        if (user.avatar) {
-          const isGif = user.avatar.startsWith('a_');
-          avatarUrl = `https://cdn.discordapp.com/avatars/${val}/${user.avatar}.${isGif ? 'gif' : 'png'}?size=256`;
-        }
+        const avatarUrl = user.avatarURL || user.defaultAvatarURL;
         
         previewAvatar.src = avatarUrl;
         previewGlobalName.textContent = globalName;
