@@ -4678,19 +4678,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderMergedBadges() {
-    const badgesEl = document.getElementById('discord-badges');
+    const badgesEl = document.getElementById("discord-badges");
     if (!badgesEl) return;
     
-    const dcdn = window.dcdnBadges || [];
-    const lany = window.lanyardBadges || [];
-    
-    // Merge by icon hash to prevent duplicates
-    const mergedMap = {};
-    dcdn.forEach(b => { if(b.icon) mergedMap[b.icon] = b; });
-    lany.forEach(b => { if(b.icon) mergedMap[b.icon] = b; });
-    
-    const finalBadges = Object.values(mergedMap);
-    badgesEl.innerHTML = finalBadges.map(b => `<img class="discord-badge-icon" src="https://cdn.discordapp.com/badge-icons/${b.icon}.png" alt="${b.description}" title="${b.description}">`).join('');
+    const customBadges = [
+      { id: "controller", desc: "Gamer" },
+      { id: "sword", desc: "RPG Player" },
+      { id: "monitor", desc: "PC Gamer" },
+      { id: "quest4", desc: "Quest Completed" },
+      { id: "bravery", desc: "HypeSquad Bravery" },
+      { id: "wreath", desc: "Wreath" },
+      { id: "leaf", desc: "Leaf" },
+      { id: "gem", desc: "Gem" }
+    ];
+
+    badgesEl.innerHTML = customBadges.map(b => `<img class="discord-badge-icon" src="assets/badges/${b.id}.png" alt="${b.desc}" title="${b.desc}">`).join("");
   }
 
   syncDiscord();
@@ -5083,3 +5085,4 @@ function checkGlobalStatus() {
 }
 document.addEventListener('DOMContentLoaded', checkGlobalStatus);
 </script>
+
