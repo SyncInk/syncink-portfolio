@@ -1,16 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="SyncInk Official Status — Real-time infrastructure, latency, and uptime monitoring for SyncInk Discord bots."/>
-<title>SyncInk | System Status & Latency</title>
-<link rel="icon" type="image/svg+xml" href="si-favicon.svg"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="SyncInk Official Status — Real-time infrastructure, latency, and uptime monitoring for SyncInk Discord bots." name="description"/>
+<title>SyncInk | System Status &amp; Latency</title>
+<link href="si-favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <script>(function(){try{var t=localStorage.getItem('theme');var s=window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches;document.documentElement.setAttribute('data-theme',t||(s?'light':'dark'));}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
-
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
@@ -1733,408 +1733,353 @@ footer{
 }
 </style>
 </head>
-
 <body>
 <canvas id="bgCanvas"></canvas>
-
 <div id="chart-tooltip"></div>
-
 <!-- NAVIGATION -->
 <nav>
-  <div class="nav-left">
-    <a href="ru.html" class="nav-brand">
-      <div class="nav-brand-icon">SI</div>
-      <span>SyncInk</span>
-    </a>
-    <span class="nav-status-badge">Status</span>
-  </div>
-
-  <ul class="nav-links" id="navLinksList">
-    <li><a href="#overview" class="nav-item active" data-target="overview">Overview</a></li>
-    <li><a href="#public-nodes" class="nav-item" data-target="public-nodes">Services</a></li>
-    <li><a href="#private-nodes" class="nav-item" data-target="private-nodes">Security</a></li>
-    <li><a href="#incidents" class="nav-item" data-target="incidents">Incidents</a></li>
-    <li><a href="bots-ru.html" class="nav-item">All Bots</a></li>
-  </ul>
-
-  <div class="nav-right">
-    <div class="live-indicator-pill">
-      <span class="pulse-dot dot-green" id="globalNavDot"></span>
-      <span id="globalNavText">Operational</span>
-    </div>
-
-    <a href="ru.html" class="btn-nav-action">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
+<div class="nav-left">
+<a class="nav-brand" href="ru.html">
+<div class="nav-brand-icon">SI</div>
+<span>SyncInk</span>
+</a>
+<span class="nav-status-badge">Статус</span>
+</div>
+<ul class="nav-links" id="navLinksList">
+<li><a class="nav-item active" data-target="overview" href="#overview">Обзор</a></li>
+<li><a class="nav-item" data-target="public-nodes" href="#public-nodes">Сервисы</a></li>
+<li><a class="nav-item" data-target="private-nodes" href="#private-nodes">Безопасность</a></li>
+<li><a class="nav-item" data-target="incidents" href="#incidents">Инциденты</a></li>
+<li><a class="nav-item" href="bots.html">Все боты</a></li>
+</ul>
+<div class="nav-right">
+<div class="live-indicator-pill">
+<span class="pulse-dot dot-green" id="globalNavDot"></span>
+<span id="globalNavText">В рабочем состоянии</span>
+</div>
+<a class="btn-nav-action" href="ru.html">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M19 12H5m0 0l7-7m-7 7l7 7"></path></svg>
       Портфолио
     </a>
-
-    <button class="theme-toggle" id="tt" aria-label="Toggle theme">
-      <svg id="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg id="sun" viewBox="0 0 24 24" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/><line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/><line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/><line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/></svg>
-    </button>
-  </div>
+<button aria-label="Toggle theme" class="theme-toggle" id="tt">
+<svg id="moon" viewbox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+<svg id="sun" style="display:none" viewbox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line stroke="currentColor" stroke-width="2" x1="12" x2="12" y1="1" y2="3"></line><line stroke="currentColor" stroke-width="2" x1="12" x2="12" y1="21" y2="23"></line><line stroke="currentColor" stroke-width="2" x1="1" x2="3" y1="12" y2="12"></line><line stroke="currentColor" stroke-width="2" x1="21" x2="23" y1="12" y2="12"></line><line stroke="currentColor" stroke-width="2" x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line stroke="currentColor" stroke-width="2" x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line stroke="currentColor" stroke-width="2" x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line stroke="currentColor" stroke-width="2" x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
+</button>
+</div>
 </nav>
-
 <!-- OPTIMIZED MOBILE SUB-NAV STRIP (Sticky on mobile only, 0 impact on PC) -->
 <div class="sub-nav-wrapper" id="subNavBar">
-  <div class="sub-nav-inner">
-    <a href="#overview" class="sub-nav-pill active" data-target="overview">Overview</a>
-    <a href="#public-nodes" class="sub-nav-pill" data-target="public-nodes">Services</a>
-    <a href="#private-nodes" class="sub-nav-pill" data-target="private-nodes">Security</a>
-    <a href="#incidents" class="sub-nav-pill" data-target="incidents">Incidents</a>
-    <a href="bots-ru.html" class="sub-nav-pill">All Bots ↗</a>
-  </div>
+<div class="sub-nav-inner">
+<a class="sub-nav-pill active" data-target="overview" href="#overview">Обзор</a>
+<a class="sub-nav-pill" data-target="public-nodes" href="#public-nodes">Сервисы</a>
+<a class="sub-nav-pill" data-target="private-nodes" href="#private-nodes">Безопасность</a>
+<a class="sub-nav-pill" data-target="incidents" href="#incidents">Инциденты</a>
+<a class="sub-nav-pill" href="bots.html">Все боты ↗</a>
 </div>
-
+</div>
 <div class="page">
-  <div class="container">
-
-    <!-- HEADER HERO -->
-    <header class="status-header" id="overview">
-      <div class="header-left">
-        <div class="kicker">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          SYSTEM METRICS
+<div class="container">
+<!-- HEADER HERO -->
+<header class="status-header" id="overview">
+<div class="header-left">
+<div class="kicker">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+          СИСТЕМНЫЕ МЕТРИКИ
         </div>
-        <h1>SyncInk Status</h1>
-        <p>Real-time infrastructure telemetry, node latency & availability monitoring.</p>
-      </div>
-
-      <div class="header-right">
-        <div class="global-banner status-operational" id="overallBanner">
-          <span class="pulse-dot dot-green" id="overallBannerDot"></span>
-          <div>
-            <div class="banner-text-main" id="overallBannerTitle">All Core Systems Operational</div>
-            <div class="banner-subtext" id="overallBannerSub">3 of 5 clusters active · 2 scheduled upgrades</div>
-          </div>
-        </div>
-
-        <div class="refresh-control">
-          <span id="lastUpdateTimer">Updated just now</span>
-          <span>·</span>
-          <button class="btn-refresh" id="manualRefreshBtn" title="Refresh metrics">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- SYSTEM OVERVIEW COMPACT METRICS ROW -->
-    <div class="overview-grid">
-      <div class="metric-card">
-        <div class="metric-label">
-          <span>Uptime</span>
-          <span class="badge-up">90D</span>
-        </div>
-        <div class="metric-val">99.98%</div>
-        <div class="metric-sub"><span class="badge-up">+0.01%</span> vs last month</div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-label">
-          <span>Active Nodes</span>
-          <span class="badge-up">В ЭФИРЕ</span>
-        </div>
-        <div class="metric-val" id="overviewActiveBots">3 / 5</div>
-        <div class="metric-sub">60% Operational</div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-label">
-          <span>Avg Latency</span>
-          <span class="badge-neutral">ONLINE</span>
-        </div>
-        <div class="metric-val" id="overviewAvgLatency">32.4ms</div>
-        <div class="metric-sub"><span class="badge-up">-1.8ms</span> optimal</div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-label">
-          <span>Connected Guilds</span>
-        </div>
-        <div class="metric-val">2,350+</div>
-        <div class="metric-sub">Across all clusters</div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-label">
-          <span>Total Users</span>
-        </div>
-        <div class="metric-val">184.5K</div>
-        <div class="metric-sub">Active community</div>
-      </div>
-
-      <div class="metric-card">
-        <div class="metric-label">
-          <span>Incidents</span>
-          <span class="badge-warn" id="incidentsOverviewBadge">LOG</span>
-        </div>
-        <div class="metric-val" id="incidentsOverviewVal">0 Active</div>
-        <div class="metric-sub" id="incidentsOverviewSub">1 Scheduled upgrade</div>
-      </div>
-    </div>
-
-    <!-- PUBLIC BOT INFRASTRUCTURE -->
-    <div id="public-nodes">
-      <div class="section-header">
-        <div class="section-title-group">
-          <div class="section-dot" style="background: var(--blue);"></div>
-          <h2 class="section-title">Public Bot Infrastructure</h2>
-        </div>
-        <span class="section-badge">4 Nodes Deployed</span>
-      </div>
-
-      <div class="bots-grid" id="publicGrid"></div>
-    </div>
-
-    <!-- PRIVATE & INTERNAL INFRASTRUCTURE -->
-    <div id="private-nodes">
-      <div class="section-header">
-        <div class="section-title-group">
-          <div class="section-dot" style="background: var(--cyan);"></div>
-          <h2 class="section-title">Private & Security Infrastructure</h2>
-        </div>
-        <span class="section-badge">Internal Shield · Not Invitable</span>
-      </div>
-
-      <div class="bots-grid" id="privateGrid"></div>
-    </div>
-
-    <!-- RECENT INCIDENTS & MAINTENANCE -->
-    <div id="incidents" class="incidents-section">
-      <div class="section-header">
-        <div class="section-title-group">
-          <div class="section-dot" style="background: var(--green);"></div>
-          <h2 class="section-title">Incidents & Maintenance Log</h2>
-        </div>
-        <span class="section-badge">Past 90 Days</span>
-      </div>
-
-      <!-- INCIDENTS LIST CONTAINER -->
-      <div id="incidentsContainer">
-        <!-- User Reported Incidents render dynamically here -->
-        <div id="userReportedIncidentsList"></div>
-
-        <!-- Default Operational Verification Card -->
-        <div class="incident-card operational" id="defaultOperationalCard">
-          <div class="incident-icon-box">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-          </div>
-          <div>
-            <div class="inc-title">No major outages reported today</div>
-            <div class="inc-desc">All operational bot clusters (Ticket, Voice, Security) are running with sub-45ms latency and zero packet loss.</div>
-          </div>
-        </div>
-
-        <!-- Scheduled Maintenance Card -->
-        <div class="incident-card maintenance">
-          <div class="inc-header">
-            <div class="inc-title">Scheduled Maintenance — Cluster Sharding & Lavalink v4 Migration</div>
-            <span class="inc-badge badge-progress">In Progress</span>
-          </div>
-          <div class="inc-meta">Aug 20, 2026 – Ongoing · Impact: SyncInk Main & SyncInk Radio</div>
-          <div class="inc-desc">
-            We are currently upgrading the underlying Node.js runtime and sharding infrastructure for SyncInk Main & Radio to enhance audio streaming throughput and prevent Discord gateway rate-limits. Services will automatically rejoin the cluster once shard synchronization completes.
-          </div>
-        </div>
-      </div>
-
-      <!-- DEDICATED REPORT INCIDENT ACTION CARD (Placed at bottom of Incidents section) -->
-      <div class="report-cta-box">
-        <div class="report-cta-text">
-          <h3>Experiencing an issue with a SyncInk bot?</h3>
-          <p>Submit a bug or disruption report directly to our development team.</p>
-        </div>
-        <button class="btn-report-action" id="openReportModalBtn">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Report Incident
-        </button>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-inner">
-        <div class="footer-left">
-          <div class="footer-brand">SyncInk Infrastructure Status</div>
-          <div class="footer-copy">SyncInk © 2026 · All systems monitored 24/7 with 99.98% SLA commitment.</div>
-        </div>
-
-        <ul class="footer-links">
-          <li><a href="ru.html">Портфолио</a></li>
-          <li><a href="bots-ru.html">Боты</a></li>
-          <li><a href="https://discord.gg/rB6gNZaK9u" target="_blank">Discord</a></li>
-          <li><a href="https://github.com/SyncInk/syncink-portfolio" target="_blank">GitHub</a></li>
-        </ul>
-      </div>
-    </footer>
-
-  </div>
+<h1>Статус SyncInk</h1>
+<p>Телеметрия инфраструктуры в реальном времени, мониторинг задержки узлов и доступности.</p>
 </div>
-
+<div class="header-right">
+<div class="global-banner status-operational" id="overallBanner">
+<span class="pulse-dot dot-green" id="overallBannerDot"></span>
+<div>
+<div class="banner-text-main" id="overallBannerTitle">Все основные системы работают</div>
+<div class="banner-subtext" id="overallBannerSub">3 из 5 кластеров активны · 2 запланированных обновления</div>
+</div>
+</div>
+<div class="refresh-control">
+<span id="lastUpdateTimer">Обновлено только что</span>
+<span>·</span>
+<button class="btn-refresh" id="manualRefreshBtn" title="Обновить метрики">
+<svg fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+</button>
+</div>
+</div>
+</header>
+<!-- SYSTEM OVERVIEW COMPACT METRICS ROW -->
+<div class="overview-grid">
+<div class="metric-card">
+<div class="metric-label">
+<span>Время работы</span>
+<span class="badge-up">90D</span>
+</div>
+<div class="metric-val">99.98%</div>
+<div class="metric-sub"><span class="badge-up">+0.01%</span> по сравнению с прошлым месяцем</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">
+<span>Активные узлы</span>
+<span class="badge-up">В ЭФИРЕ</span>
+</div>
+<div class="metric-val" id="overviewActiveBots">3 / 5</div>
+<div class="metric-sub">60% В рабочем состоянии</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">
+<span>Средняя задержка</span>
+<span class="badge-neutral">ОНЛАЙН</span>
+</div>
+<div class="metric-val" id="overviewAvgLatency">32.4мс</div>
+<div class="metric-sub"><span class="badge-up">-1.8мс</span> оптимальный</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">
+<span>Подключенные серверы</span>
+</div>
+<div class="metric-val">2,350+</div>
+<div class="metric-sub">Во всех кластерах</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">
+<span>Всего пользователей</span>
+</div>
+<div class="metric-val">184.5K</div>
+<div class="metric-sub">Активное сообщество</div>
+</div>
+<div class="metric-card">
+<div class="metric-label">
+<span>Инциденты</span>
+<span class="badge-warn" id="incidentsOverviewBadge">ЛОГ</span>
+</div>
+<div class="metric-val" id="incidentsOverviewVal">0 Активных</div>
+<div class="metric-sub" id="incidentsOverviewSub">1 Запланированное обновление</div>
+</div>
+</div>
+<!-- PUBLIC BOT INFRASTRUCTURE -->
+<div id="public-nodes">
+<div class="section-header">
+<div class="section-title-group">
+<div class="section-dot" style="background: var(--blue);"></div>
+<h2 class="section-title">Публичная инфраструктура ботов</h2>
+</div>
+<span class="section-badge">4 Узла развернуто</span>
+</div>
+<div class="bots-grid" id="publicGrid"></div>
+</div>
+<!-- PRIVATE & INTERNAL INFRASTRUCTURE -->
+<div id="private-nodes">
+<div class="section-header">
+<div class="section-title-group">
+<div class="section-dot" style="background: var(--cyan);"></div>
+<h2 class="section-title">Приватная инфраструктура и безопасность</h2>
+</div>
+<span class="section-badge">Внутренний щит · Невозможно пригласить</span>
+</div>
+<div class="bots-grid" id="privateGrid"></div>
+</div>
+<!-- RECENT INCIDENTS & MAINTENANCE -->
+<div class="incidents-section" id="incidents">
+<div class="section-header">
+<div class="section-title-group">
+<div class="section-dot" style="background: var(--green);"></div>
+<h2 class="section-title">Журнал инцидентов и технического обслуживания</h2>
+</div>
+<span class="section-badge">За последние 90 дней</span>
+</div>
+<!-- INCIDENTS LIST CONTAINER -->
+<div id="incidentsContainer">
+<!-- User Reported Incidents render dynamically here -->
+<div id="userReportedIncidentsList"></div>
+<!-- Default Operational Verification Card -->
+<div class="incident-card operational" id="defaultOperationalCard">
+<div class="incident-icon-box">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="20"><path d="M20 6L9 17l-5-5"></path></svg>
+</div>
+<div>
+<div class="inc-title">Сегодня о крупных сбоях не сообщалось</div>
+<div class="inc-desc">Все операционные кластеры ботов (Билеты, Голос, Безопасность) работают с задержкой менее 45 мс и нулевой потерей пакетов.</div>
+</div>
+</div>
+<!-- Scheduled Maintenance Card -->
+<div class="incident-card maintenance">
+<div class="inc-header">
+<div class="inc-title">Запланированное обслуживание — Шардинг кластера и миграция на Lavalink v4</div>
+<span class="inc-badge badge-progress">В процессе</span>
+</div>
+<div class="inc-meta">20 авг 2026 – Продолжается · Влияние: SyncInk Main и SyncInk Radio</div>
+<div class="inc-desc">
+            В настоящее время мы обновляем базовую среду выполнения Node.js и инфраструктуру шардинга для SyncInk Main и Radio, чтобы повысить пропускную способность аудиостриминга и предотвратить лимиты шлюза Discord. Сервисы автоматически вернутся в кластер после завершения синхронизации шардов.
+          </div>
+</div>
+</div>
+<!-- DEDICATED REPORT INCIDENT ACTION CARD (Placed at bottom of Incidents section) -->
+<div class="report-cta-box">
+<div class="report-cta-text">
+<h3>Возникла проблема с ботом SyncInk?</h3>
+<p>Отправить отчет о баге или сбое напрямую в нашу команду разработчиков.</p>
+</div>
+<button class="btn-report-action" id="openReportModalBtn">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+          Сообщить об инциденте
+        </button>
+</div>
+</div>
+<!-- FOOTER -->
+<footer>
+<div class="footer-inner">
+<div class="footer-left">
+<div class="footer-brand">Статус инфраструктуры SyncInk</div>
+<div class="footer-copy">SyncInk © 2026 · Все системы мониторятся 24/7 с гарантией SLA 99.98%.</div>
+</div>
+<ul class="footer-links">
+<li><a href="ru.html">Портфолио</a></li>
+<li><a href="bots.html">Боты</a></li>
+<li><a href="https://discord.gg/rB6gNZaK9u" target="_blank">Discord</a></li>
+<li><a href="https://github.com/SyncInk/syncink-portfolio" target="_blank">GitHub</a></li>
+</ul>
+</div>
+</footer>
+</div>
+</div>
 <!-- INCIDENT REPORTING MODAL -->
 <div class="modal-overlay" id="incidentModal">
-  <div class="modal-card">
-    <button class="modal-close-btn" id="closeIncidentModal" aria-label="Close modal">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-
-    <!-- FORM VIEW -->
-    <div id="incidentFormView">
-      <div class="modal-header-tag">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        Сообщить о проблеме / Bug
+<div class="modal-card">
+<button aria-label="Close modal" class="modal-close-btn" id="closeIncidentModal">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="16"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+</button>
+<!-- FORM VIEW -->
+<div id="incidentFormView">
+<div class="modal-header-tag">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+        Сообщить о проблеме / баге
       </div>
-      <h2 class="modal-title">Report an Incident</h2>
-      <p class="modal-sub">Submit a bug or service disruption report directly to SyncInk developers.</p>
-
-      <form id="incidentForm">
-        <!-- 1. AFFECTED SERVICE -->
-        <div class="form-group">
-          <label class="form-label" for="inc_service">Affected Service / Node <span>*</span></label>
-          <select class="form-select" id="inc_service" required>
-            <option value="" disabled selected>Select the affected bot or service...</option>
-            <optgroup label="Operational Services">
-              <option value="SyncInk® Ticket (Support System)">SyncInk® Ticket (Support System)</option>
-              <option value="SyncInk® Voice (Voice Manager)">SyncInk® Voice (Voice Manager)</option>
-              <option value="SyncInk® Security (Internal Shield)">SyncInk® Security (Internal Shield)</option>
-              <option value="Dashboard / Web Gateway">Dashboard / Web Gateway</option>
-              <option value="Multiple Services / Network Outage">Multiple Services / Network Outage</option>
-            </optgroup>
-            <optgroup label="Offline / Maintenance (Currently Disabled)">
-              <option value="SyncInk® Core (Economy & Moderation)" disabled>SyncInk® Core — [Under Maintenance]</option>
-              <option value="SyncInk® Radio (Music Node)" disabled>SyncInk® Radio — [Under Maintenance]</option>
-            </optgroup>
-          </select>
-        </div>
-
-        <!-- 2. FAILURE TYPE (Dynamically updated based on service) -->
-        <div class="form-group">
-          <label class="form-label" for="inc_type">Failure Type / Category <span>*</span></label>
-          <select class="form-select" id="inc_type" required>
-            <option value="" disabled selected>Select a service above first...</option>
-          </select>
-        </div>
-
-        <!-- 3. SEVERITY LEVEL (Individual Highlight Color Per Level) -->
-        <div class="form-group">
-          <label class="form-label">Severity Level <span>*</span></label>
-          <div class="severity-grid">
-            <label class="severity-option option-low">
-              <input type="radio" name="severity" value="Low" checked />
-              <div class="severity-label">
-                <div class="sev-header-row">
-                  <span class="sev-indicator low"></span>
-                  <span class="sev-name">Low</span>
-                </div>
-                <span class="sev-desc">Minor glitch / UI</span>
-              </div>
-            </label>
-
-            <label class="severity-option option-medium">
-              <input type="radio" name="severity" value="Medium" />
-              <div class="severity-label">
-                <div class="sev-header-row">
-                  <span class="sev-indicator medium"></span>
-                  <span class="sev-name">Medium</span>
-                </div>
-                <span class="sev-desc">Partial degradation</span>
-              </div>
-            </label>
-
-            <label class="severity-option option-high">
-              <input type="radio" name="severity" value="High" />
-              <div class="severity-label">
-                <div class="sev-header-row">
-                  <span class="sev-indicator high"></span>
-                  <span class="sev-name">High</span>
-                </div>
-                <span class="sev-desc">Bot down / crash</span>
-              </div>
-            </label>
-
-            <label class="severity-option option-critical">
-              <input type="radio" name="severity" value="Critical" />
-              <div class="severity-label">
-                <div class="sev-header-row">
-                  <span class="sev-indicator critical"></span>
-                  <span class="sev-name">Critical</span>
-                </div>
-                <span class="sev-desc">Security / Outage</span>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- 4. REPORTER DETAILS: DISCORD USER ID ONLY -->
-        <div class="form-group">
-          <label class="form-label" for="inc_reporter">Your Discord User ID <span>*</span></label>
-          <input 
-            type="text" 
-            class="form-input" 
-            id="inc_reporter" 
-            placeholder="e.g. 930306512864280607" 
-            maxlength="20"
-            required 
-            autocomplete="off" 
-          />
-          
-          <!-- Live Verified Discord ID Preview Box (Official Discord Snowflake Validation) -->
-          <div class="discord-account-preview" id="discordAccountBox">
-            <img src="" alt="Discord Avatar" class="preview-avatar" id="previewAvatar" />
-            <div class="preview-info">
-              <div class="preview-name-row">
-                <span class="preview-global-name" id="previewGlobalName">Discord Account</span>
-                <span class="preview-handle" id="previewHandle">Snowflake Validated</span>
-              </div>
-              <span class="preview-id-badge" id="previewIdBadge">ID: --</span>
-            </div>
-            <span class="preview-verified-pill" id="previewVerifiedTag">
-              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              Valid Discord ID
-            </span>
-          </div>
-
-          <div class="form-hint">Enter your 17–20 digit numeric Discord User ID (Right-click your profile in Discord → Copy User ID).</div>
-        </div>
-
-        <!-- 5. SERVER / GUILD -->
-        <div class="form-group">
-          <label class="form-label" for="inc_guild">Affected Server Name / Guild ID</label>
-          <input type="text" class="form-input" id="inc_guild" placeholder="e.g. SyncInk Support (1136319484459266100)" />
-        </div>
-
-        <!-- 6. DESCRIPTION & REPRO STEPS -->
-        <div class="form-group">
-          <label class="form-label" for="inc_desc">Incident Description & Steps <span>*</span></label>
-          <textarea class="form-textarea" id="inc_desc" rows="3" placeholder="Explain what happened, what command was executed, and the exact error observed..." required></textarea>
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" class="btn-secondary" id="cancelIncidentBtn">Cancel</button>
-          <button type="submit" class="btn-submit-incident" id="submitIncidentBtn">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Submit Incident Report
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <!-- SUCCESS VIEW -->
-    <div class="modal-success-screen" id="incidentSuccessView">
-      <div class="success-icon-wrap">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-      </div>
-      <h3 class="success-title">Incident Dispatched</h3>
-      <p class="success-desc">
-        Your incident report has been submitted. Our developers have been notified and will look into it.
-      </p>
-      <button type="button" class="btn-secondary" id="closeSuccessBtn">Close</button>
-    </div>
-
-  </div>
+<h2 class="modal-title">Сообщить об инциденте</h2>
+<p class="modal-sub">Отправить отчет о баге или сбое сервиса напрямую разработчикам SyncInk.</p>
+<form id="incidentForm">
+<!-- 1. AFFECTED SERVICE -->
+<div class="form-group">
+<label class="form-label" for="inc_service">Затронутый сервис / узел <span>*</span></label>
+<select class="form-select" id="inc_service" required="">
+<option disabled="" selected="" value="">Выберите затронутый бот или сервис...</option>
+<optgroup label="Operational Services">
+<option value="SyncInk® Ticket (Support System)">SyncInk® Ticket (Система поддержки)</option>
+<option value="SyncInk® Voice (Voice Manager)">SyncInk® Voice (Голосовой менеджер)</option>
+<option value="SyncInk® Security (Internal Shield)">SyncInk® Security (Внутренний щит)</option>
+<option value="Dashboard / Web Gateway">Панель управления / Веб-шлюз</option>
+<option value="Multiple Services / Network Outage">Сбой нескольких сервисов / сети</option>
+</optgroup>
+<optgroup label="Offline / Maintenance (Currently Disabled)">
+<option disabled="" value="SyncInk® Core (Economy &amp; Moderation)">SyncInk® Core — [На обслуживании]</option>
+<option disabled="" value="SyncInk® Radio (Music Node)">SyncInk® Radio — [На обслуживании]</option>
+</optgroup>
+</select>
 </div>
-
+<!-- 2. FAILURE TYPE (Dynamically updated based on service) -->
+<div class="form-group">
+<label class="form-label" for="inc_type">Тип сбоя / Категория <span>*</span></label>
+<select class="form-select" id="inc_type" required="">
+<option disabled="" selected="" value="">Сначала выберите сервис выше...</option>
+</select>
+</div>
+<!-- 3. SEVERITY LEVEL (Individual Highlight Color Per Level) -->
+<div class="form-group">
+<label class="form-label">Уровень серьезности <span>*</span></label>
+<div class="severity-grid">
+<label class="severity-option option-low">
+<input checked="" name="severity" type="radio" value="Low"/>
+<div class="severity-label">
+<div class="sev-header-row">
+<span class="sev-indicator low"></span>
+<span class="sev-name">Низкий</span>
+</div>
+<span class="sev-desc">Мелкий баг / UI</span>
+</div>
+</label>
+<label class="severity-option option-medium">
+<input name="severity" type="radio" value="Medium"/>
+<div class="severity-label">
+<div class="sev-header-row">
+<span class="sev-indicator medium"></span>
+<span class="sev-name">Средний</span>
+</div>
+<span class="sev-desc">Частичная деградация</span>
+</div>
+</label>
+<label class="severity-option option-high">
+<input name="severity" type="radio" value="High"/>
+<div class="severity-label">
+<div class="sev-header-row">
+<span class="sev-indicator high"></span>
+<span class="sev-name">Высокий</span>
+</div>
+<span class="sev-desc">Бот не работает / сбой</span>
+</div>
+</label>
+<label class="severity-option option-critical">
+<input name="severity" type="radio" value="Critical"/>
+<div class="severity-label">
+<div class="sev-header-row">
+<span class="sev-indicator critical"></span>
+<span class="sev-name">Критично</span>
+</div>
+<span class="sev-desc">Безопасность / Сбой</span>
+</div>
+</label>
+</div>
+</div>
+<!-- 4. REPORTER DETAILS: DISCORD USER ID ONLY -->
+<div class="form-group">
+<label class="form-label" for="inc_reporter">Ваш ID пользователя Discord <span>*</span></label>
+<input autocomplete="off" class="form-input" id="inc_reporter" maxlength="20" placeholder="напр. 930306512864280607" required="" type="text"/>
+<!-- Live Verified Discord ID Preview Box (Official Discord Snowflake Validation) -->
+<div class="discord-account-preview" id="discordAccountBox">
+<img alt="Аватар Discord" class="preview-avatar" id="previewAvatar" src=""/>
+<div class="preview-info">
+<div class="preview-name-row">
+<span class="preview-global-name" id="previewGlobalName">Аккаунт Discord</span>
+<span class="preview-handle" id="previewHandle">Snowflake подтвержден</span>
+</div>
+<span class="preview-id-badge" id="previewIdBadge">ID: --</span>
+</div>
+<span class="preview-verified-pill" id="previewVerifiedTag">
+<svg fill="none" height="11" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" width="11"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Действительный ID Discord
+            </span>
+</div>
+<div class="form-hint">Введите ваш 17-20 значный числовой ID пользователя Discord (Кликните правой кнопкой мыши по профилю в Discord → Скопировать ID).</div>
+</div>
+<!-- 5. SERVER / GUILD -->
+<div class="form-group">
+<label class="form-label" for="inc_guild">Имя затронутого сервера / ID гильдии</label>
+<input class="form-input" id="inc_guild" placeholder="напр. Поддержка SyncInk (1136319484459266100)" type="text"/>
+</div>
+<!-- 6. DESCRIPTION & REPRO STEPS -->
+<div class="form-group">
+<label class="form-label" for="inc_desc">Описание инцидента и шаги <span>*</span></label>
+<textarea class="form-textarea" id="inc_desc" placeholder="Объясните, что произошло, какая команда была выполнена и какая точная ошибка наблюдалась..." required="" rows="3"></textarea>
+</div>
+<div class="modal-actions">
+<button class="btn-secondary" id="cancelIncidentBtn" type="button">Отмена</button>
+<button class="btn-submit-incident" id="submitIncidentBtn" type="submit">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="15"><line x1="22" x2="11" y1="2" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            Отправить отчет об инциденте
+          </button>
+</div>
+</form>
+</div>
+<!-- SUCCESS VIEW -->
+<div class="modal-success-screen" id="incidentSuccessView">
+<div class="success-icon-wrap">
+<svg fill="none" height="28" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="28"><path d="M20 6L9 17l-5-5"></path></svg>
+</div>
+<h3 class="success-title">Инцидент отправлен</h3>
+<p class="success-desc">
+        Ваш отчет об инциденте отправлен. Наши разработчики уведомлены и рассмотрят его.
+      </p>
+<button class="btn-secondary" id="closeSuccessBtn" type="button">Закрыть</button>
+</div>
+</div>
+</div>
 <script>
 // =========================================================================
 // PRODUCTION-GRADE DETERMINISTIC STATUS ENGINE
@@ -2325,7 +2270,7 @@ function generateUptimeBars(bot) {
     if (!bot.isOnline && currentDayMs >= closedDateMs) {
       // Show red color for bots that have been offline/closed since July 4th
       stateClass = 'bar-down';
-      statusText = 'Крупный сбой / Offline';
+      statusText = 'Major Outage / Offline';
     } else if (rand > 0.985 && bot.id !== 'security') {
       stateClass = 'bar-degraded';
       statusText = '99.4% Uptime · Minor Shard Restart';
@@ -2407,7 +2352,7 @@ function createBotCard(bot) {
       <!-- 90-DAY UPTIME TIMELINE -->
       <div class="uptime-strip-section">
         <div class="uptime-strip-header">
-          <span>90 дней ago</span>
+          <span>90 days ago</span>
           <span class="uptime-pct-bold">${bot.uptime} uptime</span>
           <span>Today</span>
         </div>
