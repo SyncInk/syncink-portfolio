@@ -1,5 +1,0 @@
-="opacity:0.6;font-size:0.8em;font-weight:600">(в процессе)</span></div><div class="proj-tags"><span class=
-<h2 class="s-heading reveal">Мой <em>процесс</em></h2>
-<h2 class="s-heading reveal">Найти меня <em>везде</em></h2>
-<span>Активность в прямом эфире</span>
-<span>Активность на GitHub</span>

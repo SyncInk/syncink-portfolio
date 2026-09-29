@@ -1,3 +1,0 @@
--bname" style="opacity: 0.7;">SyncInk© Радио</span>
-<span class="bot-bname">Билет SyncInk©</span>
-<span class="bot-bname">SyncInk© Голос</span>
