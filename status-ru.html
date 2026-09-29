@@ -1740,8 +1740,8 @@ footer{
 <nav>
 <div class="nav-left">
 <a class="nav-brand" href="ru.html">
-<div class="nav-brand-icon">SI</div>
-<span>SyncInk</span>
+<div class="nav-brand-icon">СИ</div>
+<span>СинкИнк</span>
 </a>
 <span class="nav-status-badge">Статус</span>
 </div>
@@ -1811,10 +1811,10 @@ footer{
 <div class="metric-card">
 <div class="metric-label">
 <span>Время работы</span>
-<span class="badge-up">90D</span>
+<span class="badge-up">90Д</span>
 </div>
-<div class="metric-val">99.98%</div>
-<div class="metric-sub"><span class="badge-up">+0.01%</span> по сравнению с прошлым месяцем</div>
+<div class="metric-val">99,98%</div>
+<div class="metric-sub"><span class="badge-up">+0,01%</span> по сравнению с прошлым месяцем</div>
 </div>
 <div class="metric-card">
 <div class="metric-label">
@@ -1843,7 +1843,7 @@ footer{
 <div class="metric-label">
 <span>Всего пользователей</span>
 </div>
-<div class="metric-val">184.5K</div>
+<div class="metric-val">184,5 тыс.</div>
 <div class="metric-sub">Активное сообщество</div>
 </div>
 <div class="metric-card">
@@ -1934,7 +1934,7 @@ footer{
 <ul class="footer-links">
 <li><a href="ru.html">Портфолио</a></li>
 <li><a href="bots.html">Боты</a></li>
-<li><a href="https://discord.gg/rB6gNZaK9u" target="_blank">Discord</a></li>
+<li><a href="https://discord.gg/rB6gNZaK9u" target="_blank">Раздор</a></li>
 <li><a href="https://github.com/SyncInk/syncink-portfolio" target="_blank">GitHub</a></li>
 </ul>
 </div>
@@ -1962,11 +1962,11 @@ footer{
 <select class="form-select" id="inc_service" required="">
 <option disabled="" selected="" value="">Выберите затронутый бот или сервис...</option>
 <optgroup label="Operational Services">
-<option value="SyncInk® Ticket (Support System)">SyncInk® Ticket (Система поддержки)</option>
-<option value="SyncInk® Voice (Voice Manager)">SyncInk® Voice (Голосовой менеджер)</option>
-<option value="SyncInk® Security (Internal Shield)">SyncInk® Security (Внутренний щит)</option>
-<option value="Dashboard / Web Gateway">Панель управления / Веб-шлюз</option>
-<option value="Multiple Services / Network Outage">Сбой нескольких сервисов / сети</option>
+<option value="SyncInk Ticket® (система поддержки)">SyncInk® Ticket (Система поддержки)</option>
+<option value="SyncInk® Voice (Голосовой менеджер)">SyncInk® Voice (Голосовой менеджер)</option>
+<option value="SyncInk® Security (внутренний экран)">SyncInk® Security (Внутренний щит)</option>
+<option value="Панель управления/веб-шлюз">Панель управления / Веб-шлюз</option>
+<option value="Несколько служб / сбой сети">Сбой нескольких сервисов / сети</option>
 </optgroup>
 <optgroup label="Offline / Maintenance (Currently Disabled)">
 <option disabled="" value="SyncInk® Core (Economy &amp; Moderation)">SyncInk® Core — [На обслуживании]</option>
@@ -1986,7 +1986,7 @@ footer{
 <label class="form-label">Уровень серьезности <span>*</span></label>
 <div class="severity-grid">
 <label class="severity-option option-low">
-<input checked="" name="severity" type="radio" value="Low"/>
+<input checked="" name="severity" type="radio" value="Низкий"/>
 <div class="severity-label">
 <div class="sev-header-row">
 <span class="sev-indicator low"></span>
@@ -1996,7 +1996,7 @@ footer{
 </div>
 </label>
 <label class="severity-option option-medium">
-<input name="severity" type="radio" value="Medium"/>
+<input name="severity" type="radio" value="Середина"/>
 <div class="severity-label">
 <div class="sev-header-row">
 <span class="sev-indicator medium"></span>
@@ -2006,7 +2006,7 @@ footer{
 </div>
 </label>
 <label class="severity-option option-high">
-<input name="severity" type="radio" value="High"/>
+<input name="severity" type="radio" value="Высокий"/>
 <div class="severity-label">
 <div class="sev-header-row">
 <span class="sev-indicator high"></span>
@@ -2016,7 +2016,7 @@ footer{
 </div>
 </label>
 <label class="severity-option option-critical">
-<input name="severity" type="radio" value="Critical"/>
+<input name="severity" type="radio" value="Критический"/>
 <div class="severity-label">
 <div class="sev-header-row">
 <span class="sev-indicator critical"></span>
@@ -2039,7 +2039,7 @@ footer{
 <span class="preview-global-name" id="previewGlobalName">Аккаунт Discord</span>
 <span class="preview-handle" id="previewHandle">Snowflake подтвержден</span>
 </div>
-<span class="preview-id-badge" id="previewIdBadge">ID: --</span>
+<span class="preview-id-badge" id="previewIdBadge">ИДЕНТИФИКАТОР: --</span>
 </div>
 <span class="preview-verified-pill" id="previewVerifiedTag">
 <svg fill="none" height="11" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" width="11"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -2162,7 +2162,7 @@ const BOT_REGISTRY = [
 
 // Service Failure Map for dynamic option generation
 const SERVICE_FAILURE_MAP = {
-  'SyncInk® Ticket (Support System)': [
+  'SyncInk Ticket® (система поддержки)': [
     'Ticket Thread Creation Failed',
     'Transcript Auto-Export Timeout / Error',
     'Auto-Claim & Mention-Claim Failure',
@@ -2170,7 +2170,7 @@ const SERVICE_FAILURE_MAP = {
     'Staff Permission Hierarchy Override Bug',
     'Other Ticket System Glitch'
   ],
-  'SyncInk® Voice (Voice Manager)': [
+  'SyncInk® Voice (Голосовой менеджер)': [
     'Dynamic Voice Channel Creation Failed',
     'Voice Bitrate Stutter / Connection Drops',
     'User Limit / Custom Naming Pattern Error',
@@ -2178,7 +2178,7 @@ const SERVICE_FAILURE_MAP = {
     'Voice Activity Telemetry Error',
     'Other Voice Management Issue'
   ],
-  'SyncInk® Security (Internal Shield)': [
+  'SyncInk® Security (внутренний экран)': [
     'Anti-Nuke Trigger False Positive',
     'Server Lockdown / Quarantine Mode Failure',
     'Role & Channel Permission Lock Bypass',
@@ -2186,14 +2186,14 @@ const SERVICE_FAILURE_MAP = {
     'Security Policy Enforcement Bug',
     'Other Security Shield Glitch'
   ],
-  'Dashboard / Web Gateway': [
+  'Панель управления/веб-шлюз': [
     'Dashboard Discord OAuth Login Failed',
     'Bot Settings Saving / Sync Timeout',
     'Transcript Web Viewer 404 / 500 Error',
     'SSL / Web Certificate Connection Error',
     'Other Web Platform Issue'
   ],
-  'Multiple Services / Network Outage': [
+  'Несколько служб / сбой сети': [
     'Multiple Bots Unresponsive Simultaneously',
     'API Gateway Latency Spike (>500ms)',
     'Global Discord Gateway Disconnect',
@@ -2284,7 +2284,7 @@ function generateUptimeBars(bot) {
 // Create Card HTML
 function createBotCard(bot) {
   const statusPillClass = bot.isOnline ? 'operational' : 'maintenance';
-  const statusText = bot.isOnline ? 'Operational' : 'Maintenance';
+  const statusText = bot.isOnline ? 'Оперативный' : 'Maintenance';
   const dotColor = bot.isOnline ? 'dot-green' : 'dot-amber';
 
   return `
@@ -2292,7 +2292,7 @@ function createBotCard(bot) {
       <!-- TOP: IDENTITY & STATUS -->
       <div class="card-header">
         <div class="card-identity">
-          <img src="${bot.avatar}" alt="${bot.name}" class="bot-avatar" onerror="this.outerHTML='<div class=\\'bot-avatar-fallback\\'>SI</div>'" />
+          <img src="${bot.avatar}" alt="${bot.name}" class="bot-avatar" onerror="this.outerHTML='<div class=\\'bot-avatar-fallback\\'>СИ</div>'" />
           <div class="bot-names">
             <span class="bot-category-tag">${bot.category}</span>
             <div class="bot-title">
@@ -2349,7 +2349,7 @@ function createBotCard(bot) {
         </div>
       </div>
 
-      <!-- 90-DAY UPTIME TIMELINE -->
+      <!-- 90-ДЕНЬ UPTIME TIMELINE -->
       <div class="uptime-strip-section">
         <div class="uptime-strip-header">
           <span>90 days ago</span>
@@ -2722,9 +2722,9 @@ function renderUserIncidents() {
 
   if (stored.length === 0) {
     container.innerHTML = '';
-    if (badgeVal) badgeVal.textContent = '0 Active';
-    if (badgeSub) badgeSub.textContent = '1 Scheduled upgrade';
-    if (badgePill) { badgePill.textContent = 'LOG'; badgePill.className = 'badge-warn'; }
+    if (badgeVal) badgeVal.textContent = '0 Активный';
+    if (badgeSub) badgeSub.textContent = '1 Плановое обновление';
+    if (badgePill) { badgePill.textContent = 'БРЕВНО'; badgePill.className = 'badge-warn'; }
     return;
   }
 
@@ -2738,7 +2738,7 @@ function renderUserIncidents() {
       if (badgePill) { badgePill.textContent = 'REVIEW'; badgePill.className = 'badge-neutral'; }
     } else {
       badgeSub.textContent = 'All Reports Handled';
-      if (badgePill) { badgePill.textContent = 'LOG'; badgePill.className = 'badge-up'; }
+      if (badgePill) { badgePill.textContent = 'БРЕВНО'; badgePill.className = 'badge-up'; }
     }
   }
 
@@ -3043,7 +3043,7 @@ function initIncidentModal() {
     successView.style.display = 'none';
     form.reset();
     accountBox.classList.remove('active');
-    failureSelect.innerHTML = '<option value="" disabled selected>Select a service above first...</option>';
+    failureSelect.innerHTML = '<option value="" disabled selected>Сначала выберите услугу выше...</option>';
     submitBtn.disabled = false;
     submitBtn.innerHTML = `
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -3080,7 +3080,7 @@ function initIncidentModal() {
 
     const service = document.getElementById('inc_service').value;
     const severityRadio = document.querySelector('input[name="severity"]:checked');
-    const severity = severityRadio ? severityRadio.value : 'Low';
+    const severity = severityRadio ? severityRadio.value : 'Низкий';
     const failureType = document.getElementById('inc_type').value;
     const reporter = document.getElementById('inc_reporter').value.trim();
     const guild = document.getElementById('inc_guild').value.trim() || 'Not specified';
@@ -3105,10 +3105,10 @@ function initIncidentModal() {
 
     // Severity Colors
     const colorMap = {
-      'Low': 1096065,      // #10B981 (Green)
-      'Medium': 16096779,  // #F59E0B (Amber)
-      'High': 16347926,    // #F97316 (Orange)
-      'Critical': 15680324 // #EF4444 (Red)
+      'Низкий': 1096065,      // #10B981 (Green)
+      'Середина': 16096779,  // #F59E0B (Amber)
+      'Высокий': 16347926,    // #F97316 (Orange)
+      'Критический': 15680324 // #EF4444 (Red)
     };
 
     const embedColor = colorMap[severity] || 16096779;
@@ -3119,7 +3119,7 @@ function initIncidentModal() {
     const payload = {
       username: "SyncInk Status Bot",
       avatar_url: "https://syncink.github.io/syncink-portfolio/SyncInk%20Server%20Logo.png",
-      content: severity === 'Critical' || severity === 'High' ? "<a:alert:1520914681231839313> **[INCIDENT REPORT] High priority issue submitted!**" : undefined,
+      content: severity === 'Критический' || severity === 'Высокий' ? "<a:alert:1520914681231839313> **[INCIDENT REPORT] High priority issue submitted!**" : undefined,
       embeds: [
         {
           title: `<a:alert:1520914681231839313> Incident Report: ${service}`,
