@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -463,7 +463,7 @@ nav{
 .btn-gh{background:var(--surface);color:var(--text);border:1px solid var(--border);}
 .btn-gh:hover{border-color:var(--text);background:rgba(255,255,255,0.05);transform:translateY(-2px);}
 
-/* hero right â€” profile card */
+/* hero right — profile card */
 .hero-card{
   background:linear-gradient(to bottom, var(--discord-theme-1, var(--card)), var(--discord-theme-2, var(--card)));
   border:var(--glass-border);
@@ -552,23 +552,23 @@ nav{
 /* Discord Nitro Nameplate Effects */
 /* effect_id 0 = Solid (default, no extra styles) */
 .card-name[data-effect="1"] {
-  /* Gradient â€” just the animated gradient, handled by .animated-name */
+  /* Gradient — just the animated gradient, handled by .animated-name */
 }
 .card-name[data-effect="2"] {
-  /* Neon â€” exact Discord subtle bloom */
+  /* Neon — exact Discord subtle bloom */
   filter: drop-shadow(0 0 4px var(--discord-name-color-1));
 }
 .card-name[data-effect="3"] {
-  /* Toon â€” solid black outline with offset shadow */
+  /* Toon — solid black outline with offset shadow */
   paint-order: stroke fill;
   -webkit-text-stroke: 2px #000;
   filter: drop-shadow(2px 2px 0 #000);
 }
 .card-name[data-effect="4"] {
-  /* Pop â€” layered 3D block shadow */
+  /* Pop — layered 3D block shadow */
   filter: drop-shadow(1px 1px 0 #000) drop-shadow(2px 2px 0 #000) drop-shadow(3px 3px 0 rgba(0,0,0,0.6));
 }
-/* Discord Nitro Nameplate Fonts â€” using actual Discord font CDN */
+/* Discord Nitro Nameplate Fonts — using actual Discord font CDN */
 /* font_id 0 = gg sans (default) */
 .card-name[data-font="1"] { font-family: 'Noto Sans', sans-serif; font-weight: 800; } /* gg sans bold variant */
 .card-name[data-font="2"] { font-family: 'Sakura', cursive; font-weight: 400; } /* sakura */
@@ -936,7 +936,7 @@ nav{
   font-family:'JetBrains Mono',monospace;font-size:0.8rem;
   color:var(--muted);flex-shrink:0;display:flex;align-items:center;gap:2rem;
 }
-.marquee-item::after{content:'â—†';color:var(--blue);font-size:0.6rem;}
+.marquee-item::after{content:'◆';color:var(--blue);font-size:0.6rem;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
 /* ============ SECTION BASE ============ */
@@ -965,7 +965,7 @@ section{position:relative;z-index:10;}
 .about-text a{color:var(--blue2);border-bottom:1px solid rgba(114,137,218,0.3);transition:border-color 0.2s;}
 .about-text a:hover{border-color:var(--blue2);}
 .about-cta{margin-top:1.5rem;display:flex;gap:0.8rem;flex-wrap:wrap;}
-/* Interest cards â€” reference style */
+/* Interest cards — reference style */
 .interests{
   display:grid;grid-template-columns:1fr 1fr;
   gap:1.25rem;margin-top:1rem;
@@ -1486,7 +1486,7 @@ section{position:relative;z-index:10;}
 .plat-tag.apple{--brand:#FA243C;--brand-rgb:250,36,60;}
 .plat-tag.deezer{--brand:#FEAA2D;--brand-rgb:254,170,45;}
 .plat-tag.tidal{--brand:#F5FAFF;--brand-rgb:124,205,255;}
-/* cmd-grid â€” outer card, 2Ã—2 internal dividers */
+/* cmd-grid — outer card, 2×2 internal dividers */
 .cmd-grid{
   display:grid;grid-template-columns:repeat(2,1fr);
   gap:0;position:relative;z-index:2;
@@ -2480,24 +2480,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--mu
   100%{opacity:1;transform:translateX(0);}
 }
 </style>
-
-<!-- Google Translate Widget (Hidden) -->
-<style>
-#google_translate_element { display: none !important; }
-.goog-te-banner-frame { display: none !important; }
-body { top: 0 !important; }
-.goog-tooltip { display: none !important; }
-.goog-tooltip:hover { display: none !important; }
-.goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
-</style>
-<div id="google_translate_element"></div>
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ru,en', autoDisplay: false}, 'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </head>
 <body>
 
@@ -2555,12 +2537,12 @@ function googleTranslateElementInit() {
 </aside>
 <section class="sound-settings" aria-label="Display and Sound Settings">
   <div class="sound-settings-head">
-    <span class="sound-glyph">ðŸ›°ï¸</span>
+    <span class="sound-glyph">🛰️</span>
     <span class="sound-head-text">Display</span>
   </div>
   <div class="sound-card">
     <div class="sound-card-copy">
-      <div class="sound-card-icon" aria-hidden="true">ðŸ”Š</div>
+      <div class="sound-card-icon" aria-hidden="true">🔊</div>
       <div class="sound-card-text">
         <div class="sound-card-title">Sound Effects</div>
         <div class="sound-card-sub" id="soundStatus">Play UI sounds and feedback.</div>
@@ -2575,7 +2557,7 @@ function googleTranslateElementInit() {
 
 <div class="modal-overlay" id="cModal">
   <div class="modal">
-    <button class="modal-close" id="mClose" aria-label="Close">âœ•</button>
+    <button class="modal-close" id="mClose" aria-label="Close">✕</button>
     <div class="modal-head">
       <div class="modal-kicker">Direct Contact</div>
       <div class="modal-title">Let's <em>connect</em></div>
@@ -2584,7 +2566,7 @@ function googleTranslateElementInit() {
     <div id="fWrap">
       <div class="fg"><label class="fl" for="fn">Your Name <span class="char-counter" id="nameCounter">0/20</span></label><input class="fi" id="fn" type="text" placeholder="Your name" autocomplete="off" maxlength="20"/></div>
       <div class="fg"><label class="fl" for="fe">Email</label><input class="fi" id="fe" type="email" placeholder="you@example.com" autocomplete="off"/></div>
-      <div class="fg"><label class="fl" for="fm">Message <span class="char-counter" id="msgCounter">0/4000</span></label><textarea class="fta" id="fm" placeholder="Tell me about your idea or projectâ€¦" maxlength="4000"></textarea></div>
+      <div class="fg"><label class="fl" for="fm">Message <span class="char-counter" id="msgCounter">0/4000</span></label><textarea class="fta" id="fm" placeholder="Tell me about your idea or project…" maxlength="4000"></textarea></div>
       <div class="fg attachment-group">
         <label class="fl">Attachments (up to 4 files, 25MB total)</label>
         <div class="file-upload-box" id="fileUploadBox">
@@ -2598,7 +2580,7 @@ function googleTranslateElementInit() {
       </div>
       <button class="btn btn-primary fsub" id="fSubmit"><span>Send Message</span></button>
     </div>
-    <div class="form-success" id="fDone">âœ¦ Message sent successfully! I'll read it soon. ðŸŽ‰</div>
+    <div class="form-success" id="fDone">✦ Message sent successfully! I'll read it soon. 🎉</div>
   </div>
 </div>
 
@@ -2624,7 +2606,7 @@ function googleTranslateElementInit() {
     <li><a href="#skills" class="nav-link"><span class="nav-bullet" aria-hidden="true">&#9679;</span> skills</a></li>
     <li><a href="#work" class="nav-link"><span class="nav-bullet" aria-hidden="true">&#9679;</span> work</a></li>
     <li><a href="#bots" class="nav-link"><span class="nav-bullet" aria-hidden="true">&#9679;</span> bots</a></li>
-    <li><a href="bots" class="nav-link" style="color:var(--cyan);" title="Full Bots Page"><span class="nav-bullet" aria-hidden="true" style="color:var(--cyan)">&#9679;</span> bots page â†—</a></li>
+    <li><a href="bots" class="nav-link" style="color:var(--cyan);" title="Full Bots Page"><span class="nav-bullet" aria-hidden="true" style="color:var(--cyan)">&#9679;</span> bots page ↗</a></li>
     <li><a href="#contact" class="nav-link"><span class="nav-bullet" aria-hidden="true">&#9679;</span> contact</a></li>
     <li>
       <a href="https://discord.com/users/sync_ink_001" target="_blank" rel="noopener" class="nav-dc">
@@ -2643,11 +2625,7 @@ function googleTranslateElementInit() {
       </svg>
       <div class="status-dot" class="status-dot global-status-dot"></div>
     </a>
-    
-      <button class="theme-toggle lang-toggle-btn" id="langToggleBtn" aria-label="Toggle language" title="Translate to Russian">
-        <span id="langToggleText" style="font-family:'JetBrains Mono', monospace; font-size:0.8rem; font-weight:700;">RU</span>
-      </button>
-      <button class="theme-toggle" id="settingsBtn" aria-label="Open display settings" title="Display settings" aria-haspopup="dialog" aria-expanded="false">
+    <button class="theme-toggle" id="settingsBtn" aria-label="Open display settings" title="Display settings" aria-haspopup="dialog" aria-expanded="false">
       <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="3"></circle>
         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -2662,9 +2640,9 @@ function googleTranslateElementInit() {
 <section class="hero" id="home">
   <div class="hero-inner container">
     <div class="hero-left">
-      <div class="hero-badge"><span class="badge-dot"></span>Open to collabs â€” 2026-27</div>
+      <div class="hero-badge"><span class="badge-dot"></span>Open to collabs — 2026-27</div>
       <h1 class="hero-name">Sync<br/>Ink</h1>
-      <p class="hero-sub"><span>Developer</span> Â· <span>Gamer</span> Â· <span>Cat Person</span> ðŸ±</p>
+      <p class="hero-sub"><span>Developer</span> · <span>Gamer</span> · <span>Cat Person</span> 🐱</p>
       <p class="hero-desc">
         Passionate <strong>developer</strong>. Coding for 5+ years, currently building <strong>crazy games</strong>, experimenting with creative tech, and learning new languages for fun. I turn wild ideas into real things.
       </p>
@@ -2713,7 +2691,7 @@ function googleTranslateElementInit() {
       <div class="card-tags">
         <span class="ctag blue" style="display:inline-flex;align-items:center;"><img class="ctag-logo" src="data:image/png;base64,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" alt="">Developer</span>
         <span class="ctag green">Gamer</span>
-        <span class="ctag pink">Cat Lover ðŸ±</span>
+        <span class="ctag pink">Cat Lover 🐱</span>
         <span class="ctag blue" style="display:inline-flex;align-items:center;"><img class="ctag-logo gear" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAAC+klEQVR42u1Y2Y7iMBD053KTg/sQ/7gswwMSRwIMN4RTiKNHFY2zjnE0CWJGWmkeWlFI3F3urq52YOv1mkU1InragnyyXyCvBNJoNIgx5pqu67TZbH4eyOFwYPl83gMCA7AfB+Jst8wwTR+QUrFIp+PxIfj9fnftKSCLxcLdcTKZpE6nQ+PxmM3nc9btdimTyfgAyKbpOsHH+Xxmk8mEpdNp0jTNLV0kIMvl8iHtrzDdMMiybQoNBNnI5XKhnCM7X2XIy5Sm0XA4pEilGY1GhJQGOcQ7t9vNx4XL5eKWL5vNKtdVKhWazWbROIIFpkTGWCxGvV6POPGCDICq1apvrZnL0W6/j07W6XTKoA3cUTwep36/T6KOnE4nViwW/wUzTdput+6z6/XKarXaQ3tHBiIGgOFepayO4/gAgy/gGMqGrimXyz4f7+/vLBJZxa4BV0SSyaXY7XY+coMj/L39fu/zJW7IB0QWHqRbJqqsmCpH2ClILBIaGoISG4bxMApkovtvVO2ZzdLqc3dbx2Gb9ZqtVqsvuyyRSNBgMCBVmblFApLVNA8IMmPqOo1smyB6IhCUTm53XobXABHqLU5bcAKaoeLUt2QEXYBS4Dmuooomkkn622q5QeV1qVTKI7hlWcp3AoHA+KAS1ZGTFaO/UCiEknOAHFiW1yEQQggihA2TWxZFpTKC0fV63XOK4ADBWzXsbMHktgQwtm17gidboEyDjGJAsYWhsFDaZ8AExQt8AD0plUpK0vJZBEDtdpv+NJvUbDYJOxbXqMBEBqIaXACj0hDxHAOxEmXdA5NKuWeRyEDABXn6ik5BRFlL1p9it1itWCEgM7wDQwFBNuTJGdgdiQS13t7cK7QEmgKACKgqE89qKCBy10QxCB3AIBh4pDrpiWodiiM8KxhaqP3xeGQ4REMjwnQJ55OKM/AZCoj8GSAadjwcjdydyWmXzxucR6oy+YA8+10jnzO41qiA4zdkVDwOwL7lk1OcSUG8A3gOBiX8/TfgvwDyAXeA6oRBGJsAAAAAAElFTkSuQmCC" alt="">Game Dev</span>
         <span class="ctag">Class 11</span>
         <span class="ctag green">Polyglot</span>
@@ -2738,7 +2716,7 @@ function googleTranslateElementInit() {
     <span class="marquee-item">JavaScript</span>
     <span class="marquee-item">Game Dev</span>
     <span class="marquee-item">Python</span>
-    <span class="marquee-item">Cat Lover ðŸ±</span>
+    <span class="marquee-item">Cat Lover 🐱</span>
     <span class="marquee-item">Web Dev</span>
     <span class="marquee-item">Creative Coding</span>
     <span class="marquee-item">Gamer</span>
@@ -2746,7 +2724,7 @@ function googleTranslateElementInit() {
     <span class="marquee-item">JavaScript</span>
     <span class="marquee-item">Game Dev</span>
     <span class="marquee-item">Python</span>
-    <span class="marquee-item">Cat Lover ðŸ±</span>
+    <span class="marquee-item">Cat Lover 🐱</span>
     <span class="marquee-item">Web Dev</span>
     <span class="marquee-item">Creative Coding</span>
     <span class="marquee-item">Gamer</span>
@@ -2760,12 +2738,12 @@ function googleTranslateElementInit() {
       <div class="reveal-l">
         <div class="s-label">About Me</div>
         <h2 class="s-heading">A developer who <em>builds</em> things</h2>
-        <p class="about-text">Hey! I'm <strong>Sync Ink</strong> â€” a passionate developer. I've been coding for over <strong>5 years</strong>, which means I started when most kids were still figuring out Minecraft redstone (I was doing that too, honestly).</p>
-        <p class="about-text">Right now I'm deep into <strong>game development</strong> â€” building some genuinely crazy projects I can't wait to show the world. I love pushing what's possible in the browser and beyond.</p>
-        <p class="about-text">Outside of code, I'm a <strong>languages nerd</strong> â€” I enjoy picking up new programming languages and spoken ones too. I'm also a hardcore gamer and a certified <strong>cat person ðŸ±</strong>. If you have a cat, we're already friends.</p>
+        <p class="about-text">Hey! I'm <strong>Sync Ink</strong> — a passionate developer. I've been coding for over <strong>5 years</strong>, which means I started when most kids were still figuring out Minecraft redstone (I was doing that too, honestly).</p>
+        <p class="about-text">Right now I'm deep into <strong>game development</strong> — building some genuinely crazy projects I can't wait to show the world. I love pushing what's possible in the browser and beyond.</p>
+        <p class="about-text">Outside of code, I'm a <strong>languages nerd</strong> — I enjoy picking up new programming languages and spoken ones too. I'm also a hardcore gamer and a certified <strong>cat person 🐱</strong>. If you have a cat, we're already friends.</p>
         <div class="about-cta">
           <button class="btn btn-primary" id="openContact2">Work With Me</button>
-          <a href="https://discord.com/users/sync_ink_001" target="_blank" rel="noopener" class="btn btn-outline">Discord â†—</a>
+          <a href="https://discord.com/users/sync_ink_001" target="_blank" rel="noopener" class="btn btn-outline">Discord ↗</a>
         </div>
       </div>
       <div class="reveal-r">
@@ -2817,17 +2795,17 @@ function googleTranslateElementInit() {
     <h2 class="s-heading reveal">What I <em>know</em></h2>
     <div class="skills-grid reveal">
       <!-- JavaScript / TS: real JS logo shape -->
-      <div class="sk-card" style="--ac:234,179,8"><span class="sk-icon-wrap"><svg viewBox="0 0 128 128" fill="none"><path fill="#f7df1e" d="M0 0h128v128H0z"/><path d="M67.3 96.6c-3.1 2.3-7.5 4.1-13.4 4.1-8.5 0-14.5-4-17-9.5l10.4-6.3c1.3 3.1 4.2 5.6 7.4 5.6 3 0 5.1-1.5 5.1-3.6 0-2.4-2.1-3.4-6.6-5.2-7.5-2.9-14-6.4-14-15.5 0-7.8 6-13.4 15.1-13.4 7.2 0 12.3 2.7 14.8 7.3l-9.8 6.4c-1.3-2.3-3.7-3.8-5.9-3.8-2.3 0-3.9 1.3-3.9 3.2 0 2.2 1.7 3.1 6.1 4.9 8.3 3.3 14.5 6.9 14.5 15.8-.1 8-6.3 14-16.8 14-2.8 0-5.7-.6-8-2v-2zM122.9 96c-3.4 3-8.8 4.7-15.1 4.7-10.4 0-18.1-6-20.9-14l11.1-6.1c1.6 4.3 5.4 8.7 10.5 8.7 4.1 0 7.3-1.8 7.3-4.8 0-3.3-2.7-4.6-8.9-7-9.9-3.8-18.7-8.8-18.7-20.8 0-10.4 7.9-17.9 20-17.9 9.6 0 16.3 3.5 19.5 9.7l-10.6 6.5c-1.7-3.1-4.9-5-8-5-3.1 0-5.2 1.7-5.2 4 0 3 2.3 4.1 8.1 6.6 11.2 4.4 19.4 9.8 19.4 21 0 10.1-6.7 17.5-17.3 18.4z" fill="#000"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 128 128" aria-hidden="true" fill="rgba(234,179,8,1)"><path d="M67.3 96.6c-3.1 2.3-7.5 4.1-13.4 4.1-8.5 0-14.5-4-17-9.5l10.4-6.3c1.3 3.1 4.2 5.6 7.4 5.6 3 0 5.1-1.5 5.1-3.6 0-2.4-2.1-3.4-6.6-5.2-7.5-2.9-14-6.4-14-15.5 0-7.8 6-13.4 15.1-13.4 7.2 0 12.3 2.7 14.8 7.3l-9.8 6.4c-1.3-2.3-3.7-3.8-5.9-3.8-2.3 0-3.9 1.3-3.9 3.2 0 2.2 1.7 3.1 6.1 4.9 8.3 3.3 14.5 6.9 14.5 15.8-.1 8-6.3 14-16.8 14-2.8 0-5.7-.6-8-2v-2zM122.9 96c-3.4 3-8.8 4.7-15.1 4.7-10.4 0-18.1-6-20.9-14l11.1-6.1c1.6 4.3 5.4 8.7 10.5 8.7 4.1 0 7.3-1.8 7.3-4.8 0-3.3-2.7-4.6-8.9-7-9.9-3.8-18.7-8.8-18.7-20.8 0-10.4 7.9-17.9 20-17.9 9.6 0 16.3 3.5 19.5 9.7l-10.6 6.5c-1.7-3.1-4.9-5-8-5-3.1 0-5.2 1.7-5.2 4 0 3 2.3 4.1 8.1 6.6 11.2 4.4 19.4 9.8 19.4 21 0 10.1-6.7 17.5-17.3 18.4z"/></svg><div class="sk-name">JavaScript / TS</div><p class="sk-desc">5 years deep. From vanilla DOM to modern frameworks â€” JS is my first language.</p></div>
+      <div class="sk-card" style="--ac:234,179,8"><span class="sk-icon-wrap"><svg viewBox="0 0 128 128" fill="none"><path fill="#f7df1e" d="M0 0h128v128H0z"/><path d="M67.3 96.6c-3.1 2.3-7.5 4.1-13.4 4.1-8.5 0-14.5-4-17-9.5l10.4-6.3c1.3 3.1 4.2 5.6 7.4 5.6 3 0 5.1-1.5 5.1-3.6 0-2.4-2.1-3.4-6.6-5.2-7.5-2.9-14-6.4-14-15.5 0-7.8 6-13.4 15.1-13.4 7.2 0 12.3 2.7 14.8 7.3l-9.8 6.4c-1.3-2.3-3.7-3.8-5.9-3.8-2.3 0-3.9 1.3-3.9 3.2 0 2.2 1.7 3.1 6.1 4.9 8.3 3.3 14.5 6.9 14.5 15.8-.1 8-6.3 14-16.8 14-2.8 0-5.7-.6-8-2v-2zM122.9 96c-3.4 3-8.8 4.7-15.1 4.7-10.4 0-18.1-6-20.9-14l11.1-6.1c1.6 4.3 5.4 8.7 10.5 8.7 4.1 0 7.3-1.8 7.3-4.8 0-3.3-2.7-4.6-8.9-7-9.9-3.8-18.7-8.8-18.7-20.8 0-10.4 7.9-17.9 20-17.9 9.6 0 16.3 3.5 19.5 9.7l-10.6 6.5c-1.7-3.1-4.9-5-8-5-3.1 0-5.2 1.7-5.2 4 0 3 2.3 4.1 8.1 6.6 11.2 4.4 19.4 9.8 19.4 21 0 10.1-6.7 17.5-17.3 18.4z" fill="#000"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 128 128" aria-hidden="true" fill="rgba(234,179,8,1)"><path d="M67.3 96.6c-3.1 2.3-7.5 4.1-13.4 4.1-8.5 0-14.5-4-17-9.5l10.4-6.3c1.3 3.1 4.2 5.6 7.4 5.6 3 0 5.1-1.5 5.1-3.6 0-2.4-2.1-3.4-6.6-5.2-7.5-2.9-14-6.4-14-15.5 0-7.8 6-13.4 15.1-13.4 7.2 0 12.3 2.7 14.8 7.3l-9.8 6.4c-1.3-2.3-3.7-3.8-5.9-3.8-2.3 0-3.9 1.3-3.9 3.2 0 2.2 1.7 3.1 6.1 4.9 8.3 3.3 14.5 6.9 14.5 15.8-.1 8-6.3 14-16.8 14-2.8 0-5.7-.6-8-2v-2zM122.9 96c-3.4 3-8.8 4.7-15.1 4.7-10.4 0-18.1-6-20.9-14l11.1-6.1c1.6 4.3 5.4 8.7 10.5 8.7 4.1 0 7.3-1.8 7.3-4.8 0-3.3-2.7-4.6-8.9-7-9.9-3.8-18.7-8.8-18.7-20.8 0-10.4 7.9-17.9 20-17.9 9.6 0 16.3 3.5 19.5 9.7l-10.6 6.5c-1.7-3.1-4.9-5-8-5-3.1 0-5.2 1.7-5.2 4 0 3 2.3 4.1 8.1 6.6 11.2 4.4 19.4 9.8 19.4 21 0 10.1-6.7 17.5-17.3 18.4z"/></svg><div class="sk-name">JavaScript / TS</div><p class="sk-desc">5 years deep. From vanilla DOM to modern frameworks — JS is my first language.</p></div>
       <!-- Game Dev: joystick icon -->
       <div class="sk-card" style="--ac:124,58,237"><span class="sk-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 263"><path d="M166.9 131.2L212.8 52l22.2 79.2-22.2 79.3-46-79.3zm-22.4 13l46 79.2-80-20.5L52.6 144h91.8zM190.4 39l-45.9 79.3H52.7l57.7-58.8 80-20.5zm65.5 65.2L228 0 123.4 28l-15.5 27.2-31.4-.2L0 131.2l76.5 76.3 31.4-.2 15.5 27.2 104.5 27.9 28-104.2-15.9-27 16-27z" fill="#fff"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 256 263" fill="rgba(124,58,237,1)" aria-hidden="true"><path d="M166.9 131.2L212.8 52l22.2 79.2-22.2 79.3-46-79.3zm-22.4 13l46 79.2-80-20.5L52.6 144h91.8zM190.4 39l-45.9 79.3H52.7l57.7-58.8 80-20.5zm65.5 65.2L228 0 123.4 28l-15.5 27.2-31.4-.2L0 131.2l76.5 76.3 31.4-.2 15.5 27.2 104.5 27.9 28-104.2-15.9-27 16-27z"/></svg><div class="sk-name">Game Development</div><p class="sk-desc">Building original games with custom engines, physics and wild mechanics.</p></div>
       <!-- Web Dev: layers/stack icon -->
-      <div class="sk-card" style="--ac:14,165,233"><span class="sk-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348"><circle cx="0" cy="0" r="2.05" fill="#61dafb"/><g stroke="#61dafb" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg></span><svg class="sk-wm" width="90" height="90" viewBox="-11.5 -10.23174 23 20.46348" aria-hidden="true"><circle cx="0" cy="0" r="2.05" fill="#61dafb"/><g stroke="#61dafb" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg><div class="sk-name">Web Development</div><p class="sk-desc">Full-stack web dev â€” React, Node, clean frontends, solid backends.</p></div>
+      <div class="sk-card" style="--ac:14,165,233"><span class="sk-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348"><circle cx="0" cy="0" r="2.05" fill="#61dafb"/><g stroke="#61dafb" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg></span><svg class="sk-wm" width="90" height="90" viewBox="-11.5 -10.23174 23 20.46348" aria-hidden="true"><circle cx="0" cy="0" r="2.05" fill="#61dafb"/><g stroke="#61dafb" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg><div class="sk-name">Web Development</div><p class="sk-desc">Full-stack web dev — React, Node, clean frontends, solid backends.</p></div>
       <!-- Python: real snake/python logo shape -->
       <div class="sk-card" style="--ac:34,197,94"><span class="sk-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="16 16 32 32"><path fill="url(#a)" d="M31.885 16c-8.124 0-7.617 3.523-7.617 3.523l.01 3.65h7.752v1.095H21.197S16 23.678 16 31.876c0 8.196 4.537 7.906 4.537 7.906h2.708v-3.804s-.146-4.537 4.465-4.537h7.688s4.32.07 4.32-4.175v-7.019S40.374 16 31.885 16zm-4.275 2.454a1.394 1.394 0 1 1 0 2.79 1.393 1.393 0 0 1-1.395-1.395c0-.771.624-1.395 1.395-1.395z"/><path fill="url(#b)" d="M32.115 47.833c8.124 0 7.617-3.523 7.617-3.523l-.01-3.65H31.97v-1.095h10.832S48 40.155 48 31.958c0-8.197-4.537-7.906-4.537-7.906h-2.708v3.803s.146 4.537-4.465 4.537h-7.688s-4.32-.07-4.32 4.175v7.019s-.656 4.247 7.833 4.247zm4.275-2.454a1.393 1.393 0 0 1-1.395-1.395 1.394 1.394 0 1 1 1.395 1.395z"/><defs><linearGradient id="a" x1="19.075" x2="34.898" y1="18.782" y2="34.658" gradientUnits="userSpaceOnUse"><stop stop-color="#387EB8"/><stop offset="1" stop-color="#366994"/></linearGradient><linearGradient id="b" x1="28.809" x2="45.803" y1="28.882" y2="45.163" gradientUnits="userSpaceOnUse"><stop stop-color="#FFE052"/><stop offset="1" stop-color="#FFC331"/></linearGradient></defs></svg></span><svg class="sk-wm" width="90" height="90" viewBox="16 16 32 32" aria-hidden="true"><path fill="url(#a)" d="M31.885 16c-8.124 0-7.617 3.523-7.617 3.523l.01 3.65h7.752v1.095H21.197S16 23.678 16 31.876c0 8.196 4.537 7.906 4.537 7.906h2.708v-3.804s-.146-4.537 4.465-4.537h7.688s4.32.07 4.32-4.175v-7.019S40.374 16 31.885 16zm-4.275 2.454a1.394 1.394 0 1 1 0 2.79 1.393 1.393 0 0 1-1.395-1.395c0-.771.624-1.395 1.395-1.395z"/><path fill="url(#b)" d="M32.115 47.833c8.124 0 7.617-3.523 7.617-3.523l-.01-3.65H31.97v-1.095h10.832S48 40.155 48 31.958c0-8.197-4.537-7.906-4.537-7.906h-2.708v3.803s.146 4.537-4.465 4.537h-7.688s-4.32-.07-4.32 4.175v7.019s-.656 4.247 7.833 4.247zm4.275-2.454a1.393 1.393 0 0 1-1.395-1.395 1.394 1.394 0 1 1 1.395 1.395z"/></svg><div class="sk-name">Python</div><p class="sk-desc">Scripting, automation, data stuff and backend services.</p></div>
       <!-- UI/UX: pen-tool / figma-like icon -->
       <div class="sk-card" style="--ac:236,72,153"><span class="sk-icon-wrap"><svg width="54" height="80" viewBox="0 0 54 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3333 80.0002C20.6933 80.0002 26.6667 74.0268 26.6667 66.6668V53.3335H13.3333C5.97333 53.3335 0 59.3068 0 66.6668C0 74.0268 5.97333 80.0002 13.3333 80.0002Z" fill="#0ACF83"/><path d="M0 39.9998C0 32.6398 5.97333 26.6665 13.3333 26.6665H26.6667V53.3332H13.3333C5.97333 53.3332 0 47.3598 0 39.9998Z" fill="#A259FF"/><path d="M0 13.3333C0 5.97333 5.97333 0 13.3333 0H26.6667V26.6667H13.3333C5.97333 26.6667 0 20.6933 0 13.3333Z" fill="#F24E1E"/><path d="M26.6667 0H40.0001C47.3601 0 53.3334 5.97333 53.3334 13.3333C53.3334 20.6933 47.3601 26.6667 40.0001 26.6667H26.6667V0Z" fill="#FF7262"/><path d="M53.3334 39.9998C53.3334 47.3598 47.3601 53.3332 40.0001 53.3332C32.6401 53.3332 26.6667 47.3598 26.6667 39.9998C26.6667 32.6398 32.6401 26.6665 40.0001 26.6665C47.3601 26.6665 53.3334 32.6398 53.3334 39.9998Z" fill="#1ABCFE"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 54 80" fill="none" aria-hidden="true"><path d="M13.3333 80.0002C20.6933 80.0002 26.6667 74.0268 26.6667 66.6668V53.3335H13.3333C5.97333 53.3335 0 59.3068 0 66.6668C0 74.0268 5.97333 80.0002 13.3333 80.0002Z" fill="#0ACF83"/><path d="M0 39.9998C0 32.6398 5.97333 26.6665 13.3333 26.6665H26.6667V53.3332H13.3333C5.97333 53.3332 0 47.3598 0 39.9998Z" fill="#A259FF"/><path d="M0 13.3333C0 5.97333 5.97333 0 13.3333 0H26.6667V26.6667H13.3333C5.97333 26.6667 0 20.6933 0 13.3333Z" fill="#F24E1E"/><path d="M26.6667 0H40.0001C47.3601 0 53.3334 5.97333 53.3334 13.3333C53.3334 20.6933 47.3601 26.6667 40.0001 26.6667H26.6667V0Z" fill="#FF7262"/><path d="M53.3334 39.9998C53.3334 47.3598 47.3601 53.3332 40.0001 53.3332C32.6401 53.3332 26.6667 47.3598 26.6667 39.9998C26.6667 32.6398 32.6401 26.6665 40.0001 26.6665C47.3601 26.6665 53.3334 32.6398 53.3334 39.9998Z" fill="#1ABCFE"/></svg><div class="sk-name">UI/UX &amp; Design</div><p class="sk-desc">Designing interfaces that look great on every screen, pixel by pixel.</p></div>
       <!-- Creative Coding: canvas/brush icon -->
-      <div class="sk-card" style="--ac:249,115,22"><span class="sk-icon-wrap"><svg viewBox="0 0 128 128"><path d="M100.902 46.52a23.116 23.116 0 00-6.17-10.428L80.117 21.482a23.018 23.018 0 00-32.223 0L33.278 36.092a23.116 23.116 0 00-6.17 10.428l-5.32 19.866a23.12 23.12 0 001.326 14.512l10.026 18.066a23.018 23.018 0 0020.126 11.026H74.74a23.018 23.018 0 0020.126-11.026l10.026-18.066a23.12 23.12 0 001.326-14.512zM64 88.081c-13.3 0-24.081-10.782-24.081-24.081S50.7 39.919 64 39.919c13.3 0 24.081 10.781 24.081 24.081 0 13.3-10.781 24.081-24.081 24.081z" fill="#f97316"/><circle cx="64" cy="64" r="14" fill="#f97316"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 128 128" aria-hidden="true"><path d="M100.902 46.52a23.116 23.116 0 00-6.17-10.428L80.117 21.482a23.018 23.018 0 00-32.223 0L33.278 36.092a23.116 23.116 0 00-6.17 10.428l-5.32 19.866a23.12 23.12 0 001.326 14.512l10.026 18.066a23.018 23.018 0 0020.126 11.026H74.74a23.018 23.018 0 0020.126-11.026l10.026-18.066a23.12 23.12 0 001.326-14.512zM64 88.081c-13.3 0-24.081-10.782-24.081-24.081S50.7 39.919 64 39.919c13.3 0 24.081 10.781 24.081 24.081 0 13.3-10.781 24.081-24.081 24.081z" fill="#f97316"/><circle cx="64" cy="64" r="14" fill="#f97316"/></svg><div class="sk-name">Creative Coding</div><p class="sk-desc">Canvas, WebGL, generative art â€” making the browser do things it shouldn't.</p></div>
+      <div class="sk-card" style="--ac:249,115,22"><span class="sk-icon-wrap"><svg viewBox="0 0 128 128"><path d="M100.902 46.52a23.116 23.116 0 00-6.17-10.428L80.117 21.482a23.018 23.018 0 00-32.223 0L33.278 36.092a23.116 23.116 0 00-6.17 10.428l-5.32 19.866a23.12 23.12 0 001.326 14.512l10.026 18.066a23.018 23.018 0 0020.126 11.026H74.74a23.018 23.018 0 0020.126-11.026l10.026-18.066a23.12 23.12 0 001.326-14.512zM64 88.081c-13.3 0-24.081-10.782-24.081-24.081S50.7 39.919 64 39.919c13.3 0 24.081 10.781 24.081 24.081 0 13.3-10.781 24.081-24.081 24.081z" fill="#f97316"/><circle cx="64" cy="64" r="14" fill="#f97316"/></svg></span><svg class="sk-wm" width="90" height="90" viewBox="0 0 128 128" aria-hidden="true"><path d="M100.902 46.52a23.116 23.116 0 00-6.17-10.428L80.117 21.482a23.018 23.018 0 00-32.223 0L33.278 36.092a23.116 23.116 0 00-6.17 10.428l-5.32 19.866a23.12 23.12 0 001.326 14.512l10.026 18.066a23.018 23.018 0 0020.126 11.026H74.74a23.018 23.018 0 0020.126-11.026l10.026-18.066a23.12 23.12 0 001.326-14.512zM64 88.081c-13.3 0-24.081-10.782-24.081-24.081S50.7 39.919 64 39.919c13.3 0 24.081 10.781 24.081 24.081 0 13.3-10.781 24.081-24.081 24.081z" fill="#f97316"/><circle cx="64" cy="64" r="14" fill="#f97316"/></svg><div class="sk-name">Creative Coding</div><p class="sk-desc">Canvas, WebGL, generative art — making the browser do things it shouldn't.</p></div>
     </div>
     <div class="bars-wrap reveal">
       <div class="bar-item"><div class="bar-head"><span>JavaScript</span><span>90%</span></div><div class="bar-track"><div class="bar-fill" data-w="0.90"></div></div></div>
@@ -2848,26 +2826,26 @@ function googleTranslateElementInit() {
       <!-- 01 Game Engine -->
       <a class="proj reveal" href="https://github.com/SyncInk" target="_blank" rel="noopener" style="transition-delay:.05s">
         <span class="proj-num">01</span>
-        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></span>Project Nexus â€” Game Engine <span style="opacity:0.6;font-size:0.8em;font-weight:600">(coming soon)</span></div><div class="proj-tags"><span class="proj-tag">Game Dev</span><span class="proj-tag">JavaScript</span><span class="proj-tag">WebGL</span></div></div>
-        <span class="proj-arrow">â†—</span>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></span>Project Nexus — Game Engine <span style="opacity:0.6;font-size:0.8em;font-weight:600">(coming soon)</span></div><div class="proj-tags"><span class="proj-tag">Game Dev</span><span class="proj-tag">JavaScript</span><span class="proj-tag">WebGL</span></div></div>
+        <span class="proj-arrow">↗</span>
       </a>
       <!-- 02 Portfolio -->
       <a class="proj reveal" href="https://github.com/SyncInk" target="_blank" rel="noopener" style="transition-delay:.1s">
         <span class="proj-num">02</span>
-        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 10 2 2 4-4"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></svg></span>Portfolio v1 â€” Web Project</div><div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JS</span><span class="proj-tag">Animations</span></div></div>
-        <span class="proj-arrow">â†—</span>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 10 2 2 4-4"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></svg></span>Portfolio v1 — Web Project</div><div class="proj-tags"><span class="proj-tag">HTML/CSS</span><span class="proj-tag">JS</span><span class="proj-tag">Animations</span></div></div>
+        <span class="proj-arrow">↗</span>
       </a>
       <!-- 03 Discord Bot -->
       <a class="proj reveal" href="https://github.com/SyncInk" target="_blank" rel="noopener" style="transition-delay:.15s">
         <span class="proj-num">03</span>
-        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>Discord Bot â€” Automation, Moderation, Fun &amp; more!</div><div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Discord.py</span><span class="proj-tag">Bot</span></div></div>
-        <span class="proj-arrow">â†—</span>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>Discord Bot — Automation, Moderation, Fun &amp; more!</div><div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Discord.py</span><span class="proj-tag">Bot</span></div></div>
+        <span class="proj-arrow">↗</span>
       </a>
       <!-- 04 Cat Clicker -->
       <a class="proj reveal" href="https://cat-clicke.onrender.com/" target="_blank" rel="noopener" style="transition-delay:.2s">
         <span class="proj-num">04</span>
-        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3.1-9-7.56c0-1.25.5-2.4 1.1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75Z"/></svg></span>Cat Clicker â€” Mini Game <span style="opacity:0.6;font-size:0.8em;font-weight:600">(in progress)</span></div><div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">Game</span><span class="proj-tag">Fun</span></div></div>
-        <span class="proj-arrow">â†—</span>
+        <div><div class="proj-name"><span class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(125,211,252,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3.1-9-7.56c0-1.25.5-2.4 1.1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75Z"/></svg></span>Cat Clicker — Mini Game <span style="opacity:0.6;font-size:0.8em;font-weight:600">(in progress)</span></div><div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">Game</span><span class="proj-tag">Fun</span></div></div>
+        <span class="proj-arrow">↗</span>
       </a>
     </div>
   </div>
@@ -2980,8 +2958,8 @@ function googleTranslateElementInit() {
             </a>
           </div>
           <div class="bt-legal">
-            <a href="https://syncink-ticket-bot.up.railway.app/privacy" target="_blank" rel="noopener">Privacy Policy</a> â€¢ 
-            <a href="https://syncink-ticket-bot.up.railway.app/terms" target="_blank" rel="noopener">Terms of Service</a> â€¢ 
+            <a href="https://syncink-ticket-bot.up.railway.app/privacy" target="_blank" rel="noopener">Privacy Policy</a> • 
+            <a href="https://syncink-ticket-bot.up.railway.app/terms" target="_blank" rel="noopener">Terms of Service</a> • 
             <a href="https://syncink-ticket-bot.up.railway.app/faq" target="_blank" rel="noopener">FAQ</a>
           </div>
         </div>
@@ -3017,8 +2995,8 @@ function googleTranslateElementInit() {
             </a>
           </div>
           <div class="bt-legal">
-            <a href="https://syncink-voice-dashboard.up.railway.app/privacy" target="_blank" rel="noopener">Privacy Policy</a> â€¢ 
-            <a href="https://syncink-voice-dashboard.up.railway.app/terms" target="_blank" rel="noopener">Terms of Service</a> â€¢ 
+            <a href="https://syncink-voice-dashboard.up.railway.app/privacy" target="_blank" rel="noopener">Privacy Policy</a> • 
+            <a href="https://syncink-voice-dashboard.up.railway.app/terms" target="_blank" rel="noopener">Terms of Service</a> • 
             <a href="https://syncink-voice-dashboard.up.railway.app/faq" target="_blank" rel="noopener">FAQ</a>
           </div>
         </div>
@@ -3029,7 +3007,7 @@ function googleTranslateElementInit() {
     <div class="bots-cta reveal">
       <a href="bots" class="bots-cta-btn">
         <svg viewBox="0 0 127.14 96.36" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" clip-rule="evenodd" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-        Explore All Bots â€” Full Details, Commands &amp; More â†—
+        Explore All Bots — Full Details, Commands &amp; More ↗
       </a>
     </div>
 
@@ -3044,7 +3022,7 @@ function googleTranslateElementInit() {
       <div class="proc-card"><div class="proc-num">01</div><div class="proc-title">Idea</div><p class="proc-desc">Start with a wild idea or a real problem. The crazier the better.</p></div>
       <div class="proc-card"><div class="proc-num">02</div><div class="proc-title">Design</div><p class="proc-desc">Sketch it out, think about UX, then design something that looks clean.</p></div>
       <div class="proc-card"><div class="proc-num">03</div><div class="proc-title">Build</div><p class="proc-desc">Code it up. Fix the bugs. Code it again. Fix more bugs. Ship it.</p></div>
-      <div class="proc-card"><div class="proc-num">04</div><div class="proc-title">Iterate</div><p class="proc-desc">Deploy, get feedback, improve. Never really done â€” always getting better.</p></div>
+      <div class="proc-card"><div class="proc-num">04</div><div class="proc-title">Iterate</div><p class="proc-desc">Deploy, get feedback, improve. Never really done — always getting better.</p></div>
     </div>
   </div>
 </section>
@@ -3055,7 +3033,7 @@ function googleTranslateElementInit() {
       <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
     </div>
     <h2 class="dc-title">Find me on Discord</h2>
-    <p class="dc-sub">Best way to reach me â€” I'm almost always online (or sleeping ðŸ˜´). DM me about collabs, projects, or just to chat!</p>
+    <p class="dc-sub">Best way to reach me — I'm almost always online (or sleeping 😴). DM me about collabs, projects, or just to chat!</p>
     <div class="dc-user">sync_ink_001</div><br/>
     <a href="https://discord.com/users/sync_ink_001" target="_blank" rel="noopener" class="btn-dc-white">
       <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
@@ -3113,7 +3091,7 @@ function googleTranslateElementInit() {
     <div class="contact-wrap">
       <div class="s-label reveal" style="justify-content:center;">Let's Build</div>
       <h2 class="contact-heading reveal">Got an <em>idea?</em><br/>Let's make it real.</h2>
-      <p class="contact-sub reveal">Whether it's a game, a website, a collab, or just vibing â€” hit me up. I'm always down to build something cool.</p>
+      <p class="contact-sub reveal">Whether it's a game, a website, a collab, or just vibing — hit me up. I'm always down to build something cool.</p>
       <div class="contact-btns reveal">
         <button class="btn btn-primary" id="openContact3">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -3217,8 +3195,8 @@ function googleTranslateElementInit() {
   
 <footer>
   <span class="footer-logo">Sync Ink.</span>
-  <p>Â© 2026 Sync Ink. Built with ðŸ’™</p>
-  <a href="#home" class="footer-top" id="backTop">â†‘ Top</a>
+  <p>© 2026 Sync Ink. Built with 💙</p>
+  <a href="#home" class="footer-top" id="backTop">↑ Top</a>
 </footer>
 
 <script>
@@ -3438,7 +3416,7 @@ document.addEventListener("DOMContentLoaded", () => {
           
           gbPreviewAvatar.src = avatarUrl;
           gbPreviewName.innerHTML = `${globalName} <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
-          gbPreviewHandle.textContent = `@${username} â€¢ ${val}`;
+          gbPreviewHandle.textContent = `@${username} • ${val}`;
         } else {
           throw new Error("No data");
         }
@@ -3485,7 +3463,7 @@ document.addEventListener("DOMContentLoaded", () => {
             username: "Guestbook",
             content: null,
             embeds: [{
-              title: "ðŸ“– New Guestbook Signature!",
+              title: "📖 New Guestbook Signature!",
               color: 5814783,
               thumbnail: { url: verifiedUser.avatar },
               fields: [
@@ -3679,10 +3657,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const rect = sourceEl.getBoundingClientRect();
     const center = rect.left + rect.width / 2;
     const width = window.innerWidth || 1;
-    /* Wider stereo pan Â±0.72 for clear spatial awareness */
+    /* Wider stereo pan ±0.72 for clear spatial awareness */
     return Math.max(-0.72, Math.min(0.72, ((center / width) - 0.5) * 1.6));
   };
-  /* Vertical position â†’ subtle pitch shift for spatial depth */
+  /* Vertical position → subtle pitch shift for spatial depth */
   const getPitchShiftForTarget = (sourceEl) => {
     if (!sourceEl || typeof sourceEl.getBoundingClientRect !== 'function') return 1.0;
     const rect = sourceEl.getBoundingClientRect();
@@ -4108,31 +4086,31 @@ document.addEventListener("DOMContentLoaded", () => {
     game: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 8.2h9.6c2.5 0 4.5 2 4.5 4.5v2.1c0 1.6-1.3 2.9-2.9 2.9-.9 0-1.7-.4-2.3-1.1l-1.2-1.5H9.1l-1.2 1.5c-.6.7-1.4 1.1-2.3 1.1-1.6 0-2.9-1.3-2.9-2.9v-2.1c0-2.5 2-4.5 4.5-4.5Zm.3 3.1H5.8v1.4h1.7v1.7h1.4v-1.7h1.7v-1.4H8.9V9.6H7.5v1.7Zm8.5.2a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm2.4 2.4a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>'
   };
   const activitySvgGames = {
-    /* Exact path from Simple Icons â€” the two-wing V mark */
+    /* Exact path from Simple Icons — the two-wing V mark */
     valorant: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF4655" d="M23.792 2.152a.252.252 0 0 0-.098.083c-3.384 4.23-6.769 8.46-10.15 12.69-.107.093-.025.288.119.265 2.439.003 4.877 0 7.316.001a.66.66 0 0 0 .552-.25c.774-.967 1.55-1.934 2.324-2.903a.72.72 0 0 0 .144-.49c-.002-3.077 0-6.153-.003-9.23.016-.11-.1-.206-.204-.167zM.077 2.166c-.077.038-.074.132-.076.205.002 3.074.001 6.15.001 9.225a.679.679 0 0 0 .158.463l7.64 9.55c.12.152.308.25.505.247 2.455 0 4.91.003 7.365 0 .142.02.222-.174.116-.265C10.661 15.176 5.526 8.766.4 2.35c-.08-.094-.174-.272-.322-.184z"/></svg>`,
-    /* Simple Icons â€” League of Legends */
+    /* Simple Icons — League of Legends */
     league: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#C89B3C" d="m1.912 0 1.212 2.474v19.053L1.912 24h14.73l1.337-4.682H8.33V0ZM12 1.516c-.913 0-1.798.112-2.648.312v1.74a9.738 9.738 0 0 1 2.648-.368c5.267 0 9.536 4.184 9.536 9.348a9.203 9.203 0 0 1-2.3 6.086l-.273.954-.602 2.112c2.952-1.993 4.89-5.335 4.89-9.122C23.25 6.468 18.213 1.516 12 1.516Zm0 2.673c-.924 0-1.814.148-2.648.414v13.713h8.817a8.246 8.246 0 0 0 2.36-5.768c0-4.617-3.818-8.359-8.529-8.359zM2.104 7.312A10.858 10.858 0 0 0 .75 12.576c0 1.906.492 3.7 1.355 5.266z"/></svg>`,
-    /* Simple Icons â€” Fortnite */
+    /* Simple Icons — Fortnite */
     fortnite: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FDFF00" d="m15.767 14.171.097-5.05H12.4V5.197h3.99L16.872 0H7.128v24l5.271-.985V14.17z"/></svg>`,
-    /* Simple Icons â€” Roblox (rotated square mark) */
+    /* Simple Icons — Roblox (rotated square mark) */
     roblox: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#E00" d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></svg>`,
-    /* Simple Icons â€” Steam */
+    /* Simple Icons — Steam */
     steam: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1b2838" d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0z"/><path fill="#fff" d="M7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg>`,
-    /* Minecraft â€” custom block logo */
+    /* Minecraft — custom block logo */
     minecraft: `<img src="minecraft-block.png" alt="Minecraft Logo" style="width: 100%; height: 100%; object-fit: contain; transform: scale(1.15);" />`,
-    /* CS2 â€” the iconic CT/T star shape approximation */
+    /* CS2 — the iconic CT/T star shape approximation */
     cs2: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F4A91D" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>`,
-    /* Apex Legends â€” simple A shape */
+    /* Apex Legends — simple A shape */
     apex: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#DA292A" d="M12 2 2 22h4l1.5-4h9L18 22h4L12 2zm0 6 3 8H9l3-8z"/></svg>`,
-    /* Overwatch 2 â€” stylized O */
+    /* Overwatch 2 — stylized O */
     overwatch: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F99E1A" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3c1.8 0 3.446.612 4.757 1.626L7.626 16.757A6.965 6.965 0 0 1 5 12c0-3.866 3.134-7 7-7zm0 14c-1.8 0-3.446-.612-4.757-1.626l9.131-9.131A6.965 6.965 0 0 1 19 12c0 3.866-3.134 7-7 7z"/></svg>`,
-    /* Rocket League â€” RL ball */
+    /* Rocket League — RL ball */
     rocket: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1B7AE4"/><path fill="#fff" d="M12 4a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8zm-1 3.5 6 4-6 4V7.5z"/></svg>`,
-    /* Genshin Impact â€” paimon wings */
+    /* Genshin Impact — paimon wings */
     genshin: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4A90D9" d="M12 2l2.4 7.2H22l-6.2 4.5 2.4 7.2L12 16.4l-6.2 4.5 2.4-7.2L2 9.2h7.6z"/></svg>`,
-    /* Forza Horizon â€” F letter mark */
+    /* Forza Horizon — F letter mark */
     forza: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#E8C547" d="M4 2h16v3H8v4h10v3H8v10H4z"/></svg>`,
-    /* Call of Duty â€” target reticle */
+    /* Call of Duty — target reticle */
     cod: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#FFC107" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#FFC107"/><line x1="12" y1="2" x2="12" y2="6" stroke="#FFC107" stroke-width="2"/><line x1="12" y1="18" x2="12" y2="22" stroke="#FFC107" stroke-width="2"/><line x1="2" y1="12" x2="6" y2="12" stroke="#FFC107" stroke-width="2"/><line x1="18" y1="12" x2="22" y2="12" stroke="#FFC107" stroke-width="2"/></svg>`,
     /* YouTube (white background in box as requested) */
     youtube: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#FFFFFF" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`
@@ -4374,7 +4352,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const timeEl = document.getElementById('visitorTime');
     if (!place || !meta) return;
 
-    /* â”€â”€ try multiple geo APIs in order â”€â”€ */
+    /* ── try multiple geo APIs in order ── */
     const tryGeo = async (url, xform) => {
       try {
         const ctrl = new AbortController();
@@ -4402,7 +4380,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tz: d.timezone, org: d.org
       }));
 
-    /* â”€â”€ show location info â”€â”€ */
+    /* ── show location info ── */
     if (geo && geo.city) {
       place.textContent = geo.city + ', ' + (geo.country || 'Earth');
       meta.textContent  = geo.org ? 'Network: ' + geo.org : 'Live visitor location';
@@ -4417,7 +4395,7 @@ document.addEventListener("DOMContentLoaded", () => {
       meta.textContent  = 'Precise location hidden by network';
     }
 
-    /* â”€â”€ live clock (uses API tz or browser tz as fallback) â”€â”€ */
+    /* ── live clock (uses API tz or browser tz as fallback) ── */
     const tz = (geo && geo.tz) || Intl.DateTimeFormat().resolvedOptions().timeZone;
     const timeText = document.getElementById('visitorTimeText');
     if (timeText && tz) {
@@ -4482,27 +4460,27 @@ document.addEventListener("DOMContentLoaded", () => {
         /* build rich tooltip */
         let tip = day;
         if (value === 0) {
-          tip += ' Â· No commits';
+          tip += ' · No commits';
         } else {
           const details = dayDetails[day] || [];
-          tip += ` Â· ${value} commit${value === 1 ? '' : 's'}`;
+          tip += ` · ${value} commit${value === 1 ? '' : 's'}`;
           details.slice(0, 2).forEach(d => {
-            const vis = d.isPublic ? 'ðŸ”“' : 'ðŸ”’';
+            const vis = d.isPublic ? '🔓' : '🔒';
             tip += `&#10;${vis} ${d.repo}: ${d.msgs[0] || `${d.n} commit${d.n > 1 ? 's' : ''}`}`;
           });
-          if (details.length > 2) tip += `&#10;â€¦ +${details.length - 2} more push${details.length - 2 > 1 ? 'es' : ''}`;
+          if (details.length > 2) tip += `&#10;… +${details.length - 2} more push${details.length - 2 > 1 ? 'es' : ''}`;
         }
         return `<span class="gh-cell" data-level="${level}" title="${tip}"></span>`;
       }).join('');
       const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
-      /* format: e.g. "14 public commits Â· Updated just now" */
+      /* format: e.g. "14 public commits · Updated just now" */
       const lastActiveDay = days.slice().reverse().find(d => counts[d] > 0);
-      const lastStr = lastActiveDay ? ` Â· Last push: ${lastActiveDay}` : '';
+      const lastStr = lastActiveDay ? ` · Last push: ${lastActiveDay}` : '';
       meta.textContent = `${total} public commit${total !== 1 ? 's' : ''} in the last 35 days${lastStr}`;
     } catch (_) {
-      streakEl.textContent = 'â€”';
+      streakEl.textContent = '—';
       heatmap.innerHTML = days.map(() => '<span class="gh-cell" data-level="0" title="Data unavailable"></span>').join('');
-      meta.textContent = 'GitHub API unavailable â€” check back later';
+      meta.textContent = 'GitHub API unavailable — check back later';
     }
   }
   initVisitorWidget();
@@ -4565,7 +4543,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.user_profile && data.user_profile.pronouns) {
           const proEl = document.getElementById('discord-pronouns');
           if (proEl) {
-            proEl.textContent = `â€¢ ${data.user_profile.pronouns}`;
+            proEl.textContent = `• ${data.user_profile.pronouns}`;
             proEl.style.display = 'inline';
           }
         }
@@ -4623,7 +4601,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const textEl = document.getElementById('status-text');
         if(textEl) {
-          textEl.innerHTML = `<span>${displayStatus}</span>` + (customText ? `<span style="margin:0 4px">â€”</span>${customText}` : "");
+          textEl.innerHTML = `<span>${displayStatus}</span>` + (customText ? `<span style="margin:0 4px">—</span>${customText}` : "");
         }
 
         // 3. Sync Avatar Automatically!
@@ -4812,14 +4790,14 @@ document.addEventListener("DOMContentLoaded", () => {
       for(let f of newFiles) {
         const ext = f.name.split('.').pop().toLowerCase();
         if(!allowedExts.includes(ext)) {
-          showToast(`âš  Unsupported file type: ${f.name}`);
+          showToast(`⚠ Unsupported file type: ${f.name}`);
           continue;
         }
         validNewFiles.push(f);
       }
 
       if (selectedFiles.length + validNewFiles.length > 4) {
-        showToast('âš  Maximum 4 files allowed per message.');
+        showToast('⚠ Maximum 4 files allowed per message.');
         fAttachment.value = '';
         return;
       }
@@ -4828,7 +4806,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let newSize = validNewFiles.reduce((acc, f) => acc + f.size, 0);
       
       if (currentSize + newSize > 25 * 1024 * 1024) {
-        showToast('âš  Total upload size exceeds 25MB limit.');
+        showToast('⚠ Total upload size exceeds 25MB limit.');
         fAttachment.value = '';
         return;
       }
@@ -4847,9 +4825,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const em = document.getElementById('fe').value.trim();
       const msg = document.getElementById('fm').value.trim();
       
-      if (!n) { showToast('âš  Please enter your name.'); return; }
-      if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { showToast('âš  Please enter a valid email.'); return; }
-      if (!msg) { showToast('âš  Please write a message.'); return; }
+      if (!n) { showToast('⚠ Please enter your name.'); return; }
+      if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { showToast('⚠ Please enter a valid email.'); return; }
+      if (!msg) { showToast('⚠ Please write a message.'); return; }
       // SECURITY NOTICE: This webhook is heavily obfuscated to prevent GitHub scraping bots from stealing it.
       // It is split into Base64 fragments that are only assembled in memory at runtime.
       const _0x1a = atob('aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkv');
@@ -4865,14 +4843,14 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
           const formData = new FormData();
           let fields = [
-            { name: "ðŸ‘¤ Sender", value: `**Name:** ${n}\n**Email:** ${em}`, inline: false },
-            { name: "ðŸ’¬ Message", value: msg, inline: false }
+            { name: "👤 Sender", value: `**Name:** ${n}\n**Email:** ${em}`, inline: false },
+            { name: "💬 Message", value: msg, inline: false }
           ];
 
           if (selectedFiles.length > 0) {
-            const fileNames = selectedFiles.map(f => `ðŸ“„ \`${f.name}\` (${(f.size/(1024*1024)).toFixed(2)} MB)`).join('\n');
+            const fileNames = selectedFiles.map(f => `📄 \`${f.name}\` (${(f.size/(1024*1024)).toFixed(2)} MB)`).join('\n');
             fields.push({
-              name: `ðŸ“Ž Attachments (${selectedFiles.length})`,
+              name: `📎 Attachments (${selectedFiles.length})`,
               value: fileNames,
               inline: false
             });
@@ -4880,7 +4858,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           formData.append('payload_json', JSON.stringify({
             embeds: [{
-              title: "ðŸ“© New Portfolio Contact Message",
+              title: "📩 New Portfolio Contact Message",
               color: 5814783,
               fields: fields,
               timestamp: new Date().toISOString()
@@ -5049,8 +5027,8 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="fmp-header">
       <img src="album-cover.jpg" alt="Album Art" class="fmp-album-art" id="fmpAlbumArt">
       <div class="fmp-info">
-        <div class="fmp-title">Ð•Ð²Ð°</div>
-        <div class="fmp-artist">Ð’Ð¸Ð½Ñ‚Ð°Ð¶</div>
+        <div class="fmp-title">Ева</div>
+        <div class="fmp-artist">Винтаж</div>
       </div>
     </div>
     <div class="fmp-progress-container">
@@ -5073,7 +5051,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </button>
 </div>
 
-  <audio id="bgMusic" src="Ð’Ð¸Ð½Ñ‚Ð°Ð¶ - Ð•Ð²Ð°.mp3" loop preload="auto" autoplay></audio>
+  <audio id="bgMusic" src="Винтаж - Ева.mp3" loop preload="auto" autoplay></audio>
 <script>
   document.querySelectorAll('.zoom-img').forEach(img => {
     img.addEventListener('click', () => {
@@ -5089,48 +5067,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 </script>
-
-<!-- LANGUAGE TOGGLE LOGIC -->
-<script>
-  (function(){
-    const langBtn = document.getElementById('langToggleBtn');
-    const langText = document.getElementById('langToggleText');
-    if(!langBtn) return;
-    
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-      return null;
-    }
-    function setCookie(name, value, days) {
-      const d = new Date();
-      d.setTime(d.getTime() + (days*24*60*60*1000));
-      document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
-    }
-
-    const currentLang = getCookie('googtrans');
-    const isRu = currentLang === '/en/ru';
-    
-    if (isRu) {
-      langText.textContent = 'EN';
-      langBtn.title = 'Translate to English';
-    } else {
-      langText.textContent = 'RU';
-      langBtn.title = 'Translate to Russian';
-    }
-
-    langBtn.addEventListener('click', () => {
-      if (isRu) {
-        setCookie('googtrans', '/en/en', 30);
-      } else {
-        setCookie('googtrans', '/en/ru', 30);
-      }
-      window.location.reload();
-    });
-  })();
-</script>
-
 </body>
 </html>
 
